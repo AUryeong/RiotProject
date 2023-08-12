@@ -26,6 +26,7 @@ MonoBehaviour:
   - {fileID: 7890750133036483049, guid: 9cdc08488ef6dc142919eef9e9aa7b4e, type: 3}
   - {fileID: 4141658772581847171, guid: 9517e441ed247ad40aa5de057203b74d, type: 3}
   - {fileID: 3017883036895051110, guid: efda5aebb957db84ab0594843ddb118b, type: 3}
+  - {fileID: 7623055896138123523, guid: c789eeccad637b14398a3c1947f599c2, type: 3}
   tileDataList:
   - dataList:
     - {fileID: -6693560046239189349, guid: 09476eb2c09a21f4eb53b21f0100d4e3, type: 3}
