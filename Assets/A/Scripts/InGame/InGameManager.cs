@@ -27,7 +27,7 @@ public class InGameManager : Singleton<InGameManager>
             mainCamera.transform.position = Player.Instance.transform.position + cameraDistance;
             if (isAlice && !aris && Player.Instance.transform.position.z >= alice)
             {
-                obj2.mainColor = Color.red;
+                obj2.mainColor = new Color(0.8f,0.4f,0.4f);
                 obj2.fogColor = new Color(1,0.5f,0.5f);
                 var obj = PoolManager.Instance.Init("Trans Effect");
                 obj.transform.position = Player.Instance.transform.position;
