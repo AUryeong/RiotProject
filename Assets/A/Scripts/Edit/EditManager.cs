@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine.SceneManagement;
 
 namespace Edit
@@ -42,6 +44,7 @@ namespace Edit
             SceneManager.LoadScene("Editor");
         }
 
+#if UNITY_EDITOR
         public void SaveTile()
         {
             roadTileData.roadDatas.Clear();
@@ -68,6 +71,7 @@ namespace Edit
 
             PrefabUtility.SaveAsPrefabAssetAndConnect(roadTileData.gameObject, localPath, InteractionMode.UserAction);
         }
+        #endif
 
         public void SelectTile(int index)
         {

@@ -2,7 +2,7 @@
 
 public class Rune : MonoBehaviour
 {
-    public const float RUNE_HP_HEAL_VALUE = 2;
+    private const float RUNE_HP_HEAL_VALUE = 2;
     private void OnTriggerEnter(Collider other)
     {
         if (other == null) return;

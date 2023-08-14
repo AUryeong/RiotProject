@@ -4,37 +4,54 @@ public class InGameManager : Singleton<InGameManager>
 {
     private Camera mainCamera;
     private Vector3 cameraDistance;
-    public bool isAlice;
-    public float alice;
-    private bool aris;
 
-    [SerializeField] GlobalObjectFogController obj2;
+    private bool isChangeStage;
+    private float stageChangeLength;
+    private float beatLength;
+
+    [SerializeField] private GlobalObjectFogController fogController;
+    
     private void Start()
     {
         mainCamera = Camera.main;
         cameraDistance = mainCamera.transform.position - Player.Instance.transform.position;
-        SoundManager.Instance.PlaySound("Pricat", ESoundType.BGM, 0.5f);
     }
     private void Update()
     {
         CameraMove();
+        CheckChangeStage();
+    }
+
+    public void ChangeStage(float changeLength, float beatDataLength)
+    {
+        isChangeStage = true;
+        stageChangeLength = changeLength;
+        beatLength = beatDataLength;
+    }
+
+    private void CheckChangeStage()
+    {
+        if (!isChangeStage || Player.Instance.transform.position.z < stageChangeLength) return;
+        
+        isChangeStage = false;
+        
+        var changeStage = TileManager.Instance.stageTileData;
+            
+        fogController.mainColor = changeStage.mainColor;
+        fogController.fogColor = changeStage.fogColor;
+                
+        var transEffect = PoolManager.Instance.Init("Trans Effect");
+        transEffect.transform.position = Player.Instance.transform.position;
+                
+        SoundManager.Instance.PlaySound(TileManager.Instance.bgmData.bgmName, ESoundType.Bgm, 0.5f);
+        SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatLength;
+        Player.Instance.speedAddValue = changeStage.speedAdder;
     }
 
     private void CameraMove()
     {
-        if (Player.Instance.IsAlive)
-        {
-            mainCamera.transform.position = Player.Instance.transform.position + cameraDistance;
-            if (isAlice && !aris && Player.Instance.transform.position.z >= alice)
-            {
-                obj2.mainColor = new Color(0.8f,0.4f,0.4f);
-                obj2.fogColor = new Color(1,0.5f,0.5f);
-                var obj = PoolManager.Instance.Init("Trans Effect");
-                obj.transform.position = Player.Instance.transform.position;
-                aris = true;
-                SoundManager.Instance.PlaySound("Uragiri", ESoundType.BGM, 0.5f);
-                Player.Instance.speed += 10;
-            }
-        }
+        if (!Player.Instance.IsAlive) return;
+        
+        mainCamera.transform.position = Player.Instance.transform.position + cameraDistance;
     }
 }

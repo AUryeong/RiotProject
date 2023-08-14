@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public enum Direction
 {
@@ -29,7 +28,7 @@ public class Player : Singleton<Player>
     public float maxHp;
     public float hpRemoveValue;
 
-    private int attackIndex = 0;
+    private int attackIndex;
 
     public float Hp
     {
@@ -76,16 +75,15 @@ public class Player : Singleton<Player>
 
     private void CheckDeath()
     {
-        if (transform.position.y <= -5)
-        {
-            Die();
-        }
+        if (transform.position.y > -5) return;
+        
+        Die();
     }
 
     private void Move()
     {
-        transform.Translate(Vector3.forward * (Time.deltaTime * speed));
-        speed += speedAddValue * Time.deltaTime;
+        float moveValue = (speed + speedAddValue) * Time.deltaTime;
+        transform.Translate(Vector3.forward * moveValue);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -104,7 +102,7 @@ public class Player : Singleton<Player>
 
     private void Die()
     {
-        SoundManager.Instance.PlaySound("", ESoundType.BGM);
+        SoundManager.Instance.PlaySound("", ESoundType.Bgm);
         transform.DOKill();
         animator.CrossFade("Death", 0.2f);
         IsAlive = false;

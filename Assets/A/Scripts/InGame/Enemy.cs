@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -64,7 +63,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         gameObject.layer = LayerMask.NameToLayer("DeathEnemy");
-        SoundManager.Instance.PlaySound("clap", ESoundType.SFX);
+        SoundManager.Instance.PlaySound("clap", ESoundType.Sfx);
         
         Player.Instance.hitAbleEnemyList.Remove(this);
         Player.Instance.Hp += ENEMY_HP_HEAL_VALUE;

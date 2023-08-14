@@ -3,8 +3,8 @@ using UnityEngine;
 
 public enum ESoundType
 {
-    BGM,
-    SFX
+    Bgm,
+    Sfx
 }
 
 public class SoundManager : Singleton<SoundManager>
@@ -28,8 +28,8 @@ public class SoundManager : Singleton<SoundManager>
         foreach (var clip in clips)
             audioClips.Add(clip.name, clip);
 
-        AddAudioInfo(ESoundType.BGM).audioSource.loop = true;
-        AddAudioInfo(ESoundType.SFX);
+        AddAudioInfo(ESoundType.Bgm).audioSource.loop = true;
+        AddAudioInfo(ESoundType.Sfx);
     }
 
     protected override void OnReset()
@@ -58,13 +58,12 @@ public class SoundManager : Singleton<SoundManager>
         return audioInfo;
     }
 
-    public AudioSource GetAudioSource(ESoundType soundType = ESoundType.BGM)
+    public AudioSource GetAudioSource(ESoundType soundType = ESoundType.Bgm)
     {
         return audioInfos[soundType].audioSource;
     }
 
-    public AudioClip PlaySound(string soundName, ESoundType soundType = ESoundType.BGM, float multipleVolume = 1,
-        float pitch = 1)
+    public AudioClip PlaySound(string soundName, ESoundType soundType, float multipleVolume = 1, float pitch = 1)
     {
         if (string.IsNullOrEmpty(soundName))
         {
@@ -83,7 +82,7 @@ public class SoundManager : Singleton<SoundManager>
 
         audioSource.pitch = pitch;
 
-        if (soundType.Equals(ESoundType.BGM))
+        if (soundType.Equals(ESoundType.Bgm))
         {
             audioSource.clip = clip;
             audioSource.volume = audioInfo.audioVolume * multipleVolume;

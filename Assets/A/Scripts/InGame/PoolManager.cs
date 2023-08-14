@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public class PoolingData
@@ -20,12 +21,12 @@ public class PoolManager : Singleton<PoolManager>
     private readonly Dictionary<string, List<GameObject>> pools = new();
     private readonly Dictionary<string, GameObject> originObjects = new();
 
-    [SerializeField] private List<PoolingData> poolingDatas = new();
-    [SerializeField] private List<StageTileData> stageTileDatas = new();
+    [FormerlySerializedAs("poolingDatas")] [SerializeField] private List<PoolingData> poolingDataList = new();
+    [FormerlySerializedAs("stageTileDatas")] [SerializeField] private List<StageTileData> stageTileDataList = new();
 
     protected override void OnCreated()
     {
-        foreach (var data in poolingDatas)
+        foreach (var data in poolingDataList)
         {
             string poolName = string.IsNullOrEmpty(data.name) ? data.originObject.name : data.name;
             originObjects.Add(poolName, data.originObject);
@@ -40,7 +41,7 @@ public class PoolManager : Singleton<PoolManager>
             }
         }
 
-        foreach (var stageTileData in stageTileDatas)
+        foreach (var stageTileData in stageTileDataList)
         {
             foreach (var tileData in stageTileData.roadTileDataList)
             {
