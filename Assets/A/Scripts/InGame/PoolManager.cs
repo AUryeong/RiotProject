@@ -11,11 +11,6 @@ public class PoolingData
     public List<GameObject> poolingList;
 }
 
-public interface IPoolObject
-{
-    void OnReset();
-}
-
 public class PoolManager : Singleton<PoolManager>
 {
     private readonly Dictionary<string, List<GameObject>> pools = new();
