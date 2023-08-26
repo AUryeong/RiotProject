@@ -520,16 +520,22 @@ MonoBehaviour:
   roadDatas:
   - length: 6
     lineCondition: ffffffff000000000200000001000000
+    isJustBlank: 0
   - length: 6
     lineCondition: 0100000000000000
+    isJustBlank: 0
   - length: 5.5
     lineCondition: 00000000
+    isJustBlank: 0
   - length: 6
     lineCondition: ffffffff00000000
+    isJustBlank: 0
   - length: 6
     lineCondition: 00000000
+    isJustBlank: 1
   - length: 6
     lineCondition: 0000000001000000
+    isJustBlank: 0
   length: 35.5
 --- !u!1 &600322410968223498
 GameObject:

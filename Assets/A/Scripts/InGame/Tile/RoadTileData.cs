@@ -11,5 +11,6 @@ public class RoadTileData : MonoBehaviour
 public class RoadData
 {
     public float length;
-    public List<int> lineCondition = new List<int>();
+    public List<int> lineCondition = new();
+    public bool isJustBlank;
 }

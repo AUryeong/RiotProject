@@ -2889,14 +2889,19 @@ MonoBehaviour:
   roadDatas:
   - length: 6
     lineCondition: ffffffff0000000001000000
+    isJustBlank: 0
   - length: 6
     lineCondition: ffffffff01000000
+    isJustBlank: 1
   - length: 5.5
     lineCondition: ffffffff01000000
+    isJustBlank: 0
   - length: 5.5
     lineCondition: ffffffff01000000
+    isJustBlank: 0
   - length: 6
     lineCondition: ffffffff0000000001000000
+    isJustBlank: 0
   length: 29
 --- !u!1 &8186146203319556636
 GameObject:

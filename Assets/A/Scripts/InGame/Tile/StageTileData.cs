@@ -7,12 +7,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TileData", menuName = "A/TileData", order = 0)]
 public class StageTileData : SerializedScriptableObject
 {
-    [Title("Theme Color")]
-    public Color mainColor;
-    public Color fogColor;
-
-    [Title("Special Value")]
-    public float speedAdder;
+    [Title("Theme Color")] 
+    public ThemeColor defaultColor;
+    public ThemeColor highLightColor;
     
     [Title("Bgm Data")]
     [NonSerialized, OdinSerialize]
@@ -21,6 +18,13 @@ public class StageTileData : SerializedScriptableObject
     [Title("Tiles")]
     public List<RoadTileData> roadTileDataList = new();
     public List<TileDataList> tileDataList = new();
+}
+
+[Serializable]
+public class ThemeColor
+{
+    public Color mainColor;
+    public Color fogColor;
 }
 
 [Serializable]

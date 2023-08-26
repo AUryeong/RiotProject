@@ -2,6 +2,8 @@
 
 public class GameManager : Singleton<GameManager>
 {
+    protected override bool IsDontDestroying => true;
+
     protected override void OnCreated()
     {
         base.OnCreated();

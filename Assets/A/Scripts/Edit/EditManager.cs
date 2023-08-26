@@ -52,10 +52,10 @@ namespace Edit
             foreach (var rowTiles in buildTiles)
             {
                 var roadData = new RoadData();
-                bool isJustJumping = rowTiles.FindAll(tile => tile.tileIndex != 0).Count <= 0;
+                roadData.isJustBlank = rowTiles.FindAll(tile => tile.tileIndex != 0).Count <= 0;
                 foreach (var tile in rowTiles)
                 {
-                    if (isJustJumping || tile.tileIndex != 0)
+                    if (roadData.isJustBlank || tile.tileIndex != 0)
                         roadData.lineCondition.Add(tile.column);
                 }
 

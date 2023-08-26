@@ -5,10 +5,18 @@ public class InGameManager : Singleton<InGameManager>
     private Camera mainCamera;
     private Vector3 cameraDistance;
 
+    private bool isChangeSpeed;
     private bool isChangeStage;
-    private float stageChangeLength;
-    private float beatLength;
-
+    private bool isChangeHighLight;
+    
+    private bool isHighLighted;
+    
+    private float changeSpeedValue;
+    
+    private float speedChangePos;
+    private float stageChangePos;
+    private float highLightChangePos;
+    
     [SerializeField] private GlobalObjectFogController fogController;
     
     private void Start()
@@ -18,40 +26,83 @@ public class InGameManager : Singleton<InGameManager>
     }
     private void Update()
     {
+        if (!Player.Instance.IsAlive) return;
+        
         CameraMove();
+        CheckChangeHighLight();
+        CheckChangeSpeed();
         CheckChangeStage();
     }
 
-    public void ChangeStage(float changeLength, float beatDataLength)
+
+    public void ChangeHighLight(float changeLength, bool isHighLight)
     {
-        isChangeStage = true;
-        stageChangeLength = changeLength;
-        beatLength = beatDataLength;
+        isChangeHighLight = true;
+        isHighLighted = isHighLight;
+        highLightChangePos = changeLength;
     }
 
+    public void ChangeSpeedByBeatData(float changeLength, float speed)
+    {
+        isChangeSpeed = true;
+        changeSpeedValue = speed;
+        speedChangePos = changeLength;
+    }
+
+    public void ChangeStage(float changeLength)
+    {
+        isChangeStage = true;
+        stageChangePos = changeLength;
+    }
+
+    public void ChangeThemeColor(ThemeColor themeColor, bool isHighLightSkip = false)
+    {
+        if (!isHighLightSkip && isHighLighted) return;
+        
+        fogController.mainColor = themeColor.mainColor;
+        fogController.fogColor = themeColor.fogColor;
+        
+        var transEffect = PoolManager.Instance.Init("Trans Effect");
+        transEffect.transform.position = Player.Instance.transform.position;
+    }
+
+    private void CheckChangeHighLight()
+    {
+        if (!isChangeHighLight || Player.Instance.transform.position.z < highLightChangePos) return;
+
+        isChangeHighLight = false;
+        
+        var changeStage = TileManager.Instance.stageTileData;
+        var themeColor = isHighLighted ? changeStage.highLightColor : changeStage.defaultColor;
+        
+        ChangeThemeColor(themeColor, true);
+    }
+    
     private void CheckChangeStage()
     {
-        if (!isChangeStage || Player.Instance.transform.position.z < stageChangeLength) return;
-        
+        if (!isChangeStage || Player.Instance.transform.position.z < stageChangePos) return;
+
         isChangeStage = false;
         
         var changeStage = TileManager.Instance.stageTileData;
-            
-        fogController.mainColor = changeStage.mainColor;
-        fogController.fogColor = changeStage.fogColor;
-                
-        var transEffect = PoolManager.Instance.Init("Trans Effect");
-        transEffect.transform.position = Player.Instance.transform.position;
-                
+        var themeColor = changeStage.defaultColor;
+        
+        ChangeThemeColor(themeColor, true);
+        
         SoundManager.Instance.PlaySound(TileManager.Instance.bgmData.bgmName, ESoundType.Bgm, 0.5f);
-        SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatLength;
-        Player.Instance.speedAddValue = changeStage.speedAdder;
+    }
+    
+
+    private void CheckChangeSpeed()
+    {
+        if (!isChangeSpeed || Player.Instance.transform.position.z < speedChangePos) return;
+        
+        isChangeSpeed = false;
+        Player.Instance.speedAddValue += changeSpeedValue;
     }
 
     private void CameraMove()
     {
-        if (!Player.Instance.IsAlive) return;
-        
         mainCamera.transform.position = Player.Instance.transform.position + cameraDistance;
     }
 }

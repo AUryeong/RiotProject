@@ -16,8 +16,11 @@ public class PoolManager : Singleton<PoolManager>
     private readonly Dictionary<string, List<GameObject>> pools = new();
     private readonly Dictionary<string, GameObject> originObjects = new();
 
-    [FormerlySerializedAs("poolingDatas")] [SerializeField] private List<PoolingData> poolingDataList = new();
-    [FormerlySerializedAs("stageTileDatas")] [SerializeField] private List<StageTileData> stageTileDataList = new();
+    [FormerlySerializedAs("poolingDatas")] [SerializeField]
+    private List<PoolingData> poolingDataList = new();
+
+    [FormerlySerializedAs("stageTileDatas")] [SerializeField]
+    private List<StageTileData> stageTileDataList = new();
 
     protected override void OnCreated()
     {
@@ -43,6 +46,7 @@ public class PoolManager : Singleton<PoolManager>
                 string poolName = tileData.name;
                 originObjects.Add(poolName, tileData.gameObject);
             }
+
             foreach (var tileDataList in stageTileData.tileDataList)
             {
                 foreach (var tileData in tileDataList.dataList)
@@ -54,7 +58,7 @@ public class PoolManager : Singleton<PoolManager>
         }
     }
 
-    public GameObject Init(string origin)
+    public GameObject Init(string origin, Transform parent = null)
     {
         if (string.IsNullOrEmpty(origin)) return null;
 
@@ -80,10 +84,9 @@ public class PoolManager : Singleton<PoolManager>
             return null;
         }
 
-        copy = Instantiate(originObjects[origin]);
+        copy = parent != null ? Instantiate(originObjects[origin], parent) : Instantiate(originObjects[origin]);
         copy.SetActive(true);
-        DontDestroyOnLoad(copy);
-
+        
         pools[origin].Add(copy);
         return copy;
     }

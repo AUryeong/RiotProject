@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     
     private Animator animator;
     private Vector3 defaultLocalPos;
+    [SerializeField] private Transform bone;
     [SerializeField] private GameObject hitAbleEffect;
 
     private void Awake()
@@ -23,7 +24,9 @@ public class Enemy : MonoBehaviour
         animator.Play("Idle");
         hitAbleEffect.gameObject.SetActive(false);
         gameObject.layer = LayerMask.NameToLayer("Enemy");
+        
         transform.localPosition = defaultLocalPos;
+        bone.DOLocalMove(new Vector3(0, 6, 2), 0.5f).From(true);
     }
     private void OnCollisionEnter(Collision collision)
     {

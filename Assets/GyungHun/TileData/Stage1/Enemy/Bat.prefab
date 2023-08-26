@@ -5607,6 +5607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
+  bone: {fileID: 4715413042715499418}
   hitAbleEffect: {fileID: 776523369858205222}
 --- !u!65 &8674230146129326443
 BoxCollider:

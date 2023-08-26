@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum Direction
 {
@@ -18,7 +19,8 @@ public class Player : Singleton<Player>
 
     public bool IsAlive { get; private set; }
 
-    public float speed;
+    public float Speed => originSpeed + speedAddValue;
+    [FormerlySerializedAs("speed")] public float originSpeed;
     public float speedAddValue;
 
     public float jumpPower;
@@ -45,7 +47,7 @@ public class Player : Singleton<Player>
     }
 
     private float hp;
-    public List<Enemy> hitAbleEnemyList;
+    [HideInInspector] public List<Enemy> hitAbleEnemyList;
 
     private void Start()
     {
@@ -82,7 +84,7 @@ public class Player : Singleton<Player>
 
     private void Move()
     {
-        float moveValue = (speed + speedAddValue) * Time.deltaTime;
+        float moveValue = (originSpeed + speedAddValue) * Time.deltaTime;
         transform.Translate(Vector3.forward * moveValue);
     }
 
@@ -131,8 +133,9 @@ public class Player : Singleton<Player>
                     var hitAbleList = hitAbleEnemyList.FindAll(enemy => enemy.transform.position.x - transform.position.x < -TileManager.TILE_DISTANCE / 2);
                     if (hitAbleList.Count > 0)
                     {
-                        var hitEnemy = hitAbleList.OrderBy(enemy => enemy.transform.position.z - transform.position.z).First();
+                        var hitEnemy = hitAbleList.OrderBy(enemy => Mathf.Abs(enemy.transform.position.z - transform.position.z)).First();
                         hitEnemy.Hit(1);
+                        PoolManager.Instance.Init("Right To Left Attack", transform).transform.localPosition = Vector3.up;
                         animator.CrossFade("Left Attack", 0.1f, -1, 0);
                         break;
                     }
@@ -149,8 +152,9 @@ public class Player : Singleton<Player>
                     var hitAbleList = hitAbleEnemyList.FindAll(enemy => enemy.transform.position.x - transform.position.x > TileManager.TILE_DISTANCE / 2);
                     if (hitAbleList.Count > 0)
                     {
-                        var hitEnemy = hitAbleList.OrderBy(enemy => enemy.transform.position.z - transform.position.z).First();
+                        var hitEnemy = hitAbleList.OrderBy(enemy => Mathf.Abs(enemy.transform.position.z - transform.position.z)).First();
                         hitEnemy.Hit(1);
+                        PoolManager.Instance.Init("Left To Right Attack", transform).transform.localPosition = Vector3.up;
                         animator.CrossFade("Right Attack", 0.1f, -1, 0);
                         break;
                     }
@@ -174,12 +178,15 @@ public class Player : Singleton<Player>
                         switch (attackIndex)
                         {
                             case 0:
+                                PoolManager.Instance.Init("Right To Left Attack", transform).transform.localPosition = Vector3.up;
                                 animator.CrossFade("Left Attack", 0.1f, -1, 0);
                                 break;
                             case 1:
+                                PoolManager.Instance.Init("Left To Right Attack", transform).transform.localPosition = Vector3.up;
                                 animator.CrossFade("Right Attack", 0.1f, -1, 0);
                                 break;
                             case 2:
+                                PoolManager.Instance.Init("Spin Attack", transform).transform.localPosition = Vector3.up;
                                 animator.CrossFade("Three Attack", 0.1f, -1, 0);
                                 break;
                         }

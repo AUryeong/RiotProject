@@ -7,12 +7,15 @@ using UnityEngine;
 public class BgmData
 {
     [Space(10f)] public string bgmName;
-    public float bpm;
+
+    [Title("Special Value")] public float bpm;
+    public float speedAdder;
+    public float startBeat;
 
     [Space(10f)] [Title("Beat Data")] [SerializeField]
     private TextAsset textAsset;
 
-    [Space(5f)] [ShowIf("@textAsset != null")] [ReadOnly] [TableList]
+    [Space(5f)] [ShowIf("@textAsset != null")][TableList]
     public Queue<BeatData> beatDataList = new();
 
     [Button("Convert Csv To Beat Datas")]
@@ -23,6 +26,7 @@ public class BgmData
         string[] rows = textAsset.text.Split('\n');
 
         float lastBeatDataBeat = 0;
+        BeatData prevData = null;
         foreach (var row in rows)
         {
             string[] columns = row.Split(",");
@@ -30,10 +34,12 @@ public class BgmData
             var beatData = new BeatData
             {
                 beat = beat,
-                beatDistance = beat - lastBeatDataBeat,
-                type = columns.Length <= 1 ? BeatType.Default : Utility.GetEnum<BeatType>(columns[1])
+                type = columns.Length <= 1 ? BeatType.Default : Utility.GetEnum<BeatType>(columns[1]),
+                value = columns.Length <= 2 ? -1 : float.Parse(columns[2])
             };
-            lastBeatDataBeat = beat;
+            if (prevData != null)
+                prevData.beatDistance = beat - prevData.beat;
+            prevData = beatData;
 
             beatDataList.Enqueue(beatData);
         }
@@ -47,12 +53,16 @@ public class BeatData
 {
     public float beatDistance;
     public float beat;
+
     public BeatType type = BeatType.Default;
+    public float value = -1;
 }
 
 public enum BeatType
 {
     Default,
     SpeedUp,
-    SpeedDown
+    SpeedDown,
+    HighLightOn,
+    HighLightOff
 }
