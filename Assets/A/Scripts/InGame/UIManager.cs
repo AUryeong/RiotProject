@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateRune(int rune)
     {
+        runeIcon.rectTransform.DOKill(true);
         runeIcon.rectTransform.DOPunchScale(Vector3.one * 0.4f, 0.2f);
         runeText.text = rune.ToString();
     }

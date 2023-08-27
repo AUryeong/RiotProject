@@ -6,13 +6,10 @@ public class Item : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
     
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider == null) return;
-
-        if (collision.collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
             OnGet();
     }
 }

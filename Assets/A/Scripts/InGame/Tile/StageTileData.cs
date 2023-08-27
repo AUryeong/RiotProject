@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "TileData", menuName = "A/TileData", order = 0)]
 public class StageTileData : SerializedScriptableObject

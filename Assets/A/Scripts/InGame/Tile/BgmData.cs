@@ -10,7 +10,6 @@ public class BgmData
 
     [Title("Special Value")] public float bpm;
     public float speedAdder;
-    public float startBeat;
 
     [Space(10f)] [Title("Beat Data")] [SerializeField]
     private TextAsset textAsset;
@@ -62,6 +61,7 @@ public class BeatData
 public enum BeatType
 {
     Default,
+    Start,
     SpeedUp,
     SpeedDown,
     HighLightOn,

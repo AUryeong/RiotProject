@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TileManager : Singleton<TileManager>
 {
@@ -10,7 +11,7 @@ public class TileManager : Singleton<TileManager>
     private const float BEAT_RENDER_DISTANCE = 25;
     private const float BEAT_SYNC_START_POS = -3f;
     private const float PLAYER_RENDER_DISTANCE = 70;
-    
+
     [SerializeField] private GlobalObjectFogController fogController;
 
     [Header("Stage")] [SerializeField] private List<StageTileData> stageTileDataList;
@@ -35,20 +36,25 @@ public class TileManager : Singleton<TileManager>
     private bool isAutoTilling;
 
     private Dictionary<string, Queue<BeatData>> bgmNameToBeatData = new(); // ScriptableObject를 건들면 원본도 변경되기에 만든 Queue
-    
 
-    [Header("Change")]
-    private bool isChangeSpeed;
+
+    [Header("Change")] private bool isChangeSpeed;
     private bool isChangeStage;
     private bool isChangeHighLight;
-    
+
     private bool isHighLighted;
-    
+
     private float changeSpeedValue;
-    
+
     private float speedChangePos;
     private float stageChangePos;
     private float highLightChangePos;
+
+    [Header("Item")] [SerializeField] private List<string> itemList;
+
+    private int itemMaxValue = 0;
+    private const float ITEM_RANDOM_PROB_VALUE_PERCENT = 1f;
+    private const float ITEM_RANDOM_PROB_MAX = 50;
 
     protected override void OnCreated()
     {
@@ -72,6 +78,7 @@ public class TileManager : Singleton<TileManager>
     private void CreateTile()
     {
         roadTileLength = 0;
+        itemTileLength = 3;
         for (int index = 0; index < stageTileData.tileDataList.Count; index++)
             tileLengthList.Add(0);
 
@@ -83,16 +90,16 @@ public class TileManager : Singleton<TileManager>
 
         if (createdRoadTileDataList.Contains(data))
             createdRoadTileDataList.Remove(data);
-        
+
         createdRoadTileDataList.Add(data);
-        
+
         lastRoadTileCondition = data.roadDatas[^1].lineCondition;
         roadTileLength += data.length;
 
         float playerPos = Player.Instance.transform.position.z;
         while (roadTileLength - playerPos < PLAYER_RENDER_DISTANCE)
             CheckRoadTile(playerPos);
-        
+
         while (itemTileLength - playerPos < PLAYER_RENDER_DISTANCE)
             CheckItemTile(playerPos);
     }
@@ -120,21 +127,32 @@ public class TileManager : Singleton<TileManager>
     private void CheckItemTile(float playerPos)
     {
         if (itemTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
-        
+
         var lastRoadData = GetLengthToRoadData(itemTileLength);
 
         if (!lastRoadData.isJustBlank)
         {
-            var runeNodeObj = PoolManager.Instance.Init(nameof(Item_Rune));
-            runeNodeObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 1, itemTileLength);
+            GameObject itemObj;
+            if (itemMaxValue >= ITEM_RANDOM_PROB_MAX && Random.Range(0f, 100f) <= ITEM_RANDOM_PROB_VALUE_PERCENT)
+            {
+                itemObj = PoolManager.Instance.Init(itemList.SelectOne());
+                itemMaxValue = 0;
+            }
+            else
+            {
+                itemObj = PoolManager.Instance.Init(nameof(Item_Rune));
+                itemMaxValue++;
+            }
 
-            if (!createdTileList.Contains(runeNodeObj))
-                createdTileList.Add(runeNodeObj);
+            itemObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 1, itemTileLength);
+
+            if (!createdTileList.Contains(itemObj))
+                createdTileList.Add(itemObj);
         }
-        
+
         itemTileLength += lastRoadData.length;
     }
-    
+
     private void CheckRoadTile(float playerPos)
     {
         if (roadTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
@@ -169,21 +187,23 @@ public class TileManager : Singleton<TileManager>
         if (!isAutoTilling)
         {
             var beatData = bgmNameToBeatData[bgmData.bgmName].Dequeue();
-            if (Math.Abs(bgmData.startBeat - beatData.beat) < 0.01f)
-                ChangeStage(length + BEAT_SYNC_START_POS);
 
             switch (beatData.type)
             {
                 case BeatType.Default:
                     var enemy = lastRoadData.isJustBlank ? stageTileData.flyingEnemies.SelectOne() : stageTileData.defaultEnemies.SelectOne();
-                    
+
                     var enemyNodeObj = PoolManager.Instance.Init(enemy.name);
                     enemyNodeObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
-                    
+
                     if (!createdTileList.Contains(enemyNodeObj))
                         createdTileList.Add(enemyNodeObj);
-                    
+
                     break;
+                case BeatType.Start:
+                    ChangeStage(length + BEAT_SYNC_START_POS);
+                    beatSpawnDuration += beatInterval * beatData.value;
+                    return;
                 case BeatType.SpeedUp:
                     ChangeSpeedByBeatData(length, beatData.value);
                     break;
@@ -222,7 +242,7 @@ public class TileManager : Singleton<TileManager>
     }
 
     #endregion
-    
+
     #region Change
 
     private void CheckChange()
@@ -255,10 +275,10 @@ public class TileManager : Singleton<TileManager>
     private void ChangeThemeColor(ThemeColor themeColor, bool isHighLightSkip = false)
     {
         if (!isHighLightSkip && isHighLighted) return;
-        
+
         fogController.mainColor = themeColor.mainColor;
         fogController.fogColor = themeColor.fogColor;
-        
+
         var transEffect = PoolManager.Instance.Init("Trans Effect");
         transEffect.transform.position = Player.Instance.transform.position;
     }
@@ -268,36 +288,37 @@ public class TileManager : Singleton<TileManager>
         if (!isChangeHighLight || Player.Instance.transform.position.z < highLightChangePos) return;
 
         isChangeHighLight = false;
-        
+
         var changeStage = stageTileData;
         var themeColor = isHighLighted ? changeStage.highLightColor : changeStage.defaultColor;
-        
+
         ChangeThemeColor(themeColor, true);
     }
-    
+
     private void CheckChangeStage()
     {
         if (!isChangeStage || Player.Instance.transform.position.z < stageChangePos) return;
 
         isChangeStage = false;
-        
+
         var changeStage = stageTileData;
         var themeColor = changeStage.defaultColor;
-        
+
         ChangeThemeColor(themeColor, true);
-        
+
         SoundManager.Instance.PlaySound(TileManager.Instance.bgmData.bgmName, ESoundType.Bgm, 0.5f);
     }
-    
+
     private void CheckChangeSpeed()
     {
         if (!isChangeSpeed || Player.Instance.transform.position.z < speedChangePos) return;
-        
+
         isChangeSpeed = false;
         Player.Instance.SpeedAddValue += changeSpeedValue;
     }
+
     #endregion
-    
+
     private void CheckRemoveTile()
     {
         float playerPos = Player.Instance.transform.position.z;
@@ -326,7 +347,7 @@ public class TileManager : Singleton<TileManager>
             bgmNameToBeatData.Add(bgmData.bgmName, new Queue<BeatData>(bgmData.beatDataList));
         }
     }
-    
+
     private RoadData GetLengthToRoadData(float length)
     {
         float roadLength = roadTileLength;
@@ -347,7 +368,7 @@ public class TileManager : Singleton<TileManager>
             if (roadLength > length)
                 break;
         }
-        
+
         return lastRoadData;
     }
 }

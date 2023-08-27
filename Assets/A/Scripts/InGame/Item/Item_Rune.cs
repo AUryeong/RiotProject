@@ -6,6 +6,6 @@
         base.OnGet();
         Player.Instance.Hp += RUNE_HP_HEAL_VALUE;
         InGameManager.Instance.Rune++;
-        SoundManager.Instance.PlaySound("exp", ESoundType.Sfx, 0.5f, 2f);
+        SoundManager.Instance.PlaySound("exp", ESoundType.Coin, 0.5f, 2f);
     }
 }
