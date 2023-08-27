@@ -202,7 +202,7 @@ public class TileManager : Singleton<TileManager>
                     break;
                 case BeatType.Start:
                     ChangeStage(length + BEAT_SYNC_START_POS);
-                    beatSpawnDuration += beatInterval * beatData.value;
+                    beatSpawnDuration += beatInterval * beatData.beatDistance;
                     return;
                 case BeatType.SpeedUp:
                     ChangeSpeedByBeatData(length, beatData.value);
@@ -306,7 +306,7 @@ public class TileManager : Singleton<TileManager>
 
         ChangeThemeColor(themeColor, true);
 
-        SoundManager.Instance.PlaySound(TileManager.Instance.bgmData.bgmName, ESoundType.Bgm, 0.5f);
+        SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f);
     }
 
     private void CheckChangeSpeed()
