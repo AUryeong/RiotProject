@@ -98,7 +98,7 @@ Material:
     - _MetChannel: 3
     - _Metallic: 0
     - _Mode: 0
-    - _NormalAmount: 2
+    - _NormalAmount: 1
     - _OVERRIDE_FOG_COLOR: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02

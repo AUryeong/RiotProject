@@ -4,11 +4,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private const float ENEMY_HP_HEAL_VALUE = 10;
+    private const float ENEMY_MOVE_DURATION = 0.5f;
     
     public int hp;
     
     private Animator animator;
     private Vector3 defaultLocalPos;
+
+    [SerializeField] private Vector3 spawnVector;
     [SerializeField] private Transform bone;
     [SerializeField] private GameObject hitAbleEffect;
 
@@ -26,13 +29,19 @@ public class Enemy : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Enemy");
         
         transform.localPosition = defaultLocalPos;
-        bone.DOLocalMove(new Vector3(0, 6, 2), 0.5f).From(true);
+        bone.DOLocalMove(spawnVector, ENEMY_MOVE_DURATION).From(true);
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider == null) return;
-        
+
         if (collision.collider.CompareTag("Player"))
+            OnHitPlayer();
+    }
+
+    private void OnHitPlayer()
+    {
+        if(Player.Instance.BoostDuration <= 0)
             animator.CrossFade("Attack", 0.1f);
     }
 
@@ -66,7 +75,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         gameObject.layer = LayerMask.NameToLayer("DeathEnemy");
-        SoundManager.Instance.PlaySound("clap", ESoundType.Sfx);
+        SoundManager.Instance.PlaySound("clap", ESoundType.Sfx, 0.5f);
         
         Player.Instance.hitAbleEnemyList.Remove(this);
         Player.Instance.Hp += ENEMY_HP_HEAL_VALUE;

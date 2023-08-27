@@ -14666,6 +14666,7 @@ GameObject:
   - component: {fileID: 1462047669921483044}
   - component: {fileID: 1628663052159895440}
   - component: {fileID: 1628465421368422848}
+  - component: {fileID: 2801333643265193950}
   m_Layer: 0
   m_Name: Spin Attack
   m_TagString: Untagged
@@ -19552,6 +19553,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2801333643265193950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467701867603362024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dcf2fe253541e742ac668428fe1b81b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 3
 --- !u!1 &1467713754573479208
 GameObject:
   m_ObjectHideFlags: 0

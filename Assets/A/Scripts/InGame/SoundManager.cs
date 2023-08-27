@@ -4,7 +4,9 @@ using UnityEngine;
 public enum ESoundType
 {
     Bgm,
-    Sfx
+    Coin,
+    Sfx,
+    End
 }
 
 public class SoundManager : Singleton<SoundManager>
@@ -29,7 +31,10 @@ public class SoundManager : Singleton<SoundManager>
             audioClips.Add(clip.name, clip);
 
         AddAudioInfo(ESoundType.Bgm).audioSource.loop = true;
-        AddAudioInfo(ESoundType.Sfx);
+        for (var soundType = ESoundType.Bgm; soundType <= ESoundType.End;)
+        {
+            AddAudioInfo(++soundType);
+        }
     }
 
     protected override void OnReset()
@@ -46,7 +51,7 @@ public class SoundManager : Singleton<SoundManager>
 
     private AudioInfo AddAudioInfo(ESoundType soundType)
     {
-        var audioSourceObj = new GameObject(nameof(soundType));
+        var audioSourceObj = new GameObject(soundType.ToString());
         audioSourceObj.transform.SetParent(transform);
 
         var audioInfo = new AudioInfo

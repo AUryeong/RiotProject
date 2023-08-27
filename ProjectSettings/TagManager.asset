@@ -19,7 +19,7 @@ TagManager:
   - HitTile
   - Enemy
   - DeathEnemy
-  - Rune
+  - Getable
   - 
   - 
   - 

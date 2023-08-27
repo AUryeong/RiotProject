@@ -18,10 +18,24 @@ public class Player : Singleton<Player>
     private Animator animator;
 
     public bool IsAlive { get; private set; }
+    private const float BEAT_HIT_DISTANCE = 8;
 
-    public float Speed => originSpeed + speedAddValue;
+    public float Speed => originSpeed + SpeedAddValue;
     [FormerlySerializedAs("speed")] public float originSpeed;
-    public float speedAddValue;
+
+    public float SpeedAddValue
+    {
+        get => speedAddValue;
+        set
+        {
+            speedAddValue = value;
+
+            enemyCheckColliders.size = new Vector3(10, 10, Speed / originSpeed * BEAT_HIT_DISTANCE);
+            enemyCheckColliders.center = new Vector3(0, 0, originSpeed / Speed * BEAT_HIT_DISTANCE / 2);
+        }
+    }
+
+    private float speedAddValue;
 
     public float jumpPower;
     private int jumpCount;
@@ -30,6 +44,8 @@ public class Player : Singleton<Player>
     public float maxHp;
     public float hpRemoveValue;
 
+    [HideInInspector] public List<Enemy> hitAbleEnemyList;
+    [SerializeField] private BoxCollider enemyCheckColliders;
     private int attackIndex;
 
     public float Hp
@@ -40,14 +56,22 @@ public class Player : Singleton<Player>
             if (!IsAlive) return;
 
             hp = Mathf.Clamp(value, 0, maxHp);
-            UIManager.Instance.UpdateHpBar(hp / maxHp);
+            InGameManager.Instance.uiManager.UpdateHpBar(hp / maxHp);
             if (hp <= 0)
                 Die();
         }
     }
 
     private float hp;
-    [HideInInspector] public List<Enemy> hitAbleEnemyList;
+
+    public float BoostDuration { get; private set; }
+    [SerializeField] private BoxCollider boostBlockFallCollider;
+    [SerializeField] private ParticleSystem boostParticle;
+    
+
+    public float MagnetDuration { get; private set; }
+    [SerializeField] private ParticleSystem magnetParticle;
+    private Collider[] magnetOverlapColliders;
 
     private void Start()
     {
@@ -55,10 +79,15 @@ public class Player : Singleton<Player>
         animator = GetComponent<Animator>();
         hitAbleEnemyList = new List<Enemy>();
 
+        boostParticle.Stop();
+        magnetParticle.Stop();
+        
         IsAlive = true;
         Hp = maxHp;
         attackIndex = 0;
+        BoostDuration = 0;
         jumpCount = MAX_JUMP_COUNT;
+        boostBlockFallCollider.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -68,6 +97,56 @@ public class Player : Singleton<Player>
         Move();
         UpdateHp();
         CheckDeath();
+        CheckBoost();
+        CheckMagnet();
+    }
+
+    public void Magnet(float duration)
+    {
+        if (MagnetDuration <= 0)
+            magnetParticle.Play();
+
+        MagnetDuration = duration;
+    }
+
+    private void CheckMagnet()
+    {
+        if (MagnetDuration <= 0) return;
+
+        MagnetDuration -= Time.deltaTime;
+        magnetOverlapColliders = Physics.OverlapSphere(transform.position, Item_Magnet.MAGNET_RADIUS, LayerMask.GetMask("Getable"));
+        foreach (var overlapCollider in magnetOverlapColliders)
+            overlapCollider.transform.position = Vector3.MoveTowards(overlapCollider.transform.position, transform.position, Item_Magnet.MAGNET_SPEED * Time.deltaTime);
+        
+        if (MagnetDuration > 0) return;
+
+        magnetParticle.Stop();
+    }
+
+    public void Boost(float duration)
+    {
+        if (BoostDuration <= 0)
+        {
+            boostParticle.Play();
+            boostBlockFallCollider.gameObject.SetActive(true);
+            SpeedAddValue += Item_Boost.BOOST_SPEED_ADD_VALUE;
+        }
+
+        BoostDuration = duration;
+    }
+
+    private void CheckBoost()
+    {
+        if (BoostDuration <= 0) return;
+
+        BoostDuration -= Time.deltaTime;
+        boostBlockFallCollider.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        
+        if (BoostDuration > 0) return;
+
+        boostParticle.Stop();
+        boostBlockFallCollider.gameObject.SetActive(false);
+        SpeedAddValue -= Item_Boost.BOOST_SPEED_ADD_VALUE;
     }
 
     private void UpdateHp()
@@ -78,13 +157,13 @@ public class Player : Singleton<Player>
     private void CheckDeath()
     {
         if (transform.position.y > -5) return;
-        
+
         Die();
     }
 
     private void Move()
     {
-        float moveValue = (originSpeed + speedAddValue) * Time.deltaTime;
+        float moveValue = (originSpeed + SpeedAddValue) * Time.deltaTime;
         transform.Translate(Vector3.forward * moveValue);
     }
 
@@ -93,13 +172,34 @@ public class Player : Singleton<Player>
         if (collision.collider == null) return;
 
         if (collision.collider.CompareTag("Fall"))
-            Die();
+            OnHitFallObject();
 
         if (collision.collider.CompareTag("Enemy"))
-            Die();
+            OnHitEnemy();
 
         if (collision.collider.CompareTag("Road"))
             jumpCount = MAX_JUMP_COUNT;
+    }
+
+    private void OnHitFallObject()
+    {
+        if (BoostDuration > 0)
+        {
+            return;
+        }
+
+        Die();    
+    }
+    
+
+    private void OnHitEnemy()
+    {
+        if (BoostDuration > 0)
+        {
+            CheckInput(Direction.Down);
+            return;
+        }
+        Die();
     }
 
     private void Die()
@@ -107,6 +207,7 @@ public class Player : Singleton<Player>
         SoundManager.Instance.PlaySound("", ESoundType.Bgm);
         transform.DOKill();
         animator.CrossFade("Death", 0.2f);
+        boostParticle.Stop();
         IsAlive = false;
     }
 
@@ -115,6 +216,19 @@ public class Player : Singleton<Player>
         if (jumpCount <= 0)
             return;
 
+        if (hitAbleEnemyList.Count > 0)
+        {
+            var hitAbleList = hitAbleEnemyList.FindAll(enemy => 
+                enemy.transform.position.y > TileManager.TILE_DISTANCE / 2 
+            && Mathf.Abs(enemy.transform.position.x - transform.position.x) < TileManager.TILE_DISTANCE / 2);
+            if (hitAbleList.Count > 0)
+            {
+                var hitEnemy = hitAbleList.OrderBy(enemy => enemy.transform.position.z - transform.position.z).First();
+                hitEnemy.Hit(1);
+                PoolManager.Instance.Init("Spin Attack", transform).transform.localPosition = Vector3.up;
+            }
+        }
+        
         jumpCount--;
         rigid.velocity = Vector3.up * jumpPower;
         animator.CrossFade("Jump", 0.1f, -1, 0);

@@ -14668,6 +14668,7 @@ GameObject:
   - component: {fileID: 5572630184336403322}
   - component: {fileID: 5572630184336403323}
   - component: {fileID: 5572630184336403320}
+  - component: {fileID: 2697397487237526709}
   m_Layer: 0
   m_Name: Left To Right Attack
   m_TagString: Untagged
@@ -19551,6 +19552,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2697397487237526709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5572630184336403321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dcf2fe253541e742ac668428fe1b81b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 3
 --- !u!1 &5572630184639547991
 GameObject:
   m_ObjectHideFlags: 0

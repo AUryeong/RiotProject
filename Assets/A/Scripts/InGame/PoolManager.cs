@@ -55,6 +55,18 @@ public class PoolManager : Singleton<PoolManager>
                     originObjects.Add(poolName, tileData.gameObject);
                 }
             }
+            
+            foreach (var enemy in stageTileData.flyingEnemies)
+            {
+                string enemyName = enemy.name;
+                originObjects.Add(enemyName, enemy.gameObject);
+            }
+            
+            foreach (var enemy in stageTileData.defaultEnemies)
+            {
+                string enemyName = enemy.name;
+                originObjects.Add(enemyName, enemy.gameObject);
+            }
         }
     }
 

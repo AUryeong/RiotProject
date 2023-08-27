@@ -25,10 +25,11 @@ public class BgmData
         beatDataList = new Queue<BeatData>();
         string[] rows = textAsset.text.Split('\n');
 
-        float lastBeatDataBeat = 0;
         BeatData prevData = null;
         foreach (var row in rows)
         {
+            if (string.IsNullOrWhiteSpace(row) || string.IsNullOrEmpty(row)) continue;
+            
             string[] columns = row.Split(",");
             float beat = float.Parse(columns[0]);
             var beatData = new BeatData

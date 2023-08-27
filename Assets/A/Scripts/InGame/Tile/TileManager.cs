@@ -7,14 +7,17 @@ public class TileManager : Singleton<TileManager>
 {
     public const float TILE_DISTANCE = 2.5f;
 
-    private const float BEAT_RENDER_DISTANCE = 30;
-    private const float ENEMY_SYNC_START_POS = -3f;
+    private const float BEAT_RENDER_DISTANCE = 25;
+    private const float BEAT_SYNC_START_POS = -3f;
     private const float PLAYER_RENDER_DISTANCE = 70;
+    
+    [SerializeField] private GlobalObjectFogController fogController;
 
     [Header("Stage")] [SerializeField] private List<StageTileData> stageTileDataList;
     [HideInInspector] public StageTileData stageTileData;
 
-    [Header("Tiles")] private float roadTileLength;
+    [Header("Tiles")] private float roadStartPos = 0;
+    private float roadTileLength;
     private readonly List<RoadTileData> createdRoadTileDataList = new();
     private List<int> lastRoadTileCondition;
 
@@ -23,6 +26,8 @@ public class TileManager : Singleton<TileManager>
 
     private float beatSpawnDuration;
 
+    private float itemTileLength;
+
     [Header("Bgm")] [SerializeField] private float bpmDistanceMultiplier;
     [HideInInspector] public BgmData bgmData;
     private float beatInterval;
@@ -30,6 +35,20 @@ public class TileManager : Singleton<TileManager>
     private bool isAutoTilling;
 
     private Dictionary<string, Queue<BeatData>> bgmNameToBeatData = new(); // ScriptableObject를 건들면 원본도 변경되기에 만든 Queue
+    
+
+    [Header("Change")]
+    private bool isChangeSpeed;
+    private bool isChangeStage;
+    private bool isChangeHighLight;
+    
+    private bool isHighLighted;
+    
+    private float changeSpeedValue;
+    
+    private float speedChangePos;
+    private float stageChangePos;
+    private float highLightChangePos;
 
     protected override void OnCreated()
     {
@@ -62,43 +81,60 @@ public class TileManager : Singleton<TileManager>
         obj.transform.position = new Vector3(0, 0, roadTileLength);
         createdTileList.Add(obj);
 
+        if (createdRoadTileDataList.Contains(data))
+            createdRoadTileDataList.Remove(data);
+        
         createdRoadTileDataList.Add(data);
+        
         lastRoadTileCondition = data.roadDatas[^1].lineCondition;
         roadTileLength += data.length;
 
         float playerPos = Player.Instance.transform.position.z;
         while (roadTileLength - playerPos < PLAYER_RENDER_DISTANCE)
             CheckRoadTile(playerPos);
+        
+        while (itemTileLength - playerPos < PLAYER_RENDER_DISTANCE)
+            CheckItemTile(playerPos);
     }
 
     private void Update()
     {
         CheckTile();
         CheckRemoveTile();
+        CheckChange();
     }
 
-    private void CheckRemoveTile()
-    {
-        float playerPos = Player.Instance.transform.position.z;
-
-        foreach (var createdTile in createdTileList)
-        {
-            if (!createdTile.gameObject.activeSelf) continue;
-            if (playerPos - createdTile.transform.position.z > PLAYER_RENDER_DISTANCE)
-                createdTile.gameObject.SetActive(false);
-        }
-    }
+    #region TileCheck
 
     private void CheckTile()
     {
         if (!Player.Instance.IsAlive) return;
-        
+
         float playerPos = Player.Instance.transform.position.z;
         CheckRoadTile(playerPos);
         CheckBeatTile(playerPos);
         CheckBackgroundTile(playerPos);
+        CheckItemTile(playerPos);
     }
 
+    private void CheckItemTile(float playerPos)
+    {
+        if (itemTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
+        
+        var lastRoadData = GetLengthToRoadData(itemTileLength);
+
+        if (!lastRoadData.isJustBlank)
+        {
+            var runeNodeObj = PoolManager.Instance.Init(nameof(Item_Rune));
+            runeNodeObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 1, itemTileLength);
+
+            if (!createdTileList.Contains(runeNodeObj))
+                createdTileList.Add(runeNodeObj);
+        }
+        
+        itemTileLength += lastRoadData.length;
+    }
+    
     private void CheckRoadTile(float playerPos)
     {
         if (roadTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
@@ -111,14 +147,186 @@ public class TileManager : Singleton<TileManager>
         if (!createdTileList.Contains(roadTileObj))
             createdTileList.Add(roadTileObj);
 
-        if (createdTileList.Contains(roadTileObj))
-            createdRoadTileDataList.Remove(data);
-
         createdRoadTileDataList.Add(data);
         lastRoadTileCondition = data.roadDatas[^1].lineCondition;
         roadTileLength += data.length;
+
+        if (roadTileLength - roadStartPos >= PLAYER_RENDER_DISTANCE * 1.5f)
+        {
+            roadStartPos += createdRoadTileDataList[0].length;
+            createdRoadTileDataList.RemoveAt(0);
+        }
     }
 
+    private void CheckBeatTile(float playerPos)
+    {
+        beatSpawnDuration -= Time.deltaTime;
+        if (beatSpawnDuration > 0) return;
+
+        float length = playerPos + BEAT_RENDER_DISTANCE * (Player.Instance.Speed / Player.Instance.originSpeed);
+        var lastRoadData = GetLengthToRoadData(length);
+
+        if (!isAutoTilling)
+        {
+            var beatData = bgmNameToBeatData[bgmData.bgmName].Dequeue();
+            if (Math.Abs(bgmData.startBeat - beatData.beat) < 0.01f)
+                ChangeStage(length + BEAT_SYNC_START_POS);
+
+            switch (beatData.type)
+            {
+                case BeatType.Default:
+                    var enemy = lastRoadData.isJustBlank ? stageTileData.flyingEnemies.SelectOne() : stageTileData.defaultEnemies.SelectOne();
+                    
+                    var enemyNodeObj = PoolManager.Instance.Init(enemy.name);
+                    enemyNodeObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
+                    
+                    if (!createdTileList.Contains(enemyNodeObj))
+                        createdTileList.Add(enemyNodeObj);
+                    
+                    break;
+                case BeatType.SpeedUp:
+                    ChangeSpeedByBeatData(length, beatData.value);
+                    break;
+                case BeatType.SpeedDown:
+                    ChangeSpeedByBeatData(length, -beatData.value);
+                    break;
+                case BeatType.HighLightOn:
+                    ChangeHighLight(length, true);
+                    break;
+                case BeatType.HighLightOff:
+                    ChangeHighLight(length, false);
+                    break;
+            }
+
+            beatSpawnDuration += beatInterval * beatData.beatDistance;
+        }
+    }
+
+    private void CheckBackgroundTile(float playerPos)
+    {
+        for (var index = 0; index < stageTileData.tileDataList.Count; index++)
+        {
+            if (tileLengthList[index] - playerPos >= PLAYER_RENDER_DISTANCE + BEAT_SYNC_START_POS) continue;
+
+            var stage = stageTileData.tileDataList[index];
+            var data = stage.dataList.SelectOne();
+
+            var obj = PoolManager.Instance.Init(data.name);
+            obj.transform.position = new Vector3(0, 0, tileLengthList[index]);
+
+            if (!createdTileList.Contains(obj))
+                createdTileList.Add(obj);
+
+            tileLengthList[index] += data.length;
+        }
+    }
+
+    #endregion
+    
+    #region Change
+
+    private void CheckChange()
+    {
+        CheckChangeHighLight();
+        CheckChangeSpeed();
+        CheckChangeStage();
+    }
+
+    private void ChangeHighLight(float changeLength, bool isHighLight)
+    {
+        isChangeHighLight = true;
+        isHighLighted = isHighLight;
+        highLightChangePos = changeLength;
+    }
+
+    private void ChangeSpeedByBeatData(float changeLength, float speed)
+    {
+        isChangeSpeed = true;
+        changeSpeedValue = speed;
+        speedChangePos = changeLength;
+    }
+
+    private void ChangeStage(float changeLength)
+    {
+        isChangeStage = true;
+        stageChangePos = changeLength;
+    }
+
+    private void ChangeThemeColor(ThemeColor themeColor, bool isHighLightSkip = false)
+    {
+        if (!isHighLightSkip && isHighLighted) return;
+        
+        fogController.mainColor = themeColor.mainColor;
+        fogController.fogColor = themeColor.fogColor;
+        
+        var transEffect = PoolManager.Instance.Init("Trans Effect");
+        transEffect.transform.position = Player.Instance.transform.position;
+    }
+
+    private void CheckChangeHighLight()
+    {
+        if (!isChangeHighLight || Player.Instance.transform.position.z < highLightChangePos) return;
+
+        isChangeHighLight = false;
+        
+        var changeStage = stageTileData;
+        var themeColor = isHighLighted ? changeStage.highLightColor : changeStage.defaultColor;
+        
+        ChangeThemeColor(themeColor, true);
+    }
+    
+    private void CheckChangeStage()
+    {
+        if (!isChangeStage || Player.Instance.transform.position.z < stageChangePos) return;
+
+        isChangeStage = false;
+        
+        var changeStage = stageTileData;
+        var themeColor = changeStage.defaultColor;
+        
+        ChangeThemeColor(themeColor, true);
+        
+        SoundManager.Instance.PlaySound(TileManager.Instance.bgmData.bgmName, ESoundType.Bgm, 0.5f);
+    }
+    
+    private void CheckChangeSpeed()
+    {
+        if (!isChangeSpeed || Player.Instance.transform.position.z < speedChangePos) return;
+        
+        isChangeSpeed = false;
+        Player.Instance.SpeedAddValue += changeSpeedValue;
+    }
+    #endregion
+    
+    private void CheckRemoveTile()
+    {
+        float playerPos = Player.Instance.transform.position.z;
+
+        foreach (var createdTile in createdTileList)
+        {
+            if (!createdTile.gameObject.activeSelf) continue;
+            if (playerPos - createdTile.transform.position.z > PLAYER_RENDER_DISTANCE)
+                createdTile.gameObject.SetActive(false);
+        }
+    }
+
+
+    private void SetBgmData(BgmData setBgmData)
+    {
+        bgmData = setBgmData;
+        beatInterval = 60f / bgmData.bpm * bpmDistanceMultiplier;
+
+        isAutoTilling = bgmData.beatDataList == null || bgmData.beatDataList.Count <= 0;
+
+        Player.Instance.SpeedAddValue = bgmData.speedAdder;
+        if (isAutoTilling) return;
+
+        if (!bgmNameToBeatData.ContainsKey(bgmData.bgmName))
+        {
+            bgmNameToBeatData.Add(bgmData.bgmName, new Queue<BeatData>(bgmData.beatDataList));
+        }
+    }
+    
     private RoadData GetLengthToRoadData(float length)
     {
         float roadLength = roadTileLength;
@@ -139,122 +347,7 @@ public class TileManager : Singleton<TileManager>
             if (roadLength > length)
                 break;
         }
-
+        
         return lastRoadData;
-    }
-
-    private void CheckBeatTile(float playerPos)
-    {
-        beatSpawnDuration -= Time.deltaTime;
-        if (beatSpawnDuration > 0) return;
-
-        float length = playerPos + BEAT_RENDER_DISTANCE * (Player.Instance.Speed / Player.Instance.originSpeed);
-        var lastRoadData = GetLengthToRoadData(length);
-
-        if (!isAutoTilling)
-        {
-            var beatData = bgmNameToBeatData[bgmData.bgmName].Dequeue();
-            if (Math.Abs(bgmData.startBeat - beatData.beat) < 0.01f)
-                InGameManager.Instance.ChangeStage(length + ENEMY_SYNC_START_POS);
-
-            switch (beatData.type)
-            {
-                case  BeatType.Default:
-                    var enemyNodeObj = PoolManager.Instance.Init(nameof(Enemy));
-                    enemyNodeObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 0, length);
-                    if (!createdTileList.Contains(enemyNodeObj))
-                        createdTileList.Add(enemyNodeObj);
-                    break;
-                case BeatType.SpeedUp:
-                    InGameManager.Instance.ChangeSpeedByBeatData(length, beatData.value);
-                    break;
-                case BeatType.SpeedDown:
-                    InGameManager.Instance.ChangeSpeedByBeatData(length, -beatData.value);
-                    break;
-                case BeatType.HighLightOn:
-                    InGameManager.Instance.ChangeHighLight(length, true);
-                    break;
-                case BeatType.HighLightOff:
-                    InGameManager.Instance.ChangeHighLight(length, false);
-                    break;
-            }
-
-            beatSpawnDuration += beatInterval * beatData.beatDistance;
-        }
-
-        // int random = Random.Range(0, 6);
-        //
-        // var enemyObj = PoolManager.Instance.Init(nameof(Enemy));
-        // enemyObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 0, length);
-        //
-        // if (!createdTileList.Contains(enemyObj))
-        //     createdTileList.Add(enemyObj);
-        //
-        // if (random <= 2)
-        // {
-        //     var enemySubObj = PoolManager.Instance.Init(nameof(Enemy));
-        //     enemySubObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 0, length + beatLength / 2);
-        //
-        //     if (!createdTileList.Contains(enemySubObj))
-        //         createdTileList.Add(enemySubObj);
-        //     enemyLength += beatLength;
-        // }
-        //
-        // if (random <= 0)
-        // {
-        //     var enemySubObj = PoolManager.Instance.Init(nameof(Enemy));
-        //     enemySubObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 0, length + beatLength);
-        //
-        //     if (!createdTileList.Contains(enemySubObj))
-        //         createdTileList.Add(enemySubObj);
-        //     enemyLength += beatLength;
-        // }
-        //
-        // enemyLength += beatLength * 2;
-        // if (enemyLength >= stageChangeLength)
-        // {
-        //     var stageData = stageTileDataList.FindAll(data => data != stageTileData).SelectOne();
-        //     stageTileData = stageData;
-        //
-        //     stageChangeLength += STAGE_CHANGE_DISTANCE;
-        //
-        //     SetBgmData(stageData.bgmDataList.SelectOne());
-        // }
-    }
-
-    private void SetBgmData(BgmData setBgmData)
-    {
-        var prevBgmData = bgmData;
-        bgmData = setBgmData;
-        beatInterval = 60f / bgmData.bpm * bpmDistanceMultiplier;
-
-        isAutoTilling = bgmData.beatDataList == null || bgmData.beatDataList.Count <= 0;
-
-        Player.Instance.speedAddValue += -prevBgmData.speedAdder + bgmData.speedAdder;
-        if (isAutoTilling) return;
-
-        if (!bgmNameToBeatData.ContainsKey(bgmData.bgmName))
-        {
-            bgmNameToBeatData.Add(bgmData.bgmName, new Queue<BeatData>(bgmData.beatDataList));
-        }
-    }
-
-    private void CheckBackgroundTile(float playerPos)
-    {
-        for (var index = 0; index < stageTileData.tileDataList.Count; index++)
-        {
-            if (tileLengthList[index] - playerPos >= PLAYER_RENDER_DISTANCE + ENEMY_SYNC_START_POS) continue;
-
-            var stage = stageTileData.tileDataList[index];
-            var data = stage.dataList.SelectOne();
-
-            var obj = PoolManager.Instance.Init(data.name);
-            obj.transform.position = new Vector3(0, 0, tileLengthList[index]);
-
-            if (!createdTileList.Contains(obj))
-                createdTileList.Add(obj);
-
-            tileLengthList[index] += data.length;
-        }
     }
 }
