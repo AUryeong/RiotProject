@@ -3,14 +3,19 @@
 public class GameManager : Singleton<GameManager>
 {
     protected override bool IsDontDestroying => true;
+    public bool isGaming = true;
+    public int rune;
 
     protected override void OnCreated()
     {
         base.OnCreated();
+        OnReset();
+    }
+
+    protected override void OnReset()
+    {
         foreach (var cam in Camera.allCameras)
-        {
             SetResolution(cam);
-        }
     }
 
     private void SetResolution(Camera changeCamera)

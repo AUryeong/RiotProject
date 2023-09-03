@@ -4,7 +4,7 @@ public class InGameManager : Singleton<InGameManager>
 {
     private Camera mainCamera;
     private Vector3 cameraDistance;
-    public UIManager uiManager;
+    public InGameUIManager uiManager;
 
     public int Rune
     {
@@ -28,7 +28,7 @@ public class InGameManager : Singleton<InGameManager>
     }
     private void Update()
     {
-        if (!Player.Instance.IsAlive) return;
+        if (!Player.Instance.IsAlive && GameManager.Instance.isGaming) return;
         
         CameraMove();
     }

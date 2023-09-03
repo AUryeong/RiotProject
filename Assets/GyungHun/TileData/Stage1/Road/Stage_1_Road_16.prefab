@@ -1170,10 +1170,14 @@ MonoBehaviour:
   roadDatas:
   - length: 6
     lineCondition: 00000000
+    isJustBlank: 0
   - length: 5.5
     lineCondition: 00000000
+    isJustBlank: 0
   - length: 6
     lineCondition: 00000000
+    isJustBlank: 0
   - length: 6
     lineCondition: 00000000
+    isJustBlank: 1
   length: 23.5

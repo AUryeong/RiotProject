@@ -1,4 +1,4 @@
-0,Start,0
+1,Start,0
 3
 5
 7
@@ -10,12 +10,12 @@
 14.8
 15.5
 16.5
-16.5,SpeedUp,4
 18
+19,SpeedUp,4
+19,HighLightOn
 19
 20
 20.5
-21,HighLightOn
 22
 22.5
 24
@@ -23,8 +23,8 @@
 26 
 26.5
 27
+27,HighLightOff
 27,SpeedDown,4
-28,HighLightOff
 28
 29
 30
