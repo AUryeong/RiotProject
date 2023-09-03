@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using InGame;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -70,7 +71,6 @@ public class Player : Singleton<Player>
     [SerializeField] private BoxCollider boostBlockFallCollider;
     [SerializeField] private ParticleSystem boostParticle;
 
-
     public float MagnetDuration { get; private set; }
     [SerializeField] private ParticleSystem magnetParticle;
     private Collider[] magnetOverlapColliders;
@@ -80,22 +80,31 @@ public class Player : Singleton<Player>
         rigid = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
+        Reset();
+    }
+
+    public void Reset()
+    {
         boostParticle.Stop();
         magnetParticle.Stop();
         boostBlockFallCollider.gameObject.SetActive(false);
-        if (GameManager.Instance.isGaming)
-            GameStart();
+        
+        animator.Play("run");
+        
+        speedAddValue = 0;
+        BoostDuration = 0;
+        attackIndex = 0;
     }
 
     public void GameStart()
     {
+        Reset();
         hitAbleEnemyList = new List<Enemy>();
 
         IsAlive = true;
         Hp = maxHp;
-        attackIndex = 0;
-        BoostDuration = 0;
         jumpCount = MAX_JUMP_COUNT;
+        
         Boost(2.5f);
     }
 
@@ -121,6 +130,7 @@ public class Player : Singleton<Player>
     private void OutGamingUpdate()
     {
         Move();
+        CheckBoost();
     }
 
     public void Magnet(float duration)
@@ -230,20 +240,19 @@ public class Player : Singleton<Player>
 
     private void Die()
     {
-        SoundManager.Instance.PlaySound("", ESoundType.Bgm);
-        transform.DOKill();
-        animator.CrossFade("Death", 0.2f);
-        boostParticle.Stop();
         IsAlive = false;
-
-        StartCoroutine(AliceCoroutine());
-        IEnumerator AliceCoroutine()
-        {
-            yield return new WaitForSeconds(3);
-            GameManager.Instance.isGaming = false;
-            GameManager.Instance.rune += InGameManager.Instance.Rune;
-            SceneManager.LoadScene("InGame");
-        }
+        
+        transform.DOKill();
+        
+        animator.CrossFade("Death", 0.2f);
+        
+        boostParticle.Stop();
+        magnetParticle.Stop();
+        
+        var obj = PoolManager.Instance.Init("Hit Effect");
+        obj.transform.position = transform.position;
+        
+        InGameManager.Instance.Die();
     }
 
     private void Jump()

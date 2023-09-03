@@ -12,7 +12,7 @@
 16.5
 18
 19,SpeedUp,4
-19,HighLightOn
+19,HighLight,1
 19
 20
 20.5
@@ -23,7 +23,7 @@
 26 
 26.5
 27
-27,HighLightOff
+27,HighLight,0
 27,SpeedDown,4
 28
 29
@@ -79,7 +79,7 @@
 73
 74
 75
-75,HighLightOn
+75,HighLight,1
 76
 76.5
 77
@@ -101,7 +101,7 @@
 89
 90
 91
-91,HighLightOff
+91,HighLight,0
 91,SpeedDown,4
 91.4
 92

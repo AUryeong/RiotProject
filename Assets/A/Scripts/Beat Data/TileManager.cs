@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using InGame;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TileManager : Singleton<TileManager>
 {
@@ -12,14 +14,10 @@ public class TileManager : Singleton<TileManager>
 
     [SerializeField] private GlobalObjectFogController fogController;
 
-    [Header("Stage")]
-    [SerializeField] private List<StageTileData> stageTileDataList;
+    [Header("Stage")] [SerializeField] private List<StageTileData> stageTileDataList;
     [HideInInspector] public StageTileData stageTileData;
 
-    [Header("Tiles")] 
-    [SerializeField] private List<RoadTileData> onlyOneRoadList;
-
-    private float stageStartPos;
+    [Header("Tiles")] private float stageStartPos;
     private float roadStartPos;
     private float roadTileLength;
     private readonly List<RoadTileData> createdRoadTileDataList = new();
@@ -32,32 +30,27 @@ public class TileManager : Singleton<TileManager>
 
     private float itemTileLength;
 
-    [Header("Bgm")] 
-    [SerializeField] private float bpmDistanceMultiplier;
+    [Header("Bgm")] [SerializeField] private float bpmDistanceMultiplier;
     [HideInInspector] public BgmData bgmData;
     private float beatInterval;
 
-    private Dictionary<string, Queue<BeatData>> bgmNameToBeatData = new(); // ScriptableObject를 건들면 원본도 변경되기에 만든 Queue
+    private Queue<BeatData> beatDataQueue = new(); // ScriptableObject를 건들면 원본도 변경되기에 만든 Queue
 
 
-    [Header("Change")]
-    private bool isChangeSpeed;
-    private bool isChangeStage;
-    private bool isChangeHighLight;
-    
-    private bool isHighLighted;
+    [Header("Change")] private bool isChangeStage;
+
+    private readonly List<TileChangeData> speedDataList = new();
+    private readonly List<TileChangeData> highLightDataList = new();
+    public int highLightLevel;
+
     private bool isBeatCreating;
 
-    private float changeSpeedValue;
-
-    private float speedChangePos;
     private float stageChangePos;
     private float beatStartPos;
-    private float highLightChangePos;
 
     [Header("Item")] [SerializeField] private List<string> itemList;
 
-    private int itemMaxValue = 0;
+    private int itemMaxValue;
     private const float ITEM_RANDOM_PROB_VALUE_PERCENT = 1f;
     private const float ITEM_RANDOM_PROB_MAX = 50;
 
@@ -70,30 +63,39 @@ public class TileManager : Singleton<TileManager>
 
     private void StageReset()
     {
-        bgmNameToBeatData = new Dictionary<string, Queue<BeatData>>();
-
         stageTileData = stageTileDataList[0];
         SetBgmData(stageTileData.bgmDataList[0]);
-        
+
         tileLengthList.Clear();
         for (int index = 0; index < stageTileData.tileDataList.Count; index++)
             tileLengthList.Add(0);
     }
 
-    public void Reset()
+    public void Reset(float startPos = -1)
     {
-        stageStartPos = roadTileLength;
+        if (startPos >= 0)
+        {
+            roadTileLength = startPos;
+            for (int index = 0; index < stageTileData.tileDataList.Count; index++)
+                tileLengthList[index] = startPos;
 
-        isChangeSpeed = false;
+            foreach (var createdTile in createdTileList)
+                createdTile.gameObject.SetActive(false);
+            createdTileList.Clear();
+        }
+
         isChangeStage = false;
-        isChangeHighLight = false;
-        
         isBeatCreating = false;
+
+        highLightLevel = 0;
+        highLightDataList.Clear();
+
+        speedDataList.Clear();
+
+        stageStartPos = roadTileLength;
         beatStartPos = stageStartPos;
-
-        isHighLighted = false;
-
         roadStartPos = stageStartPos;
+
         beatSpawnDuration = 0;
 
         createdRoadTileDataList.Clear();
@@ -141,11 +143,20 @@ public class TileManager : Singleton<TileManager>
         CheckBackgroundTile(playerPos);
     }
 
+    private void GamingUpdate()
+    {
+        CheckCreateTile();
+        CheckRemoveTile();
+        CheckChange();
+    }
+
+    #region TileCheck
+
     private void CheckOutGameRoadTile(float playerPos)
     {
         if (roadTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
 
-        var data = onlyOneRoadList.SelectOne();
+        var data = stageTileData.outGameTileDataList.SelectOne();
 
         var roadTileObj = PoolManager.Instance.Init(data.name);
         roadTileObj.transform.position = new Vector3(0, 0, roadTileLength);
@@ -156,17 +167,7 @@ public class TileManager : Singleton<TileManager>
         roadTileLength += data.length;
     }
 
-
-    private void GamingUpdate()
-    {
-        CheckTile();
-        CheckRemoveTile();
-        CheckChange();
-    }
-
-    #region TileCheck
-
-    private void CheckTile()
+    private void CheckCreateTile()
     {
         if (!Player.Instance.IsAlive) return;
 
@@ -238,7 +239,7 @@ public class TileManager : Singleton<TileManager>
             isBeatCreating = true;
             return;
         }
-        
+
         beatSpawnDuration -= Time.deltaTime;
         if (beatSpawnDuration > 0) return;
 
@@ -247,7 +248,7 @@ public class TileManager : Singleton<TileManager>
         var lastRoadData = GetLengthToRoadData(length);
         Debug.Log(string.Join(",", lastRoadData.lineCondition) + " Aris");
 
-        var beatData = bgmNameToBeatData[bgmData.bgmName].Dequeue();
+        var beatData = beatDataQueue.Dequeue();
 
         switch (beatData.type)
         {
@@ -270,11 +271,8 @@ public class TileManager : Singleton<TileManager>
             case BeatType.SpeedDown:
                 ChangeSpeedByBeatData(length, -beatData.value);
                 break;
-            case BeatType.HighLightOn:
-                ChangeHighLight(length, true);
-                break;
-            case BeatType.HighLightOff:
-                ChangeHighLight(length, false);
+            case BeatType.HighLight:
+                ChangeHighLight(length, beatData.value);
                 break;
         }
 
@@ -311,18 +309,22 @@ public class TileManager : Singleton<TileManager>
         CheckChangeStage();
     }
 
-    private void ChangeHighLight(float changeLength, bool isHighLight)
+    private void ChangeHighLight(float changeLength, float changeValue)
     {
-        isChangeHighLight = true;
-        isHighLighted = isHighLight;
-        highLightChangePos = changeLength;
+        highLightDataList.Add(new TileChangeData()
+        {
+            pos = changeLength,
+            changeValue = changeValue
+        });
     }
 
-    private void ChangeSpeedByBeatData(float changeLength, float speed)
+    private void ChangeSpeedByBeatData(float changeLength, float changeValue)
     {
-        isChangeSpeed = true;
-        changeSpeedValue = speed;
-        speedChangePos = changeLength;
+        speedDataList.Add(new TileChangeData()
+        {
+            pos = changeLength,
+            changeValue = changeValue
+        });
     }
 
     private void ChangeStage(float changeLength)
@@ -331,10 +333,8 @@ public class TileManager : Singleton<TileManager>
         stageChangePos = changeLength;
     }
 
-    private void ChangeThemeColor(ThemeColor themeColor, bool isHighLightSkip = false)
+    private void ChangeThemeColor(ThemeColor themeColor)
     {
-        if (!isHighLightSkip && isHighLighted) return;
-
         fogController.mainColor = themeColor.mainColor;
         fogController.fogColor = themeColor.fogColor;
 
@@ -344,14 +344,25 @@ public class TileManager : Singleton<TileManager>
 
     private void CheckChangeHighLight()
     {
-        if (!isChangeHighLight || Player.Instance.transform.position.z < highLightChangePos) return;
+        if (highLightDataList.Count <= 0) return;
 
-        isChangeHighLight = false;
+        bool isRemoveData = false;
+        foreach (var changeData in highLightDataList)
+        {
+            if (Player.Instance.transform.position.z < changeData.pos) return;
 
-        var changeStage = stageTileData;
-        var themeColor = isHighLighted ? changeStage.highLightColor : changeStage.defaultColor;
+            isRemoveData = true;
 
-        ChangeThemeColor(themeColor, true);
+            highLightLevel = Mathf.Clamp(Mathf.RoundToInt(changeData.changeValue) + highLightLevel, 0, bgmData.highLightColors.Count);
+
+            var changeStage = stageTileData;
+            var themeColor = highLightLevel <= 0 ? changeStage.defaultColor : bgmData.highLightColors[highLightLevel - 1];
+
+            ChangeThemeColor(themeColor);
+        }
+
+        if (isRemoveData)
+            highLightDataList.RemoveAt(0);
     }
 
     private void CheckChangeStage()
@@ -364,17 +375,27 @@ public class TileManager : Singleton<TileManager>
         var changeStage = stageTileData;
         var themeColor = changeStage.defaultColor;
 
-        ChangeThemeColor(themeColor, true);
+        ChangeThemeColor(themeColor);
 
         SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f);
     }
 
     private void CheckChangeSpeed()
     {
-        if (!isChangeSpeed || Player.Instance.transform.position.z < speedChangePos) return;
+        if (speedDataList.Count <= 0) return;
 
-        isChangeSpeed = false;
-        Player.Instance.SpeedAddValue += changeSpeedValue;
+        bool isRemoveData = false;
+        foreach (var changeData in speedDataList)
+        {
+            if (Player.Instance.transform.position.z < changeData.pos) return;
+
+            isRemoveData = true;
+
+            Player.Instance.SpeedAddValue += changeData.changeValue;
+        }
+
+        if (isRemoveData)
+            speedDataList.RemoveAt(0);
     }
 
     #endregion
@@ -399,10 +420,7 @@ public class TileManager : Singleton<TileManager>
 
         Player.Instance.SpeedAddValue = bgmData.speedAdder;
 
-        if (!bgmNameToBeatData.ContainsKey(bgmData.bgmName))
-        {
-            bgmNameToBeatData.Add(bgmData.bgmName, new Queue<BeatData>(bgmData.beatDataList));
-        }
+        beatDataQueue = new Queue<BeatData>(bgmData.beatDataList);
     }
 
     private RoadData GetLengthToRoadData(float length)
@@ -426,6 +444,7 @@ public class TileManager : Singleton<TileManager>
             if (roadLength > length)
                 break;
         }
+
         return lastRoadData;
     }
 }

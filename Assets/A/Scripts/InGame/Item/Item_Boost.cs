@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using InGame;
+using UnityEngine;
 
 public class Item_Boost : Item
 {

@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
 
-public class LobbyManager : Singleton<LobbyManager>
+namespace Lobby
 {
-    public LobbyUIManager uiManager;
-
-    private void Start()
+    public class LobbyManager : Singleton<LobbyManager>, ISceneLink
     {
-        SoundManager.Instance.PlaySound("Sound1_70BPM", ESoundType.Bgm, 0.5f);
-    }
-    public void GameStart()
-    {
-        SoundManager.Instance.PlaySound("", ESoundType.Bgm);
-        GameManager.Instance.isGaming = true;
+        public LobbyUIManager uiManager;
 
-        TileManager.Instance.Reset();
-        TileManager.Instance.CreateTile();
-        
-        Player.Instance.GameStart();
-        
-        InGameManager.Instance.uiManager.Active(true);
-        uiManager.Active(false);
+        public void Active()
+        {
+            uiManager.gameObject.SetActive(true);
+            uiManager.ActiveSetting();
+
+            GameManager.Instance.isGaming = false;
+            
+            Player.Instance.Reset();
+            Player.Instance.transform.position = Vector3.zero;
+            
+            TileManager.Instance.Reset(0);
+        }
+
+        public void DeActive()
+        {
+            uiManager.DeActiveSetting();
+        }
     }
 }

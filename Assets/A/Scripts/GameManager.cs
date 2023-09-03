@@ -1,21 +1,56 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using InGame;
+using Lobby;
+using UnityEngine;
+using UnityEngine.UI;
+
+public enum SceneLinkType
+{
+    Lobby,
+    InGame
+}
 
 public class GameManager : Singleton<GameManager>
 {
     protected override bool IsDontDestroying => true;
     public bool isGaming = true;
-    public int rune;
+
+    public const float BLACK_FADE_DURATION = 0.5f;
+
+    [SerializeField] private Image blackFade;
 
     protected override void OnCreated()
     {
         base.OnCreated();
         OnReset();
+
+        ActiveSceneLink(SceneLinkType.Lobby);
     }
 
     protected override void OnReset()
     {
         foreach (var cam in Camera.allCameras)
             SetResolution(cam);
+    }
+
+    public void ActiveSceneLink(SceneLinkType type)
+    {
+        switch (type)
+        {
+            case SceneLinkType.Lobby:
+                blackFade.gameObject.SetActive(true);
+                blackFade.DOFade(1, BLACK_FADE_DURATION).OnComplete(() =>
+                {
+                    LobbyManager.Instance.Active();
+                    InGameManager.Instance.DeActive();
+                    blackFade.DOFade(0, BLACK_FADE_DURATION).OnComplete(() => blackFade.gameObject.SetActive(false));
+                });
+                break;
+            case SceneLinkType.InGame:
+                LobbyManager.Instance.DeActive();
+                InGameManager.Instance.Active();
+                break;
+        }
     }
 
     private void SetResolution(Camera changeCamera)

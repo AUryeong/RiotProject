@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using InGame;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
@@ -9,7 +10,6 @@ public class StageTileData : SerializedScriptableObject
 {
     [Title("Theme Color")] 
     public ThemeColor defaultColor;
-    public ThemeColor highLightColor;
 
     [Title("Enemy")]
     public List<Enemy> flyingEnemies;
@@ -18,8 +18,9 @@ public class StageTileData : SerializedScriptableObject
     [Title("Bgm Data")]
     [NonSerialized, OdinSerialize]
     public List<BgmData> bgmDataList = new();
-    
-    [Title("Tiles")]
+
+    [Title("Tiles")] 
+    public List<RoadTileData> outGameTileDataList = new();
     public List<RoadTileData> roadTileDataList = new();
     public List<TileDataList> tileDataList = new();
 }

@@ -8,11 +8,15 @@ public class BgmData
 {
     [Space(10f)] public string bgmName;
 
+    [Title("High Light Color")]
+    public List<ThemeColor> highLightColors = new();
+    
     [Title("Special Value")] public float bpm;
     public float speedAdder;
 
     [Space(10f)] [Title("Beat Data")] [SerializeField]
     private TextAsset textAsset;
+    
 
     [Space(5f)] [ShowIf("@textAsset != null")][TableList]
     public Queue<BeatData> beatDataList = new();
@@ -49,6 +53,13 @@ public class BgmData
 }
 
 [Serializable]
+public class TileChangeData
+{
+    public float pos;
+    public float changeValue;
+}
+
+[Serializable]
 public class BeatData
 {
     public float beatDistance;
@@ -64,6 +75,5 @@ public enum BeatType
     Start,
     SpeedUp,
     SpeedDown,
-    HighLightOn,
-    HighLightOff
+    HighLight
 }

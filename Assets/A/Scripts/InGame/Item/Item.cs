@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 
-public class Item : MonoBehaviour
+namespace InGame
 {
-    protected virtual void OnGet()
+    public class Item : MonoBehaviour
     {
-        gameObject.SetActive(false);
-    }
+        protected virtual void OnGet()
+        {
+            gameObject.SetActive(false);
+        }
     
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-            OnGet();
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+                OnGet();
+        }
     }
 }

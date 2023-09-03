@@ -1,40 +1,69 @@
 using UnityEngine;
 
-public class InGameManager : Singleton<InGameManager>
+namespace InGame
 {
-    private Camera mainCamera;
-    private Vector3 cameraDistance;
-    public InGameUIManager uiManager;
-
-    public int Rune
+    public class InGameManager : Singleton<InGameManager>, ISceneLink
     {
-        get
+        private Camera mainCamera;
+        private Vector3 cameraDistance;
+        public InGameUIManager uiManager;
+
+        public int Rune
         {
-            return rune;
+            get { return rune; }
+            set
+            {
+                rune = value;
+                uiManager.UpdateRune(rune);
+            }
         }
-        set
+
+        private int rune;
+
+        private void Start()
         {
-            rune = value;
-            uiManager.UpdateRune(rune);
+            mainCamera = Camera.main;
+            cameraDistance = mainCamera.transform.position - Player.Instance.transform.position;
         }
-    }
 
-    private int rune;
-    
-    private void Start()
-    {
-        mainCamera = Camera.main;
-        cameraDistance = mainCamera.transform.position - Player.Instance.transform.position;
-    }
-    private void Update()
-    {
-        if (!Player.Instance.IsAlive && GameManager.Instance.isGaming) return;
-        
-        CameraMove();
-    }
+        private void Update()
+        {
+            if (!Player.Instance.IsAlive && GameManager.Instance.isGaming) return;
 
-    private void CameraMove()
-    {
-        mainCamera.transform.position = Player.Instance.transform.position + cameraDistance;
+            CameraMove();
+        }
+
+        private void CameraMove()
+        {
+            mainCamera.transform.position = Player.Instance.transform.position + cameraDistance;
+        }
+
+        public void Active()
+        {
+            GameManager.Instance.isGaming = true;
+            SoundManager.Instance.PlaySound("", ESoundType.Bgm);
+
+            Rune = 0;
+
+            TileManager.Instance.Reset();
+            TileManager.Instance.CreateTile();
+
+            Player.Instance.GameStart();
+
+            uiManager.gameObject.SetActive(true);
+        }
+
+        public void DeActive()
+        {
+            uiManager.gameObject.SetActive(false);
+        }
+
+        public void Die()
+        {
+            SoundManager.Instance.PlaySound("", ESoundType.Bgm);
+            SaveManager.Instance.GameData.rune += Rune;
+
+            this.Invoke(() => GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby), 3);
+        }
     }
 }
