@@ -85,6 +85,8 @@ public class Player : Singleton<Player>
 
     public void Reset()
     {
+        rigid.velocity = Vector3.zero;
+        
         boostParticle.Stop();
         magnetParticle.Stop();
         boostBlockFallCollider.gameObject.SetActive(false);
@@ -104,8 +106,6 @@ public class Player : Singleton<Player>
         IsAlive = true;
         Hp = maxHp;
         jumpCount = MAX_JUMP_COUNT;
-        
-        Boost(2.5f);
     }
 
     private void Update()

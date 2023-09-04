@@ -9,7 +9,7 @@ public class GameData
     public int rune;
     
     public int selectStageIndex;
-    public int selectBgmIndex;
+    public int selectBgmIndex = 1;
 }
 
 public class SaveManager : Singleton<SaveManager>

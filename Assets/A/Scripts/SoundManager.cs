@@ -91,6 +91,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioSource.clip = clip;
             audioSource.volume = audioInfo.audioVolume * multipleVolume;
+            audioSource.time = 0;
             audioSource.Play();
         }
         else //SFX

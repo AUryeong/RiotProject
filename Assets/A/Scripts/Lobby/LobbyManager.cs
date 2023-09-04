@@ -8,15 +8,16 @@ namespace Lobby
 
         public void Active()
         {
-            uiManager.gameObject.SetActive(true);
-            uiManager.ActiveSetting();
-
             GameManager.Instance.isGaming = false;
             
-            Player.Instance.Reset();
             Player.Instance.transform.position = Vector3.zero;
+            Player.Instance.Reset();
             
+            TileManager.Instance.StageReset();
             TileManager.Instance.Reset(0);
+            
+            uiManager.gameObject.SetActive(true);
+            uiManager.ActiveSetting();
         }
 
         public void DeActive()

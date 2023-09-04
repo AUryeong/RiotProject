@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class BgmData
 {
+    public string bgmNickName;
     [Space(10f)] public string bgmName;
 
     [Title("High Light Color")]

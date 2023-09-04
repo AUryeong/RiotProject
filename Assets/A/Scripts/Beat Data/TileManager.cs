@@ -14,7 +14,7 @@ public class TileManager : Singleton<TileManager>
 
     [SerializeField] private GlobalObjectFogController fogController;
 
-    [Header("Stage")] [SerializeField] private List<StageTileData> stageTileDataList;
+    [Header("Stage")] public List<StageTileData> stageTileDataList;
     [HideInInspector] public StageTileData stageTileData;
 
     [Header("Tiles")] private float stageStartPos;
@@ -58,17 +58,13 @@ public class TileManager : Singleton<TileManager>
     {
         base.OnCreated();
         StageReset();
-        Reset();
+        Reset(0);
     }
 
-    private void StageReset()
+    public void StageReset()
     {
-        stageTileData = stageTileDataList[0];
-        SetBgmData(stageTileData.bgmDataList[0]);
-
-        tileLengthList.Clear();
-        for (int index = 0; index < stageTileData.tileDataList.Count; index++)
-            tileLengthList.Add(0);
+        stageTileData = stageTileDataList[SaveManager.Instance.GameData.selectStageIndex];
+        SetBgmData(stageTileData.bgmDataList[SaveManager.Instance.GameData.selectBgmIndex]);
     }
 
     public void Reset(float startPos = -1)
@@ -76,8 +72,10 @@ public class TileManager : Singleton<TileManager>
         if (startPos >= 0)
         {
             roadTileLength = startPos;
+
+            tileLengthList.Clear();
             for (int index = 0; index < stageTileData.tileDataList.Count; index++)
-                tileLengthList[index] = startPos;
+                tileLengthList.Add(startPos);
 
             foreach (var createdTile in createdTileList)
                 createdTile.gameObject.SetActive(false);
@@ -86,6 +84,9 @@ public class TileManager : Singleton<TileManager>
 
         isChangeStage = false;
         isBeatCreating = false;
+
+        if (highLightLevel > 0)
+            ChangeThemeColor(stageTileData.defaultColor);
 
         highLightLevel = 0;
         highLightDataList.Clear();
@@ -249,6 +250,7 @@ public class TileManager : Singleton<TileManager>
         Debug.Log(string.Join(",", lastRoadData.lineCondition) + " Aris");
 
         var beatData = beatDataQueue.Dequeue();
+        Debug.Log(beatData.beat + " haru");
 
         switch (beatData.type)
         {
@@ -353,7 +355,7 @@ public class TileManager : Singleton<TileManager>
 
             isRemoveData = true;
 
-            highLightLevel = Mathf.Clamp(Mathf.RoundToInt(changeData.changeValue) + highLightLevel, 0, bgmData.highLightColors.Count);
+            highLightLevel = Mathf.Clamp(Mathf.RoundToInt(changeData.changeValue), 0, bgmData.highLightColors.Count);
 
             var changeStage = stageTileData;
             var themeColor = highLightLevel <= 0 ? changeStage.defaultColor : bgmData.highLightColors[highLightLevel - 1];
@@ -421,6 +423,10 @@ public class TileManager : Singleton<TileManager>
         Player.Instance.SpeedAddValue = bgmData.speedAdder;
 
         beatDataQueue = new Queue<BeatData>(bgmData.beatDataList);
+
+        SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f);
+        if (bgmData.beatDataList.Count > 0)
+            SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatInterval * bgmData.beatDataList.ToList().Find(beatData => beatData.type == BeatType.HighLight && beatData.value > 0).beat;
     }
 
     private RoadData GetLengthToRoadData(float length)

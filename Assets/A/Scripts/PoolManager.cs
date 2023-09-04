@@ -38,6 +38,8 @@ public class PoolManager : Singleton<PoolManager>
                 obj.gameObject.SetActive(false);
             }
         }
+        
+        poolingDataList.Clear();
 
         foreach (var stageTileData in stageTileDataList)
         {
@@ -68,11 +70,14 @@ public class PoolManager : Singleton<PoolManager>
                 originObjects.Add(enemyName, enemy.gameObject);
             }
         }
+        
+        stageTileDataList.Clear();
     }
 
     public GameObject Init(string origin, Transform parent = null)
     {
         if (string.IsNullOrEmpty(origin)) return null;
+        if (poolingDataList.Count > 0) OnCreated();
 
         GameObject copy;
         if (pools.ContainsKey(origin))
