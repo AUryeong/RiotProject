@@ -1999,9 +1999,6 @@ MonoBehaviour:
   - name: Hit Effect
     originObject: {fileID: 7919642105262353862, guid: c0f100ae622bddf45bb98ce9b0ae41c8, type: 3}
     poolingList: []
-  - name: Enemy
-    originObject: {fileID: 8718060756941068561, guid: e635f358f38c20845ad527ffa9b7e422, type: 3}
-    poolingList: []
   - name: Trans Effect
     originObject: {fileID: 7765840348051711618, guid: 79f8f8c806ca1ba4e9a16e80af9a6579, type: 3}
     poolingList: []
@@ -2028,9 +2025,6 @@ MonoBehaviour:
     poolingList: []
   - name: 
     originObject: {fileID: 4402359989195988256, guid: 09e508a55f4524442bdebde38f38cede, type: 3}
-    poolingList: []
-  - name: 
-    originObject: {fileID: 5707106092345416452, guid: 54513606610ae9345b2d5d1a3a6d1132, type: 3}
     poolingList: []
   stageTileDataList:
   - {fileID: 11400000, guid: d9a9662bb535c9c48a74d8b7537118e9, type: 2}

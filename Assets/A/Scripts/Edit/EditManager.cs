@@ -149,7 +149,7 @@ namespace Edit
                 buildTile.tileIndex = selectTileIndex;
                 hit.collider.gameObject.SetActive(false);
 
-                var obj = selectTileIndex == 0 ? Instantiate(tiles[selectTileIndex].obj) : Instantiate(tiles[selectTileIndex].obj, roadTileData.transform, true);
+                var obj = selectTileIndex <= 1 ? Instantiate(tiles[selectTileIndex].obj) : Instantiate(tiles[selectTileIndex].obj, roadTileData.transform, true);
                 obj.transform.position = hit.collider.transform.position + new Vector3(0, 2f, -tiles[selectTileIndex].length / 2);
                 obj.gameObject.SetActive(true);
             }
