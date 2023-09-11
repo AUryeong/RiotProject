@@ -3,6 +3,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Lobby
@@ -18,9 +19,15 @@ namespace Lobby
         [Header("Main Button")] [SerializeField]
         private Button startButton;
 
-        [SerializeField] private Button bgmButton;
         [SerializeField] private Button settingButton;
+        [SerializeField] private LobbyUISetting settingPopup;
+        [Space(10f)]
+        [SerializeField] private Button stageButton;
+        [SerializeField] private IActiveLink bgmPopup;
+        [Space(10f)]
         [SerializeField] private Button shopButton;
+        [SerializeField] private IActiveLink shopPopup;
+        [Space(10f)]
 
         [Header("BGM Select")] [SerializeField]
         private Image bgmMainSelect;
@@ -50,9 +57,14 @@ namespace Lobby
         {
             startButton.onClick.RemoveAllListeners();
             startButton.onClick.AddListener(StartButton);
+            
+            settingButton.onClick.RemoveAllListeners();
+            settingButton.onClick.AddListener(settingPopup.Active);
 
             inputEventTrigger.AddListener(EventTriggerType.PointerDown, OnPointerDown);
             inputEventTrigger.AddListener(EventTriggerType.PointerUp, OnPointerUp);
+            
+            settingPopup.DeActive();
         }
 
         private void StartButton()
@@ -181,18 +193,18 @@ namespace Lobby
                 background.gameObject.SetActive(true);
                 background.color = background.color.GetFade(0.3f);
                 runeText.text = SaveManager.Instance.GameData.rune.ToString();
-                bgmButton.image.rectTransform.localScale = Vector3.zero;
                 settingButton.image.rectTransform.localScale = Vector3.zero;
+                stageButton.image.rectTransform.localScale = Vector3.zero;
                 shopButton.image.rectTransform.localScale = Vector3.zero;
                 runeIcon.rectTransform.anchoredPosition = new Vector2(100, runeIcon.rectTransform.anchoredPosition.y);
                 startButton.image.rectTransform.anchoredPosition = new Vector2(startButton.image.rectTransform.anchoredPosition.x, -1200);
             });
             
-            activeSequence.Join(bgmButton.image.rectTransform.DOScale(Vector3.zero, UI_SCALE_DURATION).SetEase(Ease.InBack));
+            activeSequence.Join(settingButton.image.rectTransform.DOScale(Vector3.zero, UI_SCALE_DURATION).SetEase(Ease.InBack));
             activeSequence.Join(runeIcon.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION));
             activeSequence.Join(startButton.image.rectTransform.DOAnchorPosY(0, UI_MOVE_DURATION));
-            activeSequence.Insert(UI_MOVE_DURATION, bgmButton.image.rectTransform.DOScale(Vector3.one, UI_SCALE_DURATION).SetEase(Ease.OutBack));
-            activeSequence.Insert(UI_MOVE_DURATION + UI_SCALE_DURATION / 2, settingButton.image.rectTransform.DOScale(Vector3.one, UI_SCALE_DURATION).SetEase(Ease.OutBack));
+            activeSequence.Insert(UI_MOVE_DURATION, settingButton.image.rectTransform.DOScale(Vector3.one, UI_SCALE_DURATION).SetEase(Ease.OutBack));
+            activeSequence.Insert(UI_MOVE_DURATION + UI_SCALE_DURATION / 2, stageButton.image.rectTransform.DOScale(Vector3.one, UI_SCALE_DURATION).SetEase(Ease.OutBack));
             activeSequence.Insert(UI_MOVE_DURATION + UI_SCALE_DURATION, shopButton.image.rectTransform.DOScale(Vector3.one, UI_SCALE_DURATION).SetEase(Ease.OutBack));
 
             activeSequence.OnUpdate(() =>
@@ -217,26 +229,20 @@ namespace Lobby
             deActiveSequence.OnStart(() =>
             {
                 background.color = background.color.GetFade(0.3f);
-                bgmButton.image.rectTransform.localScale = Vector3.one;
                 settingButton.image.rectTransform.localScale = Vector3.one;
+                stageButton.image.rectTransform.localScale = Vector3.one;
                 shopButton.image.rectTransform.localScale = Vector3.one;
                 runeIcon.rectTransform.anchoredPosition = new Vector2(-100, runeIcon.rectTransform.anchoredPosition.y);
                 startButton.image.rectTransform.anchoredPosition = Vector2.zero;
             });
             
-            deActiveSequence.Join(bgmButton.image.rectTransform.DOScale(Vector3.zero, UI_SCALE_DURATION).SetEase(Ease.InBack));
+            deActiveSequence.Join(settingButton.image.rectTransform.DOScale(Vector3.zero, UI_SCALE_DURATION).SetEase(Ease.InBack));
             deActiveSequence.Join(runeIcon.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION));
-            deActiveSequence.Insert(UI_SCALE_DURATION / 2, settingButton.image.rectTransform.DOScale(Vector3.zero, UI_SCALE_DURATION).SetEase(Ease.InBack));
+            deActiveSequence.Insert(UI_SCALE_DURATION / 2, stageButton.image.rectTransform.DOScale(Vector3.zero, UI_SCALE_DURATION).SetEase(Ease.InBack));
             deActiveSequence.Insert(UI_SCALE_DURATION, shopButton.image.rectTransform.DOScale(Vector3.zero, UI_SCALE_DURATION).SetEase(Ease.InBack));
             deActiveSequence.Insert(UI_SCALE_DURATION * 2, startButton.image.rectTransform.DOAnchorPosY(-1200, UI_MOVE_DURATION));
             deActiveSequence.Join(background.DOFade(0, UI_MOVE_DURATION));
 
-            deActiveSequence.OnUpdate(() =>
-            {
-                if (!Input.GetMouseButtonDown(0)) return;
-                deActiveSequence.Complete(true);
-            });
-            
             deActiveSequence.OnComplete(() => gameObject.SetActive(false));
         }
     }

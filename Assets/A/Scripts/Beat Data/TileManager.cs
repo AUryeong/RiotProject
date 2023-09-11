@@ -22,6 +22,7 @@ public class TileManager : Singleton<TileManager>
     private float roadTileLength;
     private readonly List<RoadTileData> createdRoadTileDataList = new();
     private List<int> lastRoadTileCondition;
+    private int lastEnemyTileIndex;
 
     private readonly List<float> tileLengthList = new();
     private readonly List<GameObject> createdTileList = new();
@@ -33,6 +34,7 @@ public class TileManager : Singleton<TileManager>
     [Header("Bgm")] [SerializeField] private float bpmDistanceMultiplier;
     [HideInInspector] public BgmData bgmData;
     private float beatInterval;
+    private float beatSyncPos;
 
     private Queue<BeatData> beatDataQueue = new(); // ScriptableObject를 건들면 원본도 변경되기에 만든 Queue
 
@@ -96,6 +98,10 @@ public class TileManager : Singleton<TileManager>
         stageStartPos = roadTileLength;
         beatStartPos = stageStartPos;
         roadStartPos = stageStartPos;
+        
+        lastEnemyTileIndex = 0;
+
+        beatSyncPos = SaveManager.Instance.GameData.beatSync;
 
         beatSpawnDuration = 0;
 
@@ -255,17 +261,22 @@ public class TileManager : Singleton<TileManager>
         switch (beatData.type)
         {
             case BeatType.Default:
+                var lineConditions = lastRoadData.lineCondition.FindAll(condition => Mathf.Abs(condition - lastEnemyTileIndex) <= 1);
+                int spawnIndex = lineConditions.Count > 0 ? lineConditions.SelectOne() : lastRoadData.lineCondition.SelectOne();
+                
                 var enemy = lastRoadData.isJustBlank ? stageTileData.flyingEnemies.SelectOne() : stageTileData.defaultEnemies.SelectOne();
 
                 var enemyNodeObj = PoolManager.Instance.Init(enemy.name);
-                enemyNodeObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
+                enemyNodeObj.transform.position = new Vector3(spawnIndex * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
 
                 if (!createdTileList.Contains(enemyNodeObj))
                     createdTileList.Add(enemyNodeObj);
 
+                lastEnemyTileIndex = spawnIndex;
+                
                 break;
             case BeatType.Start:
-                ChangeStage(length + BEAT_SYNC_START_POS);
+                ChangeStage(length + BEAT_SYNC_START_POS + beatSyncPos);
                 break;
             case BeatType.SpeedUp:
                 ChangeSpeedByBeatData(length, beatData.value);
@@ -285,7 +296,7 @@ public class TileManager : Singleton<TileManager>
     {
         for (var index = 0; index < stageTileData.tileDataList.Count; index++)
         {
-            if (tileLengthList[index] - playerPos >= PLAYER_RENDER_DISTANCE + BEAT_SYNC_START_POS) continue;
+            if (tileLengthList[index] - playerPos >= PLAYER_RENDER_DISTANCE + BEAT_SYNC_START_POS+ beatSyncPos) continue;
 
             var stage = stageTileData.tileDataList[index];
             var data = stage.dataList.SelectOne();

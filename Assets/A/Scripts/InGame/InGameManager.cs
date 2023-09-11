@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace InGame
 {
-    public class InGameManager : Singleton<InGameManager>, ISceneLink
+    public class InGameManager : Singleton<InGameManager>, IActiveLink
     {
         private Camera mainCamera;
         private Vector3 cameraDistance;

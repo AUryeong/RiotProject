@@ -1,4 +1,4 @@
-﻿    public interface ISceneLink
+﻿    public interface IActiveLink
     {
         void Active();
 

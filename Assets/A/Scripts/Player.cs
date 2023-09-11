@@ -22,6 +22,7 @@ public class Player : Singleton<Player>
 
     public bool IsAlive { get; private set; }
     private const float BEAT_HIT_DISTANCE = 8;
+    private const float ENEMY_HIT_RADIUS = 3;
 
     public float Speed => originSpeed + SpeedAddValue;
     [FormerlySerializedAs("speed")] public float originSpeed;
@@ -33,7 +34,7 @@ public class Player : Singleton<Player>
         {
             speedAddValue = value;
 
-            enemyCheckColliders.size = new Vector3(10, 10, Speed / originSpeed * BEAT_HIT_DISTANCE);
+            enemyCheckColliders.size = new Vector3(6, 10, Speed / originSpeed * BEAT_HIT_DISTANCE);
             enemyCheckColliders.center = new Vector3(0, 0, originSpeed / Speed * BEAT_HIT_DISTANCE / 2);
         }
     }
@@ -106,6 +107,7 @@ public class Player : Singleton<Player>
         IsAlive = true;
         Hp = maxHp;
         jumpCount = MAX_JUMP_COUNT;
+        Boost(2);
     }
 
     private void Update()
@@ -267,8 +269,7 @@ public class Player : Singleton<Player>
                 && Mathf.Abs(enemy.transform.position.x - transform.position.x) < TileManager.TILE_DISTANCE / 2);
             if (hitAbleList.Count > 0)
             {
-                var hitEnemy = hitAbleList.OrderBy(enemy => enemy.transform.position.z - transform.position.z).First();
-                hitEnemy.Hit(1);
+                HitEnemy(hitAbleList);
                 PoolManager.Instance.Init("Spin Attack", transform).transform.localPosition = Vector3.up;
             }
         }
@@ -276,6 +277,19 @@ public class Player : Singleton<Player>
         jumpCount--;
         rigid.velocity = Vector3.up * jumpPower;
         animator.CrossFade("Jump", 0.1f, -1, 0);
+    }
+
+    private void HitEnemy(List<Enemy> hitAbleList)
+    {
+        var hitAbleOrderBy = hitAbleList.OrderBy(enemy => Mathf.Abs(enemy.transform.position.z - transform.position.z)).ToArray();
+        var hitEnemy = hitAbleOrderBy[0];
+        hitEnemy.Hit(1);
+        
+        if (hitAbleList.Count <= 1) return;
+
+        var hitSecondEnemy = hitAbleOrderBy[1];
+        if (Mathf.Abs(hitSecondEnemy.transform.position.z - hitEnemy.transform.position.z) < ENEMY_HIT_RADIUS)
+            hitSecondEnemy.Hit(1);
     }
 
     public void CheckInput(Direction direction)
@@ -291,8 +305,8 @@ public class Player : Singleton<Player>
                     var hitAbleList = hitAbleEnemyList.FindAll(enemy => enemy.transform.position.x - transform.position.x < -TileManager.TILE_DISTANCE / 2);
                     if (hitAbleList.Count > 0)
                     {
-                        var hitEnemy = hitAbleList.OrderBy(enemy => Mathf.Abs(enemy.transform.position.z - transform.position.z)).First();
-                        hitEnemy.Hit(1);
+                        HitEnemy(hitAbleList);
+                        
                         PoolManager.Instance.Init("Right To Left Attack", transform).transform.localPosition = Vector3.up;
                         animator.CrossFade("Left Attack", 0.1f, -1, 0);
                         break;
@@ -310,8 +324,8 @@ public class Player : Singleton<Player>
                     var hitAbleList = hitAbleEnemyList.FindAll(enemy => enemy.transform.position.x - transform.position.x > TileManager.TILE_DISTANCE / 2);
                     if (hitAbleList.Count > 0)
                     {
-                        var hitEnemy = hitAbleList.OrderBy(enemy => Mathf.Abs(enemy.transform.position.z - transform.position.z)).First();
-                        hitEnemy.Hit(1);
+                        HitEnemy(hitAbleList);
+                        
                         PoolManager.Instance.Init("Left To Right Attack", transform).transform.localPosition = Vector3.up;
                         animator.CrossFade("Right Attack", 0.1f, -1, 0);
                         break;
@@ -331,8 +345,8 @@ public class Player : Singleton<Player>
                     var hitAbleList = hitAbleEnemyList.FindAll(enemy => Mathf.Abs(enemy.transform.position.x - transform.position.x) < TileManager.TILE_DISTANCE / 2);
                     if (hitAbleList.Count > 0)
                     {
-                        var hitEnemy = hitAbleList.OrderBy(enemy => enemy.transform.position.z - transform.position.z).First();
-                        hitEnemy.Hit(1);
+                        HitEnemy(hitAbleList);
+                        
                         switch (attackIndex)
                         {
                             case 0:

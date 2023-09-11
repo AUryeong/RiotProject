@@ -10,6 +10,8 @@ public class GameData
     
     public int selectStageIndex;
     public int selectBgmIndex = 1;
+    
+    public float beatSync = 0;
 }
 
 public class SaveManager : Singleton<SaveManager>

@@ -2,7 +2,7 @@
 
 namespace Lobby
 {
-    public class LobbyManager : Singleton<LobbyManager>, ISceneLink
+    public class LobbyManager : Singleton<LobbyManager>, IActiveLink
     {
         public LobbyUIManager uiManager;
 
