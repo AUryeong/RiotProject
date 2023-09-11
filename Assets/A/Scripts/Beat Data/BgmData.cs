@@ -76,5 +76,6 @@ public enum BeatType
     Start,
     SpeedUp,
     SpeedDown,
-    HighLight
+    HighLight,
+    End
 }

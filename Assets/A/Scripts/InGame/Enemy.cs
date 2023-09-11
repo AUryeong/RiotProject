@@ -6,6 +6,7 @@ namespace InGame
     public class Enemy : MonoBehaviour
     {
         private const float ENEMY_HP_HEAL_VALUE = 10;
+        private const int ENEMY_RUNE_GET_VALUE = 5;
         private const float ENEMY_MOVE_DURATION = 0.5f;
 
         public int hp;
@@ -82,7 +83,7 @@ namespace InGame
 
             Player.Instance.hitAbleEnemyList.Remove(this);
             Player.Instance.Hp += ENEMY_HP_HEAL_VALUE;
-            InGameManager.Instance.Rune += 5;
+            InGameManager.Instance.Rune += ENEMY_RUNE_GET_VALUE;
             gameObject.SetActive(false);
 
             var obj = PoolManager.Instance.Init("Hit Effect");

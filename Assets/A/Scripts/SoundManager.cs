@@ -63,7 +63,7 @@ public class SoundManager : Singleton<SoundManager>
         return audioInfo;
     }
 
-    public AudioSource GetAudioSource(ESoundType soundType = ESoundType.Bgm)
+    public AudioSource GetAudioSource(ESoundType soundType = ESoundType.Sfx)
     {
         return audioInfos[soundType].audioSource;
     }

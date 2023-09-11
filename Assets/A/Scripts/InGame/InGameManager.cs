@@ -59,13 +59,13 @@ namespace InGame
             uiManager.gameObject.SetActive(false);
         }
 
-        public void Die()
+        public void ReturnLobby(float duration = 3)
         {
             SoundManager.Instance.PlaySound("", ESoundType.Bgm);
             
             SaveManager.Instance.GameData.rune += Rune;
 
-            this.Invoke(() => GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby), 3);
+            this.Invoke(() => GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby), duration);
         }
     }
 }

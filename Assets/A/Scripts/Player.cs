@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using InGame;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public enum Direction
@@ -17,12 +15,14 @@ public enum Direction
 
 public class Player : Singleton<Player>
 {
+    public bool isInv;
+    
     private Rigidbody rigid;
     private Animator animator;
 
     public bool IsAlive { get; private set; }
     private const float BEAT_HIT_DISTANCE = 8;
-    private const float ENEMY_HIT_RADIUS = 3;
+    private const float ENEMY_HIT_RADIUS = 2;
 
     public float Speed => originSpeed + SpeedAddValue;
     [FormerlySerializedAs("speed")] public float originSpeed;
@@ -87,13 +87,13 @@ public class Player : Singleton<Player>
     public void Reset()
     {
         rigid.velocity = Vector3.zero;
-        
+
         boostParticle.Stop();
         magnetParticle.Stop();
         boostBlockFallCollider.gameObject.SetActive(false);
-        
+
         animator.Play("run");
-        
+
         speedAddValue = 0;
         BoostDuration = 0;
         attackIndex = 0;
@@ -108,6 +108,11 @@ public class Player : Singleton<Player>
         Hp = maxHp;
         jumpCount = MAX_JUMP_COUNT;
         Boost(2);
+
+        if (isInv)
+        {
+            boostBlockFallCollider.gameObject.SetActive(true);
+        }
     }
 
     private void Update()
@@ -127,6 +132,14 @@ public class Player : Singleton<Player>
         CheckDeath();
         CheckBoost();
         CheckMagnet();
+        CheckInv();
+    }
+
+    private void CheckInv()
+    {
+        if (!isInv) return;
+        
+        boostBlockFallCollider.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
 
     private void OutGamingUpdate()
@@ -180,14 +193,16 @@ public class Player : Singleton<Player>
         if (BoostDuration > 0) return;
 
         boostParticle.Stop();
-        boostBlockFallCollider.gameObject.SetActive(false);
+        if (!isInv)
+            boostBlockFallCollider.gameObject.SetActive(false);
         SpeedAddValue -= Item_Boost.BOOST_SPEED_ADD_VALUE;
     }
 
     private void UpdateHp()
     {
         if (BoostDuration > 0) return;
-        
+        if (isInv) return;
+
         Hp -= Time.deltaTime * hpRemoveValue;
     }
 
@@ -208,22 +223,21 @@ public class Player : Singleton<Player>
     {
         if (collision.collider == null) return;
 
+        if (collision.collider.CompareTag("Road"))
+            jumpCount = MAX_JUMP_COUNT;
+
+        if (isInv) return;
+
         if (collision.collider.CompareTag("Fall"))
             OnHitFallObject();
 
         if (collision.collider.CompareTag("Enemy"))
             OnHitEnemy();
-
-        if (collision.collider.CompareTag("Road"))
-            jumpCount = MAX_JUMP_COUNT;
     }
 
     private void OnHitFallObject()
     {
-        if (BoostDuration > 0)
-        {
-            return;
-        }
+        if (BoostDuration > 0) return;
 
         Die();
     }
@@ -243,18 +257,18 @@ public class Player : Singleton<Player>
     private void Die()
     {
         IsAlive = false;
-        
+
         transform.DOKill();
-        
+
         animator.CrossFade("Death", 0.2f);
-        
+
         boostParticle.Stop();
         magnetParticle.Stop();
-        
+
         var obj = PoolManager.Instance.Init("Hit Effect");
         obj.transform.position = transform.position;
-        
-        InGameManager.Instance.Die();
+
+        InGameManager.Instance.ReturnLobby();
     }
 
     private void Jump()
@@ -284,7 +298,7 @@ public class Player : Singleton<Player>
         var hitAbleOrderBy = hitAbleList.OrderBy(enemy => Mathf.Abs(enemy.transform.position.z - transform.position.z)).ToArray();
         var hitEnemy = hitAbleOrderBy[0];
         hitEnemy.Hit(1);
-        
+
         if (hitAbleList.Count <= 1) return;
 
         var hitSecondEnemy = hitAbleOrderBy[1];
@@ -306,7 +320,7 @@ public class Player : Singleton<Player>
                     if (hitAbleList.Count > 0)
                     {
                         HitEnemy(hitAbleList);
-                        
+
                         PoolManager.Instance.Init("Right To Left Attack", transform).transform.localPosition = Vector3.up;
                         animator.CrossFade("Left Attack", 0.1f, -1, 0);
                         break;
@@ -325,7 +339,7 @@ public class Player : Singleton<Player>
                     if (hitAbleList.Count > 0)
                     {
                         HitEnemy(hitAbleList);
-                        
+
                         PoolManager.Instance.Init("Left To Right Attack", transform).transform.localPosition = Vector3.up;
                         animator.CrossFade("Right Attack", 0.1f, -1, 0);
                         break;
@@ -346,7 +360,7 @@ public class Player : Singleton<Player>
                     if (hitAbleList.Count > 0)
                     {
                         HitEnemy(hitAbleList);
-                        
+
                         switch (attackIndex)
                         {
                             case 0:

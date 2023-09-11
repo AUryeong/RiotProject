@@ -1,9 +1,7 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Lobby
@@ -37,9 +35,9 @@ namespace Lobby
         [SerializeField] private Image bgmSideSelect;
         [SerializeField] private TextMeshProUGUI bgmSideSelectText;
 
-        public const float UI_MOVE_DURATION = 1f;
-        public const float UI_DRAG_MOVE_DURATION = 0.5f;
-        public const float UI_SCALE_DURATION = 0.5f;
+        private const float UI_MOVE_DURATION = 1f;
+        private const float UI_DRAG_MOVE_DURATION = 0.5f;
+        private const float UI_SCALE_DURATION = 0.5f;
 
         private const float AUTO_DRAG_POS = 200;
         private const float DRAG_MIN_POS = 50;
@@ -64,7 +62,7 @@ namespace Lobby
             inputEventTrigger.AddListener(EventTriggerType.PointerDown, OnPointerDown);
             inputEventTrigger.AddListener(EventTriggerType.PointerUp, OnPointerUp);
             
-            settingPopup.DeActive();
+            settingPopup.gameObject.SetActive(false);
         }
 
         private void StartButton()

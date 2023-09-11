@@ -13,7 +13,7 @@ namespace InGame
         [SerializeField] private Image runeIcon;
         [SerializeField] private TextMeshProUGUI runeText;
 
-        public const float UI_MOVE_DURATION = 1;
+        private const float UI_MOVE_DURATION = 1;
 
         public void UpdateHpBar(float fillAmount)
         {

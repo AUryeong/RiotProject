@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     protected override bool IsDontDestroying => true;
     public bool isGaming = true;
 
-    public const float BLACK_FADE_DURATION = 0.75f;
+    private const float BLACK_FADE_DURATION = 0.75f;
 
     [SerializeField] private Image blackFade;
 

@@ -2,7 +2,6 @@
 using System.Linq;
 using InGame;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class TileManager : Singleton<TileManager>
 {
@@ -36,10 +35,13 @@ public class TileManager : Singleton<TileManager>
     private float beatInterval;
     private float beatSyncPos;
 
+    private bool isEndBgm;
     private Queue<BeatData> beatDataQueue = new(); // ScriptableObject를 건들면 원본도 변경되기에 만든 Queue
 
 
-    [Header("Change")] private bool isChangeStage;
+    [Header("Change")] 
+    private float beatStartPos;
+    
 
     private readonly List<TileChangeData> speedDataList = new();
     private readonly List<TileChangeData> highLightDataList = new();
@@ -47,12 +49,16 @@ public class TileManager : Singleton<TileManager>
 
     private bool isBeatCreating;
 
+    private bool isChangeStage;
     private float stageChangePos;
-    private float beatStartPos;
+
+    private bool isChangeEndBgm;
+    private float endBgmPos;
 
     [Header("Item")] [SerializeField] private List<string> itemList;
 
     private int itemMaxValue;
+    
     private const float ITEM_RANDOM_PROB_VALUE_PERCENT = 1f;
     private const float ITEM_RANDOM_PROB_MAX = 50;
 
@@ -86,6 +92,7 @@ public class TileManager : Singleton<TileManager>
 
         isChangeStage = false;
         isBeatCreating = false;
+        isEndBgm = false;
 
         if (highLightLevel > 0)
             ChangeThemeColor(stageTileData.defaultColor);
@@ -137,7 +144,7 @@ public class TileManager : Singleton<TileManager>
 
     private void Update()
     {
-        if (GameManager.Instance.isGaming)
+        if (GameManager.Instance.isGaming && !isEndBgm)
             GamingUpdate();
         else
             OutGamingUpdate();
@@ -239,6 +246,8 @@ public class TileManager : Singleton<TileManager>
 
     private void CheckBeatTile(float playerPos)
     {
+        if (isEndBgm) return;
+        
         if (!isBeatCreating)
         {
             if (Player.Instance.transform.position.z < beatStartPos) return;
@@ -280,6 +289,12 @@ public class TileManager : Singleton<TileManager>
                 break;
             case BeatType.SpeedUp:
                 ChangeSpeedByBeatData(length, beatData.value);
+                break;
+            case BeatType.End:
+                isEndBgm = true;
+                ChangeThemeColor(stageTileData.defaultColor);
+                InGameManager.Instance.ReturnLobby(10);
+                Player.Instance.Boost(10);
                 break;
             case BeatType.SpeedDown:
                 ChangeSpeedByBeatData(length, -beatData.value);
@@ -345,7 +360,6 @@ public class TileManager : Singleton<TileManager>
         isChangeStage = true;
         stageChangePos = changeLength;
     }
-
     private void ChangeThemeColor(ThemeColor themeColor)
     {
         fogController.mainColor = themeColor.mainColor;
