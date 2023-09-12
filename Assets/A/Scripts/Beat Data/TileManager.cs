@@ -260,12 +260,12 @@ public class TileManager : Singleton<TileManager>
         if (beatSpawnDuration > 0) return;
 
         float length = playerPos + BEAT_RENDER_DISTANCE * (Player.Instance.Speed / Player.Instance.originSpeed);
-        Debug.Log(length + " Alice");
+        //Debug.Log(length + " Alice");
         var lastRoadData = GetLengthToRoadData(length);
-        Debug.Log(string.Join(",", lastRoadData.lineCondition) + " Aris");
+        //Debug.Log(string.Join(",", lastRoadData.lineCondition) + " Aris");
 
         var beatData = beatDataQueue.Dequeue();
-        Debug.Log(beatData.beat + " haru");
+        //Debug.Log(beatData.beat + " haru");
 
         switch (beatData.type)
         {
@@ -462,7 +462,7 @@ public class TileManager : Singleton<TileManager>
         {
             lastIndex--;
             roadLength -= createdRoadTileDataList[lastIndex].length;
-            Debug.Log(createdRoadTileDataList[lastIndex].name + " , " + roadLength);
+            //Debug.Log(createdRoadTileDataList[lastIndex].name + " , " + roadLength);
         }
 
         RoadData lastRoadData = null;
@@ -470,7 +470,7 @@ public class TileManager : Singleton<TileManager>
         {
             roadLength += data.length;
             lastRoadData = data;
-            Debug.Log(string.Join(",", lastRoadData.lineCondition));
+            //Debug.Log(string.Join(",", lastRoadData.lineCondition));
 
             if (roadLength > length)
                 break;
