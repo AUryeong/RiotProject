@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RoadTileData : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class RoadTileData : MonoBehaviour
 public class RoadData
 {
     public float length;
+    [FormerlySerializedAs("itemLine")] public int summonLine;
     public List<int> lineCondition = new();
     public bool isJustBlank;
 }

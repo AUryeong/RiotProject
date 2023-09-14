@@ -69,6 +69,23 @@ namespace InGame
             }
         }
 
+        public void PosChangeBySpeed(float speedMultiplier)
+        {
+            transform.DOKill(true);
+            
+            var enemyPos = transform.position;
+
+            float playerPos = Player.Instance.transform.position.z;
+            float distance = enemyPos.z - playerPos;
+            float zPos = distance * speedMultiplier + playerPos;
+
+            float moveDuration = ENEMY_MOVE_DURATION * Random.Range(0.75f, 1.25f);
+            
+            transform.DOMoveX(TileManager.Instance.GetLengthToRoadData(zPos).summonLine * TileManager.TILE_DISTANCE, moveDuration);
+            transform.DOMoveY(enemyPos.y + 2, moveDuration / 2).SetLoops(2, LoopType.Yoyo);
+            transform.DOMoveZ(zPos, moveDuration);
+        }
+
         public void Hit(int damage)
         {
             hp -= damage;

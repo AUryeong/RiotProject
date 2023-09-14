@@ -9,7 +9,9 @@ public class TileManager : Singleton<TileManager>
 
     private const float BEAT_RENDER_DISTANCE = 25;
     private const float BEAT_SYNC_START_POS = -3f;
-    private const float PLAYER_RENDER_DISTANCE = 70;
+    
+    private const float PLAYER_RENDER_DISTANCE = 150;
+    private const float PLAYER_REMOVE_DISTANCE = 60;
 
     [SerializeField] private GlobalObjectFogController fogController;
 
@@ -20,8 +22,7 @@ public class TileManager : Singleton<TileManager>
     private float roadStartPos;
     private float roadTileLength;
     private readonly List<RoadTileData> createdRoadTileDataList = new();
-    private List<int> lastRoadTileCondition;
-    private int lastEnemyTileIndex;
+    private int lastSummonLine;
 
     private readonly List<float> tileLengthList = new();
     private readonly List<GameObject> createdTileList = new();
@@ -32,16 +33,14 @@ public class TileManager : Singleton<TileManager>
 
     [Header("Bgm")] [SerializeField] private float bpmDistanceMultiplier;
     [HideInInspector] public BgmData bgmData;
+    private List<Enemy> enemies = new();
     private float beatInterval;
     private float beatSyncPos;
 
     private bool isEndBgm;
     private Queue<BeatData> beatDataQueue = new(); // ScriptableObject를 건들면 원본도 변경되기에 만든 Queue
 
-
-    [Header("Change")] 
-    private float beatStartPos;
-    
+    [Header("Change")] private float beatStartPos;
 
     private readonly List<TileChangeData> speedDataList = new();
     private readonly List<TileChangeData> highLightDataList = new();
@@ -58,7 +57,7 @@ public class TileManager : Singleton<TileManager>
     [Header("Item")] [SerializeField] private List<string> itemList;
 
     private int itemMaxValue;
-    
+
     private const float ITEM_RANDOM_PROB_VALUE_PERCENT = 1f;
     private const float ITEM_RANDOM_PROB_MAX = 50;
 
@@ -88,6 +87,8 @@ public class TileManager : Singleton<TileManager>
             foreach (var createdTile in createdTileList)
                 createdTile.gameObject.SetActive(false);
             createdTileList.Clear();
+            
+            enemies.Clear();
         }
 
         isChangeStage = false;
@@ -105,8 +106,6 @@ public class TileManager : Singleton<TileManager>
         stageStartPos = roadTileLength;
         beatStartPos = stageStartPos;
         roadStartPos = stageStartPos;
-        
-        lastEnemyTileIndex = 0;
 
         beatSyncPos = SaveManager.Instance.GameData.beatSync;
 
@@ -118,28 +117,16 @@ public class TileManager : Singleton<TileManager>
     public void CreateTile()
     {
         roadTileLength = stageStartPos;
-        itemTileLength = stageStartPos + 3;
+        itemTileLength = stageStartPos;
 
-        var data = stageTileData.roadTileDataList[0];
-
-        var obj = PoolManager.Instance.Init(data.name);
-        obj.transform.position = new Vector3(0, 0, roadTileLength);
-        createdTileList.Add(obj);
-
-        if (createdRoadTileDataList.Contains(data))
-            createdRoadTileDataList.Remove(data);
-
-        createdRoadTileDataList.Add(data);
-
-        lastRoadTileCondition = data.roadDatas[^1].lineCondition;
-        roadTileLength += data.length;
+        lastSummonLine = 0;
 
         float playerPos = Player.Instance.transform.position.z;
         while (roadTileLength - playerPos < PLAYER_RENDER_DISTANCE)
-            CheckRoadTile(playerPos);
+            CheckCreateRoadTile(playerPos);
 
         while (itemTileLength - playerPos < PLAYER_RENDER_DISTANCE)
-            CheckItemTile(playerPos);
+            CheckCreateItemTile(playerPos);
     }
 
     private void Update()
@@ -150,17 +137,22 @@ public class TileManager : Singleton<TileManager>
             OutGamingUpdate();
     }
 
+    private void FixedUpdate()
+    {
+        CheckRemoveTile();
+    }
+
+
     private void OutGamingUpdate()
     {
         float playerPos = Player.Instance.transform.position.z;
         CheckOutGameRoadTile(playerPos);
-        CheckBackgroundTile(playerPos);
+        CheckCreateBackgroundTile(playerPos);
     }
 
     private void GamingUpdate()
     {
         CheckCreateTile();
-        CheckRemoveTile();
         CheckChange();
     }
 
@@ -186,14 +178,15 @@ public class TileManager : Singleton<TileManager>
         if (!Player.Instance.IsAlive) return;
 
         float playerPos = Player.Instance.transform.position.z;
-        CheckRoadTile(playerPos);
-        CheckBeatTile(playerPos);
-        CheckBackgroundTile(playerPos);
-        CheckItemTile(playerPos);
+        CheckCreateRoadTile(playerPos);
+        CheckCreateBeatTile(playerPos);
+        CheckCreateBackgroundTile(playerPos);
+        CheckCreateItemTile(playerPos);
     }
 
-    private void CheckItemTile(float playerPos)
+    private void CheckCreateItemTile(float playerPos)
     {
+        if (itemTileLength > roadTileLength) return;
         if (itemTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
 
         var lastRoadData = GetLengthToRoadData(itemTileLength);
@@ -212,20 +205,20 @@ public class TileManager : Singleton<TileManager>
                 itemMaxValue++;
             }
 
-            itemObj.transform.position = new Vector3(lastRoadData.lineCondition.SelectOne() * TILE_DISTANCE, 1, itemTileLength);
+            itemObj.transform.position = new Vector3(lastRoadData.summonLine * TILE_DISTANCE, 1, itemTileLength);
 
             if (!createdTileList.Contains(itemObj))
                 createdTileList.Add(itemObj);
         }
 
-        itemTileLength += lastRoadData.length;
+        itemTileLength += 4;
     }
 
-    private void CheckRoadTile(float playerPos)
+    private void CheckCreateRoadTile(float playerPos)
     {
         if (roadTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
 
-        var data = stageTileData.roadTileDataList.FindAll(tileData => tileData.roadDatas[0].lineCondition.Intersect(lastRoadTileCondition).Any()).SelectOne();
+        var data = stageTileData.roadTileDataList.FindAll(tileData => tileData.roadDatas[0].lineCondition.Contains(lastSummonLine)).SelectOne();
 
         var roadTileObj = PoolManager.Instance.Init(data.name);
         roadTileObj.transform.position = new Vector3(0, 0, roadTileLength);
@@ -233,21 +226,29 @@ public class TileManager : Singleton<TileManager>
         if (!createdTileList.Contains(roadTileObj))
             createdTileList.Add(roadTileObj);
 
+        data = roadTileObj.GetComponent<RoadTileData>();
+
         createdRoadTileDataList.Add(data);
-        lastRoadTileCondition = data.roadDatas[^1].lineCondition;
+        foreach (var roadData in data.roadDatas)
+        {
+            var lineConditions = roadData.lineCondition.FindAll(condition => Mathf.Abs(condition - lastSummonLine) <= 1);
+            if (!lineConditions.Contains(lastSummonLine) || Random.Range(0, 2) != 0)
+                lastSummonLine = lineConditions.Count > 0 ? lineConditions.SelectOne() : roadData.lineCondition.SelectOne();
+            roadData.summonLine = lastSummonLine;
+        }
+
         roadTileLength += data.length;
 
-        if (roadTileLength - roadStartPos >= PLAYER_RENDER_DISTANCE * 1.5f)
-        {
-            roadStartPos += createdRoadTileDataList[0].length;
-            createdRoadTileDataList.RemoveAt(0);
-        }
+        if (roadTileLength - roadStartPos < PLAYER_RENDER_DISTANCE * 1.5f) return;
+
+        roadStartPos += createdRoadTileDataList[0].length;
+        createdRoadTileDataList.RemoveAt(0);
     }
 
-    private void CheckBeatTile(float playerPos)
+    private void CheckCreateBeatTile(float playerPos)
     {
         if (isEndBgm) return;
-        
+
         if (!isBeatCreating)
         {
             if (Player.Instance.transform.position.z < beatStartPos) return;
@@ -270,19 +271,17 @@ public class TileManager : Singleton<TileManager>
         switch (beatData.type)
         {
             case BeatType.Default:
-                var lineConditions = lastRoadData.lineCondition.FindAll(condition => Mathf.Abs(condition - lastEnemyTileIndex) <= 1);
-                int spawnIndex = lineConditions.Count > 0 ? lineConditions.SelectOne() : lastRoadData.lineCondition.SelectOne();
-                
                 var enemy = lastRoadData.isJustBlank ? stageTileData.flyingEnemies.SelectOne() : stageTileData.defaultEnemies.SelectOne();
 
                 var enemyNodeObj = PoolManager.Instance.Init(enemy.name);
-                enemyNodeObj.transform.position = new Vector3(spawnIndex * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
+                enemyNodeObj.transform.position = new Vector3(lastRoadData.summonLine * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
 
                 if (!createdTileList.Contains(enemyNodeObj))
+                {
+                    enemies.Add(enemyNodeObj.GetComponent<Enemy>());
                     createdTileList.Add(enemyNodeObj);
+                }
 
-                lastEnemyTileIndex = spawnIndex;
-                
                 break;
             case BeatType.Start:
                 ChangeStage(length + BEAT_SYNC_START_POS + beatSyncPos);
@@ -307,11 +306,11 @@ public class TileManager : Singleton<TileManager>
         beatSpawnDuration += beatInterval * beatData.beatDistance;
     }
 
-    private void CheckBackgroundTile(float playerPos)
+    private void CheckCreateBackgroundTile(float playerPos)
     {
         for (var index = 0; index < stageTileData.tileDataList.Count; index++)
         {
-            if (tileLengthList[index] - playerPos >= PLAYER_RENDER_DISTANCE + BEAT_SYNC_START_POS+ beatSyncPos) continue;
+            if (tileLengthList[index] - playerPos >= PLAYER_RENDER_DISTANCE + BEAT_SYNC_START_POS + beatSyncPos) continue;
 
             var stage = stageTileData.tileDataList[index];
             var data = stage.dataList.SelectOne();
@@ -327,6 +326,11 @@ public class TileManager : Singleton<TileManager>
     }
 
     #endregion
+
+    public List<Enemy> GetEnemies()
+    {
+        return enemies.FindAll(enemy => enemy.gameObject.activeSelf);
+    }
 
     #region Change
 
@@ -360,6 +364,7 @@ public class TileManager : Singleton<TileManager>
         isChangeStage = true;
         stageChangePos = changeLength;
     }
+
     private void ChangeThemeColor(ThemeColor themeColor)
     {
         fogController.mainColor = themeColor.mainColor;
@@ -434,7 +439,7 @@ public class TileManager : Singleton<TileManager>
         foreach (var createdTile in createdTileList)
         {
             if (!createdTile.gameObject.activeSelf) continue;
-            if (playerPos - createdTile.transform.position.z > PLAYER_RENDER_DISTANCE)
+            if (playerPos - createdTile.transform.position.z > PLAYER_REMOVE_DISTANCE)
                 createdTile.gameObject.SetActive(false);
         }
     }
@@ -454,7 +459,7 @@ public class TileManager : Singleton<TileManager>
             SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatInterval * bgmData.beatDataList.ToList().Find(beatData => beatData.type == BeatType.HighLight && beatData.value > 0).beat;
     }
 
-    private RoadData GetLengthToRoadData(float length)
+    public RoadData GetLengthToRoadData(float length)
     {
         float roadLength = roadTileLength;
         int lastIndex = createdRoadTileDataList.Count;

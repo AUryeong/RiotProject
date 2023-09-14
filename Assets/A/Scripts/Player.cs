@@ -16,7 +16,7 @@ public enum Direction
 public class Player : Singleton<Player>
 {
     public bool isInv;
-    
+
     private Rigidbody rigid;
     private Animator animator;
 
@@ -32,10 +32,17 @@ public class Player : Singleton<Player>
         get => speedAddValue;
         set
         {
+            float beforeSpeed = Speed;
             speedAddValue = value;
 
             enemyCheckColliders.size = new Vector3(6, 10, Speed / originSpeed * BEAT_HIT_DISTANCE);
             enemyCheckColliders.center = new Vector3(0, 0, originSpeed / Speed * BEAT_HIT_DISTANCE / 2);
+
+            if (!IsAlive) return;
+            if (!GameManager.Instance.isGaming) return;
+            
+            foreach (var enemy in TileManager.Instance.GetEnemies())
+                enemy.PosChangeBySpeed(Speed / beforeSpeed);
         }
     }
 
@@ -133,12 +140,14 @@ public class Player : Singleton<Player>
         CheckBoost();
         CheckMagnet();
         CheckInv();
+        if (Input.GetKeyDown(KeyCode.F))
+            Boost(5);
     }
 
     private void CheckInv()
     {
         if (!isInv) return;
-        
+
         boostBlockFallCollider.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
 
@@ -256,6 +265,8 @@ public class Player : Singleton<Player>
 
     private void Die()
     {
+        if (!IsAlive) return;
+        
         IsAlive = false;
 
         transform.DOKill();
