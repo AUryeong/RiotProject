@@ -9,7 +9,7 @@ public class TileManager : Singleton<TileManager>
 
     private const float BEAT_RENDER_DISTANCE = 25;
     private const float BEAT_SYNC_START_POS = -3f;
-    
+
     private const float PLAYER_RENDER_DISTANCE = 150;
     private const float PLAYER_REMOVE_DISTANCE = 60;
 
@@ -31,7 +31,7 @@ public class TileManager : Singleton<TileManager>
 
     private float itemTileLength;
 
-    [Header("Bgm")] [SerializeField] private float bpmDistanceMultiplier;
+    [Header("Bgm")][SerializeField] private float bpmDistanceMultiplier;
     [HideInInspector] public BgmData bgmData;
     private List<Enemy> enemies = new();
     private float beatInterval;
@@ -54,7 +54,7 @@ public class TileManager : Singleton<TileManager>
     private bool isChangeEndBgm;
     private float endBgmPos;
 
-    [Header("Item")] [SerializeField] private List<string> itemList;
+    [Header("Item")][SerializeField] private List<string> itemList;
 
     private int itemMaxValue;
 
@@ -87,7 +87,7 @@ public class TileManager : Singleton<TileManager>
             foreach (var createdTile in createdTileList)
                 createdTile.gameObject.SetActive(false);
             createdTileList.Clear();
-            
+
             enemies.Clear();
         }
 
@@ -455,8 +455,14 @@ public class TileManager : Singleton<TileManager>
         beatDataQueue = new Queue<BeatData>(bgmData.beatDataList);
 
         SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f);
-        if (bgmData.beatDataList.Count > 0)
-            SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatInterval * bgmData.beatDataList.ToList().Find(beatData => beatData.type == BeatType.HighLight && beatData.value > 0).beat;
+
+        if (bgmData.beatDataList.Count <= 0) return;
+        
+        BeatData beat = bgmData.beatDataList.ToList().Find(beatData => beatData.type == BeatType.HighLight && beatData.value > 0);
+        
+        if (beat == null) return;
+        
+        SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatInterval * beat.beat;
     }
 
     public RoadData GetLengthToRoadData(float length)

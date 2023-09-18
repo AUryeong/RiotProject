@@ -178,6 +178,8 @@ namespace Lobby
             bgmMainSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
             bgmSideSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
 
+            runeText.text = SaveManager.Instance.GameData.rune.ToString();
+
             if (activeSequence != null)
             {
                 activeSequence.Restart();
@@ -190,7 +192,6 @@ namespace Lobby
             {
                 background.gameObject.SetActive(true);
                 background.color = background.color.GetFade(0.3f);
-                runeText.text = SaveManager.Instance.GameData.rune.ToString();
                 settingButton.image.rectTransform.localScale = Vector3.zero;
                 stageButton.image.rectTransform.localScale = Vector3.zero;
                 shopButton.image.rectTransform.localScale = Vector3.zero;
