@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Lobby
 {
-    public class LobbyUISetting : MonoBehaviour, IActiveLink
+    public class LobbyUISetting : LobbyUIActiveLink
     {
         [SerializeField] private Image background;
         [SerializeField] private Image settingPopup;
@@ -14,16 +14,16 @@ namespace Lobby
 
         [SerializeField] private Slider syncSlider;
 
-        private void Awake()
+        protected override void Awake()
         {
             exitButton.onClick.RemoveAllListeners();
             exitButton.onClick.AddListener(DeActive);
         }
 
-        public void Active()
+        public override void Active()
         {
-            gameObject.SetActive(true);
-
+            base.Active();
+            
             background.DOKill();
             background.color = background.color.GetFade(0f);
             background.DOFade(0.45f, 0.5f);
@@ -35,8 +35,10 @@ namespace Lobby
             syncSlider.value = SaveManager.Instance.GameData.beatSync;
         }
 
-        public void DeActive()
+        public override void DeActive()
         {
+            base.DeActive();
+            
             background.DOKill(true);
             background.DOFade(0, 0.5f).OnComplete(() =>
             {

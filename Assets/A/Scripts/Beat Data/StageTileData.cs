@@ -26,7 +26,7 @@ public class StageTileData : SerializedScriptableObject
 }
 
 [Serializable]
-public class ThemeColor
+public struct ThemeColor
 {
     public Color mainColor;
     public Color fogColor;

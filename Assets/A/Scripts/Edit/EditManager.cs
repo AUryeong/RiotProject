@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Edit
 {
@@ -15,15 +13,17 @@ namespace Edit
         private const float EDIT_TILE_DISTANCE = 0.025f;
         private const float EDIT_TILE_SCALE = 0.1f;
 
-        [FormerlySerializedAs("plane")] [SerializeField]
-        private EditGridSlot originEditGridSlot;
+        [SerializeField] private EditGridSlot originEditGridSlot;
 
-        [FormerlySerializedAs("layerMask")] [SerializeField]
-        private LayerMask editLayerMask;
+        [SerializeField] private LayerMask editLayerMask;
 
         [SerializeField] private RoadTileData roadTileData;
+        [SerializeField] private EditStageTile stageTile;
+        [SerializeField] private GlobalObjectFogController controller;
 
-        [SerializeField] private EditTile[] tiles;
+        [Space(10)] 
+        [SerializeField] private RectTransform tileSelectParent;
+        [SerializeField] private Button tileSelectButton;
 
         private readonly List<EditGridSlot> lastTiles = new();
         private readonly List<List<EditGridSlot>> buildTiles = new();
@@ -36,6 +36,22 @@ namespace Edit
         private void Start()
         {
             sumLength = -3;
+            controller.mainColor = stageTile.tileData.defaultColor.mainColor;
+            controller.fogColor = stageTile.tileData.defaultColor.fogColor;
+
+            for (int i = 0; i < stageTile.tiles.Count; i++)
+            {
+                var obj = Instantiate(tileSelectButton, tileSelectParent);
+                
+                int temp = i;
+                obj.gameObject.SetActive(true);
+                
+                obj.onClick.RemoveAllListeners();
+                obj.onClick.AddListener(()=>SelectTile(temp));
+                
+                obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stageTile.tiles[temp].objects[0].name;
+            }
+            
             CreateTile(1);
         }
 
@@ -52,14 +68,14 @@ namespace Edit
             foreach (var rowTiles in buildTiles)
             {
                 var roadData = new RoadData();
-                roadData.isJustBlank = rowTiles.FindAll(tile => tile.tileIndex > 1).Count <= 0;
+                roadData.isJustBlank = rowTiles.FindAll(tile => !tile.isBlank).Count <= 0;
                 foreach (var tile in rowTiles)
                 {
-                    if (roadData.isJustBlank || tile.tileIndex > 1)
+                    if (roadData.isJustBlank || !tile.isBlank)
                         roadData.lineCondition.Add(tile.column);
                 }
 
-                roadData.length = tiles[rowTiles[0].tileIndex].length;
+                roadData.length = stageTile.tiles[rowTiles[0].tileIndex].length;
                 roadTileData.roadDatas.Add(roadData);
             }
 
@@ -67,16 +83,16 @@ namespace Edit
 
             string localPath = "Assets/GyungHun/TileData/Temp.prefab";
 
-            localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
+            localPath = UnityEditor.AssetDatabase.GenerateUniqueAssetPath(localPath);
 
-            PrefabUtility.SaveAsPrefabAssetAndConnect(roadTileData.gameObject, localPath, InteractionMode.UserAction);
+            UnityEditor.PrefabUtility.SaveAsPrefabAssetAndConnect(roadTileData.gameObject, localPath, UnityEditor.InteractionMode.UserAction);
         }
-        #endif
+#endif
 
         public void SelectTile(int index)
         {
-            float prevTileLength = tiles[selectTileIndex].length;
-            float selectTileLength = tiles[index].length;
+            float prevTileLength = stageTile.tiles[selectTileIndex].length;
+            float selectTileLength = stageTile.tiles[index].length;
 
             sumLength -= prevTileLength;
             sumLength += (selectTileLength + prevTileLength) / 2;
@@ -99,7 +115,7 @@ namespace Edit
         private void CreateTile(int line)
         {
             lastTiles.Clear();
-            float length = tiles[selectTileIndex].length;
+            float length = stageTile.tiles[selectTileIndex].length;
 
             sumLength += length;
             for (int i = 0; i < 7; i++)
@@ -134,7 +150,7 @@ namespace Edit
                 var buildTile = hit.collider.GetComponent<EditGridSlot>();
                 if (buildTile.row < activeLine)
                 {
-                    if (Math.Abs(tiles[buildTiles[buildTile.row - 1][0].tileIndex].length - tiles[selectTileIndex].length) > 0.05f)
+                    if (Math.Abs(stageTile.tiles[buildTiles[buildTile.row - 1][0].tileIndex].length - stageTile.tiles[selectTileIndex].length) > 0.05f)
                         return;
                 }
 
@@ -147,10 +163,14 @@ namespace Edit
                 buildTiles[buildTile.row - 1].Add(buildTile);
 
                 buildTile.tileIndex = selectTileIndex;
+
+                var tileData = stageTile.tiles[selectTileIndex];
+                buildTile.isBlank = tileData.isBlank;
+                
                 hit.collider.gameObject.SetActive(false);
 
-                var obj = selectTileIndex <= 1 ? Instantiate(tiles[selectTileIndex].obj) : Instantiate(tiles[selectTileIndex].obj, roadTileData.transform, true);
-                obj.transform.position = hit.collider.transform.position + new Vector3(0, 2f, -tiles[selectTileIndex].length / 2);
+                var obj = buildTile.isBlank ? Instantiate(tileData.objects.SelectOne()) : Instantiate(tileData.objects.SelectOne(), roadTileData.transform, true);
+                obj.transform.position = hit.collider.transform.position + new Vector3(0, 2f, -stageTile.tiles[selectTileIndex].length / 2);
                 obj.gameObject.SetActive(true);
             }
         }

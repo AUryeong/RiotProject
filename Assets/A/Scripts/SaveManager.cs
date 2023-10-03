@@ -17,7 +17,7 @@ public class SaveManager : Singleton<SaveManager>
 {
     public string prefsName = "RunesPharmacy";
 
-    [SerializeField] private GameData gameData; // 게임 데이터 확인용
+    private GameData gameData;
 
     public GameData GameData
     {

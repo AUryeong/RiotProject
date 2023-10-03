@@ -56,6 +56,7 @@ public class GameManager : Singleton<GameManager>
     private void SetResolution(Camera changeCamera)
     {
         if (changeCamera == null) return;
+        
         int setWidth = 720;
         int setHeight = 1600;
 

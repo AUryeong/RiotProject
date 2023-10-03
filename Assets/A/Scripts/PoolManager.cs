@@ -19,9 +19,6 @@ public class PoolManager : Singleton<PoolManager>
     [FormerlySerializedAs("poolingDatas")] [SerializeField]
     private List<PoolingData> poolingDataList = new();
 
-    [FormerlySerializedAs("stageTileDatas")] [SerializeField]
-    private List<StageTileData> stageTileDataList = new();
-
     protected override void OnCreated()
     {
         foreach (var data in poolingDataList)
@@ -38,15 +35,23 @@ public class PoolManager : Singleton<PoolManager>
                 obj.gameObject.SetActive(false);
             }
         }
-        
+
         poolingDataList.Clear();
 
-        foreach (var stageTileData in stageTileDataList)
+        foreach (var stageTileData in TileManager.Instance.stageTileDataList)
         {
             foreach (var tileData in stageTileData.roadTileDataList)
             {
                 string poolName = tileData.name;
-                originObjects.Add(poolName, tileData.gameObject);
+                if (!originObjects.ContainsKey(poolName))
+                    originObjects.Add(poolName, tileData.gameObject);
+            }
+
+            foreach (var tileData in stageTileData.outGameTileDataList)
+            {
+                string poolName = tileData.name;
+                if (!originObjects.ContainsKey(poolName))
+                    originObjects.Add(poolName, tileData.gameObject);
             }
 
             foreach (var tileDataList in stageTileData.tileDataList)
@@ -54,24 +59,25 @@ public class PoolManager : Singleton<PoolManager>
                 foreach (var tileData in tileDataList.dataList)
                 {
                     string poolName = tileData.name;
-                    originObjects.Add(poolName, tileData.gameObject);
+                    if (!originObjects.ContainsKey(poolName))
+                        originObjects.Add(poolName, tileData.gameObject);
                 }
             }
-            
+
             foreach (var enemy in stageTileData.flyingEnemies)
             {
                 string enemyName = enemy.name;
-                originObjects.Add(enemyName, enemy.gameObject);
+                if (!originObjects.ContainsKey(enemyName))
+                    originObjects.Add(enemyName, enemy.gameObject);
             }
-            
+
             foreach (var enemy in stageTileData.defaultEnemies)
             {
                 string enemyName = enemy.name;
-                originObjects.Add(enemyName, enemy.gameObject);
+                if (!originObjects.ContainsKey(enemyName))
+                    originObjects.Add(enemyName, enemy.gameObject);
             }
         }
-        
-        stageTileDataList.Clear();
     }
 
     public GameObject Init(string origin, Transform parent = null)
@@ -97,13 +103,13 @@ public class PoolManager : Singleton<PoolManager>
 
         if (!originObjects.ContainsKey(origin))
         {
-            Debug.Log("풀링 에러");
+            Debug.Log(origin + " Pooling Error");
             return null;
         }
 
         copy = parent != null ? Instantiate(originObjects[origin], parent) : Instantiate(originObjects[origin]);
         copy.SetActive(true);
-        
+
         pools[origin].Add(copy);
         return copy;
     }

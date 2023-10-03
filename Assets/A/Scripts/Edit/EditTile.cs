@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Edit
 {
@@ -6,6 +8,7 @@ namespace Edit
     public class EditTile
     {
         public float length;
-        public GameObject obj;
+        public List<GameObject> objects;
+        public bool isBlank;
     }
 }

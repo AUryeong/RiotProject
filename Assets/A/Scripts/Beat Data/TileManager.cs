@@ -95,8 +95,7 @@ public class TileManager : Singleton<TileManager>
         isBeatCreating = false;
         isEndBgm = false;
 
-        if (highLightLevel > 0)
-            ChangeThemeColor(stageTileData.defaultColor);
+        ChangeThemeColor(stageTileData.defaultColor);
 
         highLightLevel = 0;
         highLightDataList.Clear();
@@ -369,6 +368,8 @@ public class TileManager : Singleton<TileManager>
     {
         fogController.mainColor = themeColor.mainColor;
         fogController.fogColor = themeColor.fogColor;
+
+        Player.Instance.outLine.OutlineColor = themeColor.fogColor.GetFade(0.3f);
 
         var transEffect = PoolManager.Instance.Init("Trans Effect");
         transEffect.transform.position = Player.Instance.transform.position;

@@ -54,8 +54,10 @@ public class Player : Singleton<Player>
 
     public float maxHp;
     public float hpRemoveValue;
-
+    
     [HideInInspector] public List<Enemy> hitAbleEnemyList;
+
+    [Space(10f)]
     [SerializeField] private BoxCollider enemyCheckColliders;
     private int attackIndex;
 
@@ -75,12 +77,15 @@ public class Player : Singleton<Player>
 
     private float hp;
 
-    public float BoostDuration { get; private set; }
     [SerializeField] private BoxCollider boostBlockFallCollider;
+    [Space(10f)]
+    public Outline outLine;
+    
     [SerializeField] private ParticleSystem boostParticle;
+    public float BoostDuration { get; private set; }
 
-    public float MagnetDuration { get; private set; }
     [SerializeField] private ParticleSystem magnetParticle;
+    public float MagnetDuration { get; private set; }
     private Collider[] magnetOverlapColliders;
 
     protected override void OnCreated()

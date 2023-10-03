@@ -17,12 +17,12 @@ namespace Lobby
             TileManager.Instance.Reset(0);
             
             uiManager.gameObject.SetActive(true);
-            uiManager.ActiveSetting();
+            uiManager.Active();
         }
 
         public void DeActive()
         {
-            uiManager.DeActiveSetting();
+            uiManager.DeActive();
         }
     }
 }
