@@ -11,10 +11,16 @@ namespace Lobby
         [SerializeField] private Button startButton;
         [SerializeField] private EventTrigger inputEventTrigger;
 
+        [Space(10f)]
+        [SerializeField] private Button settingButton;
+        [SerializeField] private LobbyUISetting uiSetting;
+
+        [Space(10f)]
         [SerializeField] private Image runeIcon;
         [SerializeField] private TextMeshProUGUI runeText;
 
-        [Header("BGM Select")] [SerializeField]
+        [Header("BGM Select")]
+        [SerializeField]
         private Image bgmMainSelect;
 
         [SerializeField] private TextMeshProUGUI bgmMainSelectText;
@@ -43,6 +49,9 @@ namespace Lobby
             
             startButton.onClick.RemoveAllListeners();
             startButton.onClick.AddListener(StartButton);
+
+            settingButton.onClick.RemoveAllListeners();
+            settingButton.onClick.AddListener(uiSetting.Active);
         }
 
         public override void Active()
@@ -72,10 +81,12 @@ namespace Lobby
             activeSequence.SetAutoKill(false);
             activeSequence.OnStart(() =>
             {
+                settingButton.image.rectTransform.anchoredPosition = new Vector2(-100, settingButton.image.rectTransform.anchoredPosition.y);
                 runeIcon.rectTransform.anchoredPosition = new Vector2(100, runeIcon.rectTransform.anchoredPosition.y);
                 startButton.image.rectTransform.anchoredPosition = new Vector2(startButton.image.rectTransform.anchoredPosition.x, -1200);
             });
             
+            activeSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION));
             activeSequence.Join(runeIcon.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION));
             activeSequence.Join(startButton.image.rectTransform.DOAnchorPosY(0, UI_MOVE_DURATION));
 
@@ -104,10 +115,12 @@ namespace Lobby
             deActiveSequence.SetAutoKill(false);
             deActiveSequence.OnStart(() =>
             {
+                settingButton.image.rectTransform.anchoredPosition = new Vector2(100, settingButton.image.rectTransform.anchoredPosition.y);
                 runeIcon.rectTransform.anchoredPosition = new Vector2(-100, runeIcon.rectTransform.anchoredPosition.y);
                 startButton.image.rectTransform.anchoredPosition = Vector2.zero;
             });
-            
+
+            deActiveSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION));
             deActiveSequence.Join(runeIcon.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION));
             deActiveSequence.Join(startButton.image.rectTransform.DOAnchorPosY(-1200, UI_MOVE_DURATION));
 

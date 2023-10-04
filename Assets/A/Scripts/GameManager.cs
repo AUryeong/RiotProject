@@ -22,6 +22,8 @@ public class GameManager : Singleton<GameManager>
     protected override void OnCreated()
     {
         base.OnCreated();
+        Application.targetFrameRate = 60;
+
         OnReset();
 
         ActiveSceneLink(SceneLinkType.Lobby);

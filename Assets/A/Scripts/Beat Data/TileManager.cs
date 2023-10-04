@@ -146,7 +146,7 @@ public class TileManager : Singleton<TileManager>
     {
         float playerPos = Player.Instance.transform.position.z;
         CheckOutGameRoadTile(playerPos);
-        CheckCreateBackgroundTile(playerPos);
+        //CheckCreateBackgroundTile(playerPos);
     }
 
     private void GamingUpdate()
