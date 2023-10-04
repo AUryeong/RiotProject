@@ -8,6 +8,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TileData", menuName = "A/TileData", order = 0)]
 public class StageTileData : SerializedScriptableObject
 {
+    public string stageNickName;
+    
     [Title("Theme Color")] 
     public ThemeColor defaultColor;
 

@@ -20,8 +20,8 @@ namespace Lobby
         [SerializeField] private TextMeshProUGUI runeText;
 
         [Header("BGM Select")]
-        [SerializeField]
-        private Image bgmMainSelect;
+        [SerializeField] private RectTransform bgmParent;
+        [SerializeField] private Image bgmMainSelect;
 
         [SerializeField] private TextMeshProUGUI bgmMainSelectText;
 
@@ -84,11 +84,13 @@ namespace Lobby
                 settingButton.image.rectTransform.anchoredPosition = new Vector2(-100, settingButton.image.rectTransform.anchoredPosition.y);
                 runeIcon.rectTransform.anchoredPosition = new Vector2(100, runeIcon.rectTransform.anchoredPosition.y);
                 startButton.image.rectTransform.anchoredPosition = new Vector2(startButton.image.rectTransform.anchoredPosition.x, -1200);
+                bgmParent.anchoredPosition = new Vector2(bgmParent.anchoredPosition.x, 1000);
             });
             
             activeSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION));
             activeSequence.Join(runeIcon.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION));
             activeSequence.Join(startButton.image.rectTransform.DOAnchorPosY(0, UI_MOVE_DURATION));
+            activeSequence.Join(bgmParent.DOAnchorPosY(530, UI_MOVE_DURATION));
 
             activeSequence.OnUpdate(() =>
             {
@@ -118,11 +120,13 @@ namespace Lobby
                 settingButton.image.rectTransform.anchoredPosition = new Vector2(100, settingButton.image.rectTransform.anchoredPosition.y);
                 runeIcon.rectTransform.anchoredPosition = new Vector2(-100, runeIcon.rectTransform.anchoredPosition.y);
                 startButton.image.rectTransform.anchoredPosition = Vector2.zero;
+                bgmParent.anchoredPosition = new Vector2(bgmParent.anchoredPosition.x, 530);
             });
 
             deActiveSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION));
             deActiveSequence.Join(runeIcon.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION));
             deActiveSequence.Join(startButton.image.rectTransform.DOAnchorPosY(-1200, UI_MOVE_DURATION));
+            deActiveSequence.Join(bgmParent.DOAnchorPosY(1000, UI_MOVE_DURATION));
 
             deActiveSequence.OnComplete(() => gameObject.SetActive(false));
         }

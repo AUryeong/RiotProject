@@ -50,7 +50,7 @@ namespace Lobby
 
         public void Active()
         {
-            DownButtonClick(2);
+            DownButtonClick(1);
 
             background.DOKill();
             background.gameObject.SetActive(true);
