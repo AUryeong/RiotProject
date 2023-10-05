@@ -24,9 +24,6 @@ namespace Lobby
                 downButton.onClick.RemoveAllListeners();
                 downButton.onClick.AddListener(() => DownButtonClick(temp));
             }
-
-            foreach (var lobbyActiveLink in downButtonPopup)
-                lobbyActiveLink.gameObject.SetActive(false);
         }
 
         private void DownButtonClick(int index)
@@ -50,6 +47,9 @@ namespace Lobby
 
         public void Active()
         {
+            foreach (var lobbyActiveLink in downButtonPopup)
+                lobbyActiveLink.gameObject.SetActive(false);
+
             DownButtonClick(1);
 
             background.DOKill();

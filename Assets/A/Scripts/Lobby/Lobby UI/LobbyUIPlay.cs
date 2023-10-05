@@ -39,14 +39,14 @@ namespace Lobby
         private Vector2 startDragPos;
         private Vector2 lastDragPos;
 
-        [Header("Animation")] 
+        [Header("Animation")]
         private Sequence deActiveSequence;
         private Sequence activeSequence;
         protected override void Awake()
         {
             inputEventTrigger.AddListener(EventTriggerType.PointerDown, OnPointerDown);
             inputEventTrigger.AddListener(EventTriggerType.PointerUp, OnPointerUp);
-            
+
             startButton.onClick.RemoveAllListeners();
             startButton.onClick.AddListener(StartButton);
 
@@ -59,7 +59,7 @@ namespace Lobby
             isStarting = false;
 
             inputEventTrigger.gameObject.SetActive(true);
-            
+
             int nowIndex = SaveManager.Instance.GameData.selectBgmIndex;
 
             bgmMainSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
@@ -69,7 +69,7 @@ namespace Lobby
 
             activeSequence?.Complete();
             deActiveSequence?.Complete();
-            
+
             base.Active();
             if (activeSequence != null)
             {
@@ -86,7 +86,7 @@ namespace Lobby
                 startButton.image.rectTransform.anchoredPosition = new Vector2(startButton.image.rectTransform.anchoredPosition.x, -1200);
                 bgmParent.anchoredPosition = new Vector2(bgmParent.anchoredPosition.x, 1000);
             });
-            
+
             activeSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION));
             activeSequence.Join(runeIcon.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION));
             activeSequence.Join(startButton.image.rectTransform.DOAnchorPosY(0, UI_MOVE_DURATION));
@@ -102,10 +102,10 @@ namespace Lobby
         public override void DeActive()
         {
             inputEventTrigger.gameObject.SetActive(false);
-            
+
             activeSequence?.Complete(true);
             deActiveSequence?.Complete(true);
-            
+
             base.DeActive();
             if (deActiveSequence != null)
             {
@@ -123,10 +123,10 @@ namespace Lobby
                 bgmParent.anchoredPosition = new Vector2(bgmParent.anchoredPosition.x, 530);
             });
 
-            deActiveSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION));
-            deActiveSequence.Join(runeIcon.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION));
-            deActiveSequence.Join(startButton.image.rectTransform.DOAnchorPosY(-1200, UI_MOVE_DURATION));
-            deActiveSequence.Join(bgmParent.DOAnchorPosY(1000, UI_MOVE_DURATION));
+            deActiveSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION / 2));
+            deActiveSequence.Join(runeIcon.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION / 2));
+            deActiveSequence.Join(startButton.image.rectTransform.DOAnchorPosY(-1200, UI_MOVE_DURATION / 2));
+            deActiveSequence.Join(bgmParent.DOAnchorPosY(1000, UI_MOVE_DURATION / 2));
 
             deActiveSequence.OnComplete(() => gameObject.SetActive(false));
         }

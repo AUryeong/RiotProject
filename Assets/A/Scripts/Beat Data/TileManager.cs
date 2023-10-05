@@ -71,7 +71,8 @@ public class TileManager : Singleton<TileManager>
     public void StageReset()
     {
         stageTileData = stageTileDataList[SaveManager.Instance.GameData.selectStageIndex];
-        SetBgmData(stageTileData.bgmDataList[SaveManager.Instance.GameData.selectBgmIndex]);
+        SaveManager.Instance.GameData.selectBgmIndex %= stageTileData.bgmDataList.Count;
+        SetBgmData(stageTileData.bgmDataList[SaveManager.Instance.GameData.selectBgmIndex % stageTileData.bgmDataList.Count]);
     }
 
     public void Reset(float startPos = -1)
@@ -146,7 +147,7 @@ public class TileManager : Singleton<TileManager>
     {
         float playerPos = Player.Instance.transform.position.z;
         CheckOutGameRoadTile(playerPos);
-        //CheckCreateBackgroundTile(playerPos);
+        CheckCreateBackgroundTile(playerPos);
     }
 
     private void GamingUpdate()
@@ -446,7 +447,7 @@ public class TileManager : Singleton<TileManager>
     }
 
 
-    private void SetBgmData(BgmData setBgmData)
+    public void SetBgmData(BgmData setBgmData)
     {
         bgmData = setBgmData;
         beatInterval = 60f / bgmData.bpm * bpmDistanceMultiplier;
@@ -458,11 +459,11 @@ public class TileManager : Singleton<TileManager>
         SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f);
 
         if (bgmData.beatDataList.Count <= 0) return;
-        
+
         BeatData beat = bgmData.beatDataList.ToList().Find(beatData => beatData.type == BeatType.HighLight && beatData.value > 0);
-        
+
         if (beat == null) return;
-        
+
         SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatInterval * beat.beat;
     }
 
