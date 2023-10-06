@@ -45,7 +45,7 @@ public class ObjectFogController : MonoBehaviour
     [HideInInspector] public MeshRenderer          renderer;
     [HideInInspector] public MaterialPropertyBlock mpb;
 
-    [Space()] [HideInInspector] public bool overridedFromGlobalController = false;
+    [Space()] [HideInInspector] public bool overridedFromGlobalController = true;
 
     private void Awake()
     {

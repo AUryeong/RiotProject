@@ -45,7 +45,7 @@ public class SkinnedObjectFogController : MonoBehaviour
     [HideInInspector] public SkinnedMeshRenderer renderer;
     [HideInInspector] public MaterialPropertyBlock mpb;
 
-    [Space()] [HideInInspector] public bool overridedFromGlobalController = false;
+    [Space()] [HideInInspector] public bool overridedFromGlobalController = true;
 
     private void Awake()
     {

@@ -9,8 +9,13 @@ namespace Lobby
         [SerializeField] private Image background;
 
         [Header("Buttons")]
+        [SerializeField] private Image downButtonWindow;
+
         [SerializeField] private Button[] downButtons;
         [SerializeField] private LobbyUIActiveLink[] downButtonPopup;
+
+        public const float UI_MOVE_DURATION = 0.5f;
+        public const float UI_BUTTON_MOVE_DURATION = 0.4f;
 
         private int lastDownIndex = -1;
 
@@ -31,7 +36,7 @@ namespace Lobby
             if (lastDownIndex >= 0)
             {
                 downButtonPopup[lastDownIndex].DeActive();
-                downButtons[lastDownIndex].image.DOColor(Color.white, 0.4f);
+                downButtons[lastDownIndex].image.DOColor(Color.white, UI_BUTTON_MOVE_DURATION);
                 if (downButtonPopup[lastDownIndex] == downButtonPopup[index])
                 {
                     lastDownIndex = -1;
@@ -39,7 +44,7 @@ namespace Lobby
                 }
             }
 
-            downButtons[index].image.DOColor(new Color(0.75f, 0.75f, 0.75f), 0.4f);
+            downButtons[index].image.DOColor(new Color(0.75f, 0.75f, 0.75f), UI_BUTTON_MOVE_DURATION);
 
             downButtonPopup[index].Active();
             lastDownIndex = index;
@@ -53,10 +58,15 @@ namespace Lobby
             DownButtonClick(1);
 
             background.DOKill();
+            downButtonWindow.rectTransform.DOKill();
+
+            downButtonWindow.gameObject.SetActive(true);
             background.gameObject.SetActive(true);
 
+            downButtonWindow.rectTransform.DOAnchorPosY(150, UI_MOVE_DURATION);
+
             background.color = background.color.GetFade(0);
-            background.DOFade(0.3f, 0.5f);
+            background.DOFade(0.3f, UI_MOVE_DURATION);
         }
 
         public void DeActive()
@@ -65,9 +75,12 @@ namespace Lobby
                 downButtonPopup[lastDownIndex].DeActive();
 
             background.DOKill();
+            downButtonWindow.DOKill();
+
+            downButtonWindow.rectTransform.DOAnchorPosY(-10, UI_MOVE_DURATION);
 
             background.color = background.color.GetFade(0.3f);
-            background.DOFade(0f, 0.5f).OnComplete(() => background.gameObject.SetActive(false));
+            background.DOFade(0f, UI_MOVE_DURATION).OnComplete(() => gameObject.SetActive(false));
         }
     }
 }

@@ -2504,7 +2504,8 @@ MonoBehaviour:
   flyingEnemies:
   - {fileID: 333408687325995254, guid: d30bb1265aff4b044b4e110490b4a6b2, type: 3}
   defaultEnemies:
-  - {fileID: 8692668560499590460, guid: e1c1cf20165a3da4ba1b2e43585117ec, type: 3}
+  - {fileID: 8533134374068033499, guid: ec824d159f50cdc4f8e83bd116def714, type: 3}
+  - {fileID: 8047569705765524554, guid: ed35c300f870dfd42b0f36da400d36f8, type: 3}
   outGameTileDataList:
   - {fileID: 8436939129347990949, guid: 8d4cb058e89d2ff499862ea2e8a96b5d, type: 3}
   roadTileDataList:

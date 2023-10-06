@@ -389,6 +389,7 @@ GameObject:
   - component: {fileID: 2485083958503195754}
   - component: {fileID: 5371276586883310512}
   - component: {fileID: 5371276586883310515}
+  - component: {fileID: 143713233845858680}
   m_Layer: 8
   m_Name: Dragon
   m_TagString: Untagged
@@ -521,6 +522,24 @@ MonoBehaviour:
   fogWaveFreqZ: 0.5
   renderer: {fileID: 5371276586883310512}
   overridedFromGlobalController: 1
+--- !u!114 &143713233845858680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3618530837407485423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 2
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 4.63
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &3805399394761017638
 GameObject:
   m_ObjectHideFlags: 0

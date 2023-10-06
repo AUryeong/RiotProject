@@ -35,7 +35,6 @@ namespace InGame
 
         private void CameraMove()
         {
-            mainCamera.transform.position = Player.Instance.transform.position + cameraDistance;
         }
 
         public void Active()

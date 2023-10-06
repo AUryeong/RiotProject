@@ -106,7 +106,7 @@ public class Player : Singleton<Player>
 
         animator.Play("run");
 
-        speedAddValue = 0;
+        speedAddValue = TileManager.Instance.bgmData.speedAdder;
         BoostDuration = 0;
         attackIndex = 0;
     }
@@ -129,6 +129,7 @@ public class Player : Singleton<Player>
 
     private void Update()
     {
+        Debug.Log(SpeedAddValue);
         if (GameManager.Instance.isGaming)
             GamingUpdate();
         else
