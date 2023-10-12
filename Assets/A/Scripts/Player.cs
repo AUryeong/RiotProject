@@ -19,6 +19,7 @@ public class Player : Singleton<Player>
 
     private Rigidbody rigid;
     private Animator animator;
+    public PlayerEffectData effectData;
 
     public bool IsAlive { get; private set; }
     private const float BEAT_HIT_DISTANCE = 8;
@@ -129,7 +130,6 @@ public class Player : Singleton<Player>
 
     private void Update()
     {
-        Debug.Log(SpeedAddValue);
         if (GameManager.Instance.isGaming)
             GamingUpdate();
         else
@@ -301,7 +301,7 @@ public class Player : Singleton<Player>
             if (hitAbleList.Count > 0)
             {
                 HitEnemy(hitAbleList);
-                PoolManager.Instance.Init("Spin Attack", transform).transform.localPosition = Vector3.up;
+                effectData.GetEffect(EffectType.Spin).transform.localPosition = Vector3.up;
             }
         }
 
@@ -338,7 +338,7 @@ public class Player : Singleton<Player>
                     {
                         HitEnemy(hitAbleList);
 
-                        PoolManager.Instance.Init("Right To Left Attack", transform).transform.localPosition = Vector3.up;
+                        effectData.GetEffect(EffectType.Right).transform.localPosition = Vector3.up;
                         animator.CrossFade("Left Attack", 0.1f, -1, 0);
                         break;
                     }
@@ -357,7 +357,7 @@ public class Player : Singleton<Player>
                     {
                         HitEnemy(hitAbleList);
 
-                        PoolManager.Instance.Init("Left To Right Attack", transform).transform.localPosition = Vector3.up;
+                        effectData.GetEffect(EffectType.Left).transform.localPosition = Vector3.up;
                         animator.CrossFade("Right Attack", 0.1f, -1, 0);
                         break;
                     }
@@ -381,15 +381,15 @@ public class Player : Singleton<Player>
                         switch (attackIndex)
                         {
                             case 0:
-                                PoolManager.Instance.Init("Right To Left Attack", transform).transform.localPosition = Vector3.up;
+                                effectData.GetEffect(EffectType.Left).transform.localPosition = Vector3.up;
                                 animator.CrossFade("Left Attack", 0.1f, -1, 0);
                                 break;
                             case 1:
-                                PoolManager.Instance.Init("Left To Right Attack", transform).transform.localPosition = Vector3.up;
+                                effectData.GetEffect(EffectType.Right).transform.localPosition = Vector3.up;
                                 animator.CrossFade("Right Attack", 0.1f, -1, 0);
                                 break;
                             case 2:
-                                PoolManager.Instance.Init("Spin Attack", transform).transform.localPosition = Vector3.up;
+                                effectData.GetEffect(EffectType.Spin).transform.localPosition = Vector3.up;
                                 animator.CrossFade("Three Attack", 0.1f, -1, 0);
                                 break;
                         }

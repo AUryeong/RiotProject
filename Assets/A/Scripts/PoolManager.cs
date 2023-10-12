@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.Tilemaps;
 
 [System.Serializable]
 public class PoolingData
@@ -37,47 +39,12 @@ public class PoolManager : Singleton<PoolManager>
         }
 
         poolingDataList.Clear();
+    }
 
-        foreach (var stageTileData in TileManager.Instance.stageTileDataList)
-        {
-            foreach (var tileData in stageTileData.roadTileDataList)
-            {
-                string poolName = tileData.name;
-                if (!originObjects.ContainsKey(poolName))
-                    originObjects.Add(poolName, tileData.gameObject);
-            }
-
-            foreach (var tileData in stageTileData.outGameTileDataList)
-            {
-                string poolName = tileData.name;
-                if (!originObjects.ContainsKey(poolName))
-                    originObjects.Add(poolName, tileData.gameObject);
-            }
-
-            foreach (var tileDataList in stageTileData.tileDataList)
-            {
-                foreach (var tileData in tileDataList.dataList)
-                {
-                    string poolName = tileData.name;
-                    if (!originObjects.ContainsKey(poolName))
-                        originObjects.Add(poolName, tileData.gameObject);
-                }
-            }
-
-            foreach (var enemy in stageTileData.flyingEnemies)
-            {
-                string enemyName = enemy.name;
-                if (!originObjects.ContainsKey(enemyName))
-                    originObjects.Add(enemyName, enemy.gameObject);
-            }
-
-            foreach (var enemy in stageTileData.defaultEnemies)
-            {
-                string enemyName = enemy.name;
-                if (!originObjects.ContainsKey(enemyName))
-                    originObjects.Add(enemyName, enemy.gameObject);
-            }
-        }
+    public void AddPooling(string name, GameObject obj)
+    {
+        if (!originObjects.ContainsKey(name))
+            originObjects.Add(name, obj);
     }
 
     public GameObject Init(string origin, Transform parent = null)

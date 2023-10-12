@@ -64,6 +64,9 @@ public class TileManager : Singleton<TileManager>
     protected override void OnCreated()
     {
         base.OnCreated();
+        foreach (var stageTileData in stageTileDataList)
+            stageTileData.Init();
+
         StageReset();
         Reset(0);
     }

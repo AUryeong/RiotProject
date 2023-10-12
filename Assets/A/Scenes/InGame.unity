@@ -764,11 +764,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3950310738083238373, guid: a48eb1c92ec50a64da4847a9d49bd249, type: 3}
   m_PrefabInstance: {fileID: 248144283}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &248144285 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3946459302877735629, guid: a48eb1c92ec50a64da4847a9d49bd249, type: 3}
-  m_PrefabInstance: {fileID: 248144283}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &256052124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -833,11 +828,6 @@ PrefabInstance:
 --- !u!4 &256052125 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3950310738083238373, guid: a48eb1c92ec50a64da4847a9d49bd249, type: 3}
-  m_PrefabInstance: {fileID: 256052124}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &256052126 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3946459302877735629, guid: a48eb1c92ec50a64da4847a9d49bd249, type: 3}
   m_PrefabInstance: {fileID: 256052124}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &257384565
@@ -2697,7 +2687,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -3318,11 +3308,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5572630184336403322, guid: 7da921ba91a105245950a42600097141, type: 3}
   m_PrefabInstance: {fileID: 923088579}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &923088581 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5572630184336403321, guid: 7da921ba91a105245950a42600097141, type: 3}
-  m_PrefabInstance: {fileID: 923088579}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &943881066
 GameObject:
   m_ObjectHideFlags: 0
@@ -3580,11 +3565,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e745ac266406246adaffca91814b58, type: 3}
---- !u!1 &1001175711 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1467701867603362024, guid: d9e745ac266406246adaffca91814b58, type: 3}
-  m_PrefabInstance: {fileID: 1001175710}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1001175712 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1462047669921483044, guid: d9e745ac266406246adaffca91814b58, type: 3}
@@ -3703,21 +3683,6 @@ MonoBehaviour:
   - name: Trans Effect
     originObject: {fileID: 7765840348051711618, guid: 79f8f8c806ca1ba4e9a16e80af9a6579, type: 3}
     poolingList: []
-  - name: 
-    originObject: {fileID: 5572630184336403321, guid: 7da921ba91a105245950a42600097141, type: 3}
-    poolingList:
-    - {fileID: 923088581}
-    - {fileID: 1628783275}
-  - name: 
-    originObject: {fileID: 3946459302877735629, guid: a48eb1c92ec50a64da4847a9d49bd249, type: 3}
-    poolingList:
-    - {fileID: 248144285}
-    - {fileID: 256052126}
-  - name: 
-    originObject: {fileID: 1467701867603362024, guid: d9e745ac266406246adaffca91814b58, type: 3}
-    poolingList:
-    - {fileID: 1206649685}
-    - {fileID: 1001175711}
   - name: 
     originObject: {fileID: 3609675231943459043, guid: e1159f549f03a604c8902ce3bc916067, type: 3}
     poolingList: []
@@ -9211,11 +9176,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1462047669921483044, guid: d9e745ac266406246adaffca91814b58, type: 3}
   m_PrefabInstance: {fileID: 1206649683}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1206649685 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1467701867603362024, guid: d9e745ac266406246adaffca91814b58, type: 3}
-  m_PrefabInstance: {fileID: 1206649683}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1242873978
 GameObject:
   m_ObjectHideFlags: 0
@@ -11309,11 +11269,6 @@ PrefabInstance:
 --- !u!4 &1628783274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5572630184336403322, guid: 7da921ba91a105245950a42600097141, type: 3}
-  m_PrefabInstance: {fileID: 1628783273}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1628783275 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5572630184336403321, guid: 7da921ba91a105245950a42600097141, type: 3}
   m_PrefabInstance: {fileID: 1628783273}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1637923689
@@ -18673,6 +18628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInv: 0
+  effectData: {fileID: 11400000, guid: 584e7fa04ed292d44b769d49f426e91a, type: 2}
   originSpeed: 14
   jumpPower: 14
   maxHp: 100

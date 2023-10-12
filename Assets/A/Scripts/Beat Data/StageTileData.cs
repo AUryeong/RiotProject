@@ -25,6 +25,25 @@ public class StageTileData : SerializedScriptableObject
     public List<RoadTileData> outGameTileDataList = new();
     public List<RoadTileData> roadTileDataList = new();
     public List<TileDataList> tileDataList = new();
+
+    public void Init()
+    {
+        foreach (var tileData in roadTileDataList)
+            PoolManager.Instance.AddPooling(tileData.name, tileData.gameObject);
+
+        foreach (var tileData in outGameTileDataList)
+            PoolManager.Instance.AddPooling(tileData.name, tileData.gameObject);
+
+        foreach (var tileDataList in tileDataList)
+            foreach (var tileData in tileDataList.dataList)
+                PoolManager.Instance.AddPooling(tileData.name, tileData.gameObject);
+
+        foreach (var enemy in flyingEnemies)
+            PoolManager.Instance.AddPooling(enemy.name, enemy.gameObject);
+
+        foreach (var enemy in defaultEnemies)
+            PoolManager.Instance.AddPooling(enemy.name, enemy.gameObject);
+    }
 }
 
 [Serializable]

@@ -4907,7 +4907,7 @@ MonoBehaviour:
       Data: 150
     - Name: speedAdder
       Entry: 4
-      Data: 7
+      Data: 4
     - Name: textAsset
       Entry: 10
       Data: 2
