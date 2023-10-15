@@ -74,6 +74,8 @@ namespace Lobby
             if (lastDownIndex >= 0)
                 downButtonPopup[lastDownIndex].DeActive();
 
+            lastDownIndex = -1;
+
             background.DOKill();
             downButtonWindow.DOKill();
 

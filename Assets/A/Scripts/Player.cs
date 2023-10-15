@@ -95,6 +95,7 @@ public class Player : Singleton<Player>
         animator = GetComponent<Animator>();
 
         Reset();
+        effectData.Init();
     }
 
     public void Reset()
