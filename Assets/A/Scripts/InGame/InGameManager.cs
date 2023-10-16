@@ -26,17 +26,6 @@ namespace InGame
             cameraDistance = mainCamera.transform.position - Player.Instance.transform.position;
         }
 
-        private void Update()
-        {
-            if (!Player.Instance.IsAlive && GameManager.Instance.isGaming) return;
-
-            CameraMove();
-        }
-
-        private void CameraMove()
-        {
-        }
-
         public void Active()
         {
             GameManager.Instance.isGaming = true;

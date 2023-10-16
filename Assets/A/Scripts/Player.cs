@@ -121,7 +121,6 @@ public class Player : Singleton<Player>
         IsAlive = true;
         Hp = maxHp;
         jumpCount = MAX_JUMP_COUNT;
-        Boost(2);
 
         if (isInv)
         {
@@ -231,8 +230,14 @@ public class Player : Singleton<Player>
 
     private void Move()
     {
-        float moveValue = (originSpeed + SpeedAddValue) * Time.deltaTime;
+        float moveValue = Speed * Time.deltaTime / TileManager.Instance.beatInterval;
         transform.Translate(Vector3.forward * moveValue);
+    }
+
+    private void MoveLine(float moveX)
+    {
+        transform.DOKill(true);
+        transform.DOMoveX(moveX, 0.2f).SetRelative();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -331,7 +336,7 @@ public class Player : Singleton<Player>
         switch (direction)
         {
             case Direction.Left:
-                Move(-TileManager.TILE_DISTANCE);
+                MoveLine(-TileManager.TILE_DISTANCE);
                 if (hitAbleEnemyList.Count > 0)
                 {
                     var hitAbleList = hitAbleEnemyList.FindAll(enemy => enemy.transform.position.x - transform.position.x < -TileManager.TILE_DISTANCE / 2);
@@ -350,7 +355,7 @@ public class Player : Singleton<Player>
 
                 break;
             case Direction.Right:
-                Move(TileManager.TILE_DISTANCE);
+                MoveLine(TileManager.TILE_DISTANCE);
                 if (hitAbleEnemyList.Count > 0)
                 {
                     var hitAbleList = hitAbleEnemyList.FindAll(enemy => enemy.transform.position.x - transform.position.x > TileManager.TILE_DISTANCE / 2);
@@ -401,11 +406,5 @@ public class Player : Singleton<Player>
 
                 break;
         }
-    }
-
-    private void Move(float moveX)
-    {
-        transform.DOKill(true);
-        transform.DOMoveX(moveX, 0.2f).SetRelative();
     }
 }

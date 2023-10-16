@@ -57,7 +57,7 @@ public class SoundManager : Singleton<SoundManager>
         var audioInfo = new AudioInfo
         {
             audioSource = audioSourceObj.AddComponent<AudioSource>(),
-            audioVolume = 1
+            audioVolume = 0
         };
         audioInfos.Add(soundType, audioInfo);
         return audioInfo;

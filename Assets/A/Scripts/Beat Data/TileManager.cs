@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using InGame;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class TileManager : Singleton<TileManager>
     private const float BEAT_RENDER_DISTANCE = 25;
     private const float BEAT_SYNC_START_POS = -3f;
 
-    private const float PLAYER_RENDER_DISTANCE = 150;
+    private const float PLAYER_RENDER_DISTANCE = 70;
     private const float PLAYER_REMOVE_DISTANCE = 60;
 
     [SerializeField] private GlobalObjectFogController fogController;
@@ -34,7 +35,8 @@ public class TileManager : Singleton<TileManager>
     [Header("Bgm")][SerializeField] private float bpmDistanceMultiplier;
     [HideInInspector] public BgmData bgmData;
     private List<Enemy> enemies = new();
-    private float beatInterval;
+    public float beatInterval;
+    private int beat;
     private float beatSyncPos;
 
     private bool isEndBgm;
@@ -75,7 +77,7 @@ public class TileManager : Singleton<TileManager>
     {
         stageTileData = stageTileDataList[SaveManager.Instance.GameData.selectStageIndex];
         SaveManager.Instance.GameData.selectBgmIndex %= stageTileData.bgmDataList.Count;
-        SetBgmData(stageTileData.bgmDataList[SaveManager.Instance.GameData.selectBgmIndex % stageTileData.bgmDataList.Count]);
+        SetBgmData(stageTileData.bgmDataList[SaveManager.Instance.GameData.selectBgmIndex]);
     }
 
     public void Reset(float startPos = -1)
@@ -107,12 +109,13 @@ public class TileManager : Singleton<TileManager>
         speedDataList.Clear();
 
         stageStartPos = roadTileLength;
-        beatStartPos = stageStartPos;
+        beatStartPos = stageStartPos - 6;
         roadStartPos = stageStartPos;
 
         beatSyncPos = SaveManager.Instance.GameData.beatSync;
 
         beatSpawnDuration = 0;
+        beat = 0;
 
         createdRoadTileDataList.Clear();
     }
@@ -124,12 +127,16 @@ public class TileManager : Singleton<TileManager>
 
         lastSummonLine = 0;
 
-        float playerPos = Player.Instance.transform.position.z;
-        while (roadTileLength - playerPos < PLAYER_RENDER_DISTANCE)
-            CheckCreateRoadTile(playerPos);
+        CreateRoadTile();
+        CreateRoadTile();
+        CreateRoadTile();
+        CreateRoadTile();
 
-        while (itemTileLength - playerPos < PLAYER_RENDER_DISTANCE)
-            CheckCreateItemTile(playerPos);
+        //while (roadTileLength - playerPos < PLAYER_RENDER_DISTANCE)
+        //    CheckCreateRoadTile(playerPos);
+
+        //while (itemTileLength - playerPos < PLAYER_RENDER_DISTANCE)
+        //    CheckCreateItemTile(playerPos);
     }
 
     private void Update()
@@ -144,7 +151,6 @@ public class TileManager : Singleton<TileManager>
     {
         CheckRemoveTile();
     }
-
 
     private void OutGamingUpdate()
     {
@@ -181,10 +187,10 @@ public class TileManager : Singleton<TileManager>
         if (!Player.Instance.IsAlive) return;
 
         float playerPos = Player.Instance.transform.position.z;
-        CheckCreateRoadTile(playerPos);
+        //CheckCreateRoadTile(playerPos);
         CheckCreateBeatTile(playerPos);
         CheckCreateBackgroundTile(playerPos);
-        CheckCreateItemTile(playerPos);
+        //CheckCreateItemTile(playerPos);
     }
 
     private void CheckCreateItemTile(float playerPos)
@@ -217,10 +223,8 @@ public class TileManager : Singleton<TileManager>
         itemTileLength += 4;
     }
 
-    private void CheckCreateRoadTile(float playerPos)
+    private void CreateRoadTile()
     {
-        if (roadTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
-
         var data = stageTileData.roadTileDataList.FindAll(tileData => tileData.roadDatas[0].lineCondition.Contains(lastSummonLine)).SelectOne();
 
         var roadTileObj = PoolManager.Instance.Init(data.name);
@@ -260,20 +264,28 @@ public class TileManager : Singleton<TileManager>
             return;
         }
 
-        beatSpawnDuration -= Time.deltaTime;
-        if (beatSpawnDuration > 0) return;
+        beatSpawnDuration += Time.deltaTime / beatInterval;
+        if (beatDataQueue.Peek().beat <= beatSpawnDuration + beat)
+            CreateBeatData(playerPos);
 
+        if (beatSpawnDuration < 1) return;
+
+        beatSpawnDuration--;
+        beat++;
+
+        CreateRoadTile();
+    }
+
+    private void CreateBeatData(float playerPos)
+    {
         float length = playerPos + BEAT_RENDER_DISTANCE * (Player.Instance.Speed / Player.Instance.originSpeed);
-        //Debug.Log(length + " Alice");
-        var lastRoadData = GetLengthToRoadData(length);
-        //Debug.Log(string.Join(",", lastRoadData.lineCondition) + " Aris");
 
         var beatData = beatDataQueue.Dequeue();
-        //Debug.Log(beatData.beat + " haru");
 
         switch (beatData.type)
         {
             case BeatType.Default:
+                var lastRoadData = GetLengthToRoadData(length);
                 var enemy = lastRoadData.isJustBlank ? stageTileData.flyingEnemies.SelectOne() : stageTileData.defaultEnemies.SelectOne();
 
                 var enemyNodeObj = PoolManager.Instance.Init(enemy.name);
@@ -290,7 +302,7 @@ public class TileManager : Singleton<TileManager>
                 ChangeStage(length + BEAT_SYNC_START_POS + beatSyncPos);
                 break;
             case BeatType.SpeedUp:
-                ChangeSpeedByBeatData(length, beatData.value);
+                //    ChangeSpeedByBeatData(length, beatData.value);
                 break;
             case BeatType.End:
                 isEndBgm = true;
@@ -299,14 +311,12 @@ public class TileManager : Singleton<TileManager>
                 Player.Instance.Boost(10);
                 break;
             case BeatType.SpeedDown:
-                ChangeSpeedByBeatData(length, -beatData.value);
+                //    ChangeSpeedByBeatData(length, -beatData.value);
                 break;
             case BeatType.HighLight:
                 ChangeHighLight(length, beatData.value);
                 break;
         }
-
-        beatSpawnDuration += beatInterval * beatData.beatDistance;
     }
 
     private void CheckCreateBackgroundTile(float playerPos)

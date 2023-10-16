@@ -76,7 +76,6 @@ namespace Edit
                 }
 
                 roadData.length = stageTile.tiles[rowTiles[0].tileIndex].length;
-                roadTileData.roadDatas.Add(roadData);
             }
 
             roadTileData.length = roadTileData.roadDatas.Sum(roadData => roadData.length);
@@ -172,6 +171,8 @@ namespace Edit
                 var obj = buildTile.isBlank ? Instantiate(tileData.objects.SelectOne()) : Instantiate(tileData.objects.SelectOne(), roadTileData.transform, true);
                 obj.transform.position = hit.collider.transform.position + new Vector3(0, 2f, -stageTile.tiles[selectTileIndex].length / 2);
                 obj.gameObject.SetActive(true);
+               
+                roadTileData.roadObjects.Add(obj);
             }
         }
     }
