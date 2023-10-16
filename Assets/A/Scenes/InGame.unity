@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028396, g: 0.22571427, b: 0.30692327, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028364, g: 0.22571364, b: 0.306922, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3350,6 +3350,7 @@ MonoBehaviour:
     bpm: 0
     speedAdder: 0
     textAsset: {fileID: 0}
+  beatInterval: 0
   highLightLevel: 0
   itemList:
   - Item_Boost
@@ -18629,7 +18630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInv: 0
   effectData: {fileID: 11400000, guid: 584e7fa04ed292d44b769d49f426e91a, type: 2}
-  originSpeed: 14
+  originSpeed: 12
   jumpPower: 14
   maxHp: 100
   hpRemoveValue: 7.5

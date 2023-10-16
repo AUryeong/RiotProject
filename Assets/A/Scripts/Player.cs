@@ -235,6 +235,12 @@ public class Player : Singleton<Player>
         transform.Translate(Vector3.forward * moveValue);
     }
 
+    private void MoveLine(float moveX)
+    {
+        transform.DOKill(true);
+        transform.DOMoveX(moveX, 0.2f).SetRelative();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider == null) return;
@@ -331,7 +337,7 @@ public class Player : Singleton<Player>
         switch (direction)
         {
             case Direction.Left:
-                Move(-TileManager.TILE_DISTANCE);
+                MoveLine(-TileManager.TILE_DISTANCE);
                 if (hitAbleEnemyList.Count > 0)
                 {
                     var hitAbleList = hitAbleEnemyList.FindAll(enemy => enemy.transform.position.x - transform.position.x < -TileManager.TILE_DISTANCE / 2);
@@ -350,7 +356,7 @@ public class Player : Singleton<Player>
 
                 break;
             case Direction.Right:
-                Move(TileManager.TILE_DISTANCE);
+                MoveLine(TileManager.TILE_DISTANCE);
                 if (hitAbleEnemyList.Count > 0)
                 {
                     var hitAbleList = hitAbleEnemyList.FindAll(enemy => enemy.transform.position.x - transform.position.x > TileManager.TILE_DISTANCE / 2);
@@ -401,11 +407,5 @@ public class Player : Singleton<Player>
 
                 break;
         }
-    }
-
-    private void Move(float moveX)
-    {
-        transform.DOKill(true);
-        transform.DOMoveX(moveX, 0.2f).SetRelative();
     }
 }

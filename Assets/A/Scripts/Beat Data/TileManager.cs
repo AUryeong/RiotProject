@@ -34,7 +34,7 @@ public class TileManager : Singleton<TileManager>
     [Header("Bgm")][SerializeField] private float bpmDistanceMultiplier;
     [HideInInspector] public BgmData bgmData;
     private List<Enemy> enemies = new();
-    private float beatInterval;
+    public float beatInterval;
     private float beatSyncPos;
 
     private bool isEndBgm;
@@ -144,7 +144,6 @@ public class TileManager : Singleton<TileManager>
     {
         CheckRemoveTile();
     }
-
 
     private void OutGamingUpdate()
     {
