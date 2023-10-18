@@ -6126,7 +6126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
-  spawnVector: {x: 0, y: -2, z: 0}
+  spawnVector: {x: 0, y: -6, z: 0}
   bone: {fileID: 6997363910168174547}
   hitAbleEffect: {fileID: 1532141874577737939}
 --- !u!65 &7486266067099123614

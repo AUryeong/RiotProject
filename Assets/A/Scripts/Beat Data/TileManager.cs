@@ -8,7 +8,7 @@ public class TileManager : Singleton<TileManager>
 {
     public const float TILE_DISTANCE = 2.5f;
 
-    private const float BEAT_RENDER_DISTANCE = 20;
+    private const float BEAT_RENDER_DISTANCE = 26;
     private const float BEAT_SYNC_START_POS = -3f;
 
     private const float PLAYER_RENDER_DISTANCE = 70;
@@ -23,19 +23,21 @@ public class TileManager : Singleton<TileManager>
     private float roadStartPos;
     private float roadTileLength;
     private readonly List<RoadTileData> createdRoadTileDataList = new();
-    private readonly List<GameObject> createdBackgroundList = new();
+    private readonly List<GameObject> createdBounceList = new();
+    private readonly List<GameObject> createdBounceBackgroundList = new();
     private int lastSummonLine;
 
     private readonly List<float> tileLengthList = new();
     private readonly List<GameObject> createdTileList = new();
 
     private float beatSpawnDuration;
+    private int isNotSwipeCount;
 
-    [Header("Bgm")][SerializeField] private float bpmDistanceMultiplier;
+    [Header("Bgm")]
     [HideInInspector] public BgmData bgmData;
     private List<Enemy> enemies = new();
     public float beatInterval;
-    private int beat;
+    private int stackBeat;
     private float beatSyncPos;
 
     private bool isEndBgm;
@@ -114,7 +116,7 @@ public class TileManager : Singleton<TileManager>
         beatSyncPos = SaveManager.Instance.GameData.beatSync;
 
         beatSpawnDuration = 0;
-        beat = 0;
+        stackBeat = 0;
 
         createdRoadTileDataList.Clear();
     }
@@ -125,7 +127,6 @@ public class TileManager : Singleton<TileManager>
 
         lastSummonLine = 0;
 
-        CreateRoadTile();
         CreateRoadTile();
         CreateRoadTile();
         CreateRoadTile();
@@ -210,11 +211,11 @@ public class TileManager : Singleton<TileManager>
             createdTileList.Add(itemObj);
     }
 
-    private void CreateRoadTile(bool isbeatTiming = false)
+    private void CreateRoadTile(bool isBeatTiming = false)
     {
         RoadTileData data;
-        if (isbeatTiming)
-            data = stageTileData.roadTileDataList.FindAll(tileData => !tileData.lineCondition.Contains(lastSummonLine)).SelectOne();
+        if (isBeatTiming)
+            data = stageTileData.roadTileDataList.FindAll(tileData => tileData.lineCondition.Exists(line => Mathf.Abs(line - lastSummonLine) == 1)).SelectOne();
         else
             data = stageTileData.roadTileDataList.FindAll(tileData => tileData.lineCondition.Contains(lastSummonLine)).SelectOne();
 
@@ -253,30 +254,49 @@ public class TileManager : Singleton<TileManager>
             isBeatCreating = true;
             return;
         }
-        bool isBeatTiming = false;
 
         beatSpawnDuration += Time.deltaTime / beatInterval;
-        if (beatDataQueue.Peek().beat <= (beatSpawnDuration + beat) * bgmData.bpmMultiplier)
+
+        bool isBeatTiming = beatDataQueue.Peek().beat <= (beatSpawnDuration + stackBeat) * bgmData.bpmMultiplier;
+        if (beatSpawnDuration >= 1)
         {
+            foreach (var obj in createdBounceBackgroundList)
+            {
+                obj.transform.DOKill();
+                obj.transform.DOMoveY(-1, beatInterval / 4).SetLoops(2, LoopType.Yoyo);
+            }
+            foreach (var obj in createdBounceList)
+            {
+                obj.transform.DOKill();
+                obj.transform.DOMoveY(-0.2f, beatInterval / 4).SetLoops(2, LoopType.Yoyo);
+            }
+
+            beatSpawnDuration--;
+            stackBeat++;
+
+            if (beatDataQueue.Peek().beatDistance < 1 && !isBeatTiming)
+                isNotSwipeCount++;
+            else
+                isNotSwipeCount = 0;
+            
+            bool isForced = isNotSwipeCount >= 2;
+            if(isForced)
+                isNotSwipeCount = 0;
+
+            CreateRoadTile(isBeatTiming || isForced);
+            if (isBeatTiming)
+            {
+                CreateBeatData(playerPos, true);
+                return;
+            }
+
+        }
+        
+        if (isBeatTiming)
             CreateBeatData(playerPos);
-            isBeatTiming = true;
-        }
-
-        if (beatSpawnDuration < 1) return;
-
-        foreach (var obj in createdBackgroundList)
-        {
-            obj.transform.DOKill();
-            obj.transform.DOMoveY(-1, beatInterval / 4).SetLoops(2, LoopType.Yoyo);
-        }
-
-        beatSpawnDuration--;
-        beat++;
-
-        CreateRoadTile(isBeatTiming);
     }
 
-    private void CreateBeatData(float playerPos)
+    private void CreateBeatData(float playerPos, bool isBeatUpTiming = false)
     {
         float length = playerPos + BEAT_RENDER_DISTANCE * (Player.Instance.Speed / Player.Instance.originSpeed);
 
@@ -285,13 +305,21 @@ public class TileManager : Singleton<TileManager>
         switch (beatData.type)
         {
             case BeatType.Default:
-                var lastRoadData = GetLengthToRoadData(length);
-                var nextRoadData = GetLengthToRoadData(length + 3);
-                var enemy = !nextRoadData.lineCondition.Contains(lastRoadData.summonLine) ? stageTileData.flyingEnemies.SelectOne() : stageTileData.defaultEnemies.SelectOne();
+                
+                var enemy = stageTileData.defaultEnemies.SelectOne();
+                int summonLine = lastSummonLine;
+                if (isBeatUpTiming)
+                {
+                    var lastRoadData = GetLengthToRoadData(length);
+                    summonLine = lastRoadData.summonLine;
+                }
 
                 var enemyNodeObj = PoolManager.Instance.Init(enemy.name);
-                enemyNodeObj.transform.position = new Vector3(lastRoadData.summonLine * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
+                enemyNodeObj.transform.position = new Vector3(summonLine * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
 
+                if(!createdBounceList.Contains(enemyNodeObj))
+                    createdBounceList.Add(enemyNodeObj);
+                
                 if (!createdTileList.Contains(enemyNodeObj))
                 {
                     enemies.Add(enemyNodeObj.GetComponent<Enemy>());
@@ -308,7 +336,7 @@ public class TileManager : Singleton<TileManager>
             case BeatType.End:
                 isEndBgm = true;
                 ChangeThemeColor(stageTileData.defaultColor);
-                InGameManager.Instance.ReturnLobby(10);
+                InGameManager.Instance.ReturnLobby(8);
                 Player.Instance.Boost(10);
                 break;
             case BeatType.SpeedDown:
@@ -333,7 +361,8 @@ public class TileManager : Singleton<TileManager>
             obj.transform.position = new Vector3(0, 0, tileLengthList[index]);
 
             if (index == 0)
-                createdBackgroundList.Add(obj);
+                if(!createdBounceBackgroundList.Contains(obj))
+                    createdBounceBackgroundList.Add(obj);
 
             if (!createdTileList.Contains(obj))
                 createdTileList.Add(obj);
@@ -460,8 +489,8 @@ public class TileManager : Singleton<TileManager>
             if (!createdTile.gameObject.activeSelf) continue;
             if (playerPos - createdTile.transform.position.z > PLAYER_REMOVE_DISTANCE)
             {
-                if (createdBackgroundList.Contains(createdTile))
-                    createdBackgroundList.Remove(createdTile);
+                if (createdBounceList.Contains(createdTile))
+                    createdBounceList.Remove(createdTile);
                 createdTile.gameObject.SetActive(false);
             }
         }
@@ -471,7 +500,7 @@ public class TileManager : Singleton<TileManager>
     public void SetBgmData(BgmData setBgmData)
     {
         bgmData = setBgmData;
-        beatInterval = 60f / bgmData.bpm * bpmDistanceMultiplier;
+        beatInterval = 60f / bgmData.bpm;
 
         Player.Instance.SpeedAddValue = bgmData.speedAdder;
 

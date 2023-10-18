@@ -16,17 +16,17 @@ MonoBehaviour:
   tiles:
   - length: 6
     objects:
-    - {fileID: 5986443192590150670, guid: fe6dca0beaa21d34b8bd6adf90321be9, type: 3}
-    isBlank: 1
-  - length: 5.5
-    objects:
-    - {fileID: 5502066819334835296, guid: 29e6f8a2f276c9346929e6790c273eb2, type: 3}
-    isBlank: 1
-  - length: 6
-    objects:
     - {fileID: 3615952416925866863, guid: 87f153b7be76abb45bd18b712fb1d6bc, type: 3}
     isBlank: 0
   - length: 6
     objects:
     - {fileID: 3619106058119215618, guid: 456d313a29f262c4ca8e1de4701b2f5c, type: 3}
     isBlank: 0
+  - length: 6
+    objects:
+    - {fileID: 3615952416925866863, guid: 87f153b7be76abb45bd18b712fb1d6bc, type: 3}
+    isBlank: 1
+  - length: 6
+    objects:
+    - {fileID: 3619106058119215618, guid: 456d313a29f262c4ca8e1de4701b2f5c, type: 3}
+    isBlank: 1

@@ -7,7 +7,7 @@ namespace InGame
     {
         private const float ENEMY_HP_HEAL_VALUE = 10;
         private const int ENEMY_RUNE_GET_VALUE = 5;
-        private const float ENEMY_MOVE_DURATION = 0.5f;
+        private const float ENEMY_MOVE_DURATION = 1f;
 
         public int hp;
 
@@ -81,7 +81,7 @@ namespace InGame
 
             float moveDuration = ENEMY_MOVE_DURATION * Random.Range(0.75f, 1.25f);
             
-            transform.DOMoveX(TileManager.Instance.GetLengthToRoadData(zPos).summonLine * TileManager.TILE_DISTANCE, moveDuration);
+            //transform.DOMoveX(TileManager.Instance.GetLengthToRoadData(zPos).summonLine * TileManager.TILE_DISTANCE, moveDuration);
             transform.DOMoveY(enemyPos.y + 2, moveDuration / 2).SetLoops(2, LoopType.Yoyo);
             transform.DOMoveZ(zPos, moveDuration);
         }
