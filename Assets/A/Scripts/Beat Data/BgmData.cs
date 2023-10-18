@@ -12,7 +12,9 @@ public class BgmData
     [Title("High Light Color")]
     public List<ThemeColor> highLightColors = new();
     
-    [Title("Special Value")] public float bpm;
+    [Title("Special Value")]
+    public float bpm;
+    public float bpmMultiplier = 1;
     public float speedAdder;
 
     [Space(10f)] [Title("Beat Data")] [SerializeField]

@@ -3353,7 +3353,6 @@ MonoBehaviour:
   beatInterval: 0
   highLightLevel: 0
   itemList:
-  - Item_Boost
   - Item_Magnet
 --- !u!4 &943881068
 Transform:

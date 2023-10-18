@@ -21,15 +21,14 @@ namespace Edit
         [SerializeField] private EditStageTile stageTile;
         [SerializeField] private GlobalObjectFogController controller;
 
-        [Space(10)] 
+        [Space(10)]
         [SerializeField] private RectTransform tileSelectParent;
         [SerializeField] private Button tileSelectButton;
 
         private readonly List<EditGridSlot> lastTiles = new();
-        private readonly List<List<EditGridSlot>> buildTiles = new();
+        private readonly List<EditGridSlot> buildTiles = new();
 
         private int selectTileIndex;
-        private int activeLine = 1;
 
         private float sumLength;
 
@@ -42,17 +41,17 @@ namespace Edit
             for (int i = 0; i < stageTile.tiles.Count; i++)
             {
                 var obj = Instantiate(tileSelectButton, tileSelectParent);
-                
+
                 int temp = i;
                 obj.gameObject.SetActive(true);
-                
+
                 obj.onClick.RemoveAllListeners();
-                obj.onClick.AddListener(()=>SelectTile(temp));
-                
+                obj.onClick.AddListener(() => SelectTile(temp));
+
                 obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = stageTile.tiles[temp].objects[0].name;
             }
-            
-            CreateTile(1);
+
+            CreateTile();
         }
 
         public void ClearTile()
@@ -63,22 +62,13 @@ namespace Edit
 #if UNITY_EDITOR
         public void SaveTile()
         {
-            roadTileData.roadDatas.Clear();
-
-            foreach (var rowTiles in buildTiles)
+            foreach (var tile in buildTiles)
             {
-                var roadData = new RoadData();
-                roadData.isJustBlank = rowTiles.FindAll(tile => !tile.isBlank).Count <= 0;
-                foreach (var tile in rowTiles)
-                {
-                    if (roadData.isJustBlank || !tile.isBlank)
-                        roadData.lineCondition.Add(tile.column);
-                }
-
-                roadData.length = stageTile.tiles[rowTiles[0].tileIndex].length;
+                if (!tile.isBlank)
+                    roadTileData.lineCondition.Add(tile.column);
             }
 
-            roadTileData.length = roadTileData.roadDatas.Sum(roadData => roadData.length);
+            roadTileData.length = stageTile.tiles[buildTiles[0].tileIndex].length;
 
             string localPath = "Assets/GyungHun/TileData/Temp.prefab";
 
@@ -111,7 +101,7 @@ namespace Edit
             }
         }
 
-        private void CreateTile(int line)
+        private void CreateTile()
         {
             lastTiles.Clear();
             float length = stageTile.tiles[selectTileIndex].length;
@@ -121,7 +111,6 @@ namespace Edit
             {
                 var editGridSlot = Instantiate(originEditGridSlot);
                 editGridSlot.gameObject.SetActive(true);
-                editGridSlot.row = line;
                 editGridSlot.column = i - 3;
 
                 var trans = editGridSlot.transform;
@@ -130,8 +119,6 @@ namespace Edit
 
                 lastTiles.Add(editGridSlot);
             }
-
-            activeLine = line;
         }
 
         private void Update()
@@ -147,31 +134,24 @@ namespace Edit
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, editLayerMask))
             {
                 var buildTile = hit.collider.GetComponent<EditGridSlot>();
-                if (buildTile.row < activeLine)
-                {
-                    if (Math.Abs(stageTile.tiles[buildTiles[buildTile.row - 1][0].tileIndex].length - stageTile.tiles[selectTileIndex].length) > 0.05f)
+                if (buildTiles.Count > 0)
+                    if (Math.Abs(stageTile.tiles[buildTiles[0].tileIndex].length - stageTile.tiles[selectTileIndex].length) > 0.05f)
                         return;
-                }
 
-                if (buildTile.row == activeLine)
-                {
-                    buildTiles.Add(new List<EditGridSlot>());
-                    CreateTile(buildTile.row + 1);
-                }
-
-                buildTiles[buildTile.row - 1].Add(buildTile);
+                buildTiles.Add(buildTile);
 
                 buildTile.tileIndex = selectTileIndex;
 
                 var tileData = stageTile.tiles[selectTileIndex];
                 buildTile.isBlank = tileData.isBlank;
-                
+                roadTileData.length = tileData.length;
+
                 hit.collider.gameObject.SetActive(false);
 
                 var obj = buildTile.isBlank ? Instantiate(tileData.objects.SelectOne()) : Instantiate(tileData.objects.SelectOne(), roadTileData.transform, true);
                 obj.transform.position = hit.collider.transform.position + new Vector3(0, 2f, -stageTile.tiles[selectTileIndex].length / 2);
                 obj.gameObject.SetActive(true);
-               
+
                 roadTileData.roadObjects.Add(obj);
             }
         }

@@ -8,7 +8,7 @@ public class TileManager : Singleton<TileManager>
 {
     public const float TILE_DISTANCE = 2.5f;
 
-    private const float BEAT_RENDER_DISTANCE = 25;
+    private const float BEAT_RENDER_DISTANCE = 20;
     private const float BEAT_SYNC_START_POS = -3f;
 
     private const float PLAYER_RENDER_DISTANCE = 70;
@@ -23,14 +23,13 @@ public class TileManager : Singleton<TileManager>
     private float roadStartPos;
     private float roadTileLength;
     private readonly List<RoadTileData> createdRoadTileDataList = new();
+    private readonly List<GameObject> createdBackgroundList = new();
     private int lastSummonLine;
 
     private readonly List<float> tileLengthList = new();
     private readonly List<GameObject> createdTileList = new();
 
     private float beatSpawnDuration;
-
-    private float itemTileLength;
 
     [Header("Bgm")][SerializeField] private float bpmDistanceMultiplier;
     [HideInInspector] public BgmData bgmData;
@@ -123,10 +122,10 @@ public class TileManager : Singleton<TileManager>
     public void CreateTile()
     {
         roadTileLength = stageStartPos;
-        itemTileLength = stageStartPos;
 
         lastSummonLine = 0;
 
+        CreateRoadTile();
         CreateRoadTile();
         CreateRoadTile();
         CreateRoadTile();
@@ -187,45 +186,37 @@ public class TileManager : Singleton<TileManager>
         if (!Player.Instance.IsAlive) return;
 
         float playerPos = Player.Instance.transform.position.z;
-        //CheckCreateRoadTile(playerPos);
         CheckCreateBeatTile(playerPos);
         CheckCreateBackgroundTile(playerPos);
-        //CheckCreateItemTile(playerPos);
     }
 
-    private void CheckCreateItemTile(float playerPos)
+    private void CreateItemTile(float itemPos, RoadTileData roadTileData)
     {
-        if (itemTileLength > roadTileLength) return;
-        if (itemTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
-
-        var lastRoadData = GetLengthToRoadData(itemTileLength);
-
-        if (!lastRoadData.isJustBlank)
+        GameObject itemObj;
+        if (itemMaxValue >= ITEM_RANDOM_PROB_MAX && Random.Range(0f, 100f) <= ITEM_RANDOM_PROB_VALUE_PERCENT)
         {
-            GameObject itemObj;
-            if (itemMaxValue >= ITEM_RANDOM_PROB_MAX && Random.Range(0f, 100f) <= ITEM_RANDOM_PROB_VALUE_PERCENT)
-            {
-                itemObj = PoolManager.Instance.Init(itemList.SelectOne());
-                itemMaxValue = 0;
-            }
-            else
-            {
-                itemObj = PoolManager.Instance.Init(nameof(Item_Rune));
-                itemMaxValue++;
-            }
-
-            itemObj.transform.position = new Vector3(lastRoadData.summonLine * TILE_DISTANCE, 1, itemTileLength);
-
-            if (!createdTileList.Contains(itemObj))
-                createdTileList.Add(itemObj);
+            itemObj = PoolManager.Instance.Init(itemList.SelectOne());
+            itemMaxValue = 0;
+        }
+        else
+        {
+            itemObj = PoolManager.Instance.Init(nameof(Item_Rune));
+            itemMaxValue++;
         }
 
-        itemTileLength += 4;
+        itemObj.transform.position = new Vector3(roadTileData.summonLine * TILE_DISTANCE, 1, itemPos);
+
+        if (!createdTileList.Contains(itemObj))
+            createdTileList.Add(itemObj);
     }
 
-    private void CreateRoadTile()
+    private void CreateRoadTile(bool isbeatTiming = false)
     {
-        var data = stageTileData.roadTileDataList.FindAll(tileData => tileData.roadDatas[0].lineCondition.Contains(lastSummonLine)).SelectOne();
+        RoadTileData data;
+        if (isbeatTiming)
+            data = stageTileData.roadTileDataList.FindAll(tileData => !tileData.lineCondition.Contains(lastSummonLine)).SelectOne();
+        else
+            data = stageTileData.roadTileDataList.FindAll(tileData => tileData.lineCondition.Contains(lastSummonLine)).SelectOne();
 
         var roadTileObj = PoolManager.Instance.Init(data.name);
         roadTileObj.transform.position = new Vector3(0, 0, roadTileLength);
@@ -236,15 +227,14 @@ public class TileManager : Singleton<TileManager>
         data = roadTileObj.GetComponent<RoadTileData>();
 
         createdRoadTileDataList.Add(data);
-        foreach (var roadData in data.roadDatas)
-        {
-            var lineConditions = roadData.lineCondition.FindAll(condition => Mathf.Abs(condition - lastSummonLine) <= 1);
-            if (!lineConditions.Contains(lastSummonLine) || Random.Range(0, 2) != 0)
-                lastSummonLine = lineConditions.Count > 0 ? lineConditions.SelectOne() : roadData.lineCondition.SelectOne();
-            roadData.summonLine = lastSummonLine;
-        }
+        var lineConditions = data.lineCondition.FindAll(condition => Mathf.Abs(condition - lastSummonLine) <= 1);
+
+        if (!lineConditions.Contains(lastSummonLine) || Random.Range(0, 2) != 0)
+            lastSummonLine = lineConditions.Count > 0 ? lineConditions.SelectOne() : data.lineCondition.SelectOne();
+        data.summonLine = lastSummonLine;
 
         roadTileLength += data.length;
+        CreateItemTile(roadTileLength - data.length / 2, data);
 
         if (roadTileLength - roadStartPos < PLAYER_RENDER_DISTANCE * 1.5f) return;
 
@@ -263,17 +253,27 @@ public class TileManager : Singleton<TileManager>
             isBeatCreating = true;
             return;
         }
+        bool isBeatTiming = false;
 
         beatSpawnDuration += Time.deltaTime / beatInterval;
-        if (beatDataQueue.Peek().beat <= beatSpawnDuration + beat)
+        if (beatDataQueue.Peek().beat <= (beatSpawnDuration + beat) * bgmData.bpmMultiplier)
+        {
             CreateBeatData(playerPos);
+            isBeatTiming = true;
+        }
 
         if (beatSpawnDuration < 1) return;
+
+        foreach (var obj in createdBackgroundList)
+        {
+            obj.transform.DOKill();
+            obj.transform.DOMoveY(-1, beatInterval / 4).SetLoops(2, LoopType.Yoyo);
+        }
 
         beatSpawnDuration--;
         beat++;
 
-        CreateRoadTile();
+        CreateRoadTile(isBeatTiming);
     }
 
     private void CreateBeatData(float playerPos)
@@ -286,7 +286,8 @@ public class TileManager : Singleton<TileManager>
         {
             case BeatType.Default:
                 var lastRoadData = GetLengthToRoadData(length);
-                var enemy = lastRoadData.isJustBlank ? stageTileData.flyingEnemies.SelectOne() : stageTileData.defaultEnemies.SelectOne();
+                var nextRoadData = GetLengthToRoadData(length + 3);
+                var enemy = !nextRoadData.lineCondition.Contains(lastRoadData.summonLine) ? stageTileData.flyingEnemies.SelectOne() : stageTileData.defaultEnemies.SelectOne();
 
                 var enemyNodeObj = PoolManager.Instance.Init(enemy.name);
                 enemyNodeObj.transform.position = new Vector3(lastRoadData.summonLine * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
@@ -330,6 +331,9 @@ public class TileManager : Singleton<TileManager>
 
             var obj = PoolManager.Instance.Init(data.name);
             obj.transform.position = new Vector3(0, 0, tileLengthList[index]);
+
+            if (index == 0)
+                createdBackgroundList.Add(obj);
 
             if (!createdTileList.Contains(obj))
                 createdTileList.Add(obj);
@@ -455,7 +459,11 @@ public class TileManager : Singleton<TileManager>
         {
             if (!createdTile.gameObject.activeSelf) continue;
             if (playerPos - createdTile.transform.position.z > PLAYER_REMOVE_DISTANCE)
+            {
+                if (createdBackgroundList.Contains(createdTile))
+                    createdBackgroundList.Remove(createdTile);
                 createdTile.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -480,7 +488,7 @@ public class TileManager : Singleton<TileManager>
         SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatInterval * beat.beat;
     }
 
-    public RoadData GetLengthToRoadData(float length)
+    public RoadTileData GetLengthToRoadData(float length)
     {
         float roadLength = roadTileLength;
         int lastIndex = createdRoadTileDataList.Count;
@@ -488,20 +496,8 @@ public class TileManager : Singleton<TileManager>
         {
             lastIndex--;
             roadLength -= createdRoadTileDataList[lastIndex].length;
-            //Debug.Log(createdRoadTileDataList[lastIndex].name + " , " + roadLength);
         }
 
-        RoadData lastRoadData = null;
-        foreach (var data in createdRoadTileDataList[lastIndex].roadDatas)
-        {
-            roadLength += data.length;
-            lastRoadData = data;
-            //Debug.Log(string.Join(",", lastRoadData.lineCondition));
-
-            if (roadLength > length)
-                break;
-        }
-
-        return lastRoadData;
+        return createdRoadTileDataList[lastIndex];
     }
 }

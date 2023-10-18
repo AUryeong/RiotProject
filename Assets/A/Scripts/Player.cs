@@ -318,15 +318,8 @@ public class Player : Singleton<Player>
 
     private void HitEnemy(List<Enemy> hitAbleList)
     {
-        var hitAbleOrderBy = hitAbleList.OrderBy(enemy => Mathf.Abs(enemy.transform.position.z - transform.position.z)).ToArray();
-        var hitEnemy = hitAbleOrderBy[0];
-        hitEnemy.Hit(1);
-
-        if (hitAbleList.Count <= 1) return;
-
-        var hitSecondEnemy = hitAbleOrderBy[1];
-        if (Mathf.Abs(hitSecondEnemy.transform.position.z - hitEnemy.transform.position.z) < ENEMY_HIT_RADIUS)
-            hitSecondEnemy.Hit(1);
+        var hitAbleOrderBy = hitAbleList.OrderBy(enemy => Mathf.Abs(enemy.transform.position.z - transform.position.z));
+        hitAbleOrderBy.First().Hit(1);
     }
 
     public void CheckInput(Direction direction)

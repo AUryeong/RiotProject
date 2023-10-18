@@ -94,9 +94,12 @@ MonoBehaviour:
     - Name: bpm
       Entry: 4
       Data: 146
+    - Name: bpmMultiplier
+      Entry: 4
+      Data: 1
     - Name: speedAdder
       Entry: 4
-      Data: 3
+      Data: 0
     - Name: textAsset
       Entry: 10
       Data: 0
@@ -2558,6 +2561,9 @@ MonoBehaviour:
     - Name: bpm
       Entry: 4
       Data: 77
+    - Name: bpmMultiplier
+      Entry: 4
+      Data: 1
     - Name: speedAdder
       Entry: 4
       Data: 0
@@ -5023,6 +5029,9 @@ MonoBehaviour:
     - Name: bpm
       Entry: 4
       Data: 80
+    - Name: bpmMultiplier
+      Entry: 4
+      Data: 1
     - Name: speedAdder
       Entry: 4
       Data: 0
