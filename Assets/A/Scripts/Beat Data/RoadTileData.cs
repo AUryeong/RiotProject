@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class RoadTileData : MonoBehaviour
+public class RoadTileData : TileData
 {
-    public float length;
-
     [HideInInspector] public int summonLine;
 
     public List<int> lineCondition = new();

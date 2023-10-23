@@ -3342,12 +3342,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d9a9662bb535c9c48a74d8b7537118e9, type: 2}
   - {fileID: 11400000, guid: ba166dd04b0b0e244bf92a38753ccc43, type: 2}
   stageTileData: {fileID: 11400000, guid: d9a9662bb535c9c48a74d8b7537118e9, type: 2}
-  bpmDistanceMultiplier: 1
   bgmData:
     bgmNickName: 
     bgmName: 
     highLightColors: []
     bpm: 0
+    bpmMultiplier: 1
     speedAdder: 0
     textAsset: {fileID: 0}
   beatInterval: 0
