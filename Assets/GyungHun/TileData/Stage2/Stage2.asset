@@ -4459,10 +4459,10 @@ MonoBehaviour:
       Data: 
     - Name: bpm
       Entry: 4
-      Data: 80
+      Data: 160
     - Name: bpmMultiplier
       Entry: 4
-      Data: 1
+      Data: 0.5
     - Name: speedAdder
       Entry: 4
       Data: 0

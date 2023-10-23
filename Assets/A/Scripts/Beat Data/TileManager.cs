@@ -255,7 +255,7 @@ public class TileManager : Singleton<TileManager>
             return;
         }
 
-        beatSpawnDuration += Time.deltaTime / beatInterval;
+        beatSpawnDuration += Time.deltaTime / beatInterval * Player.Instance.Speed / Player.Instance.originSpeed;
 
         bool isBeatTiming = beatDataQueue.Peek().beat <= (beatSpawnDuration + stackBeat) * bgmData.bpmMultiplier;
         if (beatSpawnDuration >= 1)
