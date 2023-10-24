@@ -24,3 +24,7 @@ MonoBehaviour:
     - {fileID: 5342877808089582106, guid: e85abea01116ea649a1898d3e5906802, type: 3}
     - {fileID: 8384352242343199974, guid: 6e3b73f5eb7f6d142ab8f39e7ddf8d7a, type: 3}
     isBlank: 0
+  - length: 6
+    objects:
+    - {fileID: 8516425138208079033, guid: d283625d0db643a4c83fc2776135d8d6, type: 3}
+    isBlank: 0

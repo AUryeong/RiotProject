@@ -38,12 +38,6 @@ public class Player : Singleton<Player>
 
             enemyCheckColliders.size = new Vector3(6, 10, Speed / originSpeed * BEAT_HIT_DISTANCE);
             enemyCheckColliders.center = new Vector3(0, 0, originSpeed / Speed * BEAT_HIT_DISTANCE / 2);
-
-            if (!IsAlive) return;
-            if (!GameManager.Instance.isGaming) return;
-            
-            foreach (var enemy in TileManager.Instance.GetEnemies())
-                enemy.PosChangeBySpeed(Speed / beforeSpeed);
         }
     }
 

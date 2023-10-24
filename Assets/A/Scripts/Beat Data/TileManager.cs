@@ -131,12 +131,6 @@ public class TileManager : Singleton<TileManager>
         CreateRoadTile();
         CreateRoadTile();
         CreateRoadTile();
-
-        //while (roadTileLength - playerPos < PLAYER_RENDER_DISTANCE)
-        //    CheckCreateRoadTile(playerPos);
-
-        //while (itemTileLength - playerPos < PLAYER_RENDER_DISTANCE)
-        //    CheckCreateItemTile(playerPos);
     }
 
     private void Update()
@@ -145,11 +139,6 @@ public class TileManager : Singleton<TileManager>
             GamingUpdate();
         else
             OutGamingUpdate();
-    }
-
-    private void FixedUpdate()
-    {
-        CheckRemoveTile();
     }
 
     private void OutGamingUpdate()
@@ -163,6 +152,46 @@ public class TileManager : Singleton<TileManager>
     {
         CheckCreateTile();
         CheckChange();
+    }
+
+    public List<Enemy> GetEnemies()
+    {
+        return enemies.FindAll(enemy => enemy.gameObject.activeSelf);
+    }
+    private void CheckRemoveTile()
+    {
+        float playerPos = Player.Instance.transform.position.z;
+
+        foreach (var createdTile in createdTileList)
+        {
+            if (!createdTile.gameObject.activeSelf) continue;
+            if (playerPos - createdTile.transform.position.z > PLAYER_REMOVE_DISTANCE)
+            {
+                if (createdBounceList.Contains(createdTile))
+                    createdBounceList.Remove(createdTile);
+                createdTile.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void SetBgmData(BgmData setBgmData)
+    {
+        bgmData = setBgmData;
+        beatInterval = 60f / bgmData.bpm;
+
+        Player.Instance.SpeedAddValue = bgmData.speedAdder;
+
+        beatDataQueue = new Queue<BeatData>(bgmData.beatDataList);
+
+        SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f);
+
+        if (bgmData.beatDataList.Count <= 0) return;
+
+        BeatData beat = bgmData.beatDataList.ToList().Find(beatData => beatData.type == BeatType.HighLight && beatData.value > 0);
+
+        if (beat == null) return;
+
+        SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatInterval * beat.beat;
     }
 
     #region TileCheck
@@ -180,6 +209,8 @@ public class TileManager : Singleton<TileManager>
             createdTileList.Add(roadTileObj);
 
         roadTileLength += data.length;
+        
+        CheckRemoveTile();
     }
 
     private void CheckCreateTile()
@@ -236,9 +267,10 @@ public class TileManager : Singleton<TileManager>
 
         roadTileLength += data.length;
         CreateItemTile(roadTileLength - data.length / 2, data);
+        
+        CheckRemoveTile();
 
         if (roadTileLength - roadStartPos < PLAYER_RENDER_DISTANCE * 1.5f) return;
-
         roadStartPos += createdRoadTileDataList[0].length;
         createdRoadTileDataList.RemoveAt(0);
     }
@@ -268,7 +300,7 @@ public class TileManager : Singleton<TileManager>
             foreach (var obj in createdBounceList)
             {
                 obj.transform.DOKill();
-                obj.transform.DOMoveY(-0.2f, beatInterval / 4).SetLoops(2, LoopType.Yoyo);
+                obj.transform.DOMoveY(-0.2f, beatInterval / 4).SetRelative().SetLoops(2, LoopType.Yoyo);
             }
 
             beatSpawnDuration--;
@@ -305,15 +337,31 @@ public class TileManager : Singleton<TileManager>
         switch (beatData.type)
         {
             case BeatType.Default:
-                
-                var enemy = stageTileData.defaultEnemies.SelectOne();
-                int summonLine = lastSummonLine;
-                if (isBeatUpTiming)
-                {
-                    var lastRoadData = GetLengthToRoadData(length);
-                    summonLine = lastRoadData.summonLine;
-                }
+                bool isFlying;
+                RoadTileData lastRoadData;
+                float roadLength = roadTileLength;
 
+                // 적 위치 탐색 
+
+                int lastIndex = createdRoadTileDataList.Count;
+                if (roadLength < length)
+                {
+                    lastRoadData = createdRoadTileDataList[^1];
+                    isFlying = true;
+                }
+                else
+                {
+                    while (roadLength > length)
+                    {
+                        lastIndex--;
+                        roadLength -= createdRoadTileDataList[lastIndex].length;
+                    }
+                    lastRoadData = createdRoadTileDataList[lastIndex];
+                    isFlying = false;
+                }
+                int summonLine = lastRoadData.summonLine;
+
+                var enemy = isFlying ? stageTileData.flyingEnemies.SelectOne() : stageTileData.defaultEnemies.SelectOne();
                 var enemyNodeObj = PoolManager.Instance.Init(enemy.name);
                 enemyNodeObj.transform.position = new Vector3(summonLine * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
 
@@ -372,11 +420,6 @@ public class TileManager : Singleton<TileManager>
     }
 
     #endregion
-
-    public List<Enemy> GetEnemies()
-    {
-        return enemies.FindAll(enemy => enemy.gameObject.activeSelf);
-    }
 
     #region Change
 
@@ -479,54 +522,4 @@ public class TileManager : Singleton<TileManager>
     }
 
     #endregion
-
-    private void CheckRemoveTile()
-    {
-        float playerPos = Player.Instance.transform.position.z;
-
-        foreach (var createdTile in createdTileList)
-        {
-            if (!createdTile.gameObject.activeSelf) continue;
-            if (playerPos - createdTile.transform.position.z > PLAYER_REMOVE_DISTANCE)
-            {
-                if (createdBounceList.Contains(createdTile))
-                    createdBounceList.Remove(createdTile);
-                createdTile.gameObject.SetActive(false);
-            }
-        }
-    }
-
-
-    public void SetBgmData(BgmData setBgmData)
-    {
-        bgmData = setBgmData;
-        beatInterval = 60f / bgmData.bpm;
-
-        Player.Instance.SpeedAddValue = bgmData.speedAdder;
-
-        beatDataQueue = new Queue<BeatData>(bgmData.beatDataList);
-
-        SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f);
-
-        if (bgmData.beatDataList.Count <= 0) return;
-
-        BeatData beat = bgmData.beatDataList.ToList().Find(beatData => beatData.type == BeatType.HighLight && beatData.value > 0);
-
-        if (beat == null) return;
-
-        SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatInterval * beat.beat;
-    }
-
-    public RoadTileData GetLengthToRoadData(float length)
-    {
-        float roadLength = roadTileLength;
-        int lastIndex = createdRoadTileDataList.Count;
-        while (roadLength > length)
-        {
-            lastIndex--;
-            roadLength -= createdRoadTileDataList[lastIndex].length;
-        }
-
-        return createdRoadTileDataList[lastIndex];
-    }
 }

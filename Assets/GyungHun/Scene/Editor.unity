@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -952,7 +952,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483648
   roadTileData: {fileID: 47081352}
-  stageTile: {fileID: 11400000, guid: 98a40b109a2b8c440a8b7f2828b2369a, type: 2}
+  stageTile: {fileID: 11400000, guid: 2b3856cd24d5c804e9faaed0b46771db, type: 2}
   controller: {fileID: 1793007747}
   tileSelectParent: {fileID: 491880960}
   tileSelectButton: {fileID: 365959166}
