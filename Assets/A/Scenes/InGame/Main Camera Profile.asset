@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -190,13 +190,13 @@ MonoBehaviour:
     value: 0
   mixerRedOutRedIn:
     overrideState: 1
-    value: 68
+    value: 24
   mixerRedOutGreenIn:
     overrideState: 1
-    value: 22
+    value: 54
   mixerRedOutBlueIn:
     overrideState: 1
-    value: 37
+    value: 44
   mixerGreenOutRedIn:
     overrideState: 0
     value: 0

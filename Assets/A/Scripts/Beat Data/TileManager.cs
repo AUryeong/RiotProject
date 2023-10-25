@@ -305,8 +305,8 @@ public class TileManager : Singleton<TileManager>
 
             beatSpawnDuration--;
             stackBeat++;
-
-            if (beatDataQueue.Peek().beatDistance < 1 && !isBeatTiming)
+            var beatData = beatDataQueue.Peek();
+            if (beatData.type == BeatType.Default && beatData.beatDistance < 1 && !isBeatTiming)
                 isNotSwipeCount++;
             else
                 isNotSwipeCount = 0;

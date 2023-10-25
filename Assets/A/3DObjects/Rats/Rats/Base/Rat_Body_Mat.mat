@@ -125,6 +125,7 @@ Material:
     - _ANIMATION: 0
     - _AlphaClip: 0
     - _Blend: 0
+    - _Brightness: 0.3
     - _BumpScale: 1
     - _CameraDistanceImpact: 0
     - _CelExtraEnabled: 1
@@ -196,6 +197,7 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularPower: 0.4
     - _SrcBlend: 1
+    - _Strength: 0.5
     - _Surface: 0
     - _TextureBlendingMode: 0
     - _TextureImpact: 1

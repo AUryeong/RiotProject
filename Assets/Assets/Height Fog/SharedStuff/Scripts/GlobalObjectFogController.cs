@@ -9,7 +9,6 @@ using UnityEngine;
 [AddComponentMenu("SKGames/Global Fog Controller")]
 [DisallowMultipleComponent]
 [ExecuteInEditMode]
-[RequireComponent(typeof(MeshRenderer))]
 public class GlobalObjectFogController : MonoBehaviour
 {
     public enum FogSpace
