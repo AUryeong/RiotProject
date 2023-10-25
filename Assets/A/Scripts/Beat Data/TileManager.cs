@@ -306,17 +306,8 @@ public class TileManager : Singleton<TileManager>
 
             beatSpawnDuration--;
             stackBeat++;
-            var beatData = beatDataQueue.Peek();
-            if (beatData.type == BeatType.Default && beatData.beatDistance < 1 && !isBeatTiming)
-                isNotSwipeCount++;
-            else
-                isNotSwipeCount = 0;
 
-            bool isForced = isNotSwipeCount >= 2;
-            if (isForced)
-                isNotSwipeCount = 0;
-
-            CreateRoadTile(isBeatTiming || isForced);
+            CreateRoadTile(isBeatTiming);
             if (isBeatTiming)
             {
                 CreateBeatData(playerPos, true);

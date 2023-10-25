@@ -185,7 +185,7 @@ namespace Lobby
             bgmSideSelect.rectTransform.DOKill(true);
 
             int prevIndex = SaveManager.Instance.GameData.selectBgmIndex;
-            int nowIndex = (prevIndex + 1) % TileManager.Instance.stageTileData.bgmDataList.Count;
+            int nowIndex = prevIndex - 1 < 0 ? TileManager.Instance.stageTileData.bgmDataList.Count - 1 : prevIndex - 1;
             SaveManager.Instance.GameData.selectBgmIndex = nowIndex;
 
             if (prevIndex == nowIndex) return;
@@ -212,7 +212,7 @@ namespace Lobby
             bgmSideSelect.rectTransform.DOKill(true);
 
             int prevIndex = SaveManager.Instance.GameData.selectBgmIndex;
-            int nowIndex = prevIndex - 1 < 0 ? TileManager.Instance.stageTileData.bgmDataList.Count - 1 : prevIndex - 1;
+            int nowIndex = (prevIndex + 1) % TileManager.Instance.stageTileData.bgmDataList.Count;
             SaveManager.Instance.GameData.selectBgmIndex = nowIndex;
 
             if (prevIndex == nowIndex) return;

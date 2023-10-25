@@ -155,9 +155,9 @@ namespace Lobby
                 return;
 
             if (distance > 0)
-                NextStage();
-            else
                 PrevStage();
+            else
+                NextStage();
         }
 
         private void NextStage()
@@ -165,7 +165,7 @@ namespace Lobby
             mainStageSlot.RectTransform.DOKill(true);
             sideStageSlot.RectTransform.DOKill(true);
 
-            stageSelectIndex = (stageSelectIndex + 1) % TileManager.Instance.stageTileDataList.Count;
+            stageSelectIndex = stageSelectIndex - 1 < 0 ? TileManager.Instance.stageTileDataList.Count - 1 : stageSelectIndex - 1;
 
             var stageTileData = TileManager.Instance.stageTileDataList[stageSelectIndex];
 
@@ -190,7 +190,7 @@ namespace Lobby
             mainStageSlot.RectTransform.DOKill(true);
             sideStageSlot.RectTransform.DOKill(true);
 
-            stageSelectIndex = stageSelectIndex - 1 < 0 ? TileManager.Instance.stageTileDataList.Count - 1 : stageSelectIndex - 1;
+            stageSelectIndex = (stageSelectIndex + 1) % TileManager.Instance.stageTileDataList.Count;
 
             var stageTileData = TileManager.Instance.stageTileDataList[stageSelectIndex];
 
