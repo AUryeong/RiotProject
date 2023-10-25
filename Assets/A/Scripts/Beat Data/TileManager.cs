@@ -33,8 +33,7 @@ public class TileManager : Singleton<TileManager>
     private float beatSpawnDuration;
     private int isNotSwipeCount;
 
-    [Header("Bgm")]
-    [HideInInspector] public BgmData bgmData;
+    [Header("Bgm")] [HideInInspector] public BgmData bgmData;
     private List<Enemy> enemies = new();
     public float beatInterval;
     private int stackBeat;
@@ -57,7 +56,7 @@ public class TileManager : Singleton<TileManager>
     private bool isChangeEndBgm;
     private float endBgmPos;
 
-    [Header("Item")][SerializeField] private List<string> itemList;
+    [Header("Item")] [SerializeField] private List<string> itemList;
 
     private int itemMaxValue;
 
@@ -158,6 +157,7 @@ public class TileManager : Singleton<TileManager>
     {
         return enemies.FindAll(enemy => enemy.gameObject.activeSelf);
     }
+
     private void CheckRemoveTile()
     {
         float playerPos = Player.Instance.transform.position.z;
@@ -209,7 +209,7 @@ public class TileManager : Singleton<TileManager>
             createdTileList.Add(roadTileObj);
 
         roadTileLength += data.length;
-        
+
         CheckRemoveTile();
     }
 
@@ -267,7 +267,7 @@ public class TileManager : Singleton<TileManager>
 
         roadTileLength += data.length;
         CreateItemTile(roadTileLength - data.length / 2, data);
-        
+
         CheckRemoveTile();
 
         if (roadTileLength - roadStartPos < PLAYER_RENDER_DISTANCE * 1.5f) return;
@@ -297,6 +297,7 @@ public class TileManager : Singleton<TileManager>
                 obj.transform.DOKill();
                 obj.transform.DOMoveY(-1, beatInterval / 4).SetLoops(2, LoopType.Yoyo);
             }
+
             foreach (var obj in createdBounceList)
             {
                 obj.transform.DOKill();
@@ -310,9 +311,9 @@ public class TileManager : Singleton<TileManager>
                 isNotSwipeCount++;
             else
                 isNotSwipeCount = 0;
-            
+
             bool isForced = isNotSwipeCount >= 2;
-            if(isForced)
+            if (isForced)
                 isNotSwipeCount = 0;
 
             CreateRoadTile(isBeatTiming || isForced);
@@ -321,9 +322,8 @@ public class TileManager : Singleton<TileManager>
                 CreateBeatData(playerPos, true);
                 return;
             }
-
         }
-        
+
         if (isBeatTiming)
             CreateBeatData(playerPos);
     }
@@ -356,18 +356,20 @@ public class TileManager : Singleton<TileManager>
                         lastIndex--;
                         roadLength -= createdRoadTileDataList[lastIndex].length;
                     }
+
                     lastRoadData = createdRoadTileDataList[lastIndex];
                     isFlying = false;
                 }
+
                 int summonLine = lastRoadData.summonLine;
 
                 var enemy = isFlying ? stageTileData.flyingEnemies.SelectOne() : stageTileData.defaultEnemies.SelectOne();
                 var enemyNodeObj = PoolManager.Instance.Init(enemy.name);
                 enemyNodeObj.transform.position = new Vector3(summonLine * TILE_DISTANCE, 0, length) + enemy.transform.localPosition;
 
-                if(!createdBounceList.Contains(enemyNodeObj))
+                if (!createdBounceList.Contains(enemyNodeObj))
                     createdBounceList.Add(enemyNodeObj);
-                
+
                 if (!createdTileList.Contains(enemyNodeObj))
                 {
                     enemies.Add(enemyNodeObj.GetComponent<Enemy>());
@@ -409,7 +411,7 @@ public class TileManager : Singleton<TileManager>
             obj.transform.position = new Vector3(0, 0, tileLengthList[index]);
 
             if (index == 0)
-                if(!createdBounceBackgroundList.Contains(obj))
+                if (!createdBounceBackgroundList.Contains(obj))
                     createdBounceBackgroundList.Add(obj);
 
             if (!createdTileList.Contains(obj))
@@ -459,7 +461,7 @@ public class TileManager : Singleton<TileManager>
         fogController.mainColor = themeColor.mainColor;
         fogController.fogColor = themeColor.fogColor;
 
-        Player.Instance.outLine.OutlineColor = themeColor.fogColor.GetFade(0.3f);
+        Player.Instance.outLine.OutlineColor = new Color(themeColor.fogColor.r + 0.1f, themeColor.fogColor.g + 0.1f, themeColor.fogColor.b + 0.1f, 0.3f);
 
         var transEffect = PoolManager.Instance.Init("Trans Effect");
         transEffect.transform.position = Player.Instance.transform.position;

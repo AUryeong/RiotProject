@@ -1,6 +1,4 @@
 ﻿using DG.Tweening;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -157,9 +155,9 @@ namespace Lobby
                 return;
 
             if (distance > 0)
-                PrevStage();
-            else
                 NextStage();
+            else
+                PrevStage();
         }
 
         private void NextStage()

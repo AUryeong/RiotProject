@@ -6878,12 +6878,19 @@ MonoBehaviour:
   - {fileID: 8047569705765524554, guid: ed35c300f870dfd42b0f36da400d36f8, type: 3}
   outGameTileDataList:
   - {fileID: 5270357469450053138, guid: 5c0dfa6579bc01344993fd00c5810b86, type: 3}
+  - {fileID: 4351909610784048531, guid: f1b32b41599d03b4b879efa2ef978d36, type: 3}
+  - {fileID: 5763697871148072724, guid: 1f663fdf6fdaf0c4b8d2c65ee0ad455c, type: 3}
   roadTileDataList:
   - {fileID: 8870541691846268561, guid: 6bd02afb5862e7b4890c6c42dd959d7f, type: 3}
   - {fileID: 8877578568361051971, guid: 2f8c5684b266f184e9358f3e89e222cb, type: 3}
   - {fileID: 8532394591854708364, guid: b253be4392c82234da7a103c6b2b5c5b, type: 3}
   - {fileID: 6029128040493245852, guid: 6d500e5ed3007e84f87d04dbd779167c, type: 3}
   - {fileID: 3200447674509929137, guid: e19d69c3e54e35d498a651b7a807e679, type: 3}
+  - {fileID: 152652797652726297, guid: 14a61fdbcc98f8b4b934642bb7ae7f7a, type: 3}
+  - {fileID: 2293615807310512136, guid: b50d0a43451b7984e81a55ac59911472, type: 3}
+  - {fileID: 1683950763877536546, guid: f5696c549c2a1d74bbd109c6deef59ce, type: 3}
+  - {fileID: 3454069843927654, guid: 5d3acbdc46d79214897e4d20ec4ce591, type: 3}
+  - {fileID: 886965724199310615, guid: b0d75c9e04dce824d87ec55dc98a6f89, type: 3}
   tileDataList:
   - dataList:
     - {fileID: 1554404439247101168, guid: fb6eea5131cb80349a893140ab568edf, type: 3}
