@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &25011320684243843
+--- !u!1 &221537003460957989
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,435 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 420235187316321918}
-  - component: {fileID: 6942576486631370876}
-  - component: {fileID: 6746365527709354599}
-  - component: {fileID: 258383745922253115}
-  - component: {fileID: 9074400467750178637}
-  m_Layer: 6
-  m_Name: Magma_Stage_Pillar
-  m_TagString: Fall
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &420235187316321918
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25011320684243843}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8836068494350871202}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6942576486631370876
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25011320684243843}
-  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
---- !u!23 &6746365527709354599
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25011320684243843}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &258383745922253115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25011320684243843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
-  fogSimulationSpace: 1
-  fogColor: {r: 1, g: 1, b: 1, a: 1}
-  fogMinimalHeight: -20
-  fogMaximalHeight: 0
-  fogFalloff: 1
-  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  fogEmissionPower: 20
-  fogEmissionFalloff: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
-  emissionPower: 1
-  combineWithStandardFog: 0
-  overrideStandardFogColor: 0
-  useFogAnimation: 0
-  fogWaveSpeedX: 2
-  fogWaveSpeedZ: 2
-  fogWaveAmplitudeX: 0.3
-  fogWaveAmplitudeZ: 0.3
-  fogWaveFreqX: 0.5
-  fogWaveFreqZ: 0.5
-  renderer: {fileID: 6746365527709354599}
-  overridedFromGlobalController: 1
---- !u!65 &9074400467750178637
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25011320684243843}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
-  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
---- !u!1 &103482231961770501
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2610626685713020366}
-  - component: {fileID: 8008482960624894529}
-  - component: {fileID: 1972958784387807016}
-  - component: {fileID: 6557047336002014235}
-  - component: {fileID: 2665783593058968845}
-  m_Layer: 6
-  m_Name: Magma_Stage_Pillar (1)
-  m_TagString: Fall
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2610626685713020366
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103482231961770501}
-  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: -12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8836068494350871202}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
---- !u!33 &8008482960624894529
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103482231961770501}
-  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
---- !u!23 &1972958784387807016
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103482231961770501}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6557047336002014235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103482231961770501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
-  fogSimulationSpace: 1
-  fogColor: {r: 1, g: 1, b: 1, a: 1}
-  fogMinimalHeight: -20
-  fogMaximalHeight: 0
-  fogFalloff: 1
-  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  fogEmissionPower: 20
-  fogEmissionFalloff: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
-  emissionPower: 1
-  combineWithStandardFog: 0
-  overrideStandardFogColor: 0
-  useFogAnimation: 0
-  fogWaveSpeedX: 2
-  fogWaveSpeedZ: 2
-  fogWaveAmplitudeX: 0.3
-  fogWaveAmplitudeZ: 0.3
-  fogWaveFreqX: 0.5
-  fogWaveFreqZ: 0.5
-  renderer: {fileID: 1972958784387807016}
-  overridedFromGlobalController: 1
---- !u!65 &2665783593058968845
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103482231961770501}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
-  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
---- !u!1 &923326219172511315
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4755909699925568570}
-  m_Layer: 6
-  m_Name: Road_3(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4755909699925568570
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923326219172511315}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1604841595666509859}
-  m_Father: {fileID: 5270357469450053139}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1008277466655036408
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8210163513984753745}
-  - component: {fileID: 798315295248315329}
-  - component: {fileID: 8893350406802492807}
-  - component: {fileID: 6830769799692231570}
-  - component: {fileID: 4209577285968493314}
-  m_Layer: 6
-  m_Name: Magma_Stage_Road_1
-  m_TagString: Road
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8210163513984753745
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1008277466655036408}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8836068494350871202}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &798315295248315329
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1008277466655036408}
-  m_Mesh: {fileID: -6630597376819679900, guid: 274183a83994bb943badcaff770e22be, type: 3}
---- !u!23 &8893350406802492807
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1008277466655036408}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 7eda9bfcadad5574bbf2b228118f88d0, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6830769799692231570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1008277466655036408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
-  fogSimulationSpace: 1
-  fogColor: {r: 1, g: 1, b: 1, a: 1}
-  fogMinimalHeight: -20
-  fogMaximalHeight: 0
-  fogFalloff: 1
-  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  fogEmissionPower: 20
-  fogEmissionFalloff: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
-  emissionPower: 1
-  combineWithStandardFog: 0
-  overrideStandardFogColor: 0
-  useFogAnimation: 0
-  fogWaveSpeedX: 2
-  fogWaveSpeedZ: 2
-  fogWaveAmplitudeX: 0.3
-  fogWaveAmplitudeZ: 0.3
-  fogWaveFreqX: 0.5
-  fogWaveFreqZ: 0.5
-  renderer: {fileID: 8893350406802492807}
-  overridedFromGlobalController: 1
---- !u!65 &4209577285968493314
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1008277466655036408}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.2398815, y: 0.74685484, z: 6.0580506}
-  m_Center: {x: 0.031516314, y: -0.37342736, z: 2.9983642}
---- !u!1 &1817647422601533345
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1604841595666509859}
+  - component: {fileID: 5791188544037700877}
   m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
@@ -444,25 +16,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1604841595666509859
+--- !u!4 &5791188544037700877
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817647422601533345}
+  m_GameObject: {fileID: 221537003460957989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1904861069968453194}
-  - {fileID: 4705528057147582176}
-  - {fileID: 8113040464115065368}
-  m_Father: {fileID: 4755909699925568570}
+  - {fileID: 3546650685404152454}
+  - {fileID: 4196530966314299586}
+  - {fileID: 1198781706388681844}
+  m_Father: {fileID: 2894824583315235187}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2330321842750890568
+--- !u!1 &967878637419865677
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -470,753 +42,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4145472852248461431}
-  - component: {fileID: 7471583004141459963}
-  - component: {fileID: 8348831450484277196}
-  - component: {fileID: 4306760940530604931}
-  - component: {fileID: 4869397945428001536}
-  m_Layer: 6
-  m_Name: Magma_Stage_Pillar
-  m_TagString: Fall
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4145472852248461431
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2330321842750890568}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7560129447932393440}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7471583004141459963
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2330321842750890568}
-  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
---- !u!23 &8348831450484277196
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2330321842750890568}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4306760940530604931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2330321842750890568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
-  fogSimulationSpace: 1
-  fogColor: {r: 1, g: 1, b: 1, a: 1}
-  fogMinimalHeight: -20
-  fogMaximalHeight: 0
-  fogFalloff: 1
-  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  fogEmissionPower: 20
-  fogEmissionFalloff: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
-  emissionPower: 1
-  combineWithStandardFog: 0
-  overrideStandardFogColor: 0
-  useFogAnimation: 0
-  fogWaveSpeedX: 2
-  fogWaveSpeedZ: 2
-  fogWaveAmplitudeX: 0.3
-  fogWaveAmplitudeZ: 0.3
-  fogWaveFreqX: 0.5
-  fogWaveFreqZ: 0.5
-  renderer: {fileID: 8348831450484277196}
-  overridedFromGlobalController: 1
---- !u!65 &4869397945428001536
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2330321842750890568}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
-  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
---- !u!1 &2868422459523154640
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4231664391941800216}
-  - component: {fileID: 5204019059787567062}
-  - component: {fileID: 3670073377713974158}
-  - component: {fileID: 4715039555346429498}
-  - component: {fileID: 4700951322046382048}
-  m_Layer: 6
-  m_Name: Magma_Stage_Road_1
-  m_TagString: Road
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4231664391941800216
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868422459523154640}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7560129447932393440}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5204019059787567062
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868422459523154640}
-  m_Mesh: {fileID: 4498651778589773694, guid: 274183a83994bb943badcaff770e22be, type: 3}
---- !u!23 &3670073377713974158
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868422459523154640}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 429416b65f1d77142a8b2186cd3b60ec, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4715039555346429498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868422459523154640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
-  fogSimulationSpace: 1
-  fogColor: {r: 1, g: 1, b: 1, a: 1}
-  fogMinimalHeight: -20
-  fogMaximalHeight: 0
-  fogFalloff: 1
-  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  fogEmissionPower: 20
-  fogEmissionFalloff: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
-  emissionPower: 1
-  combineWithStandardFog: 0
-  overrideStandardFogColor: 0
-  useFogAnimation: 0
-  fogWaveSpeedX: 2
-  fogWaveSpeedZ: 2
-  fogWaveAmplitudeX: 0.3
-  fogWaveAmplitudeZ: 0.3
-  fogWaveFreqX: 0.5
-  fogWaveFreqZ: 0.5
-  renderer: {fileID: 3670073377713974158}
-  overridedFromGlobalController: 1
---- !u!65 &4700951322046382048
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868422459523154640}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.2398815, y: 0.74685484, z: 6.0580506}
-  m_Center: {x: 0.031516314, y: -0.37342736, z: 2.9983642}
---- !u!1 &4380025856163015208
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1465326617680381843}
-  m_Layer: 6
-  m_Name: Road(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1465326617680381843
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4380025856163015208}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8836068494350871202}
-  m_Father: {fileID: 5270357469450053139}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4429309672993319742
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8113040464115065368}
-  - component: {fileID: 4790265578452536387}
-  - component: {fileID: 3303102508126973883}
-  - component: {fileID: 1512898420338339856}
-  - component: {fileID: 7465009647089090566}
-  m_Layer: 6
-  m_Name: Magma_Stage_Pillar (1)
-  m_TagString: Fall
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8113040464115065368
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429309672993319742}
-  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: -12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1604841595666509859}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
---- !u!33 &4790265578452536387
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429309672993319742}
-  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
---- !u!23 &3303102508126973883
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429309672993319742}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1512898420338339856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429309672993319742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
-  fogSimulationSpace: 1
-  fogColor: {r: 1, g: 1, b: 1, a: 1}
-  fogMinimalHeight: -20
-  fogMaximalHeight: 0
-  fogFalloff: 1
-  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  fogEmissionPower: 20
-  fogEmissionFalloff: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
-  emissionPower: 1
-  combineWithStandardFog: 0
-  overrideStandardFogColor: 0
-  useFogAnimation: 0
-  fogWaveSpeedX: 2
-  fogWaveSpeedZ: 2
-  fogWaveAmplitudeX: 0.3
-  fogWaveAmplitudeZ: 0.3
-  fogWaveFreqX: 0.5
-  fogWaveFreqZ: 0.5
-  renderer: {fileID: 3303102508126973883}
-  overridedFromGlobalController: 1
---- !u!65 &7465009647089090566
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429309672993319742}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
-  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
---- !u!1 &5255645872080415045
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4705528057147582176}
-  - component: {fileID: 8125522286710729700}
-  - component: {fileID: 2569327618669193768}
-  - component: {fileID: 6590230785532827130}
-  - component: {fileID: 8998980529070016834}
-  m_Layer: 6
-  m_Name: Magma_Stage_Pillar
-  m_TagString: Fall
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4705528057147582176
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5255645872080415045}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1604841595666509859}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8125522286710729700
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5255645872080415045}
-  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
---- !u!23 &2569327618669193768
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5255645872080415045}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6590230785532827130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5255645872080415045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
-  fogSimulationSpace: 1
-  fogColor: {r: 1, g: 1, b: 1, a: 1}
-  fogMinimalHeight: -20
-  fogMaximalHeight: 0
-  fogFalloff: 1
-  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  fogEmissionPower: 20
-  fogEmissionFalloff: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
-  emissionPower: 1
-  combineWithStandardFog: 0
-  overrideStandardFogColor: 0
-  useFogAnimation: 0
-  fogWaveSpeedX: 2
-  fogWaveSpeedZ: 2
-  fogWaveAmplitudeX: 0.3
-  fogWaveAmplitudeZ: 0.3
-  fogWaveFreqX: 0.5
-  fogWaveFreqZ: 0.5
-  renderer: {fileID: 2569327618669193768}
-  overridedFromGlobalController: 1
---- !u!65 &8998980529070016834
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5255645872080415045}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
-  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
---- !u!1 &5270357469450053149
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5270357469450053139}
-  - component: {fileID: 5270357469450053138}
-  m_Layer: 0
-  m_Name: Stage1_Road_0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5270357469450053139
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5270357469450053149}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4755909699925568570}
-  - {fileID: 1374251032500890716}
-  - {fileID: 1465326617680381843}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5270357469450053138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5270357469450053149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23a1c408fd264f018acc986ebc7ca525, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  length: 6
-  summonLine: 0
-  lineCondition: ffffffff0000000001000000
-  roadObjects:
-  - {fileID: 923326219172511315}
-  - {fileID: 6929336995419343853}
-  - {fileID: 4380025856163015208}
---- !u!1 &5303031516363926306
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1892416373469658657}
-  - component: {fileID: 4891675443594907651}
-  - component: {fileID: 1192401327421513014}
-  - component: {fileID: 6366508283707972429}
-  - component: {fileID: 8616952344545178409}
-  m_Layer: 6
-  m_Name: Magma_Stage_Pillar (1)
-  m_TagString: Fall
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1892416373469658657
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5303031516363926306}
-  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: -12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7560129447932393440}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
---- !u!33 &4891675443594907651
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5303031516363926306}
-  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
---- !u!23 &1192401327421513014
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5303031516363926306}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6366508283707972429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5303031516363926306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
-  fogSimulationSpace: 1
-  fogColor: {r: 1, g: 1, b: 1, a: 1}
-  fogMinimalHeight: -20
-  fogMaximalHeight: 0
-  fogFalloff: 1
-  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  fogEmissionPower: 20
-  fogEmissionFalloff: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
-  emissionPower: 1
-  combineWithStandardFog: 0
-  overrideStandardFogColor: 0
-  useFogAnimation: 0
-  fogWaveSpeedX: 2
-  fogWaveSpeedZ: 2
-  fogWaveAmplitudeX: 0.3
-  fogWaveAmplitudeZ: 0.3
-  fogWaveFreqX: 0.5
-  fogWaveFreqZ: 0.5
-  renderer: {fileID: 1192401327421513014}
-  overridedFromGlobalController: 1
---- !u!65 &8616952344545178409
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5303031516363926306}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
-  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
---- !u!1 &6913556124531254426
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7560129447932393440}
+  - component: {fileID: 3326928563721492850}
   m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
@@ -1224,25 +50,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7560129447932393440
+--- !u!4 &3326928563721492850
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6913556124531254426}
+  m_GameObject: {fileID: 967878637419865677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4231664391941800216}
-  - {fileID: 4145472852248461431}
-  - {fileID: 1892416373469658657}
-  m_Father: {fileID: 1374251032500890716}
+  - {fileID: 472036841556388203}
+  - {fileID: 7159991043348783955}
+  - {fileID: 6741584159818016183}
+  m_Father: {fileID: 7042996534885416798}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6929336995419343853
+--- !u!1 &1759922650323056349
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1250,77 +76,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1374251032500890716}
-  m_Layer: 6
-  m_Name: Road_2(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1374251032500890716
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6929336995419343853}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7560129447932393440}
-  m_Father: {fileID: 5270357469450053139}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8476353418457838640
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8836068494350871202}
-  m_Layer: 6
-  m_Name: Floor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8836068494350871202
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8476353418457838640}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8210163513984753745}
-  - {fileID: 420235187316321918}
-  - {fileID: 2610626685713020366}
-  m_Father: {fileID: 1465326617680381843}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8876794236323203339
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1904861069968453194}
-  - component: {fileID: 257838271110305826}
-  - component: {fileID: 9142801761904079531}
-  - component: {fileID: 2672961918804647677}
-  - component: {fileID: 8421846102016590517}
+  - component: {fileID: 472036841556388203}
+  - component: {fileID: 6435586261104018417}
+  - component: {fileID: 1731303330566154158}
+  - component: {fileID: 8641489856504138490}
+  - component: {fileID: 4982084959315673346}
   m_Layer: 6
   m_Name: Magma_Stage_Road_1
   m_TagString: Road
@@ -1328,36 +88,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1904861069968453194
+--- !u!4 &472036841556388203
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8876794236323203339}
+  m_GameObject: {fileID: 1759922650323056349}
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1604841595666509859}
+  m_Father: {fileID: 3326928563721492850}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &257838271110305826
+--- !u!33 &6435586261104018417
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8876794236323203339}
+  m_GameObject: {fileID: 1759922650323056349}
   m_Mesh: {fileID: 531060573599863463, guid: 274183a83994bb943badcaff770e22be, type: 3}
---- !u!23 &9142801761904079531
+--- !u!23 &1731303330566154158
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8876794236323203339}
+  m_GameObject: {fileID: 1759922650323056349}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -1393,13 +153,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2672961918804647677
+--- !u!114 &8641489856504138490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8876794236323203339}
+  m_GameObject: {fileID: 1759922650323056349}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
@@ -1425,18 +185,1258 @@ MonoBehaviour:
   fogWaveAmplitudeZ: 0.3
   fogWaveFreqX: 0.5
   fogWaveFreqZ: 0.5
-  renderer: {fileID: 9142801761904079531}
+  renderer: {fileID: 1731303330566154158}
   overridedFromGlobalController: 1
---- !u!65 &8421846102016590517
+--- !u!65 &4982084959315673346
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8876794236323203339}
+  m_GameObject: {fileID: 1759922650323056349}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.2398815, y: 0.74685484, z: 6.0580506}
   m_Center: {x: 0.031516314, y: -0.37342736, z: 2.9983642}
+--- !u!1 &2436572970680784149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3546650685404152454}
+  - component: {fileID: 5119051074958206877}
+  - component: {fileID: 6728340556265490953}
+  - component: {fileID: 7149470977467289036}
+  - component: {fileID: 6083169337734911374}
+  m_Layer: 6
+  m_Name: Magma_Stage_Road_1
+  m_TagString: Road
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3546650685404152454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436572970680784149}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5791188544037700877}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5119051074958206877
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436572970680784149}
+  m_Mesh: {fileID: 4498651778589773694, guid: 274183a83994bb943badcaff770e22be, type: 3}
+--- !u!23 &6728340556265490953
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436572970680784149}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 429416b65f1d77142a8b2186cd3b60ec, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7149470977467289036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436572970680784149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  fogSimulationSpace: 1
+  fogColor: {r: 1, g: 1, b: 1, a: 1}
+  fogMinimalHeight: -20
+  fogMaximalHeight: 0
+  fogFalloff: 1
+  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  fogEmissionPower: 20
+  fogEmissionFalloff: 0.5
+  emissionColor: {r: 0, g: 0, b: 0, a: 1}
+  emissionPower: 1
+  combineWithStandardFog: 0
+  overrideStandardFogColor: 0
+  useFogAnimation: 0
+  fogWaveSpeedX: 2
+  fogWaveSpeedZ: 2
+  fogWaveAmplitudeX: 0.3
+  fogWaveAmplitudeZ: 0.3
+  fogWaveFreqX: 0.5
+  fogWaveFreqZ: 0.5
+  renderer: {fileID: 6728340556265490953}
+  overridedFromGlobalController: 1
+--- !u!65 &6083169337734911374
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436572970680784149}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2398815, y: 0.74685484, z: 6.0580506}
+  m_Center: {x: 0.031516314, y: -0.37342736, z: 2.9983642}
+--- !u!1 &2902053644325397896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2460086550343468957}
+  - component: {fileID: 7817173805305745098}
+  - component: {fileID: 1873408901790355317}
+  - component: {fileID: 7189049007305189847}
+  - component: {fileID: 4984384077799573086}
+  m_Layer: 6
+  m_Name: Magma_Stage_Pillar (1)
+  m_TagString: Fall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2460086550343468957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902053644325397896}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: 0, y: -12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6584186666216801057}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!33 &7817173805305745098
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902053644325397896}
+  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
+--- !u!23 &1873408901790355317
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902053644325397896}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7189049007305189847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902053644325397896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  fogSimulationSpace: 1
+  fogColor: {r: 1, g: 1, b: 1, a: 1}
+  fogMinimalHeight: -20
+  fogMaximalHeight: 0
+  fogFalloff: 1
+  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  fogEmissionPower: 20
+  fogEmissionFalloff: 0.5
+  emissionColor: {r: 0, g: 0, b: 0, a: 1}
+  emissionPower: 1
+  combineWithStandardFog: 0
+  overrideStandardFogColor: 0
+  useFogAnimation: 0
+  fogWaveSpeedX: 2
+  fogWaveSpeedZ: 2
+  fogWaveAmplitudeX: 0.3
+  fogWaveAmplitudeZ: 0.3
+  fogWaveFreqX: 0.5
+  fogWaveFreqZ: 0.5
+  renderer: {fileID: 1873408901790355317}
+  overridedFromGlobalController: 1
+--- !u!65 &4984384077799573086
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902053644325397896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
+  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
+--- !u!1 &3506420978879439600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6741584159818016183}
+  - component: {fileID: 6301543538310786506}
+  - component: {fileID: 2580713904042227599}
+  - component: {fileID: 1640093625568752921}
+  - component: {fileID: 6472683368275392192}
+  m_Layer: 6
+  m_Name: Magma_Stage_Pillar (1)
+  m_TagString: Fall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6741584159818016183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506420978879439600}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: 0, y: -12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3326928563721492850}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!33 &6301543538310786506
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506420978879439600}
+  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
+--- !u!23 &2580713904042227599
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506420978879439600}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1640093625568752921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506420978879439600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  fogSimulationSpace: 1
+  fogColor: {r: 1, g: 1, b: 1, a: 1}
+  fogMinimalHeight: -20
+  fogMaximalHeight: 0
+  fogFalloff: 1
+  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  fogEmissionPower: 20
+  fogEmissionFalloff: 0.5
+  emissionColor: {r: 0, g: 0, b: 0, a: 1}
+  emissionPower: 1
+  combineWithStandardFog: 0
+  overrideStandardFogColor: 0
+  useFogAnimation: 0
+  fogWaveSpeedX: 2
+  fogWaveSpeedZ: 2
+  fogWaveAmplitudeX: 0.3
+  fogWaveAmplitudeZ: 0.3
+  fogWaveFreqX: 0.5
+  fogWaveFreqZ: 0.5
+  renderer: {fileID: 2580713904042227599}
+  overridedFromGlobalController: 1
+--- !u!65 &6472683368275392192
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506420978879439600}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
+  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
+--- !u!1 &4351909610784048540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4351909610784048530}
+  - component: {fileID: 4351909610784048531}
+  m_Layer: 0
+  m_Name: Temp 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4351909610784048530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4351909610784048540}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6463854588127682438}
+  - {fileID: 2894824583315235187}
+  - {fileID: 7042996534885416798}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4351909610784048531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4351909610784048540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a1c408fd264f018acc986ebc7ca525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  length: 6
+  summonLine: 0
+  lineCondition: ffffffff0000000001000000
+  roadObjects:
+  - {fileID: 7999898776672248067}
+  - {fileID: 5428796292519346075}
+  - {fileID: 4888337926347076858}
+--- !u!1 &4775094821192342552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7159991043348783955}
+  - component: {fileID: 5454266591401393443}
+  - component: {fileID: 3042452774475582018}
+  - component: {fileID: 315548537976619955}
+  - component: {fileID: 6817771367315378596}
+  m_Layer: 6
+  m_Name: Magma_Stage_Pillar
+  m_TagString: Fall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7159991043348783955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775094821192342552}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3326928563721492850}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5454266591401393443
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775094821192342552}
+  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
+--- !u!23 &3042452774475582018
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775094821192342552}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &315548537976619955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775094821192342552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  fogSimulationSpace: 1
+  fogColor: {r: 1, g: 1, b: 1, a: 1}
+  fogMinimalHeight: -20
+  fogMaximalHeight: 0
+  fogFalloff: 1
+  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  fogEmissionPower: 20
+  fogEmissionFalloff: 0.5
+  emissionColor: {r: 0, g: 0, b: 0, a: 1}
+  emissionPower: 1
+  combineWithStandardFog: 0
+  overrideStandardFogColor: 0
+  useFogAnimation: 0
+  fogWaveSpeedX: 2
+  fogWaveSpeedZ: 2
+  fogWaveAmplitudeX: 0.3
+  fogWaveAmplitudeZ: 0.3
+  fogWaveFreqX: 0.5
+  fogWaveFreqZ: 0.5
+  renderer: {fileID: 3042452774475582018}
+  overridedFromGlobalController: 1
+--- !u!65 &6817771367315378596
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775094821192342552}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
+  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
+--- !u!1 &4888337926347076858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7042996534885416798}
+  m_Layer: 6
+  m_Name: Road_3(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7042996534885416798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4888337926347076858}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3326928563721492850}
+  m_Father: {fileID: 4351909610784048530}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5428796292519346075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2894824583315235187}
+  m_Layer: 6
+  m_Name: Road_2(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2894824583315235187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428796292519346075}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5791188544037700877}
+  m_Father: {fileID: 4351909610784048530}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7291364312748766319
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5137037403500944414}
+  - component: {fileID: 5029448259672084113}
+  - component: {fileID: 1281892458616470829}
+  - component: {fileID: 1763751118557224276}
+  - component: {fileID: 7877995905480586331}
+  m_Layer: 6
+  m_Name: Magma_Stage_Pillar
+  m_TagString: Fall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5137037403500944414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291364312748766319}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6584186666216801057}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5029448259672084113
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291364312748766319}
+  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
+--- !u!23 &1281892458616470829
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291364312748766319}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1763751118557224276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291364312748766319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  fogSimulationSpace: 1
+  fogColor: {r: 1, g: 1, b: 1, a: 1}
+  fogMinimalHeight: -20
+  fogMaximalHeight: 0
+  fogFalloff: 1
+  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  fogEmissionPower: 20
+  fogEmissionFalloff: 0.5
+  emissionColor: {r: 0, g: 0, b: 0, a: 1}
+  emissionPower: 1
+  combineWithStandardFog: 0
+  overrideStandardFogColor: 0
+  useFogAnimation: 0
+  fogWaveSpeedX: 2
+  fogWaveSpeedZ: 2
+  fogWaveAmplitudeX: 0.3
+  fogWaveAmplitudeZ: 0.3
+  fogWaveFreqX: 0.5
+  fogWaveFreqZ: 0.5
+  renderer: {fileID: 1281892458616470829}
+  overridedFromGlobalController: 1
+--- !u!65 &7877995905480586331
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291364312748766319}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
+  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
+--- !u!1 &7999898776672248067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6463854588127682438}
+  m_Layer: 6
+  m_Name: Road(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6463854588127682438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7999898776672248067}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6584186666216801057}
+  m_Father: {fileID: 4351909610784048530}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8695853425325244209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6584186666216801057}
+  m_Layer: 6
+  m_Name: Floor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6584186666216801057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8695853425325244209}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 242376282412151536}
+  - {fileID: 5137037403500944414}
+  - {fileID: 2460086550343468957}
+  m_Father: {fileID: 6463854588127682438}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8721774255218567454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 242376282412151536}
+  - component: {fileID: 7035578449463122849}
+  - component: {fileID: 3940083957482469676}
+  - component: {fileID: 2631894755118067959}
+  - component: {fileID: 295487195632025087}
+  m_Layer: 6
+  m_Name: Magma_Stage_Road_1
+  m_TagString: Road
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &242376282412151536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8721774255218567454}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6584186666216801057}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7035578449463122849
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8721774255218567454}
+  m_Mesh: {fileID: -6630597376819679900, guid: 274183a83994bb943badcaff770e22be, type: 3}
+--- !u!23 &3940083957482469676
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8721774255218567454}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 7eda9bfcadad5574bbf2b228118f88d0, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2631894755118067959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8721774255218567454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  fogSimulationSpace: 1
+  fogColor: {r: 1, g: 1, b: 1, a: 1}
+  fogMinimalHeight: -20
+  fogMaximalHeight: 0
+  fogFalloff: 1
+  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  fogEmissionPower: 20
+  fogEmissionFalloff: 0.5
+  emissionColor: {r: 0, g: 0, b: 0, a: 1}
+  emissionPower: 1
+  combineWithStandardFog: 0
+  overrideStandardFogColor: 0
+  useFogAnimation: 0
+  fogWaveSpeedX: 2
+  fogWaveSpeedZ: 2
+  fogWaveAmplitudeX: 0.3
+  fogWaveAmplitudeZ: 0.3
+  fogWaveFreqX: 0.5
+  fogWaveFreqZ: 0.5
+  renderer: {fileID: 3940083957482469676}
+  overridedFromGlobalController: 1
+--- !u!65 &295487195632025087
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8721774255218567454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2398815, y: 0.74685484, z: 6.0580506}
+  m_Center: {x: 0.031516314, y: -0.37342736, z: 2.9983642}
+--- !u!1 &9051064199473204338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1198781706388681844}
+  - component: {fileID: 8036462037560661690}
+  - component: {fileID: 6989245624526633634}
+  - component: {fileID: 4607343095148532128}
+  - component: {fileID: 8542145734157021648}
+  m_Layer: 6
+  m_Name: Magma_Stage_Pillar (1)
+  m_TagString: Fall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1198781706388681844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051064199473204338}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: 0, y: -12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5791188544037700877}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!33 &8036462037560661690
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051064199473204338}
+  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
+--- !u!23 &6989245624526633634
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051064199473204338}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4607343095148532128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051064199473204338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  fogSimulationSpace: 1
+  fogColor: {r: 1, g: 1, b: 1, a: 1}
+  fogMinimalHeight: -20
+  fogMaximalHeight: 0
+  fogFalloff: 1
+  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  fogEmissionPower: 20
+  fogEmissionFalloff: 0.5
+  emissionColor: {r: 0, g: 0, b: 0, a: 1}
+  emissionPower: 1
+  combineWithStandardFog: 0
+  overrideStandardFogColor: 0
+  useFogAnimation: 0
+  fogWaveSpeedX: 2
+  fogWaveSpeedZ: 2
+  fogWaveAmplitudeX: 0.3
+  fogWaveAmplitudeZ: 0.3
+  fogWaveFreqX: 0.5
+  fogWaveFreqZ: 0.5
+  renderer: {fileID: 6989245624526633634}
+  overridedFromGlobalController: 1
+--- !u!65 &8542145734157021648
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051064199473204338}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
+  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}
+--- !u!1 &9189599702646980461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4196530966314299586}
+  - component: {fileID: 4540038617261883403}
+  - component: {fileID: 3065128122214068602}
+  - component: {fileID: 2863295278955173894}
+  - component: {fileID: 2588561152285652289}
+  m_Layer: 6
+  m_Name: Magma_Stage_Pillar
+  m_TagString: Fall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4196530966314299586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189599702646980461}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5791188544037700877}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4540038617261883403
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189599702646980461}
+  m_Mesh: {fileID: 996354497039385055, guid: 837fe44e53f6e874ba6d1936de8501ed, type: 3}
+--- !u!23 &3065128122214068602
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189599702646980461}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2e6941e8ae8c13e45b0327f29f8e62f5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2863295278955173894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189599702646980461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  fogSimulationSpace: 1
+  fogColor: {r: 1, g: 1, b: 1, a: 1}
+  fogMinimalHeight: -20
+  fogMaximalHeight: 0
+  fogFalloff: 1
+  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  fogEmissionPower: 20
+  fogEmissionFalloff: 0.5
+  emissionColor: {r: 0, g: 0, b: 0, a: 1}
+  emissionPower: 1
+  combineWithStandardFog: 0
+  overrideStandardFogColor: 0
+  useFogAnimation: 0
+  fogWaveSpeedX: 2
+  fogWaveSpeedZ: 2
+  fogWaveAmplitudeX: 0.3
+  fogWaveAmplitudeZ: 0.3
+  fogWaveFreqX: 0.5
+  fogWaveFreqZ: 0.5
+  renderer: {fileID: 3065128122214068602}
+  overridedFromGlobalController: 1
+--- !u!65 &2588561152285652289
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189599702646980461}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9750758, y: 5.2531457, z: 5.6933575}
+  m_Center: {x: 0.031061947, y: -3.3734272, z: 3.0086422}

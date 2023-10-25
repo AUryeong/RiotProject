@@ -2502,7 +2502,7 @@ MonoBehaviour:
       Data: 
   stageNickName: Ice
   defaultColor:
-    mainColor: {r: 0.7294118, g: 0.92156863, b: 1, a: 1}
+    mainColor: {r: 0.7294118, g: 0.8749336, b: 1, a: 1}
     fogColor: {r: 1, g: 1, b: 1, a: 1}
   flyingEnemies: []
   defaultEnemies:
