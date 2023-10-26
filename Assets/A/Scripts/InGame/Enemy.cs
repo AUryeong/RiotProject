@@ -32,7 +32,7 @@ namespace InGame
             gameObject.layer = LayerMask.NameToLayer("Enemy");
 
             transform.localPosition = defaultLocalPos;
-            bone.DOLocalMove(spawnVector, ENEMY_MOVE_DURATION).From(true);
+            bone.DOLocalMove(spawnVector, TileManager.Instance.beatInterval * 2).From(true);
         }
 
         private void OnCollisionEnter(Collision collision)

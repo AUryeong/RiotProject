@@ -102,6 +102,7 @@ Material:
     - _NormalAmount: 2
     - _OVERRIDE_FOG_COLOR: 0
     - _OcclusionStrength: 1
+    - _Outline_Bold: 0
     - _Parallax: 0.02
     - _STANDARD_FOG: 0
     - _SmoothnessTextureChannel: 0
@@ -113,8 +114,9 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.96862745, g: 0.63529414, b: 0.64705884, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FogColor: {r: 1, g: 1, b: 1, a: 1}
     - _FogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

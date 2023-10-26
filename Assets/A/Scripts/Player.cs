@@ -224,7 +224,7 @@ public class Player : Singleton<Player>
 
     private void Move()
     {
-        float moveValue = Speed * Time.deltaTime / TileManager.Instance.beatInterval;
+        float moveValue = Speed * Time.deltaTime / TileManager.Instance.beatInterval ;
         transform.Translate(Vector3.forward * moveValue);
     }
 

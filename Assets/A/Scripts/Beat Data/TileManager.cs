@@ -31,10 +31,11 @@ public class TileManager : Singleton<TileManager>
     private readonly List<GameObject> createdTileList = new();
 
     private float beatSpawnDuration;
+    private float beatDanceDuration;
     private int isNotSwipeCount;
+    private BeatData lastBeatData;
 
     [Header("Bgm")] [HideInInspector] public BgmData bgmData;
-    private List<Enemy> enemies = new();
     public float beatInterval;
     private int stackBeat;
     private float beatSyncPos;
@@ -93,8 +94,6 @@ public class TileManager : Singleton<TileManager>
             foreach (var createdTile in createdTileList)
                 createdTile.gameObject.SetActive(false);
             createdTileList.Clear();
-
-            enemies.Clear();
         }
 
         isChangeStage = false;
@@ -115,6 +114,7 @@ public class TileManager : Singleton<TileManager>
         beatSyncPos = SaveManager.Instance.GameData.beatSync;
 
         beatSpawnDuration = 0;
+        beatDanceDuration = 0;
         stackBeat = 0;
 
         createdRoadTileDataList.Clear();
@@ -140,23 +140,41 @@ public class TileManager : Singleton<TileManager>
             OutGamingUpdate();
     }
 
+    private void BeatDanceUpdate()
+    {
+        beatDanceDuration += Time.deltaTime / beatInterval;
+        if (beatDanceDuration >= 1)
+        {
+            foreach (var obj in createdBounceBackgroundList)
+            {
+                obj.transform.DOKill();
+                obj.transform.DOMoveY(-1, beatInterval / 4).SetLoops(2, LoopType.Yoyo);
+            }
+
+            foreach (var obj in createdBounceList)
+            {
+                obj.transform.DOKill();
+                obj.transform.DOMoveY(-0.3f, beatInterval / 4).SetRelative().SetLoops(2, LoopType.Yoyo);
+            }
+            beatDanceDuration--;
+        }
+    }
+
     private void OutGamingUpdate()
     {
         float playerPos = Player.Instance.transform.position.z;
         CheckOutGameRoadTile(playerPos);
         CheckCreateBackgroundTile(playerPos);
+        BeatDanceUpdate();
     }
 
     private void GamingUpdate()
     {
         CheckCreateTile();
         CheckChange();
+        BeatDanceUpdate();
     }
 
-    public List<Enemy> GetEnemies()
-    {
-        return enemies.FindAll(enemy => enemy.gameObject.activeSelf);
-    }
 
     private void CheckRemoveTile()
     {
@@ -177,7 +195,7 @@ public class TileManager : Singleton<TileManager>
     public void SetBgmData(BgmData setBgmData)
     {
         bgmData = setBgmData;
-        beatInterval = 60f / bgmData.bpm;
+        beatInterval = 60f / bgmData.bpm / bgmData.bpmMultiplier;
 
         Player.Instance.SpeedAddValue = bgmData.speedAdder;
 
@@ -288,26 +306,24 @@ public class TileManager : Singleton<TileManager>
         }
 
         beatSpawnDuration += Time.deltaTime / beatInterval * Player.Instance.Speed / Player.Instance.originSpeed;
-
-        bool isBeatTiming = beatDataQueue.Peek().beat <= (beatSpawnDuration + stackBeat) * bgmData.bpmMultiplier;
+        
+        bool isBeatTiming = beatDataQueue.Peek().beat <= (beatSpawnDuration + stackBeat) / bgmData.bpmMultiplier;
         if (beatSpawnDuration >= 1)
         {
-            foreach (var obj in createdBounceBackgroundList)
-            {
-                obj.transform.DOKill();
-                obj.transform.DOMoveY(-1, beatInterval / 4).SetLoops(2, LoopType.Yoyo);
-            }
-
-            foreach (var obj in createdBounceList)
-            {
-                obj.transform.DOKill();
-                obj.transform.DOMoveY(-0.2f, beatInterval / 4).SetRelative().SetLoops(2, LoopType.Yoyo);
-            }
-
             beatSpawnDuration--;
             stackBeat++;
 
-            CreateRoadTile(isBeatTiming);
+            var beatData = beatDataQueue.Peek();
+            if (beatData.type == BeatType.Default && beatData.beat - lastBeatData?.beat < 1 && !isBeatTiming)
+                isNotSwipeCount++;
+            else
+                isNotSwipeCount = 0;
+
+            bool isForced = isNotSwipeCount >= 2;
+            if (isForced)
+                isNotSwipeCount = 0;
+
+            CreateRoadTile(isBeatTiming || isForced);
             if (isBeatTiming)
             {
                 CreateBeatData(playerPos, true);
@@ -328,6 +344,8 @@ public class TileManager : Singleton<TileManager>
         switch (beatData.type)
         {
             case BeatType.Default:
+                lastBeatData = beatData;
+                
                 bool isFlying;
                 RoadTileData lastRoadData;
                 float roadLength = roadTileLength;
@@ -362,10 +380,7 @@ public class TileManager : Singleton<TileManager>
                     createdBounceList.Add(enemyNodeObj);
 
                 if (!createdTileList.Contains(enemyNodeObj))
-                {
-                    enemies.Add(enemyNodeObj.GetComponent<Enemy>());
                     createdTileList.Add(enemyNodeObj);
-                }
 
                 break;
             case BeatType.Start:
@@ -419,22 +434,12 @@ public class TileManager : Singleton<TileManager>
     private void CheckChange()
     {
         CheckChangeHighLight();
-        CheckChangeSpeed();
         CheckChangeStage();
     }
 
     private void ChangeHighLight(float changeLength, float changeValue)
     {
         highLightDataList.Add(new TileChangeData()
-        {
-            pos = changeLength,
-            changeValue = changeValue
-        });
-    }
-
-    private void ChangeSpeedByBeatData(float changeLength, float changeValue)
-    {
-        speedDataList.Add(new TileChangeData()
         {
             pos = changeLength,
             changeValue = changeValue
@@ -452,7 +457,9 @@ public class TileManager : Singleton<TileManager>
         fogController.mainColor = themeColor.mainColor;
         fogController.fogColor = themeColor.fogColor;
 
-        Player.Instance.outLine.OutlineColor = new Color(themeColor.fogColor.r + 0.1f, themeColor.fogColor.g + 0.1f, themeColor.fogColor.b + 0.1f, 0.3f);
+        Material material = Player.Instance.outLine.GetComponent<SkinnedMeshRenderer>().material;
+        material.SetColor("_OutlineColor", new Color(themeColor.fogColor.r + 0.1f, themeColor.fogColor.g + 0.1f, themeColor.fogColor.b + 0.1f, 0.3f));
+        material.SetColor("_Color", (themeColor.mainColor/ 2 + themeColor.fogColor/ 2));
 
         var transEffect = PoolManager.Instance.Init("Trans Effect");
         transEffect.transform.position = Player.Instance.transform.position;
@@ -494,24 +501,6 @@ public class TileManager : Singleton<TileManager>
         ChangeThemeColor(themeColor);
 
         SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f);
-    }
-
-    private void CheckChangeSpeed()
-    {
-        if (speedDataList.Count <= 0) return;
-
-        bool isRemoveData = false;
-        foreach (var changeData in speedDataList)
-        {
-            if (Player.Instance.transform.position.z < changeData.pos) return;
-
-            isRemoveData = true;
-
-            Player.Instance.SpeedAddValue += changeData.changeValue;
-        }
-
-        if (isRemoveData)
-            speedDataList.RemoveAt(0);
     }
 
     #endregion

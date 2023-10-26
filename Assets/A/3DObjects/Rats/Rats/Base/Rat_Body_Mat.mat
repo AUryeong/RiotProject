@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rat_Body_Mat
-  m_Shader: {fileID: 4800000, guid: 5a1405ce32c0b534ebf969b4706c9285, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0f8246b796c78a448b6789d231210edf, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - DR_CEL_EXTRA_ON
@@ -180,6 +180,7 @@ Material:
     - _OutlineDepthOffset: 0
     - _OutlineScale: 1
     - _OutlineWidth: 2.5
+    - _Outline_Bold: 0
     - _OverrideLightmapDir: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
