@@ -5670,8 +5670,8 @@ MonoBehaviour:
       Data: 
   stageNickName: Volcano
   defaultColor:
-    mainColor: {r: 1, g: 0.88235295, b: 0.8862745, a: 1}
-    fogColor: {r: 0.9372549, g: 0.38431373, b: 0.40784314, a: 1}
+    mainColor: {r: 1, g: 1, b: 1, a: 1}
+    fogColor: {r: 1, g: 0, b: 0.34508467, a: 1}
   flyingEnemies:
   - {fileID: 333408687325995254, guid: d30bb1265aff4b044b4e110490b4a6b2, type: 3}
   defaultEnemies:
