@@ -7437,6 +7437,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   stageNickName: Ice
+  directionLightColor: {r: 0.60784316, g: 0.972549, b: 1, a: 1}
+  postProcessProfile: {fileID: 11400000, guid: c3db379f6a74fd24d8d87b31fae084c5, type: 2}
   defaultColor:
     mainColor: {r: 0.7294118, g: 0.8749336, b: 1, a: 1}
     fogColor: {r: 1, g: 1, b: 1, a: 1}

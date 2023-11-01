@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028364, g: 0.22571364, b: 0.306922, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028396, g: 0.22571427, b: 0.30692327, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2548,7 +2548,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.04411765, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.60784316, b: 0.60784316, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -3139,7 +3139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2275792d4442679a6eea8468079742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fogController: {fileID: 5330494097065481023}
   stageTileDataList:
   - {fileID: 11400000, guid: d9a9662bb535c9c48a74d8b7537118e9, type: 2}
   - {fileID: 11400000, guid: ba166dd04b0b0e244bf92a38753ccc43, type: 2}
@@ -10411,7 +10410,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5330494097065481019}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1490221379
 Camera:
@@ -10456,6 +10455,72 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1502887875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1502887877}
+  - component: {fileID: 1502887876}
+  m_Layer: 0
+  m_Name: Global Object Fog Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1502887876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502887875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d4fb1d675f4b745b325873079a44e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  fogSimulationSpace: 1
+  fogColor: {r: 0.8430502, g: 0.7893378, b: 0.9245283, a: 1}
+  fogMinimalHeight: -10.94
+  fogMaximalHeight: -2.26
+  fogFalloff: 10.8
+  fogEmissionColor: {r: 0.8462426, g: 0.74759704, b: 0.9056604, a: 0}
+  fogEmissionPower: 0
+  fogEmissionFalloff: 4.5
+  emissionColor: {r: 0.9066926, g: 0.8820755, b: 1, a: 1}
+  emissionPower: 0.03
+  combineWithStandardFog: 1
+  overrideStandardFogColor: 1
+  useFogAnimation: 1
+  fogWaveSpeedX: 5
+  fogWaveSpeedZ: 5
+  fogWaveAmplitudeX: 0.5
+  fogWaveAmplitudeZ: 0.5
+  fogWaveFreqX: 0.1
+  fogWaveFreqZ: 0.1
+  controllers: []
+  skinnedControllers: []
+--- !u!4 &1502887877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502887875}
+  m_LocalRotation: {x: -0.2461532, y: -0, z: -0, w: 0.96923095}
+  m_LocalPosition: {x: 0, y: -2.449725, z: 6.826115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5330494097065481019}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1512629770
 GameObject:
   m_ObjectHideFlags: 0
@@ -11407,6 +11472,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGaming: 0
   blackFade: {fileID: 1675643533}
+  fogController: {fileID: 1502887876}
+  postProcessVolume: {fileID: 5330494097065481017}
+  directionLight: {fileID: 705507994}
 --- !u!4 &1735811096
 Transform:
   m_ObjectHideFlags: 0
@@ -18226,7 +18294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc9962491117d54481cefe7d899b43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInv: 0
+  isInv: 1
   effectData: {fileID: 11400000, guid: 584e7fa04ed292d44b769d49f426e91a, type: 2}
   originSpeed: 6
   jumpPower: 14
@@ -19295,7 +19363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 0b45c96a2fb5f1f4bbb9a1d359da7036, type: 2}
+  sharedProfile: {fileID: 11400000, guid: c3db379f6a74fd24d8d87b31fae084c5, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -19372,6 +19440,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1502887877}
   - {fileID: 1490221377}
   m_Father: {fileID: 543450651756686794}
   m_RootOrder: 5
@@ -19440,7 +19509,6 @@ GameObject:
   - component: {fileID: 5330494097065481021}
   - component: {fileID: 5330494097065481017}
   - component: {fileID: 5330494097065481018}
-  - component: {fileID: 5330494097065481023}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -19448,40 +19516,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5330494097065481023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5330494097065481022}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8d4fb1d675f4b745b325873079a44e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
-  fogSimulationSpace: 1
-  fogColor: {r: 0.8430502, g: 0.7893378, b: 0.9245283, a: 1}
-  fogMinimalHeight: -10.94
-  fogMaximalHeight: -2.26
-  fogFalloff: 10.8
-  fogEmissionColor: {r: 0.8462426, g: 0.74759704, b: 0.9056604, a: 0}
-  fogEmissionPower: 0
-  fogEmissionFalloff: 4.5
-  emissionColor: {r: 0.9066926, g: 0.8820755, b: 1, a: 1}
-  emissionPower: 0.03
-  combineWithStandardFog: 1
-  overrideStandardFogColor: 1
-  useFogAnimation: 1
-  fogWaveSpeedX: 5
-  fogWaveSpeedZ: 5
-  fogWaveAmplitudeX: 0.5
-  fogWaveAmplitudeZ: 0.5
-  fogWaveFreqX: 0.1
-  fogWaveFreqZ: 0.1
-  controllers: []
-  skinnedControllers: []
 --- !u!4 &5383578049456458758
 Transform:
   m_ObjectHideFlags: 0

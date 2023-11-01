@@ -3,6 +3,7 @@ using System.Linq;
 using DG.Tweening;
 using InGame;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class TileManager : Singleton<TileManager>
 {
@@ -13,8 +14,6 @@ public class TileManager : Singleton<TileManager>
 
     private const float PLAYER_RENDER_DISTANCE = 70;
     private const float PLAYER_REMOVE_DISTANCE = 60;
-
-    [SerializeField] private GlobalObjectFogController fogController;
 
     [Header("Stage")] public List<StageTileData> stageTileDataList;
     [HideInInspector] public StageTileData stageTileData;
@@ -45,7 +44,6 @@ public class TileManager : Singleton<TileManager>
 
     [Header("Change")] private float beatStartPos;
 
-    private readonly List<TileChangeData> speedDataList = new();
     private readonly List<TileChangeData> highLightDataList = new();
     public int highLightLevel;
 
@@ -67,8 +65,10 @@ public class TileManager : Singleton<TileManager>
     protected override void OnCreated()
     {
         base.OnCreated();
-        foreach (var stageTileData in stageTileDataList)
-            stageTileData.Init();
+        stageTileData = null;
+        
+        foreach (var stageData in stageTileDataList)
+            stageData.Init();
 
         StageReset();
         Reset(0);
@@ -76,7 +76,14 @@ public class TileManager : Singleton<TileManager>
 
     public void StageReset()
     {
-        stageTileData = stageTileDataList[SaveManager.Instance.GameData.selectStageIndex];
+        var data = stageTileDataList[SaveManager.Instance.GameData.selectStageIndex];
+        if (stageTileData != data)
+        {
+            stageTileData = data;
+            
+            GameManager.Instance.postProcessVolume.profile = stageTileData.postProcessProfile;
+            GameManager.Instance.directionLight.color = stageTileData.directionLightColor;
+        }
         SaveManager.Instance.GameData.selectBgmIndex %= stageTileData.bgmDataList.Count;
         SetBgmData(stageTileData.bgmDataList[SaveManager.Instance.GameData.selectBgmIndex]);
     }
@@ -104,8 +111,6 @@ public class TileManager : Singleton<TileManager>
 
         highLightLevel = 0;
         highLightDataList.Clear();
-
-        speedDataList.Clear();
 
         stageStartPos = roadTileLength;
         beatStartPos = stageStartPos - 6;
@@ -454,8 +459,8 @@ public class TileManager : Singleton<TileManager>
 
     private void ChangeThemeColor(ThemeColor themeColor)
     {
-        fogController.mainColor = themeColor.mainColor;
-        fogController.fogColor = themeColor.fogColor;
+        GameManager.Instance.fogController.mainColor = themeColor.mainColor;
+        GameManager.Instance.fogController.fogColor = themeColor.fogColor;
 
         Material material = Player.Instance.outLine.GetComponent<SkinnedMeshRenderer>().material;
         material.SetColor("_OutlineColor", new Color(themeColor.fogColor.r + 0.1f, themeColor.fogColor.g + 0.1f, themeColor.fogColor.b + 0.1f, 0.3f));

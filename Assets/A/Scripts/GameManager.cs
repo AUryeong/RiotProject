@@ -2,6 +2,7 @@
 using InGame;
 using Lobby;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public enum SceneLinkType
@@ -18,6 +19,9 @@ public class GameManager : Singleton<GameManager>
     private const float BLACK_FADE_DURATION = 0.75f;
 
     [SerializeField] private Image blackFade;
+    public GlobalObjectFogController fogController;
+    public PostProcessVolume postProcessVolume;
+    public Light directionLight;
 
     protected override void OnCreated()
     {
