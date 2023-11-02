@@ -7571,11 +7571,11 @@ MonoBehaviour:
       Entry: 8
       Data: 
   stageNickName: Forest
-  directionLightColor: {r: 0.98039216, g: 0.627451, b: 1, a: 1}
+  directionLightColor: {r: 0.80784315, g: 1, b: 0.98039216, a: 1}
   postProcessProfile: {fileID: 11400000, guid: 0b45c96a2fb5f1f4bbb9a1d359da7036, type: 2}
   defaultColor:
-    mainColor: {r: 0.74509805, g: 0.7019608, b: 0.81960785, a: 1}
-    fogColor: {r: 0.84313726, g: 0.7882353, b: 0.9254902, a: 1}
+    mainColor: {r: 0.93744487, g: 1, b: 0.7971698, a: 1}
+    fogColor: {r: 0.8632076, g: 1, b: 0.9729793, a: 1}
   flyingEnemies:
   - {fileID: 597066835944119454, guid: e635f358f38c20845ad527ffa9b7e422, type: 3}
   defaultEnemies:

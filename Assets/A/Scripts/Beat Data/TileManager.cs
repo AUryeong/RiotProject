@@ -464,7 +464,7 @@ public class TileManager : Singleton<TileManager>
 
         Material material = Player.Instance.outLine.GetComponent<SkinnedMeshRenderer>().material;
         material.SetColor("_OutlineColor", new Color(themeColor.fogColor.r + 0.1f, themeColor.fogColor.g + 0.1f, themeColor.fogColor.b + 0.1f, 0.3f));
-        material.SetColor("_Color", (themeColor.mainColor/ 2 + themeColor.fogColor/ 2));
+        material.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor)/2);
 
         var transEffect = PoolManager.Instance.Init("Trans Effect");
         transEffect.transform.position = Player.Instance.transform.position;

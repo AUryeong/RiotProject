@@ -198,7 +198,7 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularPower: 0.4
     - _SrcBlend: 1
-    - _Strength: 0.5
+    - _Strength: 0.591
     - _Surface: 0
     - _TextureBlendingMode: 0
     - _TextureImpact: 1

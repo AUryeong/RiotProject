@@ -461,7 +461,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5473613901926077583}
   - component: {fileID: 1425975041339149326}
-  - component: {fileID: 5569440427672695440}
   - component: {fileID: 5569440427672695443}
   m_Layer: 8
   m_Name: Meshes
@@ -553,40 +552,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.20599219, y: -0.08273387, z: -0.00000020861626}
     m_Extent: {x: 1.0624094, y: 0.7040093, z: 0.96747875}
   m_DirtyAABB: 0
---- !u!114 &5569440427672695440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5569440427672695441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d93e470a4174b54a1e0c94ce4a03987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
-  fogSimulationSpace: 1
-  fogColor: {r: 1, g: 1, b: 1, a: 1}
-  fogMinimalHeight: -20
-  fogMaximalHeight: 0
-  fogFalloff: 1
-  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  fogEmissionPower: 20
-  fogEmissionFalloff: 0.5
-  emissionColor: {r: 0, g: 0, b: 0, a: 1}
-  emissionPower: 1
-  combineWithStandardFog: 0
-  overrideStandardFogColor: 0
-  useFogAnimation: 0
-  fogWaveSpeedX: 2
-  fogWaveSpeedZ: 2
-  fogWaveAmplitudeX: 0.3
-  fogWaveAmplitudeZ: 0.3
-  fogWaveFreqX: 0.5
-  fogWaveFreqZ: 0.5
-  renderer: {fileID: 1425975041339149326}
-  overridedFromGlobalController: 1
 --- !u!114 &5569440427672695443
 MonoBehaviour:
   m_ObjectHideFlags: 0
