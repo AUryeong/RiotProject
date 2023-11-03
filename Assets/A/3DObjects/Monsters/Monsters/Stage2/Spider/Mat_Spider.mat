@@ -121,7 +121,7 @@ Material:
     - _ANIMATION: 0
     - _AlphaClip: 0
     - _Blend: 0
-    - _Brightness: 0.098
+    - _Brightness: 0.22
     - _BumpScale: 1
     - _CameraDistanceImpact: 0
     - _CelExtraEnabled: 0

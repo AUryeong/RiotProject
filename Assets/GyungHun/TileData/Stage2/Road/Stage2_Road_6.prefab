@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  mainColor: {r: 0.9686274, g: 0.63529414, b: 0.64705884, a: 1}
   fogSimulationSpace: 1
   fogColor: {r: 1, g: 1, b: 1, a: 1}
   fogMinimalHeight: -20
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  mainColor: {r: 0.9686274, g: 0.63529414, b: 0.64705884, a: 1}
   fogSimulationSpace: 1
   fogColor: {r: 1, g: 1, b: 1, a: 1}
   fogMinimalHeight: -20
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  mainColor: {r: 0.9686274, g: 0.63529414, b: 0.64705884, a: 1}
   fogSimulationSpace: 1
   fogColor: {r: 1, g: 1, b: 1, a: 1}
   fogMinimalHeight: -20
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  mainColor: {r: 0.9686274, g: 0.63529414, b: 0.64705884, a: 1}
   fogSimulationSpace: 1
   fogColor: {r: 1, g: 1, b: 1, a: 1}
   fogMinimalHeight: -20
@@ -668,7 +668,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3708328338358260150}
-  m_Mesh: {fileID: 531060573599863463, guid: 274183a83994bb943badcaff770e22be, type: 3}
+  m_Mesh: {fileID: 2154117985795392726, guid: 274183a83994bb943badcaff770e22be, type: 3}
 --- !u!23 &6866055230414336577
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -689,7 +689,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 38b7aafe10888c04091d26d695c1b0bb, type: 2}
+  - {fileID: 2100000, guid: 7eda9bfcadad5574bbf2b228118f88d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -832,7 +832,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5334259531052695914}
-  m_Mesh: {fileID: 531060573599863463, guid: 274183a83994bb943badcaff770e22be, type: 3}
+  m_Mesh: {fileID: -6630597376819679900, guid: 274183a83994bb943badcaff770e22be, type: 3}
 --- !u!23 &646448457978217741
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -853,7 +853,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 38b7aafe10888c04091d26d695c1b0bb, type: 2}
+  - {fileID: 2100000, guid: 7eda9bfcadad5574bbf2b228118f88d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  mainColor: {r: 0.9686274, g: 0.63529414, b: 0.64705884, a: 1}
   fogSimulationSpace: 1
   fogColor: {r: 1, g: 1, b: 1, a: 1}
   fogMinimalHeight: -20
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainColor: {r: 1, g: 1, b: 1, a: 1}
+  mainColor: {r: 0.9686274, g: 0.63529414, b: 0.64705884, a: 1}
   fogSimulationSpace: 1
   fogColor: {r: 1, g: 1, b: 1, a: 1}
   fogMinimalHeight: -20

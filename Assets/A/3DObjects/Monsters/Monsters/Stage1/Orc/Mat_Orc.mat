@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_Orc
-  m_Shader: {fileID: 4800000, guid: 5a1405ce32c0b534ebf969b4706c9285, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0f8246b796c78a448b6789d231210edf, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _CELPRIMARYMODE_SINGLE
@@ -121,7 +121,7 @@ Material:
     - _ANIMATION: 0
     - _AlphaClip: 0
     - _Blend: 0
-    - _Brightness: 0.3
+    - _Brightness: 0.098
     - _BumpScale: 1
     - _CameraDistanceImpact: 0
     - _CelExtraEnabled: 0
@@ -205,7 +205,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.94007826, g: 1, b: 0.84339625, a: 1}
     - _ColorDim: {r: 1, g: 1, b: 1, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
     - _ColorDimExtra: {r: 0.85023, g: 0.85034, b: 0.8504499, a: 0.85056}
