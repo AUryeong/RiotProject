@@ -3,7 +3,6 @@ using System.Linq;
 using DG.Tweening;
 using InGame;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 
 public class TileManager : Singleton<TileManager>
 {
@@ -66,12 +65,12 @@ public class TileManager : Singleton<TileManager>
     {
         base.OnCreated();
         stageTileData = null;
-        
+
         foreach (var stageData in stageTileDataList)
             stageData.Init();
 
         StageReset();
-        Reset(0);
+        Reset(true);
     }
 
     public void StageReset()
@@ -80,23 +79,23 @@ public class TileManager : Singleton<TileManager>
         if (stageTileData != data)
         {
             stageTileData = data;
-            
+
             GameManager.Instance.postProcessVolume.profile = stageTileData.postProcessProfile;
             GameManager.Instance.directionLight.color = stageTileData.directionLightColor;
         }
+
         SaveManager.Instance.GameData.selectBgmIndex %= stageTileData.bgmDataList.Count;
         SetBgmData(stageTileData.bgmDataList[SaveManager.Instance.GameData.selectBgmIndex]);
     }
 
-    public void Reset(float startPos = -1)
+    public void Reset(bool isPosReset = false)
     {
-        if (startPos >= 0)
+        if (isPosReset)
         {
-            roadTileLength = startPos;
-
+            roadTileLength = -6;
             tileLengthList.Clear();
             for (int index = 0; index < stageTileData.tileDataList.Count; index++)
-                tileLengthList.Add(startPos);
+                tileLengthList.Add(roadTileLength);
 
             foreach (var createdTile in createdTileList)
                 createdTile.gameObject.SetActive(false);
@@ -119,7 +118,6 @@ public class TileManager : Singleton<TileManager>
         beatSyncPos = SaveManager.Instance.GameData.beatSync;
 
         beatSpawnDuration = 0;
-        beatDanceDuration = 0;
         stackBeat = 0;
 
         createdRoadTileDataList.Clear();
@@ -161,6 +159,7 @@ public class TileManager : Singleton<TileManager>
                 obj.transform.DOKill();
                 obj.transform.DOMoveY(-0.3f, beatInterval / 4).SetRelative().SetLoops(2, LoopType.Yoyo);
             }
+
             beatDanceDuration--;
         }
     }
@@ -170,7 +169,7 @@ public class TileManager : Singleton<TileManager>
         float playerPos = Player.Instance.transform.position.z;
         CheckOutGameRoadTile(playerPos);
         CheckCreateBackgroundTile(playerPos);
-        BeatDanceUpdate();
+        //BeatDanceUpdate();
     }
 
     private void GamingUpdate()
@@ -199,6 +198,8 @@ public class TileManager : Singleton<TileManager>
 
     public void SetBgmData(BgmData setBgmData)
     {
+        beatDanceDuration = 0;
+
         bgmData = setBgmData;
         beatInterval = 60f / bgmData.bpm / bgmData.bpmMultiplier;
 
@@ -311,7 +312,7 @@ public class TileManager : Singleton<TileManager>
         }
 
         beatSpawnDuration += Time.deltaTime / beatInterval * Player.Instance.Speed / Player.Instance.originSpeed;
-        
+
         bool isBeatTiming = beatDataQueue.Peek().beat <= (beatSpawnDuration + stackBeat) / bgmData.bpmMultiplier;
         if (beatSpawnDuration >= 1)
         {
@@ -331,7 +332,7 @@ public class TileManager : Singleton<TileManager>
             CreateRoadTile(isBeatTiming || isForced);
             if (isBeatTiming)
             {
-                CreateBeatData(playerPos, true);
+                CreateBeatData(playerPos);
                 return;
             }
         }
@@ -340,7 +341,7 @@ public class TileManager : Singleton<TileManager>
             CreateBeatData(playerPos);
     }
 
-    private void CreateBeatData(float playerPos, bool isBeatUpTiming = false)
+    private void CreateBeatData(float playerPos)
     {
         float length = playerPos + BEAT_RENDER_DISTANCE * (Player.Instance.Speed / Player.Instance.originSpeed);
 
@@ -350,7 +351,7 @@ public class TileManager : Singleton<TileManager>
         {
             case BeatType.Default:
                 lastBeatData = beatData;
-                
+
                 bool isFlying;
                 RoadTileData lastRoadData;
                 float roadLength = roadTileLength;
@@ -462,9 +463,8 @@ public class TileManager : Singleton<TileManager>
         GameManager.Instance.fogController.mainColor = themeColor.mainColor;
         GameManager.Instance.fogController.fogColor = themeColor.fogColor;
 
-        Material material = Player.Instance.outLine.GetComponent<SkinnedMeshRenderer>().material;
-        material.SetColor("_OutlineColor", new Color(themeColor.fogColor.r + 0.1f, themeColor.fogColor.g + 0.1f, themeColor.fogColor.b + 0.1f, 0.3f));
-        material.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor)/2);
+        var material = Player.Instance.outLine.GetComponent<SkinnedMeshRenderer>().material;
+        material.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
 
         var transEffect = PoolManager.Instance.Init("Trans Effect");
         transEffect.transform.position = Player.Instance.transform.position;

@@ -94,7 +94,7 @@ MonoBehaviour:
     value: 0
   tint:
     overrideState: 1
-    value: 41
+    value: 0
   colorFilter:
     overrideState: 0
     value: {r: 2.6352942, g: 2.7137256, b: 0.34509805, a: 1}
@@ -102,7 +102,7 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   saturation:
-    overrideState: 1
+    overrideState: 0
     value: 14
   brightness:
     overrideState: 0
@@ -114,23 +114,23 @@ MonoBehaviour:
     overrideState: 0
     value: 8
   mixerRedOutRedIn:
-    overrideState: 1
-    value: 79
+    overrideState: 0
+    value: 60
   mixerRedOutGreenIn:
     overrideState: 1
-    value: 13
+    value: 35
   mixerRedOutBlueIn:
     overrideState: 1
-    value: 2
+    value: 7
   mixerGreenOutRedIn:
     overrideState: 0
-    value: -200
+    value: -5
   mixerGreenOutGreenIn:
-    overrideState: 1
+    overrideState: 0
     value: 53
   mixerGreenOutBlueIn:
-    overrideState: 1
-    value: 6
+    overrideState: 0
+    value: 24
   mixerBlueOutRedIn:
     overrideState: 1
     value: 6
@@ -139,10 +139,10 @@ MonoBehaviour:
     value: -1
   mixerBlueOutBlueIn:
     overrideState: 0
-    value: 45
+    value: 200
   lift:
     overrideState: 1
-    value: {x: 0.9547428, y: 1, z: 0.78945154, w: 0}
+    value: {x: 0.95725536, y: 1, z: 0.9963008, w: 0}
   gamma:
     overrideState: 0
     value: {x: 1, y: 1, z: 1, w: 0}
@@ -1361,7 +1361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1

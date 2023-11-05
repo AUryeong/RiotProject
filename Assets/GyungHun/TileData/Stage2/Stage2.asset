@@ -6281,7 +6281,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   stageNickName: Volcano
-  directionLightColor: {r: 1, g: 0.60784316, b: 0.60784316, a: 1}
+  directionLightColor: {r: 1, g: 0.8632076, b: 0.8632076, a: 1}
   postProcessProfile: {fileID: 11400000, guid: 1d3d4617e94b94741ac120f5b85c9b60, type: 2}
   defaultColor:
     mainColor: {r: 1, g: 0.8820755, b: 0.89178693, a: 1}

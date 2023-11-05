@@ -58,7 +58,6 @@ public class GlobalObjectFogController : MonoBehaviour
     }
 
     private static GlobalObjectFogController instance;
-    private Camera cam;
 
     private void OnEnable()
     {
@@ -102,17 +101,6 @@ public class GlobalObjectFogController : MonoBehaviour
             {
                 skinnedControllers.Add(_fogSkinControllers[i]);
             }
-        }
-
-        cam = Camera.main;
-        if (cam == null)
-        {
-            cam = FindObjectOfType<Camera>();
-        }
-
-        if (cam == null)
-        {
-            Debug.LogError("Can't find camera!");
         }
     }
 
@@ -188,19 +176,6 @@ public class GlobalObjectFogController : MonoBehaviour
     {
         if ((controllers == null || controllers.Count == 0) && (skinnedControllers == null || skinnedControllers.Count == 0))
             return;
-
-        if (cam != null)
-        {
-            if (cam.clearFlags != CameraClearFlags.Color)
-            {
-                cam.clearFlags = CameraClearFlags.Color;
-            }
-
-            if (cam.backgroundColor != fogColor)
-            {
-                cam.backgroundColor = fogColor;
-            }
-        }
 
         for (int i = 0; i < controllers.Count; i++)
         {
