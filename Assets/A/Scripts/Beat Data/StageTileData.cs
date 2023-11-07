@@ -14,6 +14,7 @@ public class StageTileData : SerializedScriptableObject
     [Title("Stage Color")] 
     public Color directionLightColor;
     public PostProcessProfile postProcessProfile;
+    public Material skyBox;
 
     [Title("Theme Color")] 
     public ThemeColor defaultColor;
@@ -27,16 +28,12 @@ public class StageTileData : SerializedScriptableObject
     public List<BgmData> bgmDataList = new();
 
     [Title("Tiles")] 
-    public List<RoadTileData> outGameTileDataList = new();
     public List<RoadTileData> roadTileDataList = new();
     public List<TileDataList> tileDataList = new();
 
     public void Init()
     {
         foreach (var tileData in roadTileDataList)
-            PoolManager.Instance.AddPooling(tileData.name, tileData.gameObject);
-
-        foreach (var tileData in outGameTileDataList)
             PoolManager.Instance.AddPooling(tileData.name, tileData.gameObject);
 
         foreach (var tileDatas in tileDataList)

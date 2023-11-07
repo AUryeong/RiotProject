@@ -7573,6 +7573,7 @@ MonoBehaviour:
   stageNickName: Forest
   directionLightColor: {r: 0.80784315, g: 1, b: 0.98039216, a: 1}
   postProcessProfile: {fileID: 11400000, guid: 0b45c96a2fb5f1f4bbb9a1d359da7036, type: 2}
+  skyBox: {fileID: 2100000, guid: dd52776f1ef13fd43ac081a8fbd7d31a, type: 2}
   defaultColor:
     mainColor: {r: 0.93744487, g: 1, b: 0.7971698, a: 1}
     fogColor: {r: 0.8632076, g: 1, b: 0.9729793, a: 1}
@@ -7581,27 +7582,9 @@ MonoBehaviour:
   defaultEnemies:
   - {fileID: 5536837018719593484, guid: 9e0e063287259cf4789c2a79b0e06c3d, type: 3}
   - {fileID: 1714943544840983147, guid: 9296d76a3eb38774482a4357c327f202, type: 3}
-  outGameTileDataList:
-  - {fileID: 1533631223718935730, guid: cf772d4d7751c6a4cbdc6c6edbca6e12, type: 3}
   roadTileDataList:
-  - {fileID: 6345713050382547054, guid: 0f579960366e7b64dbb83c6b10a99ba5, type: 3}
   - {fileID: 1271200940612332354, guid: 1286883fa0815ca4783699597c826fb0, type: 3}
-  - {fileID: 4035147998976221917, guid: 64b78a26a2fb65f438acddc4535326a6, type: 3}
-  - {fileID: 825920616370164397, guid: 22d8de6f02435694bbc43521dbd037cc, type: 3}
-  - {fileID: 2885863183628790361, guid: 24ddac4a5fb952f428f73ad31b644738, type: 3}
-  - {fileID: 1533631223718935730, guid: cf772d4d7751c6a4cbdc6c6edbca6e12, type: 3}
-  - {fileID: 7971389956501162076, guid: 6a77b301c61933b4fa9b0394f136465c, type: 3}
-  - {fileID: 3657813717724671861, guid: 3b44382483ad90d4891f9d10982ab971, type: 3}
-  - {fileID: 4780356864503712023, guid: 0efef9855ec4438429968a2072dc3fff, type: 3}
-  - {fileID: 3603631317518670032, guid: f3e2eb57c175a7b4fa7dae9f79718291, type: 3}
-  - {fileID: 7573603917365356131, guid: c724151797d5e2d4dbdb362bc0985588, type: 3}
-  - {fileID: 2311072529982805250, guid: bf4fdabd6edca9440af4055f8626de36, type: 3}
   - {fileID: 8612784092089743354, guid: 55f3f96636257b1458479997e8388bdd, type: 3}
-  - {fileID: 6436621793466152997, guid: 858175324e626a9429bf05b885eb00a0, type: 3}
-  - {fileID: 4263085327327429564, guid: 264c9f4a94033fb488a6b0fbb0a488a6, type: 3}
-  - {fileID: 6609031158964292937, guid: 68978c23d927dde4199aa26a8e60566b, type: 3}
-  - {fileID: 7054281651265708229, guid: 55d0b3e5acc85d946bd9eba3c339e5e5, type: 3}
-  - {fileID: 2857438848603236097, guid: ec2b236e349843745aff8bd4afa632c8, type: 3}
   tileDataList:
   - dataList:
     - {fileID: 8739827297846537086, guid: 09476eb2c09a21f4eb53b21f0100d4e3, type: 3}

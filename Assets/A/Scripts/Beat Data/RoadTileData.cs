@@ -7,7 +7,6 @@ public class RoadTileData : TileData
 {
     [HideInInspector] public int summonLine;
 
-    public List<int> lineCondition = new();
     public List<GameObject> roadObjects;
 
     private void OnEnable()

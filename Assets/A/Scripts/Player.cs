@@ -19,11 +19,16 @@ public class Player : Singleton<Player>
 
     private Rigidbody rigid;
     private Animator animator;
+
+    [Space(15f)]
+    public SkinnedMeshRenderer[] defaultMeshes;
+    public SkinnedMeshRenderer[] dissolveMeshes;
+
+    [Space(15f)]
     public PlayerEffectData effectData;
 
     public bool IsAlive { get; private set; }
     private const float BEAT_HIT_DISTANCE = 8;
-    private const float ENEMY_HIT_RADIUS = 2;
 
     public float Speed => originSpeed + SpeedAddValue;
     [FormerlySerializedAs("speed")] public float originSpeed;
@@ -33,7 +38,6 @@ public class Player : Singleton<Player>
         get => speedAddValue;
         set
         {
-            float beforeSpeed = Speed;
             speedAddValue = value;
 
             enemyCheckColliders.size = new Vector3(6, 10, Speed / originSpeed * BEAT_HIT_DISTANCE);
@@ -73,9 +77,6 @@ public class Player : Singleton<Player>
     private float hp;
 
     [SerializeField] private BoxCollider boostBlockFallCollider;
-    [Space(10f)]
-    public Outline outLine;
-    
     [SerializeField] private ParticleSystem boostParticle;
     public float BoostDuration { get; private set; }
 
@@ -95,6 +96,7 @@ public class Player : Singleton<Player>
     public void Reset()
     {
         rigid.velocity = Vector3.zero;
+        rigid.useGravity = false;
 
         boostParticle.Stop();
         magnetParticle.Stop();
@@ -105,6 +107,12 @@ public class Player : Singleton<Player>
         speedAddValue = TileManager.Instance.bgmData.speedAdder;
         BoostDuration = 0;
         attackIndex = 0;
+
+        foreach (var skinnedMeshRenderer in defaultMeshes)
+            skinnedMeshRenderer.gameObject.SetActive(true);
+
+        foreach (var skinnedMeshRenderer in dissolveMeshes)
+            skinnedMeshRenderer.gameObject.SetActive(false);
     }
 
     public void GameStart()
@@ -115,6 +123,7 @@ public class Player : Singleton<Player>
         IsAlive = true;
         Hp = maxHp;
         jumpCount = MAX_JUMP_COUNT;
+        rigid.useGravity = true;
 
         if (isInv)
         {
@@ -274,6 +283,16 @@ public class Player : Singleton<Player>
         if (!IsAlive) return;
         
         IsAlive = false;
+        Material material = dissolveMeshes[0].material;
+        material.SetFloat("_DissolvePower", 0);
+        material.DOFloat(1, "_DissolvePower", 3).SetDelay(1).OnStart(() =>
+        {
+            foreach (var skinnedMeshRenderer in defaultMeshes)
+                skinnedMeshRenderer.gameObject.SetActive(false);
+
+            foreach (var skinnedMeshRenderer in dissolveMeshes)
+                skinnedMeshRenderer.gameObject.SetActive(true);
+        });
 
         transform.DOKill();
 

@@ -2,7 +2,7 @@ Shader "Custom/DissolvesShader"
 {
     Properties
     {
-        _EC ("Color", Color) = (1,0,0,1)
+        _Color ("Color", Color) = (1,0,0,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _NoiseTex("_NoiseTex", 2D) = "white" {}
         _DissolvePower("_DissolvePower", Range(-0.05,1)) = 0
@@ -25,7 +25,7 @@ Shader "Custom/DissolvesShader"
             sampler2D _NoiseTex;
 
              float _DissolvePower;
-             float4 _EC;
+             float4 _Color;
              float _Depth;
 
             struct Input
@@ -51,9 +51,9 @@ Shader "Custom/DissolvesShader"
 
                 o.Albedo = c.rgb;
                 if(_DissolvePower == 0)
-                    o.Emission = step(n.r, _DissolvePower) * _EC;
+                    o.Emission = step(n.r, _DissolvePower) * _Color;
                 else
-                    o.Emission = step(n.r-_Depth, _DissolvePower) * _EC;
+                    o.Emission = step(n.r-_Depth, _DissolvePower) * _Color;
                 // Metallic and smoothness come from slider variables
                 o.Alpha = 1 - step(n.r, _DissolvePower);
             }

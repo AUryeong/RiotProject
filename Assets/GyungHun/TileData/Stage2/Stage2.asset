@@ -6283,6 +6283,7 @@ MonoBehaviour:
   stageNickName: Volcano
   directionLightColor: {r: 1, g: 0.8632076, b: 0.8632076, a: 1}
   postProcessProfile: {fileID: 11400000, guid: 1d3d4617e94b94741ac120f5b85c9b60, type: 2}
+  skyBox: {fileID: 2100000, guid: 63dd79850a7e5bf4792e9dcdfb1e950e, type: 2}
   defaultColor:
     mainColor: {r: 1, g: 0.8820755, b: 0.89178693, a: 1}
     fogColor: {r: 1, g: 0.98707956, b: 0.8726415, a: 1}
@@ -6290,22 +6291,14 @@ MonoBehaviour:
   - {fileID: 333408687325995254, guid: d30bb1265aff4b044b4e110490b4a6b2, type: 3}
   defaultEnemies:
   - {fileID: 8533134374068033499, guid: ec824d159f50cdc4f8e83bd116def714, type: 3}
-  - {fileID: 8047569705765524554, guid: ed35c300f870dfd42b0f36da400d36f8, type: 3}
-  outGameTileDataList:
-  - {fileID: 5270357469450053138, guid: 5c0dfa6579bc01344993fd00c5810b86, type: 3}
-  - {fileID: 4351909610784048531, guid: f1b32b41599d03b4b879efa2ef978d36, type: 3}
-  - {fileID: 5763697871148072724, guid: 1f663fdf6fdaf0c4b8d2c65ee0ad455c, type: 3}
+  - {fileID: 690161577089836204, guid: 234b9ef4cbff0414a8e7947017193237, type: 3}
   roadTileDataList:
-  - {fileID: 8870541691846268561, guid: 6bd02afb5862e7b4890c6c42dd959d7f, type: 3}
-  - {fileID: 8877578568361051971, guid: 2f8c5684b266f184e9358f3e89e222cb, type: 3}
-  - {fileID: 8532394591854708364, guid: b253be4392c82234da7a103c6b2b5c5b, type: 3}
-  - {fileID: 6029128040493245852, guid: 6d500e5ed3007e84f87d04dbd779167c, type: 3}
-  - {fileID: 3200447674509929137, guid: e19d69c3e54e35d498a651b7a807e679, type: 3}
-  - {fileID: 152652797652726297, guid: 14a61fdbcc98f8b4b934642bb7ae7f7a, type: 3}
-  - {fileID: 2293615807310512136, guid: b50d0a43451b7984e81a55ac59911472, type: 3}
-  - {fileID: 1683950763877536546, guid: f5696c549c2a1d74bbd109c6deef59ce, type: 3}
-  - {fileID: 3454069843927654, guid: 5d3acbdc46d79214897e4d20ec4ce591, type: 3}
   - {fileID: 886965724199310615, guid: b0d75c9e04dce824d87ec55dc98a6f89, type: 3}
+  - {fileID: 5042375647076069211, guid: 219537af76aab9c4c9d2fc972bb1406d, type: 3}
+  - {fileID: 5587450140472058440, guid: e4011d2092f90124dbe5ceab4e39c514, type: 3}
+  - {fileID: 5261573836228489400, guid: 43cd12c627ded3f4ca33bf4520926082, type: 3}
+  - {fileID: 7290148516714763665, guid: 668888480b856ed48989ed76af43d0b2, type: 3}
+  - {fileID: 9124893142561698496, guid: e19d69c3e54e35d498a651b7a807e679, type: 3}
   tileDataList:
   - dataList:
     - {fileID: 1554404439247101168, guid: fb6eea5131cb80349a893140ab568edf, type: 3}

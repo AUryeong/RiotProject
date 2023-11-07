@@ -62,11 +62,6 @@ namespace Edit
 #if UNITY_EDITOR
         public void SaveTile()
         {
-            foreach (var tile in buildTiles)
-            {
-                if (!tile.isBlank)
-                    roadTileData.lineCondition.Add(tile.column);
-            }
 
             roadTileData.length = stageTile.tiles[buildTiles[0].tileIndex].length;
 

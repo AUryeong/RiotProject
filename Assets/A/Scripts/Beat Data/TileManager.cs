@@ -33,7 +33,7 @@ public class TileManager : Singleton<TileManager>
     private int isNotSwipeCount;
     private BeatData lastBeatData;
 
-    [Header("Bgm")] [HideInInspector] public BgmData bgmData;
+    [Header("Bgm")][HideInInspector] public BgmData bgmData;
     public float beatInterval;
     private int stackBeat;
     private float beatSyncPos;
@@ -42,6 +42,7 @@ public class TileManager : Singleton<TileManager>
     private Queue<BeatData> beatDataQueue = new(); // ScriptableObject를 건들면 원본도 변경되기에 만든 Queue
 
     [Header("Change")] private float beatStartPos;
+    public LightingSettings setting;
 
     private readonly List<TileChangeData> highLightDataList = new();
     public int highLightLevel;
@@ -54,7 +55,7 @@ public class TileManager : Singleton<TileManager>
     private bool isChangeEndBgm;
     private float endBgmPos;
 
-    [Header("Item")] [SerializeField] private List<string> itemList;
+    [Header("Item")][SerializeField] private List<string> itemList;
 
     private int itemMaxValue;
 
@@ -82,6 +83,8 @@ public class TileManager : Singleton<TileManager>
 
             GameManager.Instance.postProcessVolume.profile = stageTileData.postProcessProfile;
             GameManager.Instance.directionLight.color = stageTileData.directionLightColor;
+
+            RenderSettings.skybox = stageTileData.skyBox;
         }
 
         SaveManager.Instance.GameData.selectBgmIndex %= stageTileData.bgmDataList.Count;
@@ -224,16 +227,26 @@ public class TileManager : Singleton<TileManager>
     {
         if (roadTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
 
-        var data = stageTileData.outGameTileDataList.SelectOne();
-
+        RoadTileData data = stageTileData.roadTileDataList.SelectOne();
         var roadTileObj = PoolManager.Instance.Init(data.name);
         roadTileObj.transform.position = new Vector3(0, 0, roadTileLength);
 
         if (!createdTileList.Contains(roadTileObj))
             createdTileList.Add(roadTileObj);
 
-        roadTileLength += data.length;
+        data = roadTileObj.GetComponent<RoadTileData>();
 
+        if (Random.Range(0, 2) == 0)
+        {
+            RoadTileData backgroundData = stageTileData.roadTileDataList.SelectOne();
+            var backgroundRoadObj = PoolManager.Instance.Init(backgroundData.name);
+            backgroundRoadObj.transform.position = new Vector3(TILE_DISTANCE * Utility.RandomSign(), 0, roadTileLength);
+
+            if (!createdTileList.Contains(backgroundRoadObj))
+                createdTileList.Add(backgroundRoadObj);
+        }
+
+        roadTileLength += data.length;
         CheckRemoveTile();
     }
 
@@ -266,28 +279,36 @@ public class TileManager : Singleton<TileManager>
             createdTileList.Add(itemObj);
     }
 
-    private void CreateRoadTile(bool isBeatTiming = false)
+    private void CreateRoadTile(bool isSwife = false)
     {
-        RoadTileData data;
-        if (isBeatTiming)
-            data = stageTileData.roadTileDataList.FindAll(tileData => tileData.lineCondition.Exists(line => Mathf.Abs(line - lastSummonLine) == 1)).SelectOne();
-        else
-            data = stageTileData.roadTileDataList.FindAll(tileData => tileData.lineCondition.Contains(lastSummonLine)).SelectOne();
+        int line = lastSummonLine;
+        if (isSwife)
+            line += Utility.RandomSign();
 
+        line = Mathf.Clamp(line, -2, 2);
+
+        RoadTileData data = stageTileData.roadTileDataList.SelectOne();
         var roadTileObj = PoolManager.Instance.Init(data.name);
-        roadTileObj.transform.position = new Vector3(0, 0, roadTileLength);
+        roadTileObj.transform.position = new Vector3(line * TILE_DISTANCE, 0, roadTileLength);
 
         if (!createdTileList.Contains(roadTileObj))
             createdTileList.Add(roadTileObj);
 
         data = roadTileObj.GetComponent<RoadTileData>();
 
-        createdRoadTileDataList.Add(data);
-        var lineConditions = data.lineCondition.FindAll(condition => Mathf.Abs(condition - lastSummonLine) <= 1);
+        if (Random.Range(0, 2) == 0)
+        {
+            RoadTileData backgroundData = stageTileData.roadTileDataList.SelectOne();
+            var backgroundRoadObj = PoolManager.Instance.Init(backgroundData.name);
+            backgroundRoadObj.transform.position = new Vector3(TILE_DISTANCE * Mathf.Clamp(line + Utility.RandomSign(), -2, 2), 0, roadTileLength);
 
-        if (!lineConditions.Contains(lastSummonLine) || Random.Range(0, 2) != 0)
-            lastSummonLine = lineConditions.Count > 0 ? lineConditions.SelectOne() : data.lineCondition.SelectOne();
-        data.summonLine = lastSummonLine;
+            if (!createdTileList.Contains(backgroundRoadObj))
+                createdTileList.Add(backgroundRoadObj);
+        }
+
+        createdRoadTileDataList.Add(data);
+        data.summonLine = line;
+        lastSummonLine = line;
 
         roadTileLength += data.length;
         CreateItemTile(roadTileLength - data.length / 2, data);
@@ -463,8 +484,11 @@ public class TileManager : Singleton<TileManager>
         GameManager.Instance.fogController.mainColor = themeColor.mainColor;
         GameManager.Instance.fogController.fogColor = themeColor.fogColor;
 
-        var material = Player.Instance.outLine.GetComponent<SkinnedMeshRenderer>().material;
-        material.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
+        var material = Player.Instance.defaultMeshes[0].material;
+        material?.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
+
+        material = Player.Instance.dissolveMeshes[0].material;
+        material?.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
 
         var transEffect = PoolManager.Instance.Init("Trans Effect");
         transEffect.transform.position = Player.Instance.transform.position;

@@ -16,6 +16,10 @@ public static class Utility
     {
         return ts[UnityEngine.Random.Range(0, ts.Count)];
     }
+    public static int RandomSign()
+    {
+        return UnityEngine.Random.value < 0.5f ? 1 : -1;
+    }
 
     public static Color GetFade(this Color color, float fadeValue)
     {
