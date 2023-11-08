@@ -6,7 +6,7 @@ public class Shadow : MonoBehaviour
 {
     [SerializeField] private Transform viewPos;
 
-    private const float DEFAULT_SIZE = 5;
+    private const float DEFAULT_SIZE = 3.5f;
     private const float SIZE_MULTIPLIER = DEFAULT_SIZE / 3;
 
     private void Awake()

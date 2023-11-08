@@ -5315,7 +5315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd54737fcdbad4e4897fe63a971eb73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewPos: {fileID: 0}
+  viewPos: {fileID: 5836498719502901179}
 --- !u!1 &3171346012308289963
 GameObject:
   m_ObjectHideFlags: 0

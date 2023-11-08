@@ -5151,7 +5151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd54737fcdbad4e4897fe63a971eb73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewPos: {fileID: 0}
+  viewPos: {fileID: 8779860599802770079}
 --- !u!1 &2817264956921389108
 GameObject:
   m_ObjectHideFlags: 0
@@ -5365,7 +5365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.10768958, g: 0.10886643, b: 0.23584908, a: 0.2901961}
+  outlineColor: {r: 0.45174387, g: 0.22075468, b: 1, a: 0.3137255}
   outlineWidth: 3.55
   precomputeOutline: 0
   bakeKeys: []

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db6af2070244bc0b408872d5a04abb2, type: 3}
   m_Name: Stage3 Edit
   m_EditorClassIdentifier: 
-  tileData: {fileID: 0}
+  tileData: {fileID: 11400000, guid: ee7b94ae8abb590468083e76baf88779, type: 2}
   tiles: []

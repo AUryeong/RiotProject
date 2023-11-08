@@ -7576,7 +7576,7 @@ MonoBehaviour:
   skyBox: {fileID: 2100000, guid: dd52776f1ef13fd43ac081a8fbd7d31a, type: 2}
   defaultColor:
     mainColor: {r: 0.93744487, g: 1, b: 0.7971698, a: 1}
-    fogColor: {r: 0.8632076, g: 1, b: 0.9729793, a: 1}
+    fogColor: {r: 1, g: 0.972549, b: 0.68235296, a: 1}
   flyingEnemies:
   - {fileID: 597066835944119454, guid: e635f358f38c20845ad527ffa9b7e422, type: 3}
   defaultEnemies:

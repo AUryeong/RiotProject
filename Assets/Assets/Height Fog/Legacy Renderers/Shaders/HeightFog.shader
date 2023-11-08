@@ -86,25 +86,6 @@ Shader "SKGames/Height Fog" {
 			}
 		}
 
-		//TODO: correct deffered path
-		/*void defferedHidder(Input IN, SurfaceOutputStandard o, inout half4 outDiffuse, inout half4 outSpecSmoothness, inout half4 outNormal, inout half4 outEmission) {
-			fixed3 wPos = waveCalc(IN.worldPos);
-			fixed3 localPos = waveCalc(mul(unity_WorldToObject, fixed4(IN.worldPos, 1)));
-			float lerpValue = clamp((((localPos.y * clamp(1 - _FogRelativeWorldOrLocal, 0, 1)) + (wPos.y * clamp(0 + _FogRelativeWorldOrLocal, 0, 1))) - _FogMin) / (_FogMax - _FogMin), 0, 1);
-			outDiffuse = lerp(_FogColor, outDiffuse, pow(lerpValue, _FogFalloff));
-			outSpecSmoothness = lerp(_FogColor, outSpecSmoothness, pow(lerpValue, _FogFalloff));
-			outEmission = lerp(_FogColor, outEmission, pow(lerpValue, _FogFalloff));
-			#if STANDARD_FOG
-				UNITY_APPLY_FOG_COLOR(IN.fogCoord, outDiffuse,
-				#if OVERRIDE_FOG_COLOR
-					_FogColor
-				#else
-					unity_FogColor
-				#endif	
-				);
-			#endif
-		}*/
-
 		void verticalFogHidder(Input IN, SurfaceOutputStandard o, inout fixed4 color) {
 			#ifndef UNITY_PASS_FORWARDADD
 				fixed3 wPos = waveCalc(IN.worldPos);
@@ -115,7 +96,6 @@ Shader "SKGames/Height Fog" {
 				float3 fogEmissionColor = lerp(_FogColor, emission, pow(lerpValue, _FogEmissionFalloff));
 				color = lerp(half4(fogEmissionColor, color.a), color, pow(lerpValue, _FogFalloff));
 
-				//color = lerp(_FogColor, color, pow(lerpValue, _FogFalloff));
 				if (_STANDARD_FOG > 0) 
 				{
 					fixed4 clr = unity_FogColor;
@@ -139,15 +119,11 @@ Shader "SKGames/Height Fog" {
 
 		void surf(Input IN, inout SurfaceOutputStandard o) {
 			fixed3 localPos = waveCalc(mul(unity_WorldToObject, fixed4(IN.worldPos, 1)));
-			fixed3 normalMap = UnpackNormal(tex2D(_NormalMap, IN.uv_MainTex)).rgb;
-			normalMap = float3(normalMap.x * _NormalAmount, normalMap.y * _NormalAmount, normalMap.z);
-			o.Normal = normalMap;
 			fixed4 c = tex2D(_MainTex, IN.uv_MainTex);
 			fixed4 ao = tex2D(_AOMap, IN.uv_MainTex);
 			o.Albedo = c.rgb *_Color * ao;
 			fixed3 wPos = waveCalc(IN.worldPos);
 			float lerpValue = clamp((((localPos.y * clamp(1 - _FogRelativeWorldOrLocal, 0, 1)) + (wPos.y * clamp(0 + _FogRelativeWorldOrLocal, 0, 1))) - _FogMin) / (_FogMax - _FogMin), 0, 1);
-			//o.Emission = lerp(_FogColor.rgb, _EmissionColor.rgb * _EmissionPower, pow(lerpValue, _FogEmissionFalloff)) * _FogEmissionPower;
 			o.Emission = _EmissionColor.rgb * _EmissionPower;
 			fixed4 spec = tex2D(_SpecularTex, IN.uv_MainTex);
 			fixed4 met = tex2D(_MetallicTex, IN.uv_MainTex);

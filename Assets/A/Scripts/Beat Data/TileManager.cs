@@ -30,6 +30,7 @@ public class TileManager : Singleton<TileManager>
 
     private float beatSpawnDuration;
     private float beatDanceDuration;
+    private int beatChangeCount;
     private int isNotSwipeCount;
     private BeatData lastBeatData;
 
@@ -42,7 +43,6 @@ public class TileManager : Singleton<TileManager>
     private Queue<BeatData> beatDataQueue = new(); // ScriptableObject를 건들면 원본도 변경되기에 만든 Queue
 
     [Header("Change")] private float beatStartPos;
-    public LightingSettings setting;
 
     private readonly List<TileChangeData> highLightDataList = new();
     public int highLightLevel;
@@ -283,9 +283,10 @@ public class TileManager : Singleton<TileManager>
     {
         int line = lastSummonLine;
         if (isSwife)
-            line += Utility.RandomSign();
-
-        line = Mathf.Clamp(line, -2, 2);
+            if (Mathf.Abs(line) >= 2)
+                line += (int)Mathf.Sign(line) * -1;
+            else
+                line += Utility.RandomSign();
 
         RoadTileData data = stageTileData.roadTileDataList.SelectOne();
         var roadTileObj = PoolManager.Instance.Init(data.name);
@@ -296,19 +297,25 @@ public class TileManager : Singleton<TileManager>
 
         data = roadTileObj.GetComponent<RoadTileData>();
 
+        data.summonLine = line;
+        lastSummonLine = line;
+
         if (Random.Range(0, 2) == 0)
         {
+            if (Mathf.Abs(line) >= 2)
+                line += (int)Mathf.Sign(line) * -1;
+            else
+                line += Utility.RandomSign();
+
             RoadTileData backgroundData = stageTileData.roadTileDataList.SelectOne();
             var backgroundRoadObj = PoolManager.Instance.Init(backgroundData.name);
-            backgroundRoadObj.transform.position = new Vector3(TILE_DISTANCE * Mathf.Clamp(line + Utility.RandomSign(), -2, 2), 0, roadTileLength);
+            backgroundRoadObj.transform.position = new Vector3(TILE_DISTANCE * line, 0, roadTileLength);
 
             if (!createdTileList.Contains(backgroundRoadObj))
                 createdTileList.Add(backgroundRoadObj);
         }
 
         createdRoadTileDataList.Add(data);
-        data.summonLine = line;
-        lastSummonLine = line;
 
         roadTileLength += data.length;
         CreateItemTile(roadTileLength - data.length / 2, data);
@@ -342,13 +349,26 @@ public class TileManager : Singleton<TileManager>
 
             var beatData = beatDataQueue.Peek();
             if (beatData.type == BeatType.Default && beatData.beat - lastBeatData?.beat < 1 && !isBeatTiming)
+            {
                 isNotSwipeCount++;
+                beatChangeCount++;
+            }
             else
                 isNotSwipeCount = 0;
 
             bool isForced = isNotSwipeCount >= 2;
             if (isForced)
                 isNotSwipeCount = 0;
+
+            if (isForced || isBeatTiming)
+                beatChangeCount = 0;
+
+            if (Random.Range(0, 10) <= beatChangeCount)
+            {
+                beatChangeCount = 0;
+                CreateRoadTile(true);
+                return;
+            }
 
             CreateRoadTile(isBeatTiming || isForced);
             if (isBeatTiming)
@@ -396,6 +416,8 @@ public class TileManager : Singleton<TileManager>
                     lastRoadData = createdRoadTileDataList[lastIndex];
                     isFlying = false;
                 }
+
+                beatChangeCount++;
 
                 int summonLine = lastRoadData.summonLine;
 
@@ -489,6 +511,8 @@ public class TileManager : Singleton<TileManager>
 
         material = Player.Instance.dissolveMeshes[0].material;
         material?.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
+
+        stageTileData.skyBox?.SetColor("_GroundColor", themeColor.fogColor);
 
         var transEffect = PoolManager.Instance.Init("Trans Effect");
         transEffect.transform.position = Player.Instance.transform.position;
