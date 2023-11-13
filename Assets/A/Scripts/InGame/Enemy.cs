@@ -6,13 +6,11 @@ namespace InGame
     public class Enemy : MonoBehaviour
     {
         private const float ENEMY_HP_HEAL_VALUE = 10;
-        private const int ENEMY_RUNE_GET_VALUE = 5;
-        private const float ENEMY_MOVE_DURATION = 1f;
-
-        public int hp;
+        private const float ENEMY_MOVE_DURATION = 2;
 
         private Animator animator;
         private Vector3 defaultLocalPos;
+        private Quaternion defaultBoneQuaternion;
 
         [SerializeField] private Vector3 spawnVector;
         [SerializeField] private Transform bone;
@@ -22,6 +20,7 @@ namespace InGame
         {
             animator = GetComponent<Animator>();
             defaultLocalPos = transform.localPosition;
+            defaultBoneQuaternion = bone.rotation;
         }
 
         private void OnEnable()
@@ -32,6 +31,9 @@ namespace InGame
             gameObject.layer = LayerMask.NameToLayer("Enemy");
 
             transform.localPosition = defaultLocalPos;
+            
+            bone.localPosition = Vector3.zero;
+            bone.rotation = defaultBoneQuaternion;
             bone.DOLocalMove(spawnVector, TileManager.Instance.beatInterval * 2).From(true);
         }
 
@@ -69,22 +71,32 @@ namespace InGame
             }
         }
 
-        public void Hit(int damage)
-        {
-            hp -= damage;
-            if (hp <= 0)
-                Die();
-        }
-
-        private void Die()
+        public void Hit()
         {
             gameObject.layer = LayerMask.NameToLayer("DeathEnemy");
             SoundManager.Instance.PlaySound("clap", ESoundType.Sfx, 0.5f);
 
+            bone.DOMoveX(Random.Range(0,2) == 0 ? Random.Range(-15f,-20f) : Random.Range(15f,20f), ENEMY_MOVE_DURATION).SetRelative(true);
+            bone.DOMoveY(Random.Range(5f, 10f), ENEMY_MOVE_DURATION).SetEase(Ease.OutBack).SetRelative(true);
+            bone.DOMoveZ(Random.Range(30, 50f), ENEMY_MOVE_DURATION).SetRelative(true).OnComplete(() => gameObject.SetActive(false));
+            bone.DORotateQuaternion(Quaternion.Euler(Random.Range(-360f, 360f), Random.Range(-360f, 360f), Random.Range(-360f, 360f)), ENEMY_MOVE_DURATION);
+
             Player.Instance.hitAbleEnemyList.Remove(this);
             Player.Instance.Hp += ENEMY_HP_HEAL_VALUE;
-            InGameManager.Instance.Rune += ENEMY_RUNE_GET_VALUE;
-            gameObject.SetActive(false);
+
+            float distance = transform.position.z - Player.Instance.transform.position.z;
+            if (distance <= 2.5f)
+            {
+                InGameManager.Instance.Rune += 9;
+            }
+            else if (distance <= 4)
+            {
+                InGameManager.Instance.Rune += 7;
+            }
+            else
+            {
+                InGameManager.Instance.Rune += 5;
+            }
 
             var obj = PoolManager.Instance.Init("Hit Effect");
             obj.transform.position = transform.position;

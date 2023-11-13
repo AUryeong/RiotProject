@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -17,10 +18,21 @@ public class BgmData
     public float bpmMultiplier = 1;
     public float speedAdder;
 
+    public float LastBeat
+    {
+        get
+        {
+            if (lastBeat <= 0)
+                lastBeat = beatDataList.Last().beat;
+            return lastBeat;
+        }
+    }
+
+    private float lastBeat = -1;
+
     [Space(10f)] [Title("Beat Data")] [SerializeField]
     private TextAsset textAsset;
     
-
     [Space(5f)] [ShowIf("@textAsset != null")][TableList]
     public Queue<BeatData> beatDataList = new();
 

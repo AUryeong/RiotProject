@@ -68,7 +68,7 @@ public class SoundManager : Singleton<SoundManager>
         return audioInfos[soundType].audioSource;
     }
 
-    public AudioClip PlaySound(string soundName, ESoundType soundType, float multipleVolume = 1, float pitch = 1)
+    public AudioClip PlaySound(string soundName, ESoundType soundType, float multipleVolume = 1, float pitch = 1, bool isOneShot = false)
     {
         if (string.IsNullOrEmpty(soundName))
         {
@@ -86,6 +86,7 @@ public class SoundManager : Singleton<SoundManager>
         var audioSource = audioInfo.audioSource;
 
         audioSource.pitch = pitch;
+        audioSource.loop = isOneShot;
 
         if (soundType.Equals(ESoundType.Bgm))
         {

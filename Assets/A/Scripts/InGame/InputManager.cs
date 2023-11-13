@@ -6,7 +6,7 @@ namespace InGame
     public class InputManager : Singleton<InputManager>
     {
         private const float AUTO_DRAG_POS = 250;
-        private const float DRAG_MIN_POS = 20;
+        private const float DRAG_MIN_POS = 40;
     
         [SerializeField] private EventTrigger inputEventTrigger;
 

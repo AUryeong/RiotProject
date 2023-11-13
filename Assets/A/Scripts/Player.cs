@@ -332,7 +332,7 @@ public class Player : Singleton<Player>
     private void HitEnemy(List<Enemy> hitAbleList)
     {
         var hitAbleOrderBy = hitAbleList.OrderBy(enemy => Mathf.Abs(enemy.transform.position.z - transform.position.z));
-        hitAbleOrderBy.First().Hit(1);
+        hitAbleOrderBy.First().Hit();
     }
 
     public void CheckInput(Direction direction)

@@ -14,30 +14,39 @@ public class TileManager : Singleton<TileManager>
     private const float PLAYER_RENDER_DISTANCE = 70;
     private const float PLAYER_REMOVE_DISTANCE = 60;
 
+    private const float ITEM_RANDOM_PROB_VALUE_PERCENT = 1f;
+    private const float ITEM_RANDOM_PROB_MAX = 50;
+
     [Header("Stage")] public List<StageTileData> stageTileDataList;
     [HideInInspector] public StageTileData stageTileData;
 
     [Header("Tiles")] private float stageStartPos;
     private float roadStartPos;
     private float roadTileLength;
+
     private readonly List<RoadTileData> createdRoadTileDataList = new();
     private readonly List<GameObject> createdBounceList = new();
     private readonly List<GameObject> createdBounceBackgroundList = new();
+
     private int lastSummonLine;
 
     private readonly List<float> tileLengthList = new();
     private readonly List<GameObject> createdTileList = new();
 
-    private float beatSpawnDuration;
-    private float beatDanceDuration;
-    private int beatChangeCount;
-    private int isNotSwipeCount;
-    private BeatData lastBeatData;
+    [Header("Bgm")] [HideInInspector] public BgmData bgmData;
 
-    [Header("Bgm")][HideInInspector] public BgmData bgmData;
     public float beatInterval;
+
     private int stackBeat;
     private float beatSyncPos;
+
+    private float beatSpawnDuration;
+    private float beatDanceDuration;
+
+    private int beatChangeCount;
+    private int isNotSwipeCount;
+
+    private BeatData lastBeatData;
 
     private bool isEndBgm;
     private Queue<BeatData> beatDataQueue = new(); // ScriptableObject를 건들면 원본도 변경되기에 만든 Queue
@@ -55,12 +64,9 @@ public class TileManager : Singleton<TileManager>
     private bool isChangeEndBgm;
     private float endBgmPos;
 
-    [Header("Item")][SerializeField] private List<string> itemList;
+    [Header("Item")] [SerializeField] private List<string> itemList;
 
     private int itemMaxValue;
-
-    private const float ITEM_RANDOM_PROB_VALUE_PERCENT = 1f;
-    private const float ITEM_RANDOM_PROB_MAX = 50;
 
     protected override void OnCreated()
     {
@@ -162,6 +168,8 @@ public class TileManager : Singleton<TileManager>
                 obj.transform.DOKill();
                 obj.transform.DOMoveY(-0.3f, beatInterval / 4).SetRelative().SetLoops(2, LoopType.Yoyo);
             }
+
+            InGameManager.Instance.uiManager.BounceHpBar(beatInterval / 4);
 
             beatDanceDuration--;
         }
@@ -341,7 +349,9 @@ public class TileManager : Singleton<TileManager>
 
         beatSpawnDuration += Time.deltaTime / beatInterval * Player.Instance.Speed / Player.Instance.originSpeed;
 
-        bool isBeatTiming = beatDataQueue.Peek().beat <= (beatSpawnDuration + stackBeat) / bgmData.bpmMultiplier;
+        float nowBeat = (beatSpawnDuration + stackBeat) / bgmData.bpmMultiplier;
+        bool isBeatTiming = beatDataQueue.Peek().beat <= nowBeat;
+        InGameManager.Instance.uiManager.UpdateSongSlider(nowBeat / bgmData.LastBeat);
         if (beatSpawnDuration >= 1)
         {
             beatSpawnDuration--;
@@ -507,12 +517,12 @@ public class TileManager : Singleton<TileManager>
         GameManager.Instance.fogController.fogColor = themeColor.fogColor;
 
         var material = Player.Instance.defaultMeshes[0].material;
-        material?.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
+        material.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
 
         material = Player.Instance.dissolveMeshes[0].material;
-        material?.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
+        material.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
 
-        stageTileData.skyBox?.SetColor("_GroundColor", themeColor.fogColor);
+        stageTileData.skyBox.SetColor("_GroundColor", themeColor.fogColor);
 
         var transEffect = PoolManager.Instance.Init("Trans Effect");
         transEffect.transform.position = Player.Instance.transform.position;
@@ -553,7 +563,7 @@ public class TileManager : Singleton<TileManager>
 
         ChangeThemeColor(themeColor);
 
-        SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f);
+        SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f, 1, true);
     }
 
     #endregion
