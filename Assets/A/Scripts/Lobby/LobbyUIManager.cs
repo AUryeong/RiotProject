@@ -1,6 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace Lobby
 {
@@ -10,38 +8,49 @@ namespace Lobby
         Stage,
         Shop
     }
+
     public class LobbyUIManager : MonoBehaviour, IActiveLink
     {
         [SerializeField] private LobbyUIPlay uiPlay;
         [SerializeField] private LobbyUIStage uiStage;
 
-        private LobbyUIActiveLink beforeActiveLink;
+        private LobbyUIActiveLink activeLink;
 
         public void Select(LobbyType type)
         {
-            beforeActiveLink?.DeActive();
+            if (activeLink != null)
+                activeLink.DeActive();
+            
             switch (type)
             {
                 case LobbyType.Home:
-                    beforeActiveLink = uiPlay;
+                    activeLink = uiPlay;
                     break;
                 case LobbyType.Stage:
-                    beforeActiveLink = uiStage;
+                    activeLink = uiStage;
+                    break;
+                case LobbyType.Shop:
                     break;
             }
-            beforeActiveLink?.Active();
-            
+
+            activeLink.Active();
         }
+
         public void Active()
         {
             Select(LobbyType.Home);
         }
 
-
+        public void Bounce()
+        {
+            if (activeLink == uiPlay)
+                uiPlay.Bounce();
+        }
+        
         public void DeActive()
         {
-            beforeActiveLink?.DeActive();
-            beforeActiveLink = null;
+            activeLink.DeActive();
+            activeLink = null;
         }
     }
 }

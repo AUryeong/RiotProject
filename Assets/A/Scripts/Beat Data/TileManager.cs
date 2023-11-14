@@ -2,6 +2,7 @@
 using System.Linq;
 using DG.Tweening;
 using InGame;
+using Lobby;
 using UnityEngine;
 
 public class TileManager : Singleton<TileManager>
@@ -12,7 +13,7 @@ public class TileManager : Singleton<TileManager>
     private const float BEAT_SYNC_START_POS = -3f;
 
     private const float PLAYER_RENDER_DISTANCE = 70;
-    private const float PLAYER_REMOVE_DISTANCE = 60;
+    private const float PLAYER_REMOVE_DISTANCE = 30;
 
     private const float ITEM_RANDOM_PROB_VALUE_PERCENT = 1f;
     private const float ITEM_RANDOM_PROB_MAX = 50;
@@ -169,7 +170,10 @@ public class TileManager : Singleton<TileManager>
                 obj.transform.DOMoveY(-0.3f, beatInterval / 4).SetRelative().SetLoops(2, LoopType.Yoyo);
             }
 
-            InGameManager.Instance.uiManager.BounceHpBar(beatInterval / 4);
+            if (GameManager.Instance.isGaming)
+                InGameManager.Instance.uiManager.BounceHpBar(beatInterval / 4);
+            else
+                LobbyManager.Instance.uiManager.Bounce();
 
             beatDanceDuration--;
         }
@@ -180,7 +184,7 @@ public class TileManager : Singleton<TileManager>
         float playerPos = Player.Instance.transform.position.z;
         CheckOutGameRoadTile(playerPos);
         CheckCreateBackgroundTile(playerPos);
-        //BeatDanceUpdate();
+        BeatDanceUpdate();
     }
 
     private void GamingUpdate()

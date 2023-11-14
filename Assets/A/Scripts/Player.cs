@@ -283,11 +283,13 @@ public class Player : Singleton<Player>
         if (!IsAlive) return;
         
         IsAlive = false;
+        
+        SoundManager.Instance.PlaySound("Dead", ESoundType.Sfx, 0.5f, 0.6f);
+
         Material material = dissolveMeshes[0].material;
         material.SetFloat("_DissolvePower", 0);
         material.DOFloat(1, "_DissolvePower", 3).SetDelay(1).OnStart(() =>
         {
-            SoundManager.Instance.PlaySound("Dead", ESoundType.Sfx);
 
             foreach (var skinnedMeshRenderer in defaultMeshes)
                 skinnedMeshRenderer.gameObject.SetActive(false);

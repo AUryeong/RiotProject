@@ -70,7 +70,8 @@ namespace Lobby
         private const float AUTO_DRAG_POS = 200;
         private const float DRAG_MIN_POS = 50;
 
-        private bool isStarting;
+        private bool isDeActivating;
+        private bool isActivating;
         private bool isDrag;
         private Vector2 startDragPos;
         private Vector2 lastDragPos;
@@ -98,7 +99,8 @@ namespace Lobby
 
         public override void Active()
         {
-            isStarting = false;
+            isDeActivating = false;
+            isActivating = true;
 
             inputEventTrigger.gameObject.SetActive(true);
 
@@ -165,6 +167,11 @@ namespace Lobby
             activeSequence.Insert(UI_MOVE_DURATION / 4, stageButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
             activeSequence.Insert(UI_MOVE_DURATION/2, startButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
 
+            activeSequence.OnComplete(() =>
+            {
+                isActivating = false;
+            });
+            
             activeSequence.OnUpdate(() =>
             {
                 if (!Input.GetMouseButtonDown(0)) return;
@@ -211,24 +218,27 @@ namespace Lobby
 
         private void StageButton()
         {
-            if (isStarting) return;
+            if (isDeActivating) return;
 
-            isStarting = true;
+            isDeActivating = true;
             SoundManager.Instance.PlaySound("Button", ESoundType.Sfx);
             LobbyManager.Instance.uiManager.Select(LobbyType.Stage);
         }
 
         private void LockButton()
         {
+            shopButton.image.rectTransform.DOKill(true);
             shopButton.image.rectTransform.DOShakeAnchorPos(0.3f, 20, 50);
-            SoundManager.Instance.PlaySound("Warning", ESoundType.Sfx);
+            
+            SoundManager.Instance.PlaySound("Error", ESoundType.Sfx, 1, 1.15f);
         }
 
         private void StartButton()
         {
-            if (isStarting) return;
+            if (isDeActivating) return;
 
-            isStarting = true;
+            isDeActivating = true;
+            SoundManager.Instance.PlaySound("Game_start", ESoundType.Sfx);
             GameManager.Instance.ActiveSceneLink(SceneLinkType.InGame);
         }
 
@@ -274,6 +284,8 @@ namespace Lobby
 
         private void NextBgm()
         {
+            SoundManager.Instance.PlaySound("levelup_back", ESoundType.Sfx, 0.6f, 0.9f);
+
             bgmMainSelect.DOKill(true);
             bgmSideSelect.DOKill(true);
             bgmSelectRight.rectTransform.DOKill(true);
@@ -302,8 +314,8 @@ namespace Lobby
                 bgmSideSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
 
                 bgmSideSelectText.ForceMeshUpdate(true);
-                var charInfo = bgmSideSelectText.textInfo.characterInfo[0];
-                bgmSideIconGradient.rectTransform.localPosition = (charInfo.topLeft + charInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
+                var characterInfo = bgmSideSelectText.textInfo.characterInfo[0];
+                bgmSideIconGradient.rectTransform.localPosition = (characterInfo.topLeft + characterInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
 
                 TileManager.Instance.StageReset();
 
@@ -313,6 +325,8 @@ namespace Lobby
 
         private void PrevBgm()
         {
+            SoundManager.Instance.PlaySound("levelup_back", ESoundType.Sfx, 0.6f, 0.9f);
+            
             bgmMainSelect.DOKill(true);
             bgmSideSelect.DOKill(true);
             bgmSelectLeft.rectTransform.DOKill(true);
@@ -341,13 +355,34 @@ namespace Lobby
                 bgmSideSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
 
                 bgmSideSelectText.ForceMeshUpdate(true);
-                var charInfo = bgmSideSelectText.textInfo.characterInfo[0];
-                bgmSideIconGradient.rectTransform.localPosition = (charInfo.topLeft + charInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
+                var characterInfo = bgmSideSelectText.textInfo.characterInfo[0];
+                bgmSideIconGradient.rectTransform.localPosition = (characterInfo.topLeft + characterInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
 
                 TileManager.Instance.StageReset();
 
                 bgmMainSelect.gameObject.SetActive(false);
             });
+        }
+
+        public void Bounce()
+        {
+            if (isDeActivating || isActivating) return;
+            
+            float duration = TileManager.Instance.beatInterval / 4;
+
+            Vector3 scale = Vector3.one * 1.05f;
+            
+            startButton.image.rectTransform.DOKill(true);
+            startButton.image.rectTransform.DOScale(scale, duration).SetLoops(2, LoopType.Yoyo);
+            
+            stageButton.image.rectTransform.DOKill(true);
+            stageButton.image.rectTransform.DOScale(scale, duration).SetLoops(2, LoopType.Yoyo);
+            
+            shopButton.image.rectTransform.DOKill(true);
+            shopButton.image.rectTransform.DOScale(scale, duration).SetLoops(2, LoopType.Yoyo);
+            
+            titleNeon.rectTransform.DOKill(true);
+            titleNeon.rectTransform.DOScale(scale*0.9f, duration).SetLoops(2, LoopType.Yoyo);
         }
     }
 }

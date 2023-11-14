@@ -10,9 +10,6 @@ namespace Lobby
         [SerializeField] private TextMeshProUGUI levelText;
         [SerializeField] private TextMeshProUGUI nickNameText;
 
-        [SerializeField] private List<Image> bgmSlots;
-        [SerializeField] private List<TextMeshProUGUI> bgmSlotTexts;
-
         public RectTransform RectTransform
         {
             get
@@ -29,19 +26,6 @@ namespace Lobby
         {
             levelText.text = stageTileData.name;
             nickNameText.text = stageTileData.stageNickName;
-
-            for (int i = 0; i < bgmSlots.Count; i++)
-            {
-                if (stageTileData.bgmDataList.Count > i)
-                {
-                    bgmSlots[i].gameObject.SetActive(true);
-                    bgmSlotTexts[i].text = stageTileData.bgmDataList[i].bgmNickName;
-                }
-                else
-                {
-                    bgmSlots[i].gameObject.SetActive(false);
-                }
-            }
         }
     }
 }
