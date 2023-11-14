@@ -19,6 +19,7 @@ namespace InGame
 
         [Space(20)]
         [SerializeField] private Slider songSlider;
+        [SerializeField] private Image songPlayer;
         private RectTransform songSliderRect;
 
         private const float UI_MOVE_DURATION = 1;
@@ -35,6 +36,8 @@ namespace InGame
                 hpBarBase.rectTransform.DOKill(true);
                 hpBarBase.rectTransform.DOScale(Vector3.one * 1.15f, duration).SetLoops(2, LoopType.Yoyo);
             }
+            songPlayer.rectTransform.DOKill(true);
+            songPlayer.rectTransform.DOScale(Vector3.one * 1.15f, duration).SetLoops(2, LoopType.Yoyo);
         }
 
         public void UpdateHpBar(float fillAmount)
@@ -61,6 +64,9 @@ namespace InGame
 
         public void ActiveSetting()
         {
+            foreach (var hpBar in hpBars)
+                hpBar.color = TileManager.Instance.stageTileData.uiColor;
+
             hpBarList.anchoredPosition = new Vector2(hpBarList.anchoredPosition.x, 152);
             runeBase.rectTransform.anchoredPosition = new Vector2(runeBase.rectTransform.anchoredPosition.x, 100);
             songSliderRect.anchoredPosition = new Vector2(60, songSliderRect.anchoredPosition.y);

@@ -10,6 +10,8 @@ using UnityEngine.Rendering.PostProcessing;
 public class StageTileData : SerializedScriptableObject
 {
     public string stageNickName;
+    public Color uiColor;
+    public Color uiDarkColor;
 
     [Title("Stage Color")] 
     public Color directionLightColor;

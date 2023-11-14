@@ -7511,6 +7511,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   stageNickName: Ice
+  uiColor: {r: 0.2867924, g: 0.47235033, b: 1, a: 1}
+  uiDarkColor: {r: 0.0392157, g: 0.14633855, b: 0.58431375, a: 1}
   directionLightColor: {r: 0.9198113, g: 0.9801498, b: 1, a: 1}
   postProcessProfile: {fileID: 11400000, guid: c3db379f6a74fd24d8d87b31fae084c5, type: 2}
   skyBox: {fileID: 2100000, guid: 63dd79850a7e5bf4792e9dcdfb1e950e, type: 2}

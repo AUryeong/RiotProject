@@ -79,7 +79,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   length: 6
   summonLine: 0
-  lineCondition: 00000000
   roadObjects:
   - {fileID: 220462697504037486}
 --- !u!1 &3100570910382198208
@@ -145,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 05bf68f72e5193647ba1742e7eb230ec, type: 2}
+  - {fileID: 2100000, guid: 192232cb0f3549a4897b10d3f44568ed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -7493,6 +7493,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   stageNickName: Forest
+  uiColor: {r: 0, g: 0.7924528, b: 0.0807992, a: 1}
+  uiDarkColor: {r: 0.01605552, g: 0.38679248, b: 0.054597527, a: 1}
   directionLightColor: {r: 1, g: 0.92156863, b: 0.7882353, a: 1}
   postProcessProfile: {fileID: 11400000, guid: 0b45c96a2fb5f1f4bbb9a1d359da7036, type: 2}
   skyBox: {fileID: 2100000, guid: dd52776f1ef13fd43ac081a8fbd7d31a, type: 2}
@@ -7506,7 +7508,7 @@ MonoBehaviour:
   - {fileID: 1714943544840983147, guid: 9296d76a3eb38774482a4357c327f202, type: 3}
   roadTileDataList:
   - {fileID: 8612784092089743354, guid: 55f3f96636257b1458479997e8388bdd, type: 3}
-  - {fileID: 1271200940612332354, guid: 0f579960366e7b64dbb83c6b10a99ba5, type: 3}
+  - {fileID: 1271200940612332354, guid: 1286883fa0815ca4783699597c826fb0, type: 3}
   tileDataList:
   - dataList:
     - {fileID: 8739827297846537086, guid: 09476eb2c09a21f4eb53b21f0100d4e3, type: 3}

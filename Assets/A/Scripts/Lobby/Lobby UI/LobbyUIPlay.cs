@@ -11,21 +11,57 @@ namespace Lobby
         [SerializeField] private Button startButton;
         [SerializeField] private EventTrigger inputEventTrigger;
 
-        [Space(10f)]
+        [Header("Title")]
+        [SerializeField] private Image titleOutline;
+        [SerializeField] private Image titleNeon;
+
+        [Header("Buttons")]
+        [SerializeField] private Button shopButton;
+        [SerializeField] private Button stageButton;
+
+        [Header("Play")]
+        [SerializeField] private Image playHighLight;
+        [SerializeField] private Image playGradient;
+        [SerializeField] private Image playOutline;
+
+        [Header("Shop")]
+        [SerializeField] private Image lockOutline;
+        [SerializeField] private Image lockIcon;
+        [SerializeField] private Image lockGradient;
+
+        [Header("Stage")]
+        [SerializeField] private Image stageOutline;
+        [SerializeField] private Image stageIcon;
+        [SerializeField] private Image stageGradient;
+
+        [Header("Setting")]
         [SerializeField] private Button settingButton;
         [SerializeField] private LobbyUISetting uiSetting;
 
-        [Space(10f)]
-        [SerializeField] private Image runeIcon;
+        [Header("Rune")]
+        [SerializeField] private Image runeBase;
         [SerializeField] private TextMeshProUGUI runeText;
 
         [Header("BGM Select")]
         [SerializeField] private RectTransform bgmParent;
-        [SerializeField] private Image bgmMainSelect;
 
+        [Space(10f)]
+
+        [SerializeField] private Image bgmSelectLeft;
+        [SerializeField] private Image bgmSelectRight;
+
+        [Space(10f)]
+
+        [SerializeField] private RectTransform bgmMainSelect;
+        [SerializeField] private Image bgmMainIcon;
+        [SerializeField] private Image bgmMainIconGradient;
         [SerializeField] private TextMeshProUGUI bgmMainSelectText;
 
-        [SerializeField] private Image bgmSideSelect;
+        [Space(10f)]
+
+        [SerializeField] private RectTransform bgmSideSelect;
+        [SerializeField] private Image bgmSideIcon;
+        [SerializeField] private Image bgmSideIconGradient;
         [SerializeField] private TextMeshProUGUI bgmSideSelectText;
 
         private const float UI_MOVE_DURATION = 0.75f;
@@ -50,6 +86,12 @@ namespace Lobby
             startButton.onClick.RemoveAllListeners();
             startButton.onClick.AddListener(StartButton);
 
+            shopButton.onClick.RemoveAllListeners();
+            shopButton.onClick.AddListener(LockButton);
+
+            stageButton.onClick.RemoveAllListeners();
+            stageButton.onClick.AddListener(StageButton);
+
             settingButton.onClick.RemoveAllListeners();
             settingButton.onClick.AddListener(uiSetting.Active);
         }
@@ -62,10 +104,36 @@ namespace Lobby
 
             int nowIndex = SaveManager.Instance.GameData.selectBgmIndex;
 
-            bgmMainSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
             bgmSideSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
 
+            bgmSideSelectText.ForceMeshUpdate(true);
+            var charInfo = bgmSideSelectText.textInfo.characterInfo[0];
+            bgmSideIconGradient.rectTransform.localPosition = (charInfo.topLeft + charInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
+
             runeText.text = SaveManager.Instance.GameData.rune.ToString();
+
+            Color color = TileManager.Instance.stageTileData.uiColor;
+            Color darkColor = TileManager.Instance.stageTileData.uiDarkColor;
+
+            runeText.fontSharedMaterial.SetColor("_OutlineColor", darkColor);
+
+            titleOutline.color = color;
+            titleNeon.color = color;
+
+            bgmMainIcon.color = color;
+            bgmSideIcon.color = color;
+
+            playHighLight.color = color;
+            playGradient.color = darkColor;
+            playOutline.color = color;
+
+            lockIcon.color = color;
+            lockOutline.color = color;
+            lockGradient.color = darkColor;
+
+            stageIcon.color = color;
+            stageOutline.color = color;
+            stageGradient.color = darkColor;
 
             activeSequence?.Complete();
             deActiveSequence?.Complete();
@@ -81,16 +149,21 @@ namespace Lobby
             activeSequence.SetAutoKill(false);
             activeSequence.OnStart(() =>
             {
-                settingButton.image.rectTransform.anchoredPosition = new Vector2(-100, settingButton.image.rectTransform.anchoredPosition.y);
-                runeIcon.rectTransform.anchoredPosition = new Vector2(100, runeIcon.rectTransform.anchoredPosition.y);
-                startButton.image.rectTransform.anchoredPosition = new Vector2(startButton.image.rectTransform.anchoredPosition.x, -1200);
+                settingButton.image.rectTransform.anchoredPosition = new Vector2(-70, settingButton.image.rectTransform.anchoredPosition.y);
+                runeBase.rectTransform.anchoredPosition = new Vector2(180, runeBase.rectTransform.anchoredPosition.y);
                 bgmParent.anchoredPosition = new Vector2(bgmParent.anchoredPosition.x, 1000);
+                startButton.image.rectTransform.localScale = Vector3.zero;
+                shopButton.image.rectTransform.localScale = Vector3.zero;
+                stageButton.image.rectTransform.localScale = Vector3.zero;
             });
 
-            activeSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION));
-            activeSequence.Join(runeIcon.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION));
-            activeSequence.Join(startButton.image.rectTransform.DOAnchorPosY(0, UI_MOVE_DURATION));
-            activeSequence.Join(bgmParent.DOAnchorPosY(530, UI_MOVE_DURATION));
+            activeSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(46f, UI_MOVE_DURATION));
+            activeSequence.Join(runeBase.rectTransform.DOAnchorPosX(-160, UI_MOVE_DURATION));
+            activeSequence.Join(bgmParent.DOAnchorPosY(350, UI_MOVE_DURATION));
+
+            activeSequence.Join(shopButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
+            activeSequence.Insert(UI_MOVE_DURATION / 4, stageButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
+            activeSequence.Insert(UI_MOVE_DURATION/2, startButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
 
             activeSequence.OnUpdate(() =>
             {
@@ -117,18 +190,38 @@ namespace Lobby
             deActiveSequence.SetAutoKill(false);
             deActiveSequence.OnStart(() =>
             {
-                settingButton.image.rectTransform.anchoredPosition = new Vector2(100, settingButton.image.rectTransform.anchoredPosition.y);
-                runeIcon.rectTransform.anchoredPosition = new Vector2(-100, runeIcon.rectTransform.anchoredPosition.y);
-                startButton.image.rectTransform.anchoredPosition = Vector2.zero;
-                bgmParent.anchoredPosition = new Vector2(bgmParent.anchoredPosition.x, 530);
+                settingButton.image.rectTransform.anchoredPosition = new Vector2(46, settingButton.image.rectTransform.anchoredPosition.y);
+                runeBase.rectTransform.anchoredPosition = new Vector2(-160, runeBase.rectTransform.anchoredPosition.y);
+                bgmParent.anchoredPosition = new Vector2(bgmParent.anchoredPosition.x, 350);
+                startButton.image.rectTransform.localScale = Vector3.one;
+                shopButton.image.rectTransform.localScale = Vector3.one;
+                stageButton.image.rectTransform.localScale = Vector3.one;
             });
 
             deActiveSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION / 2));
-            deActiveSequence.Join(runeIcon.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION / 2));
-            deActiveSequence.Join(startButton.image.rectTransform.DOAnchorPosY(-1200, UI_MOVE_DURATION / 2));
+            deActiveSequence.Join(runeBase.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION / 2));
             deActiveSequence.Join(bgmParent.DOAnchorPosY(1000, UI_MOVE_DURATION / 2));
 
+            deActiveSequence.Join(startButton.image.rectTransform.DOScale(Vector3.zero, UI_MOVE_DURATION / 2).SetEase(Ease.InBack));
+            deActiveSequence.Insert(UI_MOVE_DURATION / 8, stageButton.image.rectTransform.DOScale(Vector3.zero, UI_MOVE_DURATION / 2).SetEase(Ease.InBack));
+            deActiveSequence.Insert(UI_MOVE_DURATION / 4, shopButton.image.rectTransform.DOScale(Vector3.zero, UI_MOVE_DURATION / 2).SetEase(Ease.InBack));
+
             deActiveSequence.OnComplete(() => gameObject.SetActive(false));
+        }
+
+        private void StageButton()
+        {
+            if (isStarting) return;
+
+            isStarting = true;
+            SoundManager.Instance.PlaySound("Button", ESoundType.Sfx);
+            LobbyManager.Instance.uiManager.Select(LobbyType.Stage);
+        }
+
+        private void LockButton()
+        {
+            shopButton.image.rectTransform.DOShakeAnchorPos(0.3f, 20, 50);
+            SoundManager.Instance.PlaySound("Warning", ESoundType.Sfx);
         }
 
         private void StartButton()
@@ -181,8 +274,9 @@ namespace Lobby
 
         private void NextBgm()
         {
-            bgmMainSelect.rectTransform.DOKill(true);
-            bgmSideSelect.rectTransform.DOKill(true);
+            bgmMainSelect.DOKill(true);
+            bgmSideSelect.DOKill(true);
+            bgmSelectRight.rectTransform.DOKill(true);
 
             int prevIndex = SaveManager.Instance.GameData.selectBgmIndex;
             int nowIndex = prevIndex - 1 < 0 ? TileManager.Instance.stageTileData.bgmDataList.Count - 1 : prevIndex - 1;
@@ -191,14 +285,25 @@ namespace Lobby
             if (prevIndex == nowIndex) return;
 
             bgmMainSelect.gameObject.SetActive(true);
-            bgmMainSelect.rectTransform.anchoredPosition = new Vector2(-650, bgmMainSelect.rectTransform.anchoredPosition.y);
+            bgmMainSelect.anchoredPosition = new Vector2(-650, bgmMainSelect.anchoredPosition.y);
+
+            bgmSelectRight.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
+
             bgmMainSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
 
-            bgmSideSelect.rectTransform.DOAnchorPosX(650, UI_DRAG_MOVE_DURATION);
-            bgmMainSelect.rectTransform.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
+            bgmMainSelectText.ForceMeshUpdate(true);
+            var charInfo = bgmMainSelectText.textInfo.characterInfo[0];
+            bgmMainIconGradient.rectTransform.localPosition = (charInfo.topLeft + charInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
+
+            bgmSideSelect.DOAnchorPosX(650, UI_DRAG_MOVE_DURATION);
+            bgmMainSelect.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                bgmSideSelect.rectTransform.anchoredPosition = new Vector2(0, bgmSideSelect.rectTransform.anchoredPosition.y);
+                bgmSideSelect.anchoredPosition = new Vector2(0, bgmSideSelect.anchoredPosition.y);
                 bgmSideSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
+
+                bgmSideSelectText.ForceMeshUpdate(true);
+                var charInfo = bgmSideSelectText.textInfo.characterInfo[0];
+                bgmSideIconGradient.rectTransform.localPosition = (charInfo.topLeft + charInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
 
                 TileManager.Instance.StageReset();
 
@@ -208,8 +313,9 @@ namespace Lobby
 
         private void PrevBgm()
         {
-            bgmMainSelect.rectTransform.DOKill(true);
-            bgmSideSelect.rectTransform.DOKill(true);
+            bgmMainSelect.DOKill(true);
+            bgmSideSelect.DOKill(true);
+            bgmSelectLeft.rectTransform.DOKill(true);
 
             int prevIndex = SaveManager.Instance.GameData.selectBgmIndex;
             int nowIndex = (prevIndex + 1) % TileManager.Instance.stageTileData.bgmDataList.Count;
@@ -218,14 +324,25 @@ namespace Lobby
             if (prevIndex == nowIndex) return;
 
             bgmMainSelect.gameObject.SetActive(true);
-            bgmMainSelect.rectTransform.anchoredPosition = new Vector2(650, bgmMainSelect.rectTransform.anchoredPosition.y);
+            bgmMainSelect.anchoredPosition = new Vector2(650, bgmMainSelect.anchoredPosition.y);
+
+            bgmSelectLeft.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
+
             bgmMainSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
 
-            bgmSideSelect.rectTransform.DOAnchorPosX(-650, UI_DRAG_MOVE_DURATION);
-            bgmMainSelect.rectTransform.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
+            bgmMainSelectText.ForceMeshUpdate(true);
+            var charInfo = bgmMainSelectText.textInfo.characterInfo[0];
+            bgmMainIconGradient.rectTransform.localPosition = (charInfo.topLeft + charInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
+
+            bgmSideSelect.DOAnchorPosX(-650, UI_DRAG_MOVE_DURATION);
+            bgmMainSelect.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                bgmSideSelect.rectTransform.anchoredPosition = new Vector2(0, bgmSideSelect.rectTransform.anchoredPosition.y);
+                bgmSideSelect.anchoredPosition = new Vector2(0, bgmSideSelect.anchoredPosition.y);
                 bgmSideSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
+
+                bgmSideSelectText.ForceMeshUpdate(true);
+                var charInfo = bgmSideSelectText.textInfo.characterInfo[0];
+                bgmSideIconGradient.rectTransform.localPosition = (charInfo.topLeft + charInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
 
                 TileManager.Instance.StageReset();
 

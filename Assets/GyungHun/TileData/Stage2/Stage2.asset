@@ -8261,6 +8261,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   stageNickName: Volcano
+  uiColor: {r: 0.9056604, g: 0, b: 0.08484909, a: 1}
+  uiDarkColor: {r: 0.5754717, g: 0.061890315, b: 0.07623625, a: 1}
   directionLightColor: {r: 1, g: 0.8632076, b: 0.8632076, a: 1}
   postProcessProfile: {fileID: 11400000, guid: 1d3d4617e94b94741ac120f5b85c9b60, type: 2}
   skyBox: {fileID: 2100000, guid: 63dd79850a7e5bf4792e9dcdfb1e950e, type: 2}

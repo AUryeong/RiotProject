@@ -86,12 +86,12 @@ namespace InGame
             Player.Instance.Hp += ENEMY_HP_HEAL_VALUE;
 
             float distance = transform.position.z - Player.Instance.transform.position.z;
-            if (distance <= 4f)
+            if (distance <= 4.5f)
             {
                 InGameManager.Instance.Rune += 9;
                 PoolManager.Instance.Init("Perfect Effect").transform.position = transform.position;
             }
-            else if (distance <= 5)
+            else if (distance <= 6.5f)
             {
                 InGameManager.Instance.Rune += 7;
                 PoolManager.Instance.Init("Great Effect").transform.position = transform.position;

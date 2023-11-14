@@ -4,85 +4,44 @@ using UnityEngine.UI;
 
 namespace Lobby
 {
+    public enum LobbyType
+    {
+        Home,
+        Stage,
+        Shop
+    }
     public class LobbyUIManager : MonoBehaviour, IActiveLink
     {
-        [SerializeField] private Image background;
+        [SerializeField] private LobbyUIPlay uiPlay;
+        [SerializeField] private LobbyUIStage uiStage;
 
-        [Header("Buttons")]
-        [SerializeField] private Image downButtonWindow;
+        private LobbyUIActiveLink beforeActiveLink;
 
-        [SerializeField] private Button[] downButtons;
-        [SerializeField] private LobbyUIActiveLink[] downButtonPopup;
-
-        public const float UI_MOVE_DURATION = 0.5f;
-        public const float UI_BUTTON_MOVE_DURATION = 0.4f;
-
-        private int lastDownIndex = -1;
-
-        private void Awake()
+        public void Select(LobbyType type)
         {
-            for (var i = 0; i < downButtons.Length; i++)
+            beforeActiveLink?.DeActive();
+            switch (type)
             {
-                var downButton = downButtons[i];
-                int temp = i;
-
-                downButton.onClick.RemoveAllListeners();
-                downButton.onClick.AddListener(() => DownButtonClick(temp));
+                case LobbyType.Home:
+                    beforeActiveLink = uiPlay;
+                    break;
+                case LobbyType.Stage:
+                    beforeActiveLink = uiStage;
+                    break;
             }
+            beforeActiveLink?.Active();
+            
         }
-
-        private void DownButtonClick(int index)
-        {
-            if (lastDownIndex >= 0)
-            {
-                downButtonPopup[lastDownIndex].DeActive();
-                downButtons[lastDownIndex].image.DOColor(Color.white, UI_BUTTON_MOVE_DURATION);
-                if (downButtonPopup[lastDownIndex] == downButtonPopup[index])
-                {
-                    lastDownIndex = -1;
-                    return;
-                }
-            }
-
-            downButtons[index].image.DOColor(new Color(0.75f, 0.75f, 0.75f), UI_BUTTON_MOVE_DURATION);
-
-            downButtonPopup[index].Active();
-            lastDownIndex = index;
-        }
-
         public void Active()
         {
-            foreach (var lobbyActiveLink in downButtonPopup)
-                lobbyActiveLink.gameObject.SetActive(false);
-
-            DownButtonClick(1);
-
-            background.DOKill();
-            downButtonWindow.rectTransform.DOKill();
-
-            downButtonWindow.gameObject.SetActive(true);
-            background.gameObject.SetActive(true);
-
-            downButtonWindow.rectTransform.DOAnchorPosY(150, UI_MOVE_DURATION);
-
-            background.color = background.color.GetFade(0);
-            background.DOFade(0.3f, UI_MOVE_DURATION);
+            Select(LobbyType.Home);
         }
+
 
         public void DeActive()
         {
-            if (lastDownIndex >= 0)
-                downButtonPopup[lastDownIndex].DeActive();
-
-            lastDownIndex = -1;
-
-            background.DOKill();
-            downButtonWindow.DOKill();
-
-            downButtonWindow.rectTransform.DOAnchorPosY(-10, UI_MOVE_DURATION);
-
-            background.color = background.color.GetFade(0.3f);
-            background.DOFade(0f, UI_MOVE_DURATION).OnComplete(() => gameObject.SetActive(false));
+            beforeActiveLink?.DeActive();
+            beforeActiveLink = null;
         }
     }
 }
