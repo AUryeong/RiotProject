@@ -13,6 +13,17 @@ namespace Lobby
         [SerializeField] private LobbyUIStageSlot sideStageSlot;
 
         [SerializeField] private Button selectButton;
+        [SerializeField] private Image borderBackground;
+
+        [Space(10f)]
+
+        [SerializeField] private Button exitButton;
+
+        [Space(10f)]
+
+        [SerializeField] private Image buttonOutline;
+        [SerializeField] private Image buttonGradient;
+        [SerializeField] private Image buttonIcon;
 
         private int stageSelectIndex;
         private int bgmSelectIndex;
@@ -23,7 +34,7 @@ namespace Lobby
         private const float AUTO_DRAG_POS = 200;
         private const float DRAG_MIN_POS = 50;
 
-        private bool isSelecting;
+        private bool isDeActivating;
         private bool isDrag;
         private Vector2 startDragPos;
         private Vector2 lastDragPos;
@@ -38,23 +49,40 @@ namespace Lobby
 
             selectButton.onClick.RemoveAllListeners();
             selectButton.onClick.AddListener(SelectButton);
+
+            exitButton.onClick.RemoveAllListeners();
+            exitButton.onClick.AddListener(ExitButton);
+        }
+
+        private void ExitButton()
+        {
+            if (isDeActivating) return;
+
+            isDeActivating = true;
+
+            SoundManager.Instance.PlaySound("Button", ESoundType.Sfx);
+            
+            LobbyManager.Instance.uiManager.Select(LobbyType.Home);
         }
 
         private void SelectButton()
         {
-            if (isSelecting) return;
+            if (isDeActivating) return;
 
-            isSelecting = true;
+            isDeActivating = true;
+
+            SoundManager.Instance.PlaySound("levelup", ESoundType.Sfx, 0.6f, 0.9f);
 
             SaveManager.Instance.GameData.selectStageIndex = stageSelectIndex;
             SaveManager.Instance.GameData.selectBgmIndex = bgmSelectIndex;
-            
+
             GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby);
         }
 
         public override void Active()
         {
-            isSelecting = false;
+            base.Active();
+            isDeActivating = false;
             stageSelectIndex = SaveManager.Instance.GameData.selectStageIndex;
             inputEventTrigger.gameObject.SetActive(true);
 
@@ -62,10 +90,15 @@ namespace Lobby
             mainStageSlot.ShowStage(stageTileData);
             sideStageSlot.ShowStage(stageTileData);
 
+            buttonIcon.color = stageTileData.uiColor;
+            buttonOutline.color = stageTileData.uiColor;
+            buttonGradient.color = stageTileData.uiDarkColor;
+
+            borderBackground.color = stageTileData.uiDarkColor.GetFade(0.35f);
+
             activeSequence?.Complete();
             deActiveSequence?.Complete();
 
-            base.Active();
             if (activeSequence != null)
             {
                 activeSequence.Restart();
@@ -79,10 +112,12 @@ namespace Lobby
                 sideStageSlot.ShowStage(TileManager.Instance.stageTileDataList[SaveManager.Instance.GameData.selectStageIndex]);
                 selectButton.image.rectTransform.localScale = Vector3.zero;
                 sideStageSlot.RectTransform.localScale = Vector3.zero;
+                exitButton.image.rectTransform.anchoredPosition = new Vector2(-70, exitButton.image.rectTransform.anchoredPosition.y);
             });
 
             activeSequence.Join(sideStageSlot.RectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
             activeSequence.Join(selectButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
+            activeSequence.Join(exitButton.image.rectTransform.DOAnchorPosX(70, UI_MOVE_DURATION));
 
             activeSequence.OnUpdate(() =>
             {
@@ -93,15 +128,15 @@ namespace Lobby
 
         public override void DeActive()
         {
+            base.DeActive();
             inputEventTrigger.gameObject.SetActive(false);
 
             var bgmData = TileManager.Instance.stageTileData.bgmDataList[SaveManager.Instance.GameData.selectBgmIndex];
             TileManager.Instance.SetBgmData(bgmData);
-            
+
             activeSequence?.Complete(true);
             deActiveSequence?.Complete(true);
 
-            base.DeActive();
             if (deActiveSequence != null)
             {
                 deActiveSequence.Restart();
@@ -114,10 +149,12 @@ namespace Lobby
             {
                 sideStageSlot.RectTransform.localScale = Vector3.one;
                 selectButton.image.rectTransform.localScale = Vector3.one;
+                exitButton.image.rectTransform.anchoredPosition = new Vector2(70, exitButton.image.rectTransform.anchoredPosition.y);
             });
 
-            deActiveSequence.Join(sideStageSlot.RectTransform.DOScale(Vector3.zero, UI_MOVE_DURATION/2).SetEase(Ease.InBack));
-            deActiveSequence.Join(selectButton.image.rectTransform.DOScale(Vector3.zero, UI_MOVE_DURATION/2).SetEase(Ease.InBack));
+            deActiveSequence.Join(sideStageSlot.RectTransform.DOScale(Vector3.zero, UI_MOVE_DURATION / 2).SetEase(Ease.InBack));
+            deActiveSequence.Join(selectButton.image.rectTransform.DOScale(Vector3.zero, UI_MOVE_DURATION / 2).SetEase(Ease.InBack));
+            deActiveSequence.Join(exitButton.image.rectTransform.DOAnchorPosX(-70, UI_MOVE_DURATION / 2));
 
             deActiveSequence.OnComplete(() => gameObject.SetActive(false));
         }
@@ -162,6 +199,8 @@ namespace Lobby
 
         private void NextStage()
         {
+            SoundManager.Instance.PlaySound("levelup_back", ESoundType.Sfx, 0.6f, 0.9f);
+
             mainStageSlot.RectTransform.DOKill(true);
             sideStageSlot.RectTransform.DOKill(true);
 
@@ -172,6 +211,18 @@ namespace Lobby
             mainStageSlot.gameObject.SetActive(true);
             mainStageSlot.RectTransform.anchoredPosition = new Vector2(-650, mainStageSlot.RectTransform.anchoredPosition.y);
             mainStageSlot.ShowStage(stageTileData);
+
+            buttonIcon.DOKill(true);
+            buttonIcon.DOColor(stageTileData.uiColor, UI_DRAG_MOVE_DURATION);
+
+            buttonOutline.DOKill(true);
+            buttonOutline.DOColor(stageTileData.uiColor, UI_DRAG_MOVE_DURATION);
+
+            buttonGradient.DOKill(true);
+            buttonGradient.DOColor(stageTileData.uiDarkColor, UI_DRAG_MOVE_DURATION);
+
+            borderBackground.DOKill(true);
+            borderBackground.DOColor(stageTileData.uiDarkColor.GetFade(0.35f), UI_DRAG_MOVE_DURATION);
 
             sideStageSlot.RectTransform.DOAnchorPosX(650, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack);
             mainStageSlot.RectTransform.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
@@ -187,6 +238,8 @@ namespace Lobby
 
         private void PrevStage()
         {
+            SoundManager.Instance.PlaySound("levelup_back", ESoundType.Sfx, 0.6f, 0.9f);
+
             mainStageSlot.RectTransform.DOKill(true);
             sideStageSlot.RectTransform.DOKill(true);
 
@@ -197,6 +250,18 @@ namespace Lobby
             mainStageSlot.gameObject.SetActive(true);
             mainStageSlot.RectTransform.anchoredPosition = new Vector2(650, mainStageSlot.RectTransform.anchoredPosition.y);
             mainStageSlot.ShowStage(stageTileData);
+
+            buttonIcon.DOKill(true);
+            buttonIcon.DOColor(stageTileData.uiColor, UI_DRAG_MOVE_DURATION);
+
+            buttonOutline.DOKill(true);
+            buttonOutline.DOColor(stageTileData.uiColor, UI_DRAG_MOVE_DURATION);
+
+            buttonGradient.DOKill(true);
+            buttonGradient.DOColor(stageTileData.uiDarkColor, UI_DRAG_MOVE_DURATION);
+
+            borderBackground.DOKill(true);
+            borderBackground.DOColor(stageTileData.uiDarkColor.GetFade(0.35f), UI_DRAG_MOVE_DURATION);
 
             sideStageSlot.RectTransform.DOAnchorPosX(-650, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack);
             mainStageSlot.RectTransform.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>

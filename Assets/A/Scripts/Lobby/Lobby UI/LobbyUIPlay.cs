@@ -99,6 +99,7 @@ namespace Lobby
 
         public override void Active()
         {
+            base.Active();
             isDeActivating = false;
             isActivating = true;
 
@@ -140,7 +141,6 @@ namespace Lobby
             activeSequence?.Complete();
             deActiveSequence?.Complete();
 
-            base.Active();
             if (activeSequence != null)
             {
                 activeSequence.Restart();
@@ -181,12 +181,12 @@ namespace Lobby
 
         public override void DeActive()
         {
+            base.DeActive();
             inputEventTrigger.gameObject.SetActive(false);
 
             activeSequence?.Complete(true);
             deActiveSequence?.Complete(true);
 
-            base.DeActive();
             if (deActiveSequence != null)
             {
                 deActiveSequence.Restart();
@@ -238,7 +238,7 @@ namespace Lobby
             if (isDeActivating) return;
 
             isDeActivating = true;
-            SoundManager.Instance.PlaySound("Game_start", ESoundType.Sfx);
+            SoundManager.Instance.PlaySound("gamestart", ESoundType.Sfx, 1, 1.2f);
             GameManager.Instance.ActiveSceneLink(SceneLinkType.InGame);
         }
 

@@ -2034,13 +2034,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
+      Data: 0.5981132
+    - Name: 
+      Entry: 4
+      Data: 0.7531999
+    - Name: 
+      Entry: 4
       Data: 1
-    - Name: 
-      Entry: 4
-      Data: 0.531772435
-    - Name: 
-      Entry: 4
-      Data: 0.4198113
     - Name: 
       Entry: 4
       Data: 1
@@ -2052,13 +2052,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.8018868
+      Data: 0.890566051
     - Name: 
       Entry: 4
-      Data: 0.24980554
+      Data: 1
     - Name: 
       Entry: 4
-      Data: 0.238296539
+      Data: 0.9976625
     - Name: 
       Entry: 4
       Data: 1
@@ -4717,7 +4717,7 @@ MonoBehaviour:
       Data: 257|BgmData, Assembly-CSharp
     - Name: bgmNickName
       Entry: 1
-      Data: Boost The Amp
+      Data: Lolipop Waltz
     - Name: bgmName
       Entry: 1
       Data: Sound3-3
@@ -4736,13 +4736,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
+      Data: 0.579245269
+    - Name: 
+      Entry: 4
       Data: 1
     - Name: 
       Entry: 4
-      Data: 0.531772435
-    - Name: 
-      Entry: 4
-      Data: 0.4198113
+      Data: 0.850373566
     - Name: 
       Entry: 4
       Data: 1
@@ -4754,13 +4754,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.8018868
+      Data: 0.862264156
     - Name: 
       Entry: 4
-      Data: 0.24980554
+      Data: 1
     - Name: 
       Entry: 4
-      Data: 0.238296539
+      Data: 0.918419838
     - Name: 
       Entry: 4
       Data: 1

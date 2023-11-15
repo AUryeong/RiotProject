@@ -35,7 +35,7 @@ MonoBehaviour:
       Data: 1|BgmData, Assembly-CSharp
     - Name: bgmNickName
       Entry: 1
-      Data: A Drawn Out Adventure
+      Data: Year's End, It was chaos
     - Name: bgmName
       Entry: 1
       Data: Sound2-1
@@ -5107,7 +5107,7 @@ MonoBehaviour:
       Data: 274|BgmData, Assembly-CSharp
     - Name: bgmNickName
       Entry: 1
-      Data: A Secret Crush Don't Tell
+      Data: Against Villainous Robot
     - Name: bgmName
       Entry: 1
       Data: Sound2-3

@@ -38,6 +38,9 @@ namespace Lobby
 
         public void Active()
         {
+            uiPlay.gameObject.SetActive(false);
+            uiStage.gameObject.SetActive(false);
+
             Select(LobbyType.Home);
         }
 
