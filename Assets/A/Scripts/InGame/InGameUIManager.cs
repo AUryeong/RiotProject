@@ -8,6 +8,9 @@ namespace InGame
 {
     public class InGameUIManager : MonoBehaviour
     {
+        [SerializeField] private InputDetail inputDetail;
+
+        [Space(20)]
         [SerializeField] private RectTransform hpBarList;
         [SerializeField] private Image[] hpBarBases;
         [SerializeField] private Image[] hpBars;
@@ -70,6 +73,9 @@ namespace InGame
             hpBarList.anchoredPosition = new Vector2(hpBarList.anchoredPosition.x, 152);
             runeBase.rectTransform.anchoredPosition = new Vector2(runeBase.rectTransform.anchoredPosition.x, 100);
             songSliderRect.anchoredPosition = new Vector2(60, songSliderRect.anchoredPosition.y);
+
+            inputDetail.inputAction = Player.Instance.CheckInput;
+
             UpdateSongSlider(0);
             this.Invoke(() =>
             {

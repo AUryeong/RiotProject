@@ -9,7 +9,7 @@ namespace Lobby
     public class LobbyUIPlay : LobbyUIActiveLink
     {
         [SerializeField] private Button startButton;
-        [SerializeField] private EventTrigger inputEventTrigger;
+        [SerializeField] private InputDetail inputDetail;
 
         [Header("Title")]
         [SerializeField] private Image titleOutline;
@@ -52,37 +52,24 @@ namespace Lobby
 
         [Space(10f)]
 
-        [SerializeField] private RectTransform bgmMainSelect;
-        [SerializeField] private Image bgmMainIcon;
-        [SerializeField] private Image bgmMainIconGradient;
-        [SerializeField] private TextMeshProUGUI bgmMainSelectText;
+        [SerializeField] private LobbyUISongSelect bgmMainSelect;
 
         [Space(10f)]
 
-        [SerializeField] private RectTransform bgmSideSelect;
-        [SerializeField] private Image bgmSideIcon;
-        [SerializeField] private Image bgmSideIconGradient;
-        [SerializeField] private TextMeshProUGUI bgmSideSelectText;
+        [SerializeField] private LobbyUISongSelect bgmSideSelect;
 
         private const float UI_MOVE_DURATION = 0.75f;
         private const float UI_DRAG_MOVE_DURATION = 0.5f;
 
-        private const float AUTO_DRAG_POS = 200;
-        private const float DRAG_MIN_POS = 50;
-
         private bool isDeActivating;
         private bool isActivating;
-        private bool isDrag;
-        private Vector2 startDragPos;
-        private Vector2 lastDragPos;
 
         [Header("Animation")]
         private Sequence deActiveSequence;
         private Sequence activeSequence;
         protected override void Awake()
         {
-            inputEventTrigger.AddListener(EventTriggerType.PointerDown, OnPointerDown);
-            inputEventTrigger.AddListener(EventTriggerType.PointerUp, OnPointerUp);
+            inputDetail.inputAction = CheckInput;
 
             startButton.onClick.RemoveAllListeners();
             startButton.onClick.AddListener(StartButton);
@@ -103,28 +90,36 @@ namespace Lobby
             isDeActivating = false;
             isActivating = true;
 
-            inputEventTrigger.gameObject.SetActive(true);
+            inputDetail.gameObject.SetActive(true);
 
             int nowIndex = SaveManager.Instance.GameData.selectBgmIndex;
 
-            bgmSideSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
-
-            bgmSideSelectText.ForceMeshUpdate(true);
-            var charInfo = bgmSideSelectText.textInfo.characterInfo[0];
-            bgmSideIconGradient.rectTransform.localPosition = (charInfo.topLeft + charInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
 
             runeText.text = SaveManager.Instance.GameData.rune.ToString();
 
             Color color = TileManager.Instance.stageTileData.uiColor;
             Color darkColor = TileManager.Instance.stageTileData.uiDarkColor;
 
+            int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
+            if (SaveManager.Instance.GameData.lastScores.Count <= index)
+                for (int i = SaveManager.Instance.GameData.lastScores.Count; i <= index; i++)
+                    SaveManager.Instance.GameData.lastScores.Add(0);
+
+            int lastScore = SaveManager.Instance.GameData.lastScores[index];
+
+            if (SaveManager.Instance.GameData.highScores.Count <= index)
+                for (int i = SaveManager.Instance.GameData.highScores.Count; i <= index; i++)
+                    SaveManager.Instance.GameData.highScores.Add(0);
+
+            int highScore = SaveManager.Instance.GameData.highScores[index];
+
+            bgmSideSelect.gameObject.SetActive(true);
+            bgmSideSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], color, lastScore, highScore);
+
             runeText.fontSharedMaterial.SetColor("_OutlineColor", darkColor);
 
             titleOutline.color = color;
             titleNeon.color = color;
-
-            bgmMainIcon.color = color;
-            bgmSideIcon.color = color;
 
             playHighLight.color = color;
             playGradient.color = darkColor;
@@ -165,13 +160,13 @@ namespace Lobby
 
             activeSequence.Join(shopButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
             activeSequence.Insert(UI_MOVE_DURATION / 4, stageButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
-            activeSequence.Insert(UI_MOVE_DURATION/2, startButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
+            activeSequence.Insert(UI_MOVE_DURATION / 2, startButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
 
             activeSequence.OnComplete(() =>
             {
                 isActivating = false;
             });
-            
+
             activeSequence.OnUpdate(() =>
             {
                 if (!Input.GetMouseButtonDown(0)) return;
@@ -182,7 +177,7 @@ namespace Lobby
         public override void DeActive()
         {
             base.DeActive();
-            inputEventTrigger.gameObject.SetActive(false);
+            inputDetail.gameObject.SetActive(false);
 
             activeSequence?.Complete(true);
             deActiveSequence?.Complete(true);
@@ -229,7 +224,7 @@ namespace Lobby
         {
             shopButton.image.rectTransform.DOKill(true);
             shopButton.image.rectTransform.DOShakeAnchorPos(0.3f, 20, 50);
-            
+
             SoundManager.Instance.PlaySound("Error", ESoundType.Sfx, 1, 1.15f);
         }
 
@@ -242,41 +237,9 @@ namespace Lobby
             GameManager.Instance.ActiveSceneLink(SceneLinkType.InGame);
         }
 
-        private void OnPointerDown(PointerEventData data)
+        private void CheckInput(Direction direction)
         {
-            isDrag = true;
-            startDragPos = data.position;
-        }
-
-        private void Update()
-        {
-            if (!isDrag) return;
-
-            lastDragPos = Input.mousePosition;
-            if (Vector2.Distance(startDragPos, lastDragPos) > AUTO_DRAG_POS)
-            {
-                isDrag = false;
-                CheckInput();
-            }
-        }
-
-
-        private void OnPointerUp(PointerEventData data)
-        {
-            if (!isDrag) return;
-
-            isDrag = false;
-            CheckInput();
-        }
-
-        private void CheckInput()
-        {
-            float distance = startDragPos.x - lastDragPos.x;
-            float distanceX = Mathf.Abs(distance);
-            if (distanceX < DRAG_MIN_POS)
-                return;
-
-            if (distance > 0)
+            if (direction == Direction.Left)
                 PrevBgm();
             else
                 NextBgm();
@@ -297,26 +260,30 @@ namespace Lobby
             if (prevIndex == nowIndex) return;
 
             bgmMainSelect.gameObject.SetActive(true);
-            bgmMainSelect.anchoredPosition = new Vector2(-650, bgmMainSelect.anchoredPosition.y);
+            bgmMainSelect.RectTransform.anchoredPosition = new Vector2(-650, bgmMainSelect.RectTransform.anchoredPosition.y);
 
             bgmSelectRight.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
 
-            bgmMainSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
+            int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
+            if (SaveManager.Instance.GameData.lastScores.Count <= index)
+                for (int i = SaveManager.Instance.GameData.lastScores.Count; i <= index; i++)
+                    SaveManager.Instance.GameData.lastScores.Add(0);
 
-            bgmMainSelectText.ForceMeshUpdate(true);
-            var charInfo = bgmMainSelectText.textInfo.characterInfo[0];
-            bgmMainIconGradient.rectTransform.localPosition = (charInfo.topLeft + charInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
+            int lastScore = SaveManager.Instance.GameData.lastScores[index];
 
-            bgmSideSelect.DOAnchorPosX(650, UI_DRAG_MOVE_DURATION);
-            bgmMainSelect.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
+            if (SaveManager.Instance.GameData.highScores.Count <= index)
+                for (int i = SaveManager.Instance.GameData.highScores.Count; i <= index; i++)
+                    SaveManager.Instance.GameData.highScores.Add(0);
+
+            int highScore = SaveManager.Instance.GameData.highScores[index];
+
+            bgmMainSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
+
+            bgmSideSelect.RectTransform.DOAnchorPosX(650, UI_DRAG_MOVE_DURATION);
+            bgmMainSelect.RectTransform.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                bgmSideSelect.anchoredPosition = new Vector2(0, bgmSideSelect.anchoredPosition.y);
-                bgmSideSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
-
-                bgmSideSelectText.ForceMeshUpdate(true);
-                var characterInfo = bgmSideSelectText.textInfo.characterInfo[0];
-                bgmSideIconGradient.rectTransform.localPosition = (characterInfo.topLeft + characterInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
-
+                bgmSideSelect.RectTransform.anchoredPosition = new Vector2(0, bgmSideSelect.RectTransform.anchoredPosition.y);
+                bgmSideSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
                 TileManager.Instance.StageReset();
 
                 bgmMainSelect.gameObject.SetActive(false);
@@ -326,7 +293,7 @@ namespace Lobby
         private void PrevBgm()
         {
             SoundManager.Instance.PlaySound("levelup_back", ESoundType.Sfx, 0.6f, 0.9f);
-            
+
             bgmMainSelect.DOKill(true);
             bgmSideSelect.DOKill(true);
             bgmSelectLeft.rectTransform.DOKill(true);
@@ -338,26 +305,30 @@ namespace Lobby
             if (prevIndex == nowIndex) return;
 
             bgmMainSelect.gameObject.SetActive(true);
-            bgmMainSelect.anchoredPosition = new Vector2(650, bgmMainSelect.anchoredPosition.y);
+            bgmMainSelect.RectTransform.anchoredPosition = new Vector2(650, bgmMainSelect.RectTransform.anchoredPosition.y);
 
             bgmSelectLeft.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
 
-            bgmMainSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
+            int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
+            if (SaveManager.Instance.GameData.lastScores.Count <= index)
+                for (int i = SaveManager.Instance.GameData.lastScores.Count; i <= index; i++)
+                    SaveManager.Instance.GameData.lastScores.Add(0);
 
-            bgmMainSelectText.ForceMeshUpdate(true);
-            var charInfo = bgmMainSelectText.textInfo.characterInfo[0];
-            bgmMainIconGradient.rectTransform.localPosition = (charInfo.topLeft + charInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
+            int lastScore = SaveManager.Instance.GameData.lastScores[index];
 
-            bgmSideSelect.DOAnchorPosX(-650, UI_DRAG_MOVE_DURATION);
-            bgmMainSelect.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
+            if (SaveManager.Instance.GameData.highScores.Count <= index)
+                for (int i = SaveManager.Instance.GameData.highScores.Count; i <= index; i++)
+                    SaveManager.Instance.GameData.highScores.Add(0);
+
+            int highScore = SaveManager.Instance.GameData.highScores[index];
+
+            bgmMainSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
+
+            bgmSideSelect.RectTransform.DOAnchorPosX(-650, UI_DRAG_MOVE_DURATION);
+            bgmMainSelect.RectTransform.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                bgmSideSelect.anchoredPosition = new Vector2(0, bgmSideSelect.anchoredPosition.y);
-                bgmSideSelectText.text = TileManager.Instance.stageTileData.bgmDataList[nowIndex].bgmNickName;
-
-                bgmSideSelectText.ForceMeshUpdate(true);
-                var characterInfo = bgmSideSelectText.textInfo.characterInfo[0];
-                bgmSideIconGradient.rectTransform.localPosition = (characterInfo.topLeft + characterInfo.bottomLeft) / 2 + new Vector3(-30, 0, 0);
-
+                bgmSideSelect.RectTransform.anchoredPosition = new Vector2(0, bgmSideSelect.RectTransform.anchoredPosition.y);
+                bgmSideSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
                 TileManager.Instance.StageReset();
 
                 bgmMainSelect.gameObject.SetActive(false);
@@ -367,22 +338,22 @@ namespace Lobby
         public void Bounce()
         {
             if (isDeActivating || isActivating) return;
-            
+
             float duration = TileManager.Instance.beatInterval / 4;
 
             Vector3 scale = Vector3.one * 1.05f;
-            
+
             startButton.image.rectTransform.DOKill(true);
             startButton.image.rectTransform.DOScale(scale, duration).SetLoops(2, LoopType.Yoyo);
-            
+
             stageButton.image.rectTransform.DOKill(true);
             stageButton.image.rectTransform.DOScale(scale, duration).SetLoops(2, LoopType.Yoyo);
-            
+
             shopButton.image.rectTransform.DOKill(true);
             shopButton.image.rectTransform.DOScale(scale, duration).SetLoops(2, LoopType.Yoyo);
-            
+
             titleNeon.rectTransform.DOKill(true);
-            titleNeon.rectTransform.DOScale(scale*0.9f, duration).SetLoops(2, LoopType.Yoyo);
+            titleNeon.rectTransform.DOScale(scale * 0.9f, duration).SetLoops(2, LoopType.Yoyo);
         }
     }
 }

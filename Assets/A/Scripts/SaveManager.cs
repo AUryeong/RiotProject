@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -10,7 +11,10 @@ public class GameData
     public int selectStageIndex;
     public int selectBgmIndex = 1;
     public int selectEffectIndex = 0;
-    
+
+    public List<int> lastScores;
+    public List<int> highScores;
+
     public float beatSync = 0;
 }
 

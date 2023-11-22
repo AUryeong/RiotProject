@@ -5,14 +5,6 @@ using InGame;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public enum Direction
-{
-    Left,
-    Up,
-    Right,
-    Down
-}
-
 public class Player : Singleton<Player>
 {
     public bool isInv;
