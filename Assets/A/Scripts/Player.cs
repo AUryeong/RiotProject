@@ -131,11 +131,17 @@ public class Player : Singleton<Player>
             OutGamingUpdate();
     }
 
+    private void FixedUpdate()
+    {
+        if (!IsAlive && GameManager.Instance.isGaming) return;
+
+        Move(Time.fixedDeltaTime);
+    }
+
     private void GamingUpdate()
     {
         if (!IsAlive) return;
 
-        Move();
         UpdateHp();
         CheckDeath();
         CheckBoost();
@@ -152,7 +158,6 @@ public class Player : Singleton<Player>
 
     private void OutGamingUpdate()
     {
-        Move();
         CheckBoost();
     }
 
@@ -221,9 +226,9 @@ public class Player : Singleton<Player>
         Die();
     }
 
-    private void Move()
+    private void Move(float deltaTime)
     {
-        float moveValue = Speed * Time.deltaTime / TileManager.Instance.beatInterval ;
+        float moveValue = Speed * deltaTime / TileManager.Instance.beatInterval ;
         transform.Translate(Vector3.forward * moveValue);
     }
 

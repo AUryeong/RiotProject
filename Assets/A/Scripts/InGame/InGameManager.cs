@@ -4,8 +4,6 @@ namespace InGame
 {
     public class InGameManager : Singleton<InGameManager>, IActiveLink
     {
-        private Camera mainCamera;
-        private Vector3 cameraDistance;
         public InGameUIManager uiManager;
 
         public int Rune
@@ -19,12 +17,6 @@ namespace InGame
         }
 
         private int rune;
-
-        private void Start()
-        {
-            mainCamera = Camera.main;
-            cameraDistance = mainCamera.transform.position - Player.Instance.transform.position;
-        }
 
         public void Active()
         {
