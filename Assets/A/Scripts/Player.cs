@@ -141,8 +141,6 @@ public class Player : Singleton<Player>
         CheckBoost();
         CheckMagnet();
         CheckInv();
-        if (Input.GetKeyDown(KeyCode.F))
-            Boost(5);
     }
 
     private void CheckInv()

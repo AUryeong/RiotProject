@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     public bool isGaming = true;
 
     private const float BLACK_FADE_DURATION = 0.75f;
+    private readonly Vector2 CAMERA_RENDER_SIZE = new Vector2(1920, 1080);
 
     [SerializeField] private Image blackFade;
     public GlobalObjectFogController fogController;
@@ -37,6 +38,9 @@ public class GameManager : Singleton<GameManager>
     {
         foreach (var cam in Camera.allCameras)
             SetResolution(cam);
+
+        foreach (var canvas in FindObjectsOfType<CanvasScaler>())
+            canvas.referenceResolution = CAMERA_RENDER_SIZE;
     }
 
     public void ActiveSceneLink(SceneLinkType type)
@@ -63,8 +67,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (changeCamera == null) return;
         
-        int setWidth = 720;
-        int setHeight = 1600;
+        int setWidth = Mathf.CeilToInt(CAMERA_RENDER_SIZE.x);
+        int setHeight = Mathf.CeilToInt(CAMERA_RENDER_SIZE.y);
 
         int deviceWidth = Screen.width;
         int deviceHeight = Screen.height;

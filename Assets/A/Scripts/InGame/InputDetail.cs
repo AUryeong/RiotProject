@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -44,6 +45,8 @@ public class InputDetail : MonoBehaviour
 
     private void Update()
     {
+        CheckKeyInput();
+
         if (!isDrag) return;
 
         lastDragPos = Input.mousePosition;
@@ -51,6 +54,26 @@ public class InputDetail : MonoBehaviour
         {
             isDrag = false;
             CheckInput();
+        }
+    }
+
+    private void CheckKeyInput()
+    {
+        if (!isOnlyLeftRight)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.S))
+                inputAction?.Invoke(Direction.Down);
+
+            if (Input.GetKeyDown(KeyCode.W))
+                inputAction?.Invoke(Direction.Up);
+        }
+        if (!isOnlyDownUp)
+        {
+            if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.A))
+                inputAction?.Invoke(Direction.Left);
+
+            if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.D))
+                inputAction?.Invoke(Direction.Right);
         }
     }
 
