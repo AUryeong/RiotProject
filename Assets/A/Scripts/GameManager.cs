@@ -13,19 +13,18 @@ public enum SceneLinkType
 
 public class GameManager : Singleton<GameManager>
 {
-    protected override bool IsDontDestroying => true;
     public bool isGaming = true;
 
-    private readonly Vector2 CAMERA_RENDER_SIZE = new Vector2(1920, 1080);
+    private readonly Vector2 CAMERA_RENDER_SIZE = new(1920, 1080);
+    private const float UPSCALE_RATIO = 0.75f;
 
     public Camera mainCamera;
     public Camera playerRenderCamera;
+    [SerializeField] private Camera[] resolutionCameras;
 
     [SerializeField] private RawImage rawImage;
-    [SerializeField] private RawImage playerRawImage;
 
     private RenderTexture renderTexture;
-    private RenderTexture playerRenderTexture;
 
     [Space(20f)]
     [SerializeField] private Image blackFade;
@@ -53,11 +52,32 @@ public class GameManager : Singleton<GameManager>
 
     protected override void OnReset()
     {
-        foreach (var cam in Camera.allCameras)
+        foreach (var cam in resolutionCameras)
             SetResolution(cam);
 
         foreach (var canvas in FindObjectsOfType<CanvasScaler>())
             canvas.referenceResolution = CAMERA_RENDER_SIZE;
+
+        UpScaleSamplingSetting();
+    }
+
+    private void UpScaleSamplingSetting()
+    {
+        if (renderTexture != null)
+            renderTexture.Release();
+
+        int setWidth = Mathf.CeilToInt(CAMERA_RENDER_SIZE.x);
+
+        int deviceWidth = Screen.width;
+        int deviceHeight = Screen.height;
+        
+        renderTexture = new RenderTexture((int)(UPSCALE_RATIO * setWidth), (int)((float)deviceHeight / deviceWidth * setWidth * UPSCALE_RATIO), 24, UnityEngine.Experimental.Rendering.DefaultFormat.HDR);
+        renderTexture.Create();
+
+        mainCamera.targetTexture = renderTexture;
+        playerRenderCamera.targetTexture = renderTexture;
+
+        rawImage.texture = renderTexture;
     }
 
     public void ActiveSceneLink(SceneLinkType type)
@@ -106,21 +126,5 @@ public class GameManager : Singleton<GameManager>
             changeCamera.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight);
         }
 
-        float ratio = 0.75f;
-
-        if (renderTexture != null)
-            renderTexture.Release();
-
-        renderTexture = new RenderTexture((int)(ratio * setWidth), (int)((float)deviceHeight / deviceWidth * setWidth * ratio), 24, UnityEngine.Experimental.Rendering.DefaultFormat.HDR);
-        renderTexture.Create();
-
-        playerRenderTexture = new RenderTexture((int)(ratio * setWidth), (int)((float)deviceHeight / deviceWidth * setWidth * ratio), 24, UnityEngine.Experimental.Rendering.DefaultFormat.HDR);
-        playerRenderTexture.Create();
-
-        mainCamera.targetTexture = renderTexture;
-        playerRenderCamera.targetTexture = playerRenderTexture;
-
-        rawImage.texture = renderTexture;
-        playerRawImage.texture = playerRenderTexture;
     }
 }
