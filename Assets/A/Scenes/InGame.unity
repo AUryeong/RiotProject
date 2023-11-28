@@ -14207,7 +14207,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675643531}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14915,10 +14915,8 @@ MonoBehaviour:
   isGaming: 0
   mainCamera: {fileID: 5330494097065481020}
   playerRenderCamera: {fileID: 143818355}
-  resolutionCameras:
-  - {fileID: 143818355}
-  - {fileID: 5330494097065481020}
-  - {fileID: 1490221379}
+  uiCamera: {fileID: 1490221379}
+  renderingCamera: {fileID: 1161797705}
   rawImage: {fileID: 1238329332}
   blackFade: {fileID: 1675643533}
   fogController: {fileID: 1502887876}

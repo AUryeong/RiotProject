@@ -15,34 +15,29 @@ public class GameManager : Singleton<GameManager>
 {
     public bool isGaming = true;
 
-    private readonly Vector2 CAMERA_RENDER_SIZE = new(1920, 1080);
-    private const float UPSCALE_RATIO = 0.75f;
+    private readonly Vector2 CAMERA_RENDER_SIZE = new(720, 1600);
+    private const float UPSCALE_RATIO = 0.65f;
 
     public Camera mainCamera;
-    public Camera playerRenderCamera;
-    [SerializeField] private Camera[] resolutionCameras;
+    [SerializeField] private Camera playerRenderCamera;
+    [SerializeField] private Camera uiCamera;
+    [SerializeField] private Camera renderingCamera;
 
+    [Space(10f)]
     [SerializeField] private RawImage rawImage;
 
     private RenderTexture renderTexture;
 
-    [Space(20f)]
-    [SerializeField] private Image blackFade;
+    [Space(20f)] [SerializeField] private Image blackFade;
     private const float BLACK_FADE_DURATION = 0.75f;
 
-    [Space(20f)]
-    public GlobalObjectFogController fogController;
+    [Space(20f)] public GlobalObjectFogController fogController;
     public PostProcessVolume postProcessVolume;
     public Light directionLight;
 
     protected override void OnCreated()
     {
         base.OnCreated();
-        if (mainCamera == null)
-            mainCamera = Camera.main;
-
-        if (playerRenderCamera == null)
-            playerRenderCamera = Camera.allCameras[1];
 
         Application.targetFrameRate = 60;
 
@@ -52,35 +47,15 @@ public class GameManager : Singleton<GameManager>
 
     protected override void OnReset()
     {
-        foreach (var cam in resolutionCameras)
-            SetResolution(cam);
+        SetResolution();
 
-        foreach (var canvas in FindObjectsOfType<CanvasScaler>())
+        foreach (var canvas in FindObjectsOfType<CanvasScaler>(true))
             canvas.referenceResolution = CAMERA_RENDER_SIZE;
 
         UpScaleSamplingSetting();
     }
 
-    private void UpScaleSamplingSetting()
-    {
-        if (renderTexture != null)
-            renderTexture.Release();
-
-        int setWidth = Mathf.CeilToInt(CAMERA_RENDER_SIZE.x);
-
-        int deviceWidth = Screen.width;
-        int deviceHeight = Screen.height;
-        
-        renderTexture = new RenderTexture((int)(UPSCALE_RATIO * setWidth), (int)((float)deviceHeight / deviceWidth * setWidth * UPSCALE_RATIO), 24, UnityEngine.Experimental.Rendering.DefaultFormat.HDR);
-        renderTexture.Create();
-
-        mainCamera.targetTexture = renderTexture;
-        playerRenderCamera.targetTexture = renderTexture;
-
-        rawImage.texture = renderTexture;
-    }
-
-    public void ActiveSceneLink(SceneLinkType type)
+    public void ActiveSceneLink(SceneLinkType type, System.Action action = null)
     {
         switch (type)
         {
@@ -88,6 +63,8 @@ public class GameManager : Singleton<GameManager>
                 blackFade.gameObject.SetActive(true);
                 blackFade.DOFade(1, BLACK_FADE_DURATION).OnComplete(() =>
                 {
+                    action?.Invoke();
+                    
                     LobbyManager.Instance.Active();
                     InGameManager.Instance.DeActive();
                     blackFade.DOFade(0, BLACK_FADE_DURATION).OnComplete(() => blackFade.gameObject.SetActive(false));
@@ -100,10 +77,28 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    private void SetResolution(Camera changeCamera)
+    private void UpScaleSamplingSetting()
     {
-        if (changeCamera == null) return;
+        if (renderTexture != null)
+            renderTexture.Release();
 
+        int setWidth = Mathf.CeilToInt(CAMERA_RENDER_SIZE.x);
+
+        int deviceWidth = Screen.width;
+        int deviceHeight = Screen.height;
+
+        renderTexture = new RenderTexture((int)(UPSCALE_RATIO * setWidth), (int)((float)deviceHeight / deviceWidth * setWidth * UPSCALE_RATIO), 24,
+            UnityEngine.Experimental.Rendering.DefaultFormat.HDR);
+        renderTexture.Create();
+
+        mainCamera.targetTexture = renderTexture;
+        playerRenderCamera.targetTexture = renderTexture;
+
+        rawImage.texture = renderTexture;
+    }
+    
+    private void SetResolution()
+    {
         int setWidth = Mathf.CeilToInt(CAMERA_RENDER_SIZE.x);
         int setHeight = Mathf.CeilToInt(CAMERA_RENDER_SIZE.y);
 
@@ -118,13 +113,16 @@ public class GameManager : Singleton<GameManager>
         if (screenMultiplier < deviceMultiplier)
         {
             float newWidth = screenMultiplier / deviceMultiplier;
-            changeCamera.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f);
+            renderingCamera.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f);
+            uiCamera.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f);
+            rawImage.uvRect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f);
         }
         else
         {
             float newHeight = deviceMultiplier / screenMultiplier;
-            changeCamera.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight);
+            renderingCamera.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight);
+            uiCamera.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight);
+            rawImage.uvRect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight);
         }
-
     }
 }

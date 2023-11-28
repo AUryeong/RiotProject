@@ -8,16 +8,15 @@ using UnityEngine.Serialization;
 public class Player : Singleton<Player>
 {
     public bool isInv;
+    private int line;
 
     private Rigidbody rigid;
     private Animator animator;
 
-    [Space(15f)]
-    public SkinnedMeshRenderer[] defaultMeshes;
+    [Space(15f)] public SkinnedMeshRenderer[] defaultMeshes;
     public SkinnedMeshRenderer[] dissolveMeshes;
 
-    [Space(15f)]
-    public PlayerEffectData effectData;
+    [Space(15f)] public PlayerEffectData effectData;
 
     public bool IsAlive { get; private set; }
     private const float BEAT_HIT_DISTANCE = 8;
@@ -45,11 +44,10 @@ public class Player : Singleton<Player>
 
     public float maxHp;
     public float hpRemoveValue;
-    
+
     [HideInInspector] public List<Enemy> hitAbleEnemyList;
 
-    [Space(10f)]
-    [SerializeField] private BoxCollider enemyCheckColliders;
+    [Space(10f)] [SerializeField] private BoxCollider enemyCheckColliders;
     private int attackIndex;
 
     public float Hp
@@ -87,6 +85,8 @@ public class Player : Singleton<Player>
 
     public void Reset()
     {
+        line = 0;
+
         rigid.velocity = Vector3.zero;
         rigid.useGravity = false;
 
@@ -228,12 +228,20 @@ public class Player : Singleton<Player>
 
     private void Move(float deltaTime)
     {
-        float moveValue = Speed * deltaTime / TileManager.Instance.beatInterval ;
+        float moveValue = Speed * deltaTime / TileManager.Instance.beatInterval;
         transform.Translate(Vector3.forward * moveValue);
     }
 
     private void MoveLine(float moveX)
     {
+        int moveXSign = (int)Mathf.Sign(moveX);
+        int moveXLine = (int)Mathf.Sign(line);
+        line += moveXSign;
+
+        if (Mathf.Abs(line) >= 4)
+            if (moveXLine == moveXSign)
+                return;
+
         transform.DOKill(true);
         transform.DOMoveX(moveX, 0.2f).SetRelative();
     }
@@ -276,16 +284,15 @@ public class Player : Singleton<Player>
     private void Die()
     {
         if (!IsAlive) return;
-        
+
         IsAlive = false;
-        
+
         SoundManager.Instance.PlaySound("Dead", ESoundType.Sfx, 0.5f, 0.6f);
 
         Material material = dissolveMeshes[0].material;
         material.SetFloat("_DissolvePower", 0);
         material.DOFloat(1, "_DissolvePower", 3).SetDelay(1).OnStart(() =>
         {
-
             foreach (var skinnedMeshRenderer in defaultMeshes)
                 skinnedMeshRenderer.gameObject.SetActive(false);
 
