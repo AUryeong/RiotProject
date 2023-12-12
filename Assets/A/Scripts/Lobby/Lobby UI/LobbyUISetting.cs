@@ -12,6 +12,8 @@ namespace Lobby
         [SerializeField] private Button exitButton;
 
         [SerializeField] private Slider syncSlider;
+        
+        [SerializeField] private Toggle buttonToggle;
 
         protected override void Awake()
         {
@@ -32,6 +34,7 @@ namespace Lobby
             settingPopup.rectTransform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
 
             syncSlider.value = SaveManager.Instance.GameData.beatSync;
+            buttonToggle.isOn = SaveManager.Instance.GameData.isButton;
         }
 
         public override void DeActive()
@@ -48,6 +51,7 @@ namespace Lobby
             settingPopup.rectTransform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack);
 
             SaveManager.Instance.GameData.beatSync = syncSlider.value;
+            SaveManager.Instance.GameData.isButton = buttonToggle.isOn;
         }
     }
 }

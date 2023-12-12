@@ -275,7 +275,7 @@ namespace Lobby
 
             float duration = TileManager.Instance.beatInterval / 4;
             
-            Vector3 scale = Vector3.one * 1.1f;
+            Vector3 scale = Vector3.one * 1.15f;
 
             selectButton.image.rectTransform.DOKill(true);
             selectButton.image.rectTransform.DOScale(scale, duration).SetLoops(2, LoopType.Yoyo);

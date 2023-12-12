@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -25,22 +26,82 @@ public class InputDetail : MonoBehaviour
     private Vector2 lastDragPos;
     private bool isDrag;
 
+    private readonly List<int> touches = new();
+
+
     private void Update()
     {
         CheckKeyInput();
-        CheckTouch();
+        if (SaveManager.Instance.GameData.isButton)
+            CheckTouch();
+        else
+            CheckSwipeTouch();
     }
 
     private void CheckTouch()
     {
+#if UNITY_ANDROID
         if (Input.touchCount <= 0) return;
-            
         var touch = Input.GetTouch(0);
         switch (touch.phase)
         {
             case TouchPhase.Began:
-                if (!EventSystem.current.IsPointerOverGameObject(0)) return;
-                
+            case TouchPhase.Stationary:
+            case TouchPhase.Moved:
+                if (Input.touchCount > 1)
+                {
+                    var touch2 = Input.GetTouch(1);
+                    if (touch2.phase == TouchPhase.Began)
+                    {
+                        inputAction?.Invoke(Direction.Down);
+                        touches.Add(touch.fingerId);
+                        touches.Add(touch2.fingerId);
+                    }
+                }
+                break;
+
+            case TouchPhase.Ended:
+            case TouchPhase.Canceled:
+                if (touches.Contains(touch.fingerId))
+                {
+                    touches.Remove(touch.fingerId);
+                    return;
+                }
+                inputAction?.Invoke(touch.position.x <= Screen.width / 2 ? Direction.Left : Direction.Right);
+                break;
+        }
+#endif
+    }
+
+    private void CheckSwipeTouch()
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (EventSystem.current.IsPointerOverGameObject(0)) return;
+            
+            isDrag = true;
+            startDragPos = Input.mousePosition;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            lastDragPos = Input.mousePosition;
+            if (Vector2.Distance(startDragPos, lastDragPos) > AUTO_DRAG_POS)
+                CheckInput();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            lastDragPos = Input.mousePosition;
+            CheckInput();
+        }
+#elif UNITY_ANDROID
+        if (Input.touchCount <= 0) return;
+        var touch = Input.GetTouch(0);
+        switch (touch.phase)
+        {
+            case TouchPhase.Began:
+                if (EventSystem.current.IsPointerOverGameObject(0)) return;
+
                 isDrag = true;
                 startDragPos = touch.position;
                 break;
@@ -55,6 +116,7 @@ public class InputDetail : MonoBehaviour
                 CheckInput();
                 break;
         }
+#endif
     }
 
     private void CheckKeyInput()

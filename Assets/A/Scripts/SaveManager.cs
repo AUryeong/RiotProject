@@ -12,6 +12,8 @@ public class GameData
     public int selectBgmIndex = 1;
     public int selectEffectIndex = 0;
 
+    public bool isButton;
+    
     public List<int> lastScores;
 
     public int GetLastScore(int index)

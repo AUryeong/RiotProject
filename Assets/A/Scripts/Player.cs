@@ -362,6 +362,7 @@ public class Player : Singleton<Player>
             case Direction.Up:
                 Jump();
                 break;
+            case Direction.Center:
             case Direction.Down:
                 if (hitAbleEnemyList.Count > 0)
                 {
