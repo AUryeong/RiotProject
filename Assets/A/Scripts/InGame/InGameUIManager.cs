@@ -1,7 +1,6 @@
 ﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace InGame
@@ -42,16 +41,6 @@ namespace InGame
             songPlayer.rectTransform.DOKill(true);
             songPlayer.rectTransform.DOScale(Vector3.one * 1.15f, duration).SetLoops(2, LoopType.Yoyo);
         }
-
-        public void UpdateHpBar(float fillAmount)
-        {
-            for (var i = 0; i < hpBars.Length; i++)
-            {
-                var hpBar = hpBars[i];
-                float prevMultiplier = i / 3f;
-                hpBar.DOFillAmount((fillAmount - prevMultiplier) * 3f, 0.2f);
-            }
-        }
         
         public void UpdateSongSlider(float fillAmount)
         {
@@ -69,18 +58,18 @@ namespace InGame
         {
             foreach (var hpBar in hpBars)
                 hpBar.color = TileManager.Instance.stageTileData.uiColor;
-
-            hpBarList.anchoredPosition = new Vector2(hpBarList.anchoredPosition.x, 152);
+            
+            hpBarList.anchoredPosition = new Vector2(-50, hpBarList.anchoredPosition.y);
             runeBase.rectTransform.anchoredPosition = new Vector2(runeBase.rectTransform.anchoredPosition.x, 100);
-            songSliderRect.anchoredPosition = new Vector2(60, songSliderRect.anchoredPosition.y);
+            songSliderRect.anchoredPosition = new Vector2(-62.5f, songSliderRect.anchoredPosition.y);
 
             inputDetail.inputAction = Player.Instance.CheckInput;
 
             UpdateSongSlider(0);
             this.Invoke(() =>
             {
-                hpBarList.DOAnchorPosY(-90f, UI_MOVE_DURATION);
-                songSliderRect.DOAnchorPosX(-50, UI_MOVE_DURATION);
+                hpBarList.DOAnchorPosX(-100f, UI_MOVE_DURATION);
+                songSliderRect.DOAnchorPosX(62.5f, UI_MOVE_DURATION);
                 runeBase.rectTransform.DOAnchorPosY(-100, UI_MOVE_DURATION);
             }, 1);
         }

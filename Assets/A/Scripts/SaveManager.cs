@@ -13,7 +13,26 @@ public class GameData
     public int selectEffectIndex = 0;
 
     public List<int> lastScores;
+
+    public int GetLastScore(int index)
+    {
+        if (lastScores.Count <= index)
+            for (int i = lastScores.Count; i <= index; i++)
+                lastScores.Add(0);
+
+        return lastScores[index];
+    }
+    
     public List<int> highScores;
+
+    public int GetHighScore(int index)
+    {
+        if (highScores.Count <= index)
+            for (int i = highScores.Count; i <= index; i++)
+                highScores.Add(0);
+
+        return highScores[index];
+    }
 
     public float beatSync = 0;
 }

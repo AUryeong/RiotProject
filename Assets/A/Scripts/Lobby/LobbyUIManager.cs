@@ -11,8 +11,8 @@ namespace Lobby
 
     public class LobbyUIManager : MonoBehaviour, IActiveLink
     {
-        [SerializeField] private LobbyUIPlay uiPlay;
-        [SerializeField] private LobbyUIStage uiStage;
+        public LobbyUIPlay uiPlay;
+        public LobbyUIStage uiStage;
 
         private LobbyUIActiveLink activeLink;
 
@@ -48,6 +48,9 @@ namespace Lobby
         {
             if (activeLink == uiPlay)
                 uiPlay.Bounce();
+
+            if (activeLink == uiStage)
+                uiStage.Bounce();
         }
         
         public void DeActive()

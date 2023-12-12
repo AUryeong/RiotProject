@@ -86,7 +86,7 @@ public class SoundManager : Singleton<SoundManager>
         var audioSource = audioInfo.audioSource;
 
         audioSource.pitch = pitch;
-        audioSource.loop = isOneShot;
+        audioSource.loop = !isOneShot;
 
         if (soundType.Equals(ESoundType.Bgm))
         {

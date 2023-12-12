@@ -83,7 +83,6 @@ namespace InGame
             gameObject.SetActive(false);
 
             Player.Instance.hitAbleEnemyList.Remove(this);
-            Player.Instance.Hp += ENEMY_HP_HEAL_VALUE;
 
             float distance = transform.position.z - Player.Instance.transform.position.z;
             if (distance <= 4.5f)

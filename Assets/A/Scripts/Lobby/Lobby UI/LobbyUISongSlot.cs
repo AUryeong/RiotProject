@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +12,28 @@ namespace Lobby
         [SerializeField] private Image songIconGraident; 
         [SerializeField] private Image songIcon;
 
+        private Button button;
+        private BgmData data;
+
+        private void Awake()
+        {
+            button = GetComponent<Button>();
+            
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(SelectBgm);
+        }
+
+        private void SelectBgm()
+        {
+            transform.DOPunchScale(Vector3.one * 0.1f, 0.3f);
+            LobbyManager.Instance.uiManager.uiStage.SelectBgm(data);
+        }
+
         public void Show(BgmData bgmData, StageTileData stageTileData)
         {
             if (songText.textInfo == null) return;
+
+            data = bgmData;
 
             songText.text = bgmData.bgmNickName;
 

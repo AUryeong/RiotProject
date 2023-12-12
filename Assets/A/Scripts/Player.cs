@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class Player : Singleton<Player>
 {
     public bool isInv;
-    private int line;
+    public int line;
 
     private Rigidbody rigid;
     private Animator animator;
@@ -49,22 +49,6 @@ public class Player : Singleton<Player>
 
     [Space(10f)] [SerializeField] private BoxCollider enemyCheckColliders;
     private int attackIndex;
-
-    public float Hp
-    {
-        get => hp;
-        set
-        {
-            if (!IsAlive) return;
-
-            hp = Mathf.Clamp(value, 0, maxHp);
-            InGameManager.Instance.uiManager.UpdateHpBar(hp / maxHp);
-            if (hp <= 0)
-                Die();
-        }
-    }
-
-    private float hp;
 
     [SerializeField] private BoxCollider boostBlockFallCollider;
     [SerializeField] private ParticleSystem boostParticle;
@@ -113,7 +97,6 @@ public class Player : Singleton<Player>
         hitAbleEnemyList = new List<Enemy>();
 
         IsAlive = true;
-        Hp = maxHp;
         jumpCount = MAX_JUMP_COUNT;
         rigid.useGravity = true;
 
@@ -142,7 +125,6 @@ public class Player : Singleton<Player>
     {
         if (!IsAlive) return;
 
-        UpdateHp();
         CheckDeath();
         CheckBoost();
         CheckMagnet();
@@ -209,14 +191,6 @@ public class Player : Singleton<Player>
         if (!isInv)
             boostBlockFallCollider.gameObject.SetActive(false);
         SpeedAddValue -= Item_Boost.BOOST_SPEED_ADD_VALUE;
-    }
-
-    private void UpdateHp()
-    {
-        if (BoostDuration > 0) return;
-        if (isInv) return;
-
-        Hp -= Time.deltaTime * hpRemoveValue;
     }
 
     private void CheckDeath()

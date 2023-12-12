@@ -239,9 +239,11 @@ public class TileManager : Singleton<TileManager>
     {
         if (roadTileLength - playerPos >= PLAYER_RENDER_DISTANCE) return;
 
+        int line = Player.Instance.line;
+
         RoadTileData data = stageTileData.roadTileDataList.SelectOne();
         var roadTileObj = PoolManager.Instance.Init(data.name);
-        roadTileObj.transform.position = new Vector3(0, 0, roadTileLength);
+        roadTileObj.transform.position = new Vector3(line* TILE_DISTANCE, 0, roadTileLength);
 
         if (!createdTileList.Contains(roadTileObj))
             createdTileList.Add(roadTileObj);
@@ -250,9 +252,14 @@ public class TileManager : Singleton<TileManager>
 
         if (Random.Range(0, 2) == 0)
         {
+            if (Mathf.Abs(line) >= 2)
+                line += (int)Mathf.Sign(line) * -1;
+            else
+                line += Utility.RandomSign();
+            
             RoadTileData backgroundData = stageTileData.roadTileDataList.SelectOne();
             var backgroundRoadObj = PoolManager.Instance.Init(backgroundData.name);
-            backgroundRoadObj.transform.position = new Vector3(TILE_DISTANCE * Utility.RandomSign(), 0, roadTileLength);
+            backgroundRoadObj.transform.position = new Vector3(TILE_DISTANCE * line, 0, roadTileLength);
 
             if (!createdTileList.Contains(backgroundRoadObj))
                 createdTileList.Add(backgroundRoadObj);

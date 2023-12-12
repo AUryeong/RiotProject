@@ -101,17 +101,9 @@ namespace Lobby
             Color darkColor = TileManager.Instance.stageTileData.uiDarkColor;
 
             int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
-            if (SaveManager.Instance.GameData.lastScores.Count <= index)
-                for (int i = SaveManager.Instance.GameData.lastScores.Count; i <= index; i++)
-                    SaveManager.Instance.GameData.lastScores.Add(0);
-
-            int lastScore = SaveManager.Instance.GameData.lastScores[index];
-
-            if (SaveManager.Instance.GameData.highScores.Count <= index)
-                for (int i = SaveManager.Instance.GameData.highScores.Count; i <= index; i++)
-                    SaveManager.Instance.GameData.highScores.Add(0);
-
-            int highScore = SaveManager.Instance.GameData.highScores[index];
+            
+            int lastScore = SaveManager.Instance.GameData.GetLastScore(index);
+            int highScore = SaveManager.Instance.GameData.GetHighScore(index);
 
             bgmSideSelect.gameObject.SetActive(true);
             bgmSideSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], color, lastScore, highScore);
@@ -249,8 +241,8 @@ namespace Lobby
         {
             SoundManager.Instance.PlaySound("levelup_back", ESoundType.Sfx, 0.6f, 0.9f);
 
-            bgmMainSelect.DOKill(true);
-            bgmSideSelect.DOKill(true);
+            bgmMainSelect.RectTransform.DOKill(true);
+            bgmSideSelect.RectTransform.DOKill(true);
             bgmSelectRight.rectTransform.DOKill(true);
 
             int prevIndex = SaveManager.Instance.GameData.selectBgmIndex;
@@ -265,17 +257,9 @@ namespace Lobby
             bgmSelectRight.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
 
             int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
-            if (SaveManager.Instance.GameData.lastScores.Count <= index)
-                for (int i = SaveManager.Instance.GameData.lastScores.Count; i <= index; i++)
-                    SaveManager.Instance.GameData.lastScores.Add(0);
-
-            int lastScore = SaveManager.Instance.GameData.lastScores[index];
-
-            if (SaveManager.Instance.GameData.highScores.Count <= index)
-                for (int i = SaveManager.Instance.GameData.highScores.Count; i <= index; i++)
-                    SaveManager.Instance.GameData.highScores.Add(0);
-
-            int highScore = SaveManager.Instance.GameData.highScores[index];
+            
+            int lastScore = SaveManager.Instance.GameData.GetLastScore(index);
+            int highScore = SaveManager.Instance.GameData.GetHighScore(index);
 
             bgmMainSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
 
@@ -294,8 +278,8 @@ namespace Lobby
         {
             SoundManager.Instance.PlaySound("levelup_back", ESoundType.Sfx, 0.6f, 0.9f);
 
-            bgmMainSelect.DOKill(true);
-            bgmSideSelect.DOKill(true);
+            bgmMainSelect.RectTransform.DOKill(true);
+            bgmSideSelect.RectTransform.DOKill(true);
             bgmSelectLeft.rectTransform.DOKill(true);
 
             int prevIndex = SaveManager.Instance.GameData.selectBgmIndex;
@@ -310,17 +294,9 @@ namespace Lobby
             bgmSelectLeft.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
 
             int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
-            if (SaveManager.Instance.GameData.lastScores.Count <= index)
-                for (int i = SaveManager.Instance.GameData.lastScores.Count; i <= index; i++)
-                    SaveManager.Instance.GameData.lastScores.Add(0);
-
-            int lastScore = SaveManager.Instance.GameData.lastScores[index];
-
-            if (SaveManager.Instance.GameData.highScores.Count <= index)
-                for (int i = SaveManager.Instance.GameData.highScores.Count; i <= index; i++)
-                    SaveManager.Instance.GameData.highScores.Add(0);
-
-            int highScore = SaveManager.Instance.GameData.highScores[index];
+            
+            int lastScore = SaveManager.Instance.GameData.GetLastScore(index);
+            int highScore = SaveManager.Instance.GameData.GetHighScore(index);
 
             bgmMainSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
 

@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Lobby
@@ -77,6 +76,15 @@ namespace Lobby
             SaveManager.Instance.GameData.selectBgmIndex = bgmSelectIndex;
 
             GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby);
+        }
+
+        public void SelectBgm(BgmData bgmData)
+        {
+            SoundManager.Instance.PlaySound("levelup_back", ESoundType.Sfx, 0.6f, 0.9f);
+
+            var stageTileData = TileManager.Instance.stageTileDataList[stageSelectIndex];
+            bgmSelectIndex = stageTileData.bgmDataList.IndexOf(bgmData);
+            TileManager.Instance.SetBgmData(bgmData);
         }
 
         public override void Active()
@@ -259,6 +267,21 @@ namespace Lobby
                 bgmSelectIndex = Random.Range(0, stageTileData.bgmDataList.Count);
                 TileManager.Instance.SetBgmData(stageTileData.bgmDataList[bgmSelectIndex]);
             });
+        }
+
+        public void Bounce()
+        {
+            if (isDeActivating) return;
+
+            float duration = TileManager.Instance.beatInterval / 4;
+            
+            Vector3 scale = Vector3.one * 1.1f;
+
+            selectButton.image.rectTransform.DOKill(true);
+            selectButton.image.rectTransform.DOScale(scale, duration).SetLoops(2, LoopType.Yoyo);
+
+            sideStageSlot.Bounce(bgmSelectIndex);
+            mainStageSlot.Bounce(bgmSelectIndex);
         }
     }
 }
