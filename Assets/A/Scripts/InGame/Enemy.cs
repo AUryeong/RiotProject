@@ -88,16 +88,19 @@ namespace InGame
             if (distance <= 4.5f)
             {
                 InGameManager.Instance.Rune += 9;
+                InGameManager.Instance.AddBeatHit(BeatHitType.Perfect);
                 PoolManager.Instance.Init("Perfect Effect").transform.position = transform.position;
             }
             else if (distance <= 6.5f)
             {
                 InGameManager.Instance.Rune += 7;
+                InGameManager.Instance.AddBeatHit(BeatHitType.Great);
                 PoolManager.Instance.Init("Great Effect").transform.position = transform.position;
             }
             else
             {
                 InGameManager.Instance.Rune += 5;
+                InGameManager.Instance.AddBeatHit(BeatHitType.Good);
                 PoolManager.Instance.Init("Good Effect").transform.position = transform.position;
             }
 

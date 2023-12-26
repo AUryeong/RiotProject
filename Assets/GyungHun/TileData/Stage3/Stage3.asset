@@ -98,7 +98,7 @@ MonoBehaviour:
       Data: 60
     - Name: bpmMultiplier
       Entry: 4
-      Data: 2
+      Data: 2.5
     - Name: speedAdder
       Entry: 4
       Data: 0
@@ -116,10 +116,10 @@ MonoBehaviour:
       Data: 4|BeatData, Assembly-CSharp
     - Name: beatDistance
       Entry: 4
-      Data: 1.2
+      Data: 0.799999952
     - Name: beat
       Entry: 4
-      Data: 0.8
+      Data: 1.2
     - Name: type
       Entry: 3
       Data: 1

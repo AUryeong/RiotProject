@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -7,8 +8,14 @@ using UnityEngine.Serialization;
 public class PoolingData
 {
     [Tooltip("풀링 이름 비어있을시 오브젝트 이름으로")] public string name;
-    public GameObject originObject;
+    public int createCount = 0;
+    [OnValueChanged(nameof(OnObjectChanged))] public GameObject originObject;
     public List<GameObject> poolingList;
+    private void OnObjectChanged()
+    {
+        if (string.IsNullOrEmpty(name))
+            name = originObject.name;
+    }
 }
 
 public class PoolManager : Singleton<PoolManager>
@@ -16,7 +23,8 @@ public class PoolManager : Singleton<PoolManager>
     private readonly Dictionary<string, List<GameObject>> pools = new();
     private readonly Dictionary<string, GameObject> originObjects = new();
 
-    [FormerlySerializedAs("poolingDatas")] [SerializeField]
+    [FormerlySerializedAs("poolingDatas")]
+    [SerializeField]
     private List<PoolingData> poolingDataList = new();
 
     protected override void OnCreated()
@@ -25,6 +33,9 @@ public class PoolManager : Singleton<PoolManager>
         {
             string poolName = string.IsNullOrEmpty(data.name) ? data.originObject.name : data.name;
             originObjects.Add(poolName, data.originObject);
+
+            if (data.createCount > 0)
+                CreatePoolingData(poolName, data.createCount);
 
             if (data.poolingList.Count <= 0) continue;
 
@@ -39,10 +50,36 @@ public class PoolManager : Singleton<PoolManager>
         poolingDataList.Clear();
     }
 
-    public void AddPooling(string name, GameObject obj)
+    public void JoinPoolingData(string name, GameObject obj)
     {
         if (!originObjects.ContainsKey(name))
             originObjects.Add(name, obj);
+    }
+
+    public void CreatePoolingData(string origin, int count = 1, Transform parent = null)
+    {
+        if (string.IsNullOrEmpty(origin)) return;
+
+        if (!originObjects.ContainsKey(origin))
+        {
+            Debug.Log(origin + " Pooling Error");
+            return;
+        }
+
+        if (!pools.ContainsKey(origin))
+            pools.Add(origin, new List<GameObject>());
+
+        var objects = pools[origin];
+
+        if (objects.Count > count) return;
+
+        for (int i = 0; i < count; i++)
+        {
+            GameObject copy = parent != null ? Instantiate(originObjects[origin], parent) : Instantiate(originObjects[origin]);
+            copy.SetActive(false);
+
+            objects.Add(copy);
+        }
     }
 
     public GameObject Init(string origin, Transform parent = null)

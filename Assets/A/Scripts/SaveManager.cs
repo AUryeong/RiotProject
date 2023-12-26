@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class GameData
 
     public bool isButton;
     
-    public List<int> lastScores;
+    public List<int> lastScores = new List<int>();
 
     public int GetLastScore(int index)
     {
@@ -25,7 +26,7 @@ public class GameData
         return lastScores[index];
     }
     
-    public List<int> highScores;
+    public List<int> highScores = new List<int>();
 
     public int GetHighScore(int index)
     {
@@ -41,7 +42,7 @@ public class GameData
 
 public class SaveManager : Singleton<SaveManager>
 {
-    public string prefsName = "RunesPharmacy";
+    public const string SAVE_DATA_NAME = "RatsGo";
 
     private GameData gameData;
 
@@ -57,26 +58,27 @@ public class SaveManager : Singleton<SaveManager>
 
     protected override void OnCreated()
     {
-        LoadGameData();
+        if (gameData == null)
+            LoadGameData();
     }
 
-    public void ResetSaveFile()
+    [Button(nameof(ResetSaveFile))]
+    private void ResetSaveFile()
     {
-        gameData = new GameData();
+        gameData = null;
         SaveGameData();
-        LoadGameData();
     }
 
     private void LoadGameData()
     {
-        var s = PlayerPrefs.GetString(prefsName, "null");
+        var s = PlayerPrefs.GetString(SAVE_DATA_NAME, "null");
         gameData = s.Equals("null") || string.IsNullOrEmpty(s) ? new GameData() : JsonUtility.FromJson<GameData>(s);
     }
 
 
     private void SaveGameData()
     {
-        PlayerPrefs.SetString(prefsName, JsonUtility.ToJson(gameData));
+        PlayerPrefs.SetString(SAVE_DATA_NAME, JsonUtility.ToJson(gameData));
     }
 
     private void OnApplicationQuit()

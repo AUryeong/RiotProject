@@ -4,7 +4,6 @@ using UnityEngine;
 public enum ESoundType
 {
     Bgm,
-    Coin,
     Sfx,
     End
 }
@@ -21,7 +20,7 @@ public class SoundManager : Singleton<SoundManager>
     private readonly Dictionary<string, AudioClip> audioClips = new();
 
     private readonly Dictionary<ESoundType, AudioInfo> audioInfos = new();
-
+    [SerializeField, Range(0f, 1f)] private float volumeMultiplier = 1;
     protected override bool IsDontDestroying => true;
 
     protected override void OnCreated()
@@ -32,9 +31,7 @@ public class SoundManager : Singleton<SoundManager>
 
         AddAudioInfo(ESoundType.Bgm).audioSource.loop = true;
         for (var soundType = ESoundType.Bgm; soundType <= ESoundType.End;)
-        {
             AddAudioInfo(++soundType);
-        }
     }
 
     protected override void OnReset()
@@ -91,12 +88,12 @@ public class SoundManager : Singleton<SoundManager>
         if (soundType.Equals(ESoundType.Bgm))
         {
             audioSource.clip = clip;
-            audioSource.volume = audioInfo.audioVolume * multipleVolume;
+            audioSource.volume = audioInfo.audioVolume * multipleVolume * volumeMultiplier;
             audioSource.time = 0;
             audioSource.Play();
         }
         else //SFX
-            audioSource.PlayOneShot(clip, audioInfo.audioVolume * multipleVolume);
+            audioSource.PlayOneShot(clip, audioInfo.audioVolume * multipleVolume * volumeMultiplier);
 
         return clip;
     }

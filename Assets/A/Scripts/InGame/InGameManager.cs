@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace InGame
@@ -17,6 +18,26 @@ namespace InGame
         }
 
         private int rune;
+        private List<int> beatScores = new List<int>();
+        public void AddBeatHit(BeatHitType type)
+        {
+            int index = (int)type;
+            if (beatScores.Count <= index)
+                for (int i = beatScores.Count; i <= index; i++)
+                    beatScores.Add(0);
+
+            beatScores[index]++;
+        }
+
+        public int GetBeatHit(BeatHitType type)
+        {
+            int index = (int)type;
+            if (beatScores.Count <= index)
+                for (int i = beatScores.Count; i <= index; i++)
+                    beatScores.Add(0);
+
+            return beatScores[index];
+        }
 
         public void Active()
         {
@@ -35,6 +56,7 @@ namespace InGame
         public void DeActive()
         {
             Rune = 0;
+            beatScores.Clear();
 
             uiManager.gameObject.SetActive(false);
         }

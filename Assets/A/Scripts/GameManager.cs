@@ -15,23 +15,30 @@ public class GameManager : Singleton<GameManager>
 {
     public bool isGaming = true;
 
-    private readonly Vector2 CAMERA_RENDER_SIZE = new(720, 1600);
+    private readonly Vector2 CAMERA_RENDER_SIZE = new(720, 1600 - AD_SIZE_Y);
+    private const int AD_SIZE_Y = 160;
     private const float UPSCALE_RATIO = 0.65f;
 
+    [Space(10f)]
     public Camera mainCamera;
     [SerializeField] private Camera playerRenderCamera;
     [SerializeField] private Camera uiCamera;
     [SerializeField] private Camera renderingCamera;
+
+    [SerializeField] private Camera adCamera;
+    [SerializeField] private Canvas adCanvas;
 
     [Space(10f)]
     [SerializeField] private RawImage rawImage;
 
     private RenderTexture renderTexture;
 
-    [Space(20f)] [SerializeField] private Image blackFade;
+    [Space(20f)]
+    [SerializeField] private Image blackFade;
     private const float BLACK_FADE_DURATION = 0.75f;
 
-    [Space(20f)] public GlobalObjectFogController fogController;
+    [Space(20f)]
+    public GlobalObjectFogController fogController;
     public PostProcessVolume postProcessVolume;
     public Light directionLight;
 
@@ -50,7 +57,15 @@ public class GameManager : Singleton<GameManager>
         SetResolution();
 
         foreach (var canvas in FindObjectsOfType<CanvasScaler>(true))
+        {
+            if (adCanvas == canvas)
+            {
+                canvas.referenceResolution = CAMERA_RENDER_SIZE + new Vector2(0, AD_SIZE_Y);
+                continue;
+            }
+
             canvas.referenceResolution = CAMERA_RENDER_SIZE;
+        }
 
         UpScaleSamplingSetting();
     }
@@ -64,7 +79,7 @@ public class GameManager : Singleton<GameManager>
                 blackFade.DOFade(1, BLACK_FADE_DURATION).OnComplete(() =>
                 {
                     action?.Invoke();
-                    
+
                     LobbyManager.Instance.Active();
                     InGameManager.Instance.DeActive();
                     blackFade.DOFade(0, BLACK_FADE_DURATION).OnComplete(() => blackFade.gameObject.SetActive(false));
@@ -96,33 +111,37 @@ public class GameManager : Singleton<GameManager>
 
         rawImage.texture = renderTexture;
     }
-    
+
     private void SetResolution()
     {
         int setWidth = Mathf.CeilToInt(CAMERA_RENDER_SIZE.x);
-        int setHeight = Mathf.CeilToInt(CAMERA_RENDER_SIZE.y);
+        int setHeight = Mathf.CeilToInt(CAMERA_RENDER_SIZE.y) + AD_SIZE_Y;
 
         int deviceWidth = Screen.width;
         int deviceHeight = Screen.height;
 
-        Screen.SetResolution(setWidth, (int)((float)deviceHeight / deviceWidth * setWidth), true);
+        Screen.SetResolution(setWidth, (int)((float)deviceHeight / deviceWidth * setHeight), true);
 
         float screenMultiplier = (float)setWidth / setHeight;
         float deviceMultiplier = (float)deviceWidth / deviceHeight;
+        float adHeight = AD_SIZE_Y / (float)setHeight;
 
         if (screenMultiplier < deviceMultiplier)
         {
             float newWidth = screenMultiplier / deviceMultiplier;
-            renderingCamera.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f);
-            uiCamera.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f);
-            rawImage.uvRect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f);
+            float newHeight = 1 - adHeight;
+            renderingCamera.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, newHeight);
+            uiCamera.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, newHeight);
+            adCamera.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1);
+            rawImage.uvRect = new Rect((1f - newWidth) / 2f, 0f, newWidth, newHeight);
         }
         else
         {
             float newHeight = deviceMultiplier / screenMultiplier;
-            renderingCamera.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight);
-            uiCamera.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight);
-            rawImage.uvRect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight);
+            adCamera.rect = new Rect(0f, 0, 1f, newHeight);
+            renderingCamera.rect = new Rect(0f, 0, 1f, newHeight - adHeight);
+            uiCamera.rect = new Rect(0f, 0, 1f, newHeight - adHeight);
+            rawImage.uvRect = new Rect(0f, 0, 1f, newHeight - adHeight);
         }
     }
 }

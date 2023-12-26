@@ -19,9 +19,9 @@ public class PlayerEffectData : ScriptableObject
         rightEffectName = name + "_Effect_Right";
         spinEffectName = name + "_Effect_Spin";
 
-        PoolManager.Instance.AddPooling(leftEffectName, leftEffect);
-        PoolManager.Instance.AddPooling(rightEffectName, rightEffect);
-        PoolManager.Instance.AddPooling(spinEffectName, spinEffect);
+        PoolManager.Instance.JoinPoolingData(leftEffectName, leftEffect);
+        PoolManager.Instance.JoinPoolingData(rightEffectName, rightEffect);
+        PoolManager.Instance.JoinPoolingData(spinEffectName, spinEffect);
     }
 
     public GameObject GetEffect(EffectType type)
