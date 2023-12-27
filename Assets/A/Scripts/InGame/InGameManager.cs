@@ -73,7 +73,10 @@ namespace InGame
             if (SaveManager.Instance.GameData.GetHighScore(index) < Rune)
                 SaveManager.Instance.GameData.highScores[index] = Rune;
 
-            this.Invoke(() => GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby), duration);
+            this.Invoke(() =>
+            {
+                GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby);
+            }, duration);
         }
     }
 }
