@@ -53,6 +53,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: aa0f8fc51b253cd4687d2a58bcedce4a, type: 3}
   - {fileID: 21300000, guid: 45ba2bd59b5dadc4d8bea2a69cbee660, type: 3}
   - {fileID: 21300000, guid: df947ac639a897645bb9e5b47a678353, type: 3}
+  - {fileID: 21300000, guid: 6e41c0c79fcde7a4da56ed1e7e97bbbe, type: 3}
+  - {fileID: 21300000, guid: 26560afc867b4af45b17d7dc0b384628, type: 3}
+  - {fileID: 21300000, guid: 8874143de335d464d936fbc05132f742, type: 3}
   - {fileID: 21300000, guid: 897af15f96e9e2645bcde94821dbbcfc, type: 3}
   m_PackedSpriteNamesToIndex:
   - accuracy_score_border
@@ -61,6 +64,9 @@ SpriteAtlas:
   - Game_Over
   - Game Clear
   - Miss
+  - good
+  - per
+  - great
   - Score_box
   m_RenderDataMap: {}
   m_Tag: UI_Score_Atals
