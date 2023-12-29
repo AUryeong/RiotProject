@@ -11,28 +11,15 @@ namespace Lobby
         [SerializeField] private Button startButton;
         [SerializeField] private InputDetail inputDetail;
 
-        [Header("Title")]
-        [SerializeField] private Image titleOutline;
-        [SerializeField] private Image titleNeon;
+        [Header("Color Changer")]
+        [SerializeField] private UIButtonColorChanger titleButtonChanger;
+        [SerializeField] private UIButtonColorChanger playButtonChanger;
+        [SerializeField] private UIButtonColorChanger lockButtonChanger;
+        [SerializeField] private UIButtonColorChanger stageButtonChanger;
 
         [Header("Buttons")]
         [SerializeField] private Button shopButton;
         [SerializeField] private Button stageButton;
-
-        [Header("Play")]
-        [SerializeField] private Image playHighLight;
-        [SerializeField] private Image playGradient;
-        [SerializeField] private Image playOutline;
-
-        [Header("Shop")]
-        [SerializeField] private Image lockOutline;
-        [SerializeField] private Image lockIcon;
-        [SerializeField] private Image lockGradient;
-
-        [Header("Stage")]
-        [SerializeField] private Image stageOutline;
-        [SerializeField] private Image stageIcon;
-        [SerializeField] private Image stageGradient;
 
         [Header("Setting")]
         [SerializeField] private Button settingButton;
@@ -110,20 +97,10 @@ namespace Lobby
 
             runeText.fontSharedMaterial.SetColor("_OutlineColor", darkColor);
 
-            titleOutline.color = color;
-            titleNeon.color = color;
-
-            playHighLight.color = color;
-            playGradient.color = darkColor;
-            playOutline.color = color;
-
-            lockIcon.color = color;
-            lockOutline.color = color;
-            lockGradient.color = darkColor;
-
-            stageIcon.color = color;
-            stageOutline.color = color;
-            stageGradient.color = darkColor;
+            titleButtonChanger.Apply(color, darkColor);
+            playButtonChanger.Apply(color, darkColor);
+            lockButtonChanger.Apply(color, darkColor);
+            stageButtonChanger.Apply(color, darkColor);
 
             activeSequence?.Complete();
             deActiveSequence?.Complete();
@@ -328,8 +305,8 @@ namespace Lobby
             shopButton.image.rectTransform.DOKill(true);
             shopButton.image.rectTransform.DOScale(scale, duration).SetLoops(2, LoopType.Yoyo);
 
-            titleNeon.rectTransform.DOKill(true);
-            titleNeon.rectTransform.DOScale(scale * 0.9f, duration).SetLoops(2, LoopType.Yoyo);
+            titleButtonChanger.RectTransform.DOKill(true);
+            titleButtonChanger.RectTransform.DOScale(scale * 0.9f, duration).SetLoops(2, LoopType.Yoyo);
         }
     }
 }

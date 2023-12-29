@@ -27,9 +27,7 @@ namespace Lobby
 
         [Space(10f)]
 
-        [SerializeField] private Image buttonOutline;
-        [SerializeField] private Image buttonGradient;
-        [SerializeField] private Image buttonIcon;
+        [SerializeField] private UIButtonColorChanger changeButtonChanger;
 
         private int stageSelectIndex;
         private int bgmSelectIndex;
@@ -98,9 +96,7 @@ namespace Lobby
             mainStageSlot.ShowStage(stageTileData);
             sideStageSlot.ShowStage(stageTileData);
 
-            buttonIcon.color = stageTileData.uiColor;
-            buttonOutline.color = stageTileData.uiColor;
-            buttonGradient.color = stageTileData.uiDarkColor;
+            changeButtonChanger.Apply(stageTileData.uiColor, stageTileData.uiDarkColor);
 
             borderBackground.color = stageTileData.uiDarkColor.GetFade(0.35f);
 
@@ -203,14 +199,7 @@ namespace Lobby
             mainStageSlot.RectTransform.anchoredPosition = new Vector2(-650, mainStageSlot.RectTransform.anchoredPosition.y);
             mainStageSlot.ShowStage(stageTileData);
 
-            buttonIcon.DOKill(true);
-            buttonIcon.DOColor(stageTileData.uiColor, UI_DRAG_MOVE_DURATION);
-
-            buttonOutline.DOKill(true);
-            buttonOutline.DOColor(stageTileData.uiColor, UI_DRAG_MOVE_DURATION);
-
-            buttonGradient.DOKill(true);
-            buttonGradient.DOColor(stageTileData.uiDarkColor, UI_DRAG_MOVE_DURATION);
+            changeButtonChanger.ApplyFade(UI_DRAG_MOVE_DURATION, stageTileData.uiColor, stageTileData.uiDarkColor);
 
             borderBackground.DOKill(true);
             borderBackground.DOColor(stageTileData.uiDarkColor.GetFade(0.35f), UI_DRAG_MOVE_DURATION);
@@ -244,14 +233,7 @@ namespace Lobby
             mainStageSlot.RectTransform.anchoredPosition = new Vector2(650, mainStageSlot.RectTransform.anchoredPosition.y);
             mainStageSlot.ShowStage(stageTileData);
 
-            buttonIcon.DOKill(true);
-            buttonIcon.DOColor(stageTileData.uiColor, UI_DRAG_MOVE_DURATION);
-
-            buttonOutline.DOKill(true);
-            buttonOutline.DOColor(stageTileData.uiColor, UI_DRAG_MOVE_DURATION);
-
-            buttonGradient.DOKill(true);
-            buttonGradient.DOColor(stageTileData.uiDarkColor, UI_DRAG_MOVE_DURATION);
+            changeButtonChanger.ApplyFade(UI_DRAG_MOVE_DURATION, stageTileData.uiColor, stageTileData.uiDarkColor);
 
             borderBackground.DOKill(true);
             borderBackground.DOColor(stageTileData.uiDarkColor.GetFade(0.35f), UI_DRAG_MOVE_DURATION);

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43645793, g: 0.4102875, b: 0.42485422, a: 1}
+  m_IndirectSpecularColor: {r: 0.43645793, g: 0.40437555, b: 0.36562765, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3731,9 +3731,7 @@ MonoBehaviour:
   exitButton: {fileID: 2123057749}
   stageSelectLeft: {fileID: 1620518843}
   stageSelectRight: {fileID: 169902232}
-  buttonOutline: {fileID: 53994235}
-  buttonGradient: {fileID: 772880624}
-  buttonIcon: {fileID: 1591229863}
+  changeButtonChanger: {fileID: 1281992333}
 --- !u!1 &667373029
 GameObject:
   m_ObjectHideFlags: 0
@@ -5044,6 +5042,7 @@ GameObject:
   - component: {fileID: 876853854}
   - component: {fileID: 876853853}
   - component: {fileID: 876853852}
+  - component: {fileID: 876853855}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -5117,19 +5116,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 876853853}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1817879661}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: GameStart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &876853853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5168,6 +5155,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876853850}
   m_CullTransparentMesh: 1
+--- !u!114 &876853855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876853850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c3e83c761a2db41b06818d9a4edc86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightColorImages:
+  - {fileID: 621689995}
+  - {fileID: 1031600216}
+  darkColorImages:
+  - {fileID: 1693894091}
 --- !u!1 &891852948
 GameObject:
   m_ObjectHideFlags: 0
@@ -5549,6 +5553,7 @@ GameObject:
   - component: {fileID: 959433453}
   - component: {fileID: 959433455}
   - component: {fileID: 959433456}
+  - component: {fileID: 959433457}
   m_Layer: 5
   m_Name: Shop Button
   m_TagString: Untagged
@@ -5674,6 +5679,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &959433457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959433451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c3e83c761a2db41b06818d9a4edc86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightColorImages:
+  - {fileID: 1896358992}
+  - {fileID: 920368437}
+  darkColorImages:
+  - {fileID: 2141727565}
 --- !u!1 &963716163
 GameObject:
   m_ObjectHideFlags: 0
@@ -12382,19 +12404,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButton: {fileID: 876853852}
   inputDetail: {fileID: 1567468826}
-  titleOutline: {fileID: 749557777}
-  titleNeon: {fileID: 2060781735}
+  titleButtonChanger: {fileID: 2060781737}
+  playButtonChanger: {fileID: 876853855}
+  lockButtonChanger: {fileID: 959433457}
+  stageButtonChanger: {fileID: 1410332000}
   shopButton: {fileID: 959433455}
   stageButton: {fileID: 1410331999}
-  playHighLight: {fileID: 1031600216}
-  playGradient: {fileID: 1693894091}
-  playOutline: {fileID: 621689995}
-  lockOutline: {fileID: 1896358992}
-  lockIcon: {fileID: 920368437}
-  lockGradient: {fileID: 2141727565}
-  stageOutline: {fileID: 749793960}
-  stageIcon: {fileID: 223974229}
-  stageGradient: {fileID: 782628377}
   settingButton: {fileID: 1076140791}
   uiSetting: {fileID: 1537487368}
   runeBase: {fileID: 1895584334}
@@ -12416,6 +12431,7 @@ GameObject:
   - component: {fileID: 1281992332}
   - component: {fileID: 1281992331}
   - component: {fileID: 1281992330}
+  - component: {fileID: 1281992333}
   m_Layer: 5
   m_Name: Select Button
   m_TagString: Untagged
@@ -12527,6 +12543,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281992328}
   m_CullTransparentMesh: 1
+--- !u!114 &1281992333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281992328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c3e83c761a2db41b06818d9a4edc86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightColorImages:
+  - {fileID: 1591229863}
+  - {fileID: 53994235}
+  darkColorImages:
+  - {fileID: 772880624}
 --- !u!1 &1291651791
 GameObject:
   m_ObjectHideFlags: 0
@@ -12759,6 +12792,7 @@ GameObject:
   - component: {fileID: 1410331998}
   - component: {fileID: 1410331997}
   - component: {fileID: 1410331999}
+  - component: {fileID: 1410332000}
   m_Layer: 5
   m_Name: Song Button
   m_TagString: Untagged
@@ -12870,6 +12904,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1410332000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410331995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c3e83c761a2db41b06818d9a4edc86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightColorImages:
+  - {fileID: 749793960}
+  - {fileID: 223974229}
+  darkColorImages:
+  - {fileID: 782628377}
 --- !u!1 &1410806167
 GameObject:
   m_ObjectHideFlags: 0
@@ -21845,6 +21896,7 @@ GameObject:
   - component: {fileID: 2060781734}
   - component: {fileID: 2060781736}
   - component: {fileID: 2060781735}
+  - component: {fileID: 2060781737}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -21912,6 +21964,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060781733}
   m_CullTransparentMesh: 1
+--- !u!114 &2060781737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060781733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c3e83c761a2db41b06818d9a4edc86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightColorImages:
+  - {fileID: 2060781735}
+  - {fileID: 749557777}
+  darkColorImages: []
 --- !u!1 &2072746409
 GameObject:
   m_ObjectHideFlags: 0
