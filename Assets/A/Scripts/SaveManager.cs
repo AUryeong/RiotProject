@@ -38,6 +38,8 @@ public class GameData
     }
 
     public float beatSync = 0;
+    public float bgmSoundMultiplier = 1;
+    public float sfxSoundMultiplier = 1;
 }
 
 public class SaveManager : Singleton<SaveManager>

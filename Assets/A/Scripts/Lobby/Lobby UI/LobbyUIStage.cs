@@ -196,7 +196,7 @@ namespace Lobby
             var stageTileData = TileManager.Instance.stageTileDataList[stageSelectIndex];
 
             mainStageSlot.gameObject.SetActive(true);
-            mainStageSlot.RectTransform.anchoredPosition = new Vector2(-650, mainStageSlot.RectTransform.anchoredPosition.y);
+            mainStageSlot.RectTransform.anchoredPosition = new Vector2(-GameManager.Instance.ScreenSize.x, mainStageSlot.RectTransform.anchoredPosition.y);
             mainStageSlot.ShowStage(stageTileData);
 
             changeButtonChanger.ApplyFade(UI_DRAG_MOVE_DURATION, stageTileData.uiColor, stageTileData.uiDarkColor);
@@ -205,7 +205,7 @@ namespace Lobby
             borderBackground.DOColor(stageTileData.uiDarkColor.GetFade(0.35f), UI_DRAG_MOVE_DURATION);
 
             stageSelectRight.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
-            sideStageSlot.RectTransform.DOAnchorPosX(650, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack);
+            sideStageSlot.RectTransform.DOAnchorPosX(GameManager.Instance.ScreenSize.x, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack);
             mainStageSlot.RectTransform.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
             {
                 sideStageSlot.RectTransform.anchoredPosition = new Vector2(0, sideStageSlot.RectTransform.anchoredPosition.y);
@@ -230,7 +230,7 @@ namespace Lobby
             var stageTileData = TileManager.Instance.stageTileDataList[stageSelectIndex];
 
             mainStageSlot.gameObject.SetActive(true);
-            mainStageSlot.RectTransform.anchoredPosition = new Vector2(650, mainStageSlot.RectTransform.anchoredPosition.y);
+            mainStageSlot.RectTransform.anchoredPosition = new Vector2(GameManager.Instance.ScreenSize.x, mainStageSlot.RectTransform.anchoredPosition.y);
             mainStageSlot.ShowStage(stageTileData);
 
             changeButtonChanger.ApplyFade(UI_DRAG_MOVE_DURATION, stageTileData.uiColor, stageTileData.uiDarkColor);
@@ -239,7 +239,7 @@ namespace Lobby
             borderBackground.DOColor(stageTileData.uiDarkColor.GetFade(0.35f), UI_DRAG_MOVE_DURATION);
 
             stageSelectLeft.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
-            sideStageSlot.RectTransform.DOAnchorPosX(-650, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack);
+            sideStageSlot.RectTransform.DOAnchorPosX(-GameManager.Instance.ScreenSize.x, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack);
             mainStageSlot.RectTransform.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
             {
                 sideStageSlot.RectTransform.anchoredPosition = new Vector2(0, sideStageSlot.RectTransform.anchoredPosition.y);

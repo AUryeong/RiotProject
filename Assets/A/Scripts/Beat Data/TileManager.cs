@@ -257,7 +257,7 @@ public class TileManager : Singleton<TileManager>
 
         beatDataQueue = new Queue<BeatData>(bgmData.beatDataList);
 
-        SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f);
+        SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm);
 
         if (bgmData.beatDataList.Count <= 0) return;
 
@@ -594,7 +594,7 @@ public class TileManager : Singleton<TileManager>
 
         ChangeThemeColor(themeColor);
 
-        SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 0.5f, 1, true);
+        SoundManager.Instance.PlaySound(bgmData.bgmName, ESoundType.Bgm, 1, 1, true);
     }
 
     #endregion

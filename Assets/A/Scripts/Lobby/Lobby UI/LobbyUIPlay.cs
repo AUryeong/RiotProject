@@ -33,16 +33,13 @@ namespace Lobby
         [SerializeField] private RectTransform bgmParent;
 
         [Space(10f)]
-
         [SerializeField] private Image bgmSelectLeft;
         [SerializeField] private Image bgmSelectRight;
 
         [Space(10f)]
-
         [SerializeField] private LobbyUISongSelect bgmMainSelect;
 
         [Space(10f)]
-
         [SerializeField] private LobbyUISongSelect bgmSideSelect;
 
         private const float UI_MOVE_DURATION = 0.75f;
@@ -54,6 +51,7 @@ namespace Lobby
         [Header("Animation")]
         private Sequence deActiveSequence;
         private Sequence activeSequence;
+
         protected override void Awake()
         {
             inputDetail.inputAction = CheckInput;
@@ -88,7 +86,7 @@ namespace Lobby
             Color darkColor = TileManager.Instance.stageTileData.uiDarkColor;
 
             int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
-            
+
             int lastScore = SaveManager.Instance.GameData.GetLastScore(index);
             int highScore = SaveManager.Instance.GameData.GetHighScore(index);
 
@@ -110,6 +108,7 @@ namespace Lobby
                 activeSequence.Restart();
                 return;
             }
+
             activeSequence = DOTween.Sequence();
 
             activeSequence.SetAutoKill(false);
@@ -131,10 +130,7 @@ namespace Lobby
             activeSequence.Insert(UI_MOVE_DURATION / 4, stageButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
             activeSequence.Insert(UI_MOVE_DURATION / 2, startButton.image.rectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
 
-            activeSequence.OnComplete(() =>
-            {
-                isActivating = false;
-            });
+            activeSequence.OnComplete(() => { isActivating = false; });
 
             activeSequence.OnUpdate(() =>
             {
@@ -156,6 +152,7 @@ namespace Lobby
                 deActiveSequence.Restart();
                 return;
             }
+
             deActiveSequence = DOTween.Sequence();
 
             deActiveSequence.SetAutoKill(false);
@@ -229,18 +226,18 @@ namespace Lobby
             if (prevIndex == nowIndex) return;
 
             bgmMainSelect.gameObject.SetActive(true);
-            bgmMainSelect.RectTransform.anchoredPosition = new Vector2(-650, bgmMainSelect.RectTransform.anchoredPosition.y);
+            bgmMainSelect.RectTransform.anchoredPosition = new Vector2(-GameManager.Instance.ScreenSize.x, bgmMainSelect.RectTransform.anchoredPosition.y);
 
             bgmSelectRight.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
 
             int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
-            
+
             int lastScore = SaveManager.Instance.GameData.GetLastScore(index);
             int highScore = SaveManager.Instance.GameData.GetHighScore(index);
 
             bgmMainSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
 
-            bgmSideSelect.RectTransform.DOAnchorPosX(650, UI_DRAG_MOVE_DURATION);
+            bgmSideSelect.RectTransform.DOAnchorPosX(GameManager.Instance.ScreenSize.x, UI_DRAG_MOVE_DURATION);
             bgmMainSelect.RectTransform.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
             {
                 bgmSideSelect.RectTransform.anchoredPosition = new Vector2(0, bgmSideSelect.RectTransform.anchoredPosition.y);
@@ -266,18 +263,18 @@ namespace Lobby
             if (prevIndex == nowIndex) return;
 
             bgmMainSelect.gameObject.SetActive(true);
-            bgmMainSelect.RectTransform.anchoredPosition = new Vector2(650, bgmMainSelect.RectTransform.anchoredPosition.y);
+            bgmMainSelect.RectTransform.anchoredPosition = new Vector2(GameManager.Instance.ScreenSize.x, bgmMainSelect.RectTransform.anchoredPosition.y);
 
             bgmSelectLeft.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
 
             int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
-            
+
             int lastScore = SaveManager.Instance.GameData.GetLastScore(index);
             int highScore = SaveManager.Instance.GameData.GetHighScore(index);
 
             bgmMainSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
 
-            bgmSideSelect.RectTransform.DOAnchorPosX(-650, UI_DRAG_MOVE_DURATION);
+            bgmSideSelect.RectTransform.DOAnchorPosX(-GameManager.Instance.ScreenSize.x, UI_DRAG_MOVE_DURATION);
             bgmMainSelect.RectTransform.DOAnchorPosX(0, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack).OnComplete(() =>
             {
                 bgmSideSelect.RectTransform.anchoredPosition = new Vector2(0, bgmSideSelect.RectTransform.anchoredPosition.y);

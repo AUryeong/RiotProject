@@ -17,6 +17,8 @@ public class InputDetail : MonoBehaviour
     private const float AUTO_DRAG_POS = 130;
     private const float DRAG_MIN_POS = 20;
 
+    public bool isActivate = true;
+
     public Action<Direction> inputAction;
 
     public bool isOnlyLeftRight;
@@ -31,6 +33,8 @@ public class InputDetail : MonoBehaviour
 
     private void Update()
     {
+        if (!isActivate) return;
+        
         CheckKeyInput();
         if (SaveManager.Instance.GameData.isButton)
             CheckTouch();

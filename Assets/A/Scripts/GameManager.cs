@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     public bool isGaming = true;
 
     private const float UPSCALE_RATIO = 0.65f;
+    public Vector2Int ScreenSize { get; private set; }
 
     [Space(10f)] public Camera mainCamera;
     [SerializeField] private Camera playerRenderCamera;
@@ -103,7 +104,7 @@ public class GameManager : Singleton<GameManager>
 
     private void SetResolution()
     {
-        int deviceHeight = Screen.height;
+        ScreenSize = new Vector2Int(Screen.width, Screen.height);
 
         int adSizeY = AdMobManager.Instance.GetADSizeY();
         
@@ -115,7 +116,7 @@ public class GameManager : Singleton<GameManager>
             canvas.referenceResolution = cameraRenderSize;
         }
 
-        float adHeight = adSizeY / (float)deviceHeight;
+        float adHeight = adSizeY / (float)ScreenSize.y;
 
         renderingCamera.rect = new Rect(0f, 0, 1f, 1 - adHeight);
         uiCamera.rect = new Rect(0f, 0, 1f, 1 - adHeight);

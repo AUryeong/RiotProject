@@ -20,7 +20,7 @@ public class SoundManager : Singleton<SoundManager>
     private readonly Dictionary<string, AudioClip> audioClips = new();
 
     private readonly Dictionary<ESoundType, AudioInfo> audioInfos = new();
-    [SerializeField, Range(0f, 1f)] private float volumeMultiplier = 1;
+    [SerializeField] private Dictionary<ESoundType, float> defaultVolumes = new Dictionary<ESoundType, float>();
     protected override bool IsDontDestroying => true;
 
     protected override void OnCreated()
@@ -29,9 +29,8 @@ public class SoundManager : Singleton<SoundManager>
         foreach (var clip in clips)
             audioClips.Add(clip.name, clip);
 
-        AddAudioInfo(ESoundType.Bgm).audioSource.loop = true;
-        for (var soundType = ESoundType.Bgm; soundType <= ESoundType.End;)
-            AddAudioInfo(++soundType);
+        for (var soundType = ESoundType.Bgm; soundType < ESoundType.End; soundType++)
+            AddAudioInfo(soundType);
     }
 
     protected override void OnReset()
@@ -42,8 +41,10 @@ public class SoundManager : Singleton<SoundManager>
 
     public void UpdateVolume(ESoundType soundType, float sound)
     {
-        audioInfos[soundType].audioVolume = sound;
-        audioInfos[soundType].audioSource.volume = sound;
+        var audioInfo = audioInfos[soundType];
+        float defaultVolume = defaultVolumes.ContainsKey(soundType) ? defaultVolumes[soundType] : 1;
+        audioInfo.audioVolume = sound * defaultVolume;
+        audioInfo.audioSource.volume = sound * defaultVolume;
     }
 
     private AudioInfo AddAudioInfo(ESoundType soundType)
@@ -54,7 +55,7 @@ public class SoundManager : Singleton<SoundManager>
         var audioInfo = new AudioInfo
         {
             audioSource = audioSourceObj.AddComponent<AudioSource>(),
-            audioVolume = 1
+            audioVolume = defaultVolumes.ContainsKey(soundType) ? defaultVolumes[soundType] : 1
         };
         audioInfos.Add(soundType, audioInfo);
         return audioInfo;
@@ -72,6 +73,7 @@ public class SoundManager : Singleton<SoundManager>
             audioInfos[soundType].audioSource.Stop();
             return null;
         }
+
         if (!audioClips.ContainsKey(soundName))
         {
             Debug.Log("그 소리 없음!");
@@ -88,12 +90,12 @@ public class SoundManager : Singleton<SoundManager>
         if (soundType.Equals(ESoundType.Bgm))
         {
             audioSource.clip = clip;
-            audioSource.volume = audioInfo.audioVolume * multipleVolume * volumeMultiplier;
+            audioSource.volume = audioInfo.audioVolume * multipleVolume;
             audioSource.time = 0;
             audioSource.Play();
         }
         else //SFX
-            audioSource.PlayOneShot(clip, audioInfo.audioVolume * multipleVolume * volumeMultiplier);
+            audioSource.PlayOneShot(clip, audioInfo.audioVolume * multipleVolume);
 
         return clip;
     }
