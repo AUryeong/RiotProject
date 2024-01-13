@@ -108,12 +108,10 @@ public class GameManager : Singleton<GameManager>
 
         int adSizeY = AdMobManager.Instance.GetADSizeY();
         
-        var cameraRenderSize = new Vector2(720, 1600);
-
         foreach (var canvas in FindObjectsOfType<CanvasScaler>(true))
         {
-            canvas.matchWidthOrHeight = 1f;
-            canvas.referenceResolution = cameraRenderSize;
+            canvas.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
+            canvas.scaleFactor = 1.2f;
         }
 
         float adHeight = adSizeY / (float)ScreenSize.y;
