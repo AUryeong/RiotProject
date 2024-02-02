@@ -49,8 +49,7 @@ namespace InGame
 
             Player.Instance.GameStart();
 
-            uiManager.gameObject.SetActive(true);
-            uiManager.ActiveSetting();
+            uiManager.Active();
         }
 
         public void DeActive()

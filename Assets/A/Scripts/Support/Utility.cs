@@ -21,7 +21,7 @@ public static class Utility
         return UnityEngine.Random.value < 0.5f ? 1 : -1;
     }
 
-    public static Color GetFade(this Color color, float fadeValue)
+    public static Color GetAlpha(this Color color, float fadeValue)
     {
         return new Color(color.r, color.g, color.b, fadeValue);
     }

@@ -16,6 +16,10 @@
 apply plugin: 'com.android.library'
 **APPLY_PLUGINS**
 
+gradle.projectsEvaluated {
+    apply from: 'GoogleMobileAdsPlugin.androidlib/validate_dependencies.gradle'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 // Android Resolver Dependencies Start

@@ -98,7 +98,7 @@ namespace Lobby
 
             changeButtonChanger.Apply(stageTileData.uiColor, stageTileData.uiDarkColor);
 
-            borderBackground.color = stageTileData.uiDarkColor.GetFade(0.35f);
+            borderBackground.color = stageTileData.uiDarkColor.GetAlpha(0.35f);
 
             activeSequence?.Complete();
             deActiveSequence?.Complete();
@@ -116,9 +116,9 @@ namespace Lobby
                 sideStageSlot.ShowStage(TileManager.Instance.stageTileDataList[SaveManager.Instance.GameData.selectStageIndex]);
                 selectButton.image.rectTransform.localScale = Vector3.zero;
                 sideStageSlot.RectTransform.localScale = Vector3.zero;
-                borderBackground.color = borderBackground.color.GetFade(1);
-                stageSelectLeft.color = stageSelectLeft.color.GetFade(1);
-                stageSelectRight.color = stageSelectRight.color.GetFade(1);
+                borderBackground.color = borderBackground.color.GetAlpha(1);
+                stageSelectLeft.color = stageSelectLeft.color.GetAlpha(1);
+                stageSelectRight.color = stageSelectRight.color.GetAlpha(1);
                 exitButton.image.rectTransform.anchoredPosition = new Vector2(-70, exitButton.image.rectTransform.anchoredPosition.y);
             });
 
@@ -160,9 +160,9 @@ namespace Lobby
                 sideStageSlot.RectTransform.localScale = Vector3.one;
                 selectButton.image.rectTransform.localScale = Vector3.one;
                 exitButton.image.rectTransform.anchoredPosition = new Vector2(70, exitButton.image.rectTransform.anchoredPosition.y);
-                borderBackground.color = borderBackground.color.GetFade(0);
-                stageSelectLeft.color = stageSelectLeft.color.GetFade(0);
-                stageSelectRight.color = stageSelectRight.color.GetFade(0);
+                borderBackground.color = borderBackground.color.GetAlpha(0);
+                stageSelectLeft.color = stageSelectLeft.color.GetAlpha(0);
+                stageSelectRight.color = stageSelectRight.color.GetAlpha(0);
             });
 
             deActiveSequence.Join(sideStageSlot.RectTransform.DOScale(Vector3.zero, UI_MOVE_DURATION / 2).SetEase(Ease.InBack));
@@ -202,7 +202,7 @@ namespace Lobby
             changeButtonChanger.ApplyFade(UI_DRAG_MOVE_DURATION, stageTileData.uiColor, stageTileData.uiDarkColor);
 
             borderBackground.DOKill(true);
-            borderBackground.DOColor(stageTileData.uiDarkColor.GetFade(0.35f), UI_DRAG_MOVE_DURATION);
+            borderBackground.DOColor(stageTileData.uiDarkColor.GetAlpha(0.35f), UI_DRAG_MOVE_DURATION);
 
             stageSelectRight.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
             sideStageSlot.RectTransform.DOAnchorPosX(GameManager.Instance.ScreenSize.x, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack);
@@ -236,7 +236,7 @@ namespace Lobby
             changeButtonChanger.ApplyFade(UI_DRAG_MOVE_DURATION, stageTileData.uiColor, stageTileData.uiDarkColor);
 
             borderBackground.DOKill(true);
-            borderBackground.DOColor(stageTileData.uiDarkColor.GetFade(0.35f), UI_DRAG_MOVE_DURATION);
+            borderBackground.DOColor(stageTileData.uiDarkColor.GetAlpha(0.35f), UI_DRAG_MOVE_DURATION);
 
             stageSelectLeft.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
             sideStageSlot.RectTransform.DOAnchorPosX(-GameManager.Instance.ScreenSize.x, UI_DRAG_MOVE_DURATION).SetEase(Ease.OutBack);

@@ -63,11 +63,11 @@ namespace Lobby
             SoundManager.Instance.PlaySound("Button", ESoundType.Sfx);
             
             backgroundButton.image.DOKill();
-            backgroundButton.image.color = backgroundButton.image.color.GetFade(0f);
+            backgroundButton.image.color = backgroundButton.image.color.GetAlpha(0f);
             backgroundButton.image.DOFade(0.45f, UI_MOVE_DURATION);
 
             settingPopup.DOKill();
-            settingPopup.color = settingPopup.color.GetFade(0f);
+            settingPopup.color = settingPopup.color.GetAlpha(0f);
             settingPopup.DOFade(1f, UI_MOVE_DURATION);
 
             settingTitle.RectTransform.DOKill();

@@ -42,9 +42,6 @@ public class Player : Singleton<Player>
     private int jumpCount;
     private const int MAX_JUMP_COUNT = 2;
 
-    public float maxHp;
-    public float hpRemoveValue;
-
     [HideInInspector] public List<Enemy> hitAbleEnemyList;
 
     [Space(10f)] [SerializeField] private BoxCollider enemyCheckColliders;
