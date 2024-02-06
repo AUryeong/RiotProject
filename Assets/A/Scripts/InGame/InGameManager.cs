@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace InGame
@@ -18,7 +19,7 @@ namespace InGame
         }
 
         private int rune;
-        private List<int> beatScores = new List<int>();
+        private readonly List<int> beatScores = new();
         public void AddBeatHit(BeatHitType type)
         {
             int index = (int)type;
@@ -28,9 +29,14 @@ namespace InGame
 
             beatScores[index]++;
         }
+        
+        public int BeatHitCount => beatScores.Sum();
 
         public int GetBeatHit(BeatHitType type)
         {
+            if (type == BeatHitType.Miss)
+                return TileManager.Instance.bgmData.DefaultBeatCount - BeatHitCount;
+            
             int index = (int)type;
             if (beatScores.Count <= index)
                 for (int i = beatScores.Count; i <= index; i++)
@@ -60,7 +66,7 @@ namespace InGame
             uiManager.gameObject.SetActive(false);
         }
 
-        public void ReturnLobby(float duration = 3)
+        public void GameOver()
         {
             SoundManager.Instance.PlaySound("", ESoundType.Bgm);
 
@@ -72,10 +78,7 @@ namespace InGame
             if (SaveManager.Instance.GameData.GetHighScore(index) < Rune)
                 SaveManager.Instance.GameData.highScores[index] = Rune;
 
-            this.Invoke(() =>
-            {
-                GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby);
-            }, duration);
+            uiManager.DeActive();
         }
     }
 }

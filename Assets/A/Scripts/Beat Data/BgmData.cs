@@ -27,8 +27,18 @@ public class BgmData
             return lastBeat;
         }
     }
-
     private float lastBeat = -1;
+
+    public int DefaultBeatCount
+    {
+        get
+        {
+            if (defaultBeatCount <= 0)
+                defaultBeatCount = beatDataList.Count(x => x.type == BeatType.Default);
+            return defaultBeatCount;
+        }
+    }
+    private int defaultBeatCount = -1;
 
     [Space(10f)] [Title("Beat Data")] [SerializeField]
     private TextAsset textAsset;
@@ -65,6 +75,7 @@ public class BgmData
 
         Debug.Log("Add All Beat Datas");
     }
+
 }
 
 [Serializable]

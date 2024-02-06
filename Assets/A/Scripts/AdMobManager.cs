@@ -19,14 +19,15 @@ public class AdMobManager : Singleton<AdMobManager>
             bannerViewAd.LoadAd(new AdRequest());
         }
     }
+
     public int GetADSizeY()
     {
-        if(bannerViewAd == null)
+        if (bannerViewAd == null)
             ShowBannerView();
-        
+
         return Mathf.CeilToInt(bannerViewAd.GetHeightInPixels());
     }
-    
+
     public void ShowRewardAd(Action action)
     {
         if (rewardAd != null)
@@ -41,19 +42,15 @@ public class AdMobManager : Singleton<AdMobManager>
                 if (error != null || ad == null)
                 {
                     Debug.Log("rewarded ad failed to load an ad " +
-                                   "with error : " + error);
+                              "with error : " + error);
                     return;
                 }
 
                 rewardAd = ad;
                 if (rewardAd != null && rewardAd.CanShowAd())
                 {
-                    rewardAd.Show((Reward reward) =>
-                    {
-                        action?.Invoke();
-                    });
+                    rewardAd.Show((Reward reward) => { action?.Invoke(); });
                 }
             });
     }
-    
 }

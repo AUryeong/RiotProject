@@ -5,8 +5,9 @@ namespace InGame
 {
     public class Enemy : MonoBehaviour
     {
-        private const float ENEMY_HP_HEAL_VALUE = 10;
-        private const float ENEMY_MOVE_DURATION = 2;
+        public const int PERFECT_RUNE_COUNT = 9;
+        public const int GREAT_RUNE_COUNT = 7;
+        public const int GOOD_RUNE_COUNT = 5;
 
         private Animator animator;
         private Vector3 defaultLocalPos;
@@ -75,11 +76,6 @@ namespace InGame
         {
             gameObject.layer = LayerMask.NameToLayer("DeathEnemy");
             SoundManager.Instance.PlaySound("clap", ESoundType.Sfx, 0.5f);
-
-            // bone.DOMoveX(Random.Range(0,2) == 0 ? Random.Range(-15f,-20f) : Random.Range(15f,20f), ENEMY_MOVE_DURATION).SetRelative(true);
-            // bone.DOMoveY(Random.Range(5f, 10f), ENEMY_MOVE_DURATION).SetEase(Ease.OutBack).SetRelative(true);
-            // bone.DOMoveZ(Random.Range(30, 50f), ENEMY_MOVE_DURATION).SetRelative(true).OnComplete(() => gameObject.SetActive(false));
-            // bone.DORotateQuaternion(Quaternion.Euler(Random.Range(-360f, 360f), Random.Range(-360f, 360f), Random.Range(-360f, 360f)), ENEMY_MOVE_DURATION);
             gameObject.SetActive(false);
 
             Player.Instance.hitAbleEnemyList.Remove(this);
@@ -87,19 +83,19 @@ namespace InGame
             float distance = transform.position.z - Player.Instance.transform.position.z;
             if (distance <= 4.5f)
             {
-                InGameManager.Instance.Rune += 9;
+                InGameManager.Instance.Rune += PERFECT_RUNE_COUNT;
                 InGameManager.Instance.AddBeatHit(BeatHitType.Perfect);
                 PoolManager.Instance.Init("Perfect Effect").transform.position = transform.position;
             }
             else if (distance <= 6.5f)
             {
-                InGameManager.Instance.Rune += 7;
+                InGameManager.Instance.Rune += GREAT_RUNE_COUNT;
                 InGameManager.Instance.AddBeatHit(BeatHitType.Great);
                 PoolManager.Instance.Init("Great Effect").transform.position = transform.position;
             }
             else
             {
-                InGameManager.Instance.Rune += 5;
+                InGameManager.Instance.Rune += GOOD_RUNE_COUNT;
                 InGameManager.Instance.AddBeatHit(BeatHitType.Good);
                 PoolManager.Instance.Init("Good Effect").transform.position = transform.position;
             }

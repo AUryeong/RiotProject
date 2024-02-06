@@ -49,6 +49,9 @@ namespace InGame
 
         public void Active()
         {
+            gameOverPopup.gameObject.SetActive(false);
+            gameObject.SetActive(true);
+            
             runeBase.rectTransform.anchoredPosition = new Vector2(runeBase.rectTransform.anchoredPosition.x, 100);
             songSliderRect.anchoredPosition = new Vector2(-62.5f, songSliderRect.anchoredPosition.y);
 
@@ -60,9 +63,6 @@ namespace InGame
                 songSliderRect.DOAnchorPosX(62.5f, UI_MOVE_DURATION);
                 runeBase.rectTransform.DOAnchorPosY(-100, UI_MOVE_DURATION);
             }, 1);
-
-            gameOverPopup.gameObject.SetActive(false);
-            gameObject.SetActive(true);
         }
 
         public void DeActive()

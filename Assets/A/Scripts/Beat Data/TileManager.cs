@@ -9,7 +9,8 @@ public enum BeatHitType
 {
     Good,
     Great,
-    Perfect
+    Perfect,
+    Miss
 }
 
 public class TileManager : Singleton<TileManager>
@@ -488,7 +489,7 @@ public class TileManager : Singleton<TileManager>
             case BeatType.End:
                 isEndBgm = true;
                 ChangeThemeColor(stageTileData.defaultColor);
-                InGameManager.Instance.ReturnLobby(8);
+                InGameManager.Instance.GameOver();
                 Player.Instance.Boost(10);
                 break;
             case BeatType.SpeedDown:

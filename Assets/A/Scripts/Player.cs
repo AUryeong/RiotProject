@@ -281,7 +281,7 @@ public class Player : Singleton<Player>
         var obj = PoolManager.Instance.Init("Hit Effect");
         obj.transform.position = transform.position;
 
-        InGameManager.Instance.ReturnLobby();
+        InGameManager.Instance.GameOver();
     }
 
     private void Jump()
