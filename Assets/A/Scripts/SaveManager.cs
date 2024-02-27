@@ -3,6 +3,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public struct StageData
+{
+    public bool isBuy;
+    public int lastScore;
+    public int highScore;
+}
 
 [Serializable]
 public class GameData
@@ -11,31 +18,8 @@ public class GameData
     
     public int selectStageIndex;
     public int selectBgmIndex = 1;
-    public int selectEffectIndex = 0;
 
-    public bool isButton;
-    
-    public List<int> lastScores = new List<int>();
-
-    public int GetLastScore(int index)
-    {
-        if (lastScores.Count <= index)
-            for (int i = lastScores.Count; i <= index; i++)
-                lastScores.Add(0);
-
-        return lastScores[index];
-    }
-    
-    public List<int> highScores = new List<int>();
-
-    public int GetHighScore(int index)
-    {
-        if (highScores.Count <= index)
-            for (int i = highScores.Count; i <= index; i++)
-                highScores.Add(0);
-
-        return highScores[index];
-    }
+    public StageData[] stageDataList = new StageData[9];
 
     public float beatSync = 0;
     public float bgmSoundMultiplier = 1;
@@ -44,7 +28,7 @@ public class GameData
 
 public class SaveManager : Singleton<SaveManager>
 {
-    public const string SAVE_DATA_NAME = "RatsGo";
+    private const string SAVE_DATA_NAME = "RatsGo";
 
     private GameData gameData;
 

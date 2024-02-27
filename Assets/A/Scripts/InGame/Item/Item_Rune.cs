@@ -6,7 +6,7 @@
         {
             base.OnGet();
             InGameManager.Instance.Rune++;
-            SoundManager.Instance.PlaySound("exp", ESoundType.Sfx, 0.5f);
+            SoundManager.Instance.PlaySound("exp", ESoundType.Pitch2Sfx, 0.3f, 2);
         }
     }
 }

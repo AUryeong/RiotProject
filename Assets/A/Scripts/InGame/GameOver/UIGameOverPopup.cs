@@ -7,6 +7,8 @@ namespace InGame
 {
     public class UIGameOverPopup : MonoBehaviour
     {
+        private float toLobbyDuration = 0;
+        
         [SerializeField] private Image background;
         [SerializeField] private Image blackBackground;
 
@@ -72,7 +74,7 @@ namespace InGame
             rankText.text = rank;
 
             fullComboChanger.gameObject.SetActive(false);
-            
+
             comboJudgeSlot.gameObject.SetActive(false);
             prefectJudgeSlot.gameObject.SetActive(false);
             greatJudgeSlot.gameObject.SetActive(false);
@@ -126,15 +128,25 @@ namespace InGame
             runeBase.DOScale(1, UI_MOVE_DURATION).SetEase(Ease.OutBack).SetDelay(UI_MOVE_DURATION * 3f);
             runeText.DOCounter(0, runeCount, UI_MOVE_DURATION * 2).SetDelay(UI_MOVE_DURATION * 3f);
 
-            rankText.rectTransform.DOScale(1, UI_MOVE_DURATION / 4).SetDelay(UI_MOVE_DURATION * 5.5f);
-            rankText.rectTransform.DORotate(new Vector3(0, 0, Random.Range(10f, -10f)), UI_MOVE_DURATION / 4).SetDelay(UI_MOVE_DURATION * 5.5f);
+            rankText.rectTransform.DOScale(1, UI_MOVE_DURATION / 4).SetDelay(UI_MOVE_DURATION * 5.5f).OnStart(() => { SoundManager.Instance.PlaySound("Drum_snare", ESoundType.Sfx); });
             rankText.DOFade(1, UI_MOVE_DURATION / 4).SetDelay(UI_MOVE_DURATION * 5.5f);
+
+            toLobbyDuration = 8;
+        }
+
+        private void Update()
+        {
+            if (toLobbyDuration <= 0) return;
             
-            
-            this.Invoke(() =>
+            toLobbyDuration -= Time.deltaTime;
+
+            if (toLobbyDuration >= 2f && Input.GetMouseButtonDown(0))
             {
-                GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby);
-            }, UI_MOVE_DURATION*8f);
+                toLobbyDuration = 1;
+                DOTween.CompleteAll();
+            }
+            if (toLobbyDuration > 0) return;
+            GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby);
         }
     }
 }

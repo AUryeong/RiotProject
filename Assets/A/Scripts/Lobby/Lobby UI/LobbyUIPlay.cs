@@ -87,8 +87,8 @@ namespace Lobby
 
             int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
 
-            int lastScore = SaveManager.Instance.GameData.GetLastScore(index);
-            int highScore = SaveManager.Instance.GameData.GetHighScore(index);
+            int lastScore = SaveManager.Instance.GameData.stageDataList[index].lastScore;
+            int highScore = SaveManager.Instance.GameData.stageDataList[index].highScore;
 
             bgmSideSelect.gameObject.SetActive(true);
             bgmSideSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], color, lastScore, highScore);
@@ -232,8 +232,8 @@ namespace Lobby
 
             int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
 
-            int lastScore = SaveManager.Instance.GameData.GetLastScore(index);
-            int highScore = SaveManager.Instance.GameData.GetHighScore(index);
+            int lastScore = SaveManager.Instance.GameData.stageDataList[index].lastScore;
+            int highScore = SaveManager.Instance.GameData.stageDataList[index].highScore;
 
             bgmMainSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
 
@@ -269,8 +269,8 @@ namespace Lobby
 
             int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
 
-            int lastScore = SaveManager.Instance.GameData.GetLastScore(index);
-            int highScore = SaveManager.Instance.GameData.GetHighScore(index);
+            int lastScore = SaveManager.Instance.GameData.stageDataList[index].lastScore;
+            int highScore = SaveManager.Instance.GameData.stageDataList[index].highScore;
 
             bgmMainSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
 

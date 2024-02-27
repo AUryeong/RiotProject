@@ -24,8 +24,6 @@ namespace Lobby
         [Space(10f)]
         [SerializeField] private UIButtonColorChanger syncColorChanger;
         [SerializeField] private Slider syncSlider;
-        [Space(10f)]
-        [SerializeField] private Toggle buttonToggle;
 
         private const float UI_MOVE_DURATION = 0.5f;
 
@@ -98,7 +96,6 @@ namespace Lobby
             sfxSlider.value = SaveManager.Instance.GameData.sfxSoundMultiplier;
             bgmSlider.value = SaveManager.Instance.GameData.bgmSoundMultiplier;
             syncSlider.value = SaveManager.Instance.GameData.beatSync;
-            buttonToggle.isOn = SaveManager.Instance.GameData.isButton;
         }
 
         public override void DeActive()
@@ -133,8 +130,6 @@ namespace Lobby
             BgmValueChange(bgmSlider.value);
 
             SaveManager.Instance.GameData.beatSync = syncSlider.value;
-
-            SaveManager.Instance.GameData.isButton = buttonToggle.isOn;
         }
     }
 }

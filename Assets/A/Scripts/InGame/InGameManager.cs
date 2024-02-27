@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace InGame
 {
@@ -20,6 +19,7 @@ namespace InGame
 
         private int rune;
         private readonly List<int> beatScores = new();
+
         public void AddBeatHit(BeatHitType type)
         {
             int index = (int)type;
@@ -29,14 +29,14 @@ namespace InGame
 
             beatScores[index]++;
         }
-        
+
         public int BeatHitCount => beatScores.Sum();
 
         public int GetBeatHit(BeatHitType type)
         {
             if (type == BeatHitType.Miss)
                 return TileManager.Instance.bgmData.DefaultBeatCount - BeatHitCount;
-            
+
             int index = (int)type;
             if (beatScores.Count <= index)
                 for (int i = beatScores.Count; i <= index; i++)
@@ -47,6 +47,8 @@ namespace InGame
 
         public void Active()
         {
+            beatScores.Clear();
+
             GameManager.Instance.isGaming = true;
             SoundManager.Instance.PlaySound("", ESoundType.Bgm);
 
@@ -73,10 +75,10 @@ namespace InGame
             SaveManager.Instance.GameData.rune += Rune * (SaveManager.Instance.GameData.selectStageIndex + 1);
             int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
 
-            SaveManager.Instance.GameData.lastScores[index] = Rune;
+            SaveManager.Instance.GameData.stageDataList[index].lastScore = Rune;
 
-            if (SaveManager.Instance.GameData.GetHighScore(index) < Rune)
-                SaveManager.Instance.GameData.highScores[index] = Rune;
+            if (SaveManager.Instance.GameData.stageDataList[index].highScore < Rune)
+                SaveManager.Instance.GameData.stageDataList[index].highScore = Rune;
 
             uiManager.DeActive();
         }

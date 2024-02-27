@@ -5,6 +5,7 @@ public enum ESoundType
 {
     Bgm,
     Sfx,
+    Pitch2Sfx,
     End
 }
 

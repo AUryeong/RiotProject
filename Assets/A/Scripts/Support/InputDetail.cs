@@ -34,12 +34,11 @@ public class InputDetail : MonoBehaviour
     private void Update()
     {
         if (!isActivate) return;
-        
+
+#if UNITY_EDITOR
         CheckKeyInput();
-        if (SaveManager.Instance.GameData.isButton)
-            CheckTouch();
-        else
-            CheckSwipeTouch();
+#endif
+        CheckSwipeTouch();
     }
 
     private void CheckTouch()
@@ -47,32 +46,29 @@ public class InputDetail : MonoBehaviour
 #if UNITY_ANDROID
         if (Input.touchCount <= 0) return;
         var touch = Input.GetTouch(0);
-        switch (touch.phase)
+        
+        if (touch.phase != TouchPhase.Began) return;
+        if (EventSystem.current.IsPointerOverGameObject(0)) return;
+        
+        if (isOnlyLeftRight)
         {
-            case TouchPhase.Began:
-            case TouchPhase.Stationary:
-            case TouchPhase.Moved:
-                if (Input.touchCount > 1)
-                {
-                    var touch2 = Input.GetTouch(1);
-                    if (touch2.phase == TouchPhase.Began)
-                    {
-                        inputAction?.Invoke(Direction.Down);
-                        touches.Add(touch.fingerId);
-                        touches.Add(touch2.fingerId);
-                    }
-                }
-                break;
-
-            case TouchPhase.Ended:
-            case TouchPhase.Canceled:
-                if (touches.Contains(touch.fingerId))
-                {
-                    touches.Remove(touch.fingerId);
-                    return;
-                }
-                inputAction?.Invoke(touch.position.x <= Screen.width / 2 ? Direction.Left : Direction.Right);
-                break;
+            inputAction?.Invoke(touch.position.x <= GameManager.Instance.ScreenSize.x / 2 ? Direction.Left : Direction.Right);
+        }
+        else
+        {
+            float screen = GameManager.Instance.ScreenSize.x / 3f;
+            if (touch.position.x <= screen)
+            {
+                inputAction?.Invoke(Direction.Left);
+            }
+            else if (touch.position.x > screen && touch.position.x <= screen)
+            {
+                inputAction?.Invoke(Direction.Down);
+            }
+            else
+            {
+                inputAction?.Invoke(Direction.Right);
+            }
         }
 #endif
     }
@@ -83,7 +79,7 @@ public class InputDetail : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject(0)) return;
-            
+
             isDrag = true;
             startDragPos = Input.mousePosition;
         }
@@ -123,6 +119,7 @@ public class InputDetail : MonoBehaviour
 #endif
     }
 
+#if UNITY_EDITOR
     private void CheckKeyInput()
     {
         if (!isOnlyLeftRight)
@@ -143,6 +140,7 @@ public class InputDetail : MonoBehaviour
                 inputAction?.Invoke(Direction.Right);
         }
     }
+#endif
 
     private void CheckInput()
     {
