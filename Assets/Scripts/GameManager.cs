@@ -133,12 +133,12 @@ public class GameManager : Singleton<GameManager>
             height = safeArea.height / Screen.height;
         else
         {
-            float adHeight = AdMobManager.Instance.GetADSizeY() / ScreenSize.y;
-            height = Mathf.Min(safeArea.height / Screen.height, 1 - adHeight);
+            float adHeight = AdMobManager.Instance.GetADSizeY() / 1440f;
+            height = Mathf.Min(safeArea.height / Screen.height, 1-adHeight);
         }
 #else
-        float adHeight = AdMobManager.Instance.GetADSizeY() / ScreenSize.y;
-        float height = Mathf.Min(safeArea.height / Screen.height, 1 - adHeight);
+        float adHeight = AdMobManager.Instance.GetADSizeY() / 1440f;
+        float height = Mathf.Min(safeArea.height / Screen.height, 1-adHeight);
 #endif
         var camRect = new Rect(safeArea.x, safeArea.y, safeArea.width / Screen.width, height);
         renderingCamera.rect = camRect;

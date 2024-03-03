@@ -93,11 +93,13 @@ namespace Lobby
 
             songText.text = bgmData.bgmNickName;
 
+            runeIcon.DOKill();
             runeIcon.color = runeIcon.color.GetAlpha(1);
             runeIcon.rectTransform.rotation = Quaternion.identity;
             runeIcon.rectTransform.localScale = Vector3.one * 0.6f;
-            
-            runeText.color = runeIcon.color.GetAlpha(1);
+
+            runeText.DOKill();
+            runeText.color = runeText.color.GetAlpha(1);
             runeText.rectTransform.localScale = Vector3.one;
             runeText.text = bgmData.price.ToString();
 
