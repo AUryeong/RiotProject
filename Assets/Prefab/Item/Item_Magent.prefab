@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5991552679211235738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5991552679211235713}
+  - component: {fileID: 5991552679211235718}
+  - component: {fileID: 5991552679211235719}
+  - component: {fileID: 5991552679211235717}
+  - component: {fileID: 5991552679211235712}
+  - component: {fileID: 7401173985736819389}
+  m_Layer: 10
+  m_Name: Item_Magent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5991552679211235713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991552679211235738}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5, y: 1.31, z: 18.36}
+  m_LocalScale: {x: 9, y: 9, z: 9}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5991552679211235718
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991552679211235738}
+  m_Mesh: {fileID: -1732647622341758642, guid: 57b3efdb30fc1cb45bf00afc8f83b500, type: 3}
+--- !u!23 &5991552679211235719
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991552679211235738}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 96b1e9e41fead864d8e6381177a91f63, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5991552679211235717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991552679211235738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df29c1a0184634f40a43f70bec48e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainColor: {r: 1, g: 0.18252507, b: 0.12735847, a: 1}
+  fogSimulationSpace: 1
+  fogColor: {r: 1, g: 1, b: 1, a: 1}
+  fogMinimalHeight: -20
+  fogMaximalHeight: 0
+  fogFalloff: 1
+  fogEmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  fogEmissionPower: 20
+  fogEmissionFalloff: 0.5
+  emissionColor: {r: 0, g: 0, b: 0, a: 1}
+  emissionPower: 1
+  combineWithStandardFog: 0
+  overrideStandardFogColor: 0
+  useFogAnimation: 0
+  fogWaveSpeedX: 2
+  fogWaveSpeedZ: 2
+  fogWaveAmplitudeX: 0.3
+  fogWaveAmplitudeZ: 0.3
+  fogWaveFreqX: 0.5
+  fogWaveFreqZ: 0.5
+  renderer: {fileID: 5991552679211235719}
+  overridedFromGlobalController: 1
+--- !u!114 &5991552679211235712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991552679211235738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dccaf2b5c3641938aef6eabc4e9585f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &7401173985736819389
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991552679211235738}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.11224079, y: 0.14815906, z: 0.0198541}
+  m_Center: {x: 0, y: 0.0807998, z: -0.0000000013969841}

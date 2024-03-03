@@ -1,10 +1,9 @@
 using Sirenix.OdinInspector;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public struct StageData
+public class StageData
 {
     public bool isBuy;
     public int lastScore;
@@ -17,9 +16,19 @@ public class GameData
     public int rune;
     
     public int selectStageIndex;
-    public int selectBgmIndex = 1;
+    public int selectBgmIndex;
 
-    public StageData[] stageDataList = new StageData[9];
+    public StageData GetStageData(int stageIndex, int bgmIndex)
+    {
+        return stageDataList[stageIndex * 3 + bgmIndex];
+    }
+
+    public StageData GetSelectStageData()
+    {
+        return GetStageData(selectStageIndex, selectBgmIndex);
+    }
+    
+    [SerializeField] private StageData[] stageDataList = new StageData[9];
 
     public float beatSync = 0;
     public float bgmSoundMultiplier = 1;

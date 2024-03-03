@@ -255,7 +255,7 @@ namespace Lobby
         {
             if (isDeActivating) return;
 
-            float duration = TileManager.Instance.beatInterval / 4;
+            float duration = TileManager.Instance.BeatInterval / 4;
             
             Vector3 scale = Vector3.one * 1.15f;
 

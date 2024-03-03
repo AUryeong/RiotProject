@@ -14,7 +14,8 @@ namespace Lobby
             Player.Instance.Reset();
             
             TileManager.Instance.StageReset();
-            TileManager.Instance.Reset(true);
+            TileManager.Instance.TileReset();
+            TileManager.Instance.Reset();
             
             uiManager.gameObject.SetActive(true);
             uiManager.Active();

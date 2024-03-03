@@ -13,7 +13,7 @@ public class RoadTileData : TileData
     {
         float playerPos = Player.Instance.transform.position.x;
 
-        float beatInterval = TileManager.Instance.beatInterval;
+        float beatInterval = TileManager.Instance.BeatInterval;
         Vector3 localPos = new Vector3(0, 6, 0);
 
         foreach (var obj in roadObjects)

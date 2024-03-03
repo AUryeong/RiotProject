@@ -5,9 +5,6 @@ namespace InGame
 {
     public class Enemy : MonoBehaviour
     {
-        public const int PERFECT_RUNE_COUNT = 9;
-        public const int GREAT_RUNE_COUNT = 7;
-        public const int GOOD_RUNE_COUNT = 5;
 
         private Animator animator;
         private Vector3 defaultLocalPos;
@@ -35,7 +32,7 @@ namespace InGame
 
             bone.localPosition = Vector3.zero;
             bone.rotation = defaultBoneQuaternion;
-            bone.DOLocalMove(spawnVector, TileManager.Instance.beatInterval * 2).From(true);
+            bone.DOLocalMove(spawnVector, TileManager.Instance.BeatInterval * 2).From(true);
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -83,19 +80,19 @@ namespace InGame
             float distance = transform.position.z - Player.Instance.transform.position.z;
             if (distance <= 4.5f)
             {
-                InGameManager.Instance.Rune += PERFECT_RUNE_COUNT;
+                InGameManager.Instance.Rune += Item_Rune.PERFECT_RUNE_COUNT;
                 InGameManager.Instance.AddBeatHit(BeatHitType.Perfect);
                 PoolManager.Instance.Init("Perfect Effect").transform.position = transform.position;
             }
             else if (distance <= 6.5f)
             {
-                InGameManager.Instance.Rune += GREAT_RUNE_COUNT;
+                InGameManager.Instance.Rune += Item_Rune.GREAT_RUNE_COUNT;
                 InGameManager.Instance.AddBeatHit(BeatHitType.Great);
                 PoolManager.Instance.Init("Great Effect").transform.position = transform.position;
             }
             else
             {
-                InGameManager.Instance.Rune += GOOD_RUNE_COUNT;
+                InGameManager.Instance.Rune += Item_Rune.GOOD_RUNE_COUNT;
                 InGameManager.Instance.AddBeatHit(BeatHitType.Good);
                 PoolManager.Instance.Init("Good Effect").transform.position = transform.position;
             }

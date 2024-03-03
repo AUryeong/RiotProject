@@ -14,7 +14,8 @@ public enum SceneLinkType
 
 public class GameManager : Singleton<GameManager>
 {
-    public bool isGaming = true;
+    public bool isDebugging;
+    public bool isGaming;
 
     private const float UPSCALE_RATIO = 0.65f;
     private static readonly Vector2 SCREEN_SIZE = new(1080, 1920);
@@ -49,7 +50,14 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
-        MobileAds.Initialize((InitializationStatus initStatus) =>
+#if UNITY_EDITOR
+        if (isDebugging)
+        {
+            ActiveSceneLink(SceneLinkType.Lobby);
+            return;
+        }
+#endif
+        MobileAds.Initialize(initStatus =>
         {
             ActiveSceneLink(SceneLinkType.Lobby);
             AdMobManager.Instance.ShowBannerView();
@@ -108,8 +116,6 @@ public class GameManager : Singleton<GameManager>
         Rect safeArea = Screen.safeArea;
         ScreenSize = new Vector2(Screen.width * (1 - safeArea.x), Screen.height * (1 - safeArea.y));
 
-        int adSizeY = AdMobManager.Instance.GetADSizeY();
-
         float sizeXMultiplier = ScreenSize.x / SCREEN_SIZE.x;
         float sizeYMultiplier = ScreenSize.y / SCREEN_SIZE.y;
 
@@ -118,12 +124,22 @@ public class GameManager : Singleton<GameManager>
         foreach (var canvas in FindObjectsOfType<CanvasScaler>(true))
         {
             canvas.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
-            canvas.scaleFactor = 1.4f * sizeMultiplier;
+            canvas.scaleFactor = 1.3f * sizeMultiplier;
         }
 
-        float adHeight = adSizeY / ScreenSize.y;
-
+#if UNITY_EDITOR
+        float height;
+        if (isDebugging)
+            height = safeArea.height / Screen.height;
+        else
+        {
+            float adHeight = AdMobManager.Instance.GetADSizeY() / ScreenSize.y;
+            height = Mathf.Min(safeArea.height / Screen.height, 1 - adHeight);
+        }
+#else
+        float adHeight = AdMobManager.Instance.GetADSizeY() / ScreenSize.y;
         float height = Mathf.Min(safeArea.height / Screen.height, 1 - adHeight);
+#endif
         var camRect = new Rect(safeArea.x, safeArea.y, safeArea.width / Screen.width, height);
         renderingCamera.rect = camRect;
         uiCamera.rect = camRect;

@@ -9,7 +9,7 @@ namespace InGame
 
         public int Rune
         {
-            get { return rune; }
+            get => rune;
             set
             {
                 rune = value;
@@ -73,12 +73,12 @@ namespace InGame
             SoundManager.Instance.PlaySound("", ESoundType.Bgm);
 
             SaveManager.Instance.GameData.rune += Rune * (SaveManager.Instance.GameData.selectStageIndex + 1);
-            int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
 
-            SaveManager.Instance.GameData.stageDataList[index].lastScore = Rune;
+            var stageData = SaveManager.Instance.GameData.GetSelectStageData();
+            stageData.lastScore = Rune;
 
-            if (SaveManager.Instance.GameData.stageDataList[index].highScore < Rune)
-                SaveManager.Instance.GameData.stageDataList[index].highScore = Rune;
+            if (stageData.highScore < Rune)
+                stageData.highScore = Rune;
 
             uiManager.DeActive();
         }

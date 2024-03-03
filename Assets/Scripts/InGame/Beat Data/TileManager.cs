@@ -47,7 +47,7 @@ public class TileManager : Singleton<TileManager>
     [Header("Bgm")]
     [HideInInspector] public BgmData bgmData;
 
-    public float beatInterval;
+    public float BeatInterval { get; private set; }
 
     private int stackBeat;
     private float beatSyncPos;
@@ -67,7 +67,7 @@ public class TileManager : Singleton<TileManager>
     private float beatStartPos;
 
     private readonly List<TileChangeData> highLightDataList = new();
-    public int highLightLevel;
+    private int highLightLevel;
 
     private bool isBeatCreating;
 
@@ -77,10 +77,10 @@ public class TileManager : Singleton<TileManager>
     private bool isChangeEndBgm;
     private float endBgmPos;
 
-    [Header("Item")]
-    [SerializeField] private List<string> itemList;
-
     private int itemMaxValue;
+    
+    private static readonly int PLAYER_COLOR = Shader.PropertyToID("_Color");
+    private static readonly int SKYBOX_GROUND_COLOR = Shader.PropertyToID("_GroundColor");
 
     protected override void OnCreated()
     {
@@ -91,7 +91,8 @@ public class TileManager : Singleton<TileManager>
             stageData.Init();
 
         StageReset();
-        Reset(true);
+        TileReset();
+        Reset();
     }
 
     public void StageReset()
@@ -104,20 +105,20 @@ public class TileManager : Singleton<TileManager>
             GameManager.Instance.postProcessVolume.profile = stageTileData.postProcessProfile;
             GameManager.Instance.directionLight.color = stageTileData.directionLightColor;
 
-            const int POOLING_COUNT = 4;
+            const int poolingCount = 4;
 
             foreach (var enemy in stageTileData.defaultEnemies)
-                PoolManager.Instance.CreatePoolingData(enemy.name, POOLING_COUNT);
+                PoolManager.Instance.CreatePoolingData(enemy.name, poolingCount);
 
             foreach (var enemy in stageTileData.flyingEnemies)
-                PoolManager.Instance.CreatePoolingData(enemy.name, POOLING_COUNT);
+                PoolManager.Instance.CreatePoolingData(enemy.name, poolingCount);
 
             foreach (var road in stageTileData.roadTileDataList)
-                PoolManager.Instance.CreatePoolingData(road.name, POOLING_COUNT);
+                PoolManager.Instance.CreatePoolingData(road.name, poolingCount);
 
             foreach (var roadDataList in stageTileData.tileDataList)
-                foreach (var road in roadDataList.dataList)
-                    PoolManager.Instance.CreatePoolingData(road.name, POOLING_COUNT);
+            foreach (var road in roadDataList.dataList)
+                PoolManager.Instance.CreatePoolingData(road.name, poolingCount);
 
             RenderSettings.skybox = stageTileData.skyBox;
         }
@@ -126,20 +127,20 @@ public class TileManager : Singleton<TileManager>
         SetBgmData(stageTileData.bgmDataList[SaveManager.Instance.GameData.selectBgmIndex]);
     }
 
-    public void Reset(bool isPosReset = false)
+    public void TileReset()
     {
-        if (isPosReset)
-        {
-            roadTileLength = -6;
-            tileLengthList.Clear();
-            for (int index = 0; index < stageTileData.tileDataList.Count; index++)
-                tileLengthList.Add(roadTileLength);
+        roadTileLength = -6;
+        tileLengthList.Clear();
+        for (int index = 0; index < stageTileData.tileDataList.Count; index++)
+            tileLengthList.Add(roadTileLength);
 
-            foreach (var createdTile in createdTileList)
-                createdTile.gameObject.SetActive(false);
-            createdTileList.Clear();
-        }
+        foreach (var createdTile in createdTileList)
+            createdTile.gameObject.SetActive(false);
+        createdTileList.Clear();
+    }
 
+    public void Reset()
+    {
         isChangeStage = false;
         isBeatCreating = false;
         isEndBgm = false;
@@ -183,23 +184,23 @@ public class TileManager : Singleton<TileManager>
 
     private void BeatDanceUpdate()
     {
-        beatDanceDuration += Time.deltaTime / beatInterval;
+        beatDanceDuration += Time.deltaTime / BeatInterval;
         if (beatDanceDuration >= 1)
         {
             foreach (var obj in createdBounceBackgroundList)
             {
                 obj.transform.DOKill();
-                obj.transform.DOMoveY(-1, beatInterval / 4).SetLoops(2, LoopType.Yoyo);
+                obj.transform.DOMoveY(-1, BeatInterval / 4).SetLoops(2, LoopType.Yoyo);
             }
 
             foreach (var obj in createdBounceList)
             {
                 obj.transform.DOKill();
-                obj.transform.DOMoveY(-0.3f, beatInterval / 4).SetRelative().SetLoops(2, LoopType.Yoyo);
+                obj.transform.DOMoveY(-0.3f, BeatInterval / 4).SetRelative().SetLoops(2, LoopType.Yoyo);
             }
 
             if (GameManager.Instance.isGaming)
-                InGameManager.Instance.uiManager.BounceHpBar(beatInterval / 4);
+                InGameManager.Instance.uiManager.BounceHpBar(BeatInterval / 4);
             else
                 LobbyManager.Instance.uiManager.Bounce();
 
@@ -252,7 +253,7 @@ public class TileManager : Singleton<TileManager>
         beatDanceDuration = 0;
 
         bgmData = setBgmData;
-        beatInterval = 60f / bgmData.bpm / bgmData.bpmMultiplier;
+        BeatInterval = 60f / bgmData.bpm / bgmData.bpmMultiplier;
 
         Player.Instance.SpeedAddValue = bgmData.speedAdder;
 
@@ -266,7 +267,7 @@ public class TileManager : Singleton<TileManager>
 
         if (beat == null) return;
 
-        SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = beatInterval * beat.beat;
+        SoundManager.Instance.GetAudioSource(ESoundType.Bgm).time = BeatInterval * beat.beat;
     }
 
     #region TileCheck
@@ -310,7 +311,7 @@ public class TileManager : Singleton<TileManager>
         GameObject itemObj;
         if (itemMaxValue >= ITEM_RANDOM_PROB_MAX && Random.Range(0f, 100f) <= ITEM_RANDOM_PROB_VALUE_PERCENT)
         {
-            itemObj = PoolManager.Instance.Init(itemList.SelectOne());
+            itemObj = PoolManager.Instance.Init("item_Magnet");
             itemMaxValue = 0;
         }
         else
@@ -325,10 +326,10 @@ public class TileManager : Singleton<TileManager>
             createdTileList.Add(itemObj);
     }
 
-    private void CreateRoadTile(bool isSwife = false)
+    private void CreateRoadTile(bool isSwipe = false)
     {
         int line = lastSummonLine;
-        if (isSwife)
+        if (isSwipe)
             if (Mathf.Abs(line) >= 2)
                 line += (int)Mathf.Sign(line) * -1;
             else
@@ -385,7 +386,7 @@ public class TileManager : Singleton<TileManager>
             return;
         }
 
-        beatSpawnDuration += Time.deltaTime / beatInterval * Player.Instance.Speed / Player.Instance.originSpeed;
+        beatSpawnDuration += Time.deltaTime / BeatInterval * Player.Instance.Speed / Player.Instance.originSpeed;
 
         float nowBeat = (beatSpawnDuration + stackBeat) / bgmData.bpmMultiplier;
         bool isBeatTiming = beatDataQueue.Peek().beat <= nowBeat;
@@ -549,12 +550,12 @@ public class TileManager : Singleton<TileManager>
         GameManager.Instance.fogController.fogColor = themeColor.fogColor;
 
         var material = Player.Instance.defaultMeshes[0].material;
-        material.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
+        material.SetColor(PLAYER_COLOR, (stageTileData.directionLightColor + themeColor.mainColor) / 2);
 
         material = Player.Instance.dissolveMeshes[0].material;
-        material.SetColor("_Color", (stageTileData.directionLightColor + themeColor.mainColor) / 2);
+        material.SetColor(PLAYER_COLOR, (stageTileData.directionLightColor + themeColor.mainColor) / 2);
 
-        stageTileData.skyBox.SetColor("_GroundColor", themeColor.fogColor);
+        stageTileData.skyBox.SetColor(SKYBOX_GROUND_COLOR, themeColor.fogColor);
 
         var transEffect = PoolManager.Instance.Init("Trans Effect");
         transEffect.transform.position = Player.Instance.transform.position;

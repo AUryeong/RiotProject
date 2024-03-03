@@ -9,15 +9,17 @@ public class AdMobManager : Singleton<AdMobManager>
 #if UNITY_EDITOR
     private const string AD_BANNER_UNIT_ID = "ca-app-pub-3940256099942544/6300978111";
 #else
-    private const string AD_BANNER_UNIT_ID = "ca-app-pub-5708876822263347/4804356655";
+    private const string AD_BANNER_UNIT_ID = "ca-app-pub-3940256099942544/6300978111";  
 #endif
+    // private const string AD_BANNER_UNIT_ID = "ca-app-pub-5708876822263347/4804356655";
 
     private RewardedAd rewardAd;
 #if UNITY_EDITOR
     private const string AD_REWARD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
 #else
-    private const string AD_REWARD_UNIT_ID = "ca-app-pub-5708876822263347/9820308792";
+    private const string AD_REWARD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
 #endif
+    //private const string AD_REWARD_UNIT_ID = "ca-app-pub-5708876822263347/9820308792";
 
     public void ShowBannerView()
     {

@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
+using GooglePlayGames;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Lobby
@@ -60,7 +60,7 @@ namespace Lobby
             startButton.onClick.AddListener(StartButton);
 
             shopButton.onClick.RemoveAllListeners();
-            shopButton.onClick.AddListener(LockButton);
+            shopButton.onClick.AddListener(RankingButton);
 
             stageButton.onClick.RemoveAllListeners();
             stageButton.onClick.AddListener(StageButton);
@@ -85,10 +85,9 @@ namespace Lobby
             Color color = TileManager.Instance.stageTileData.uiColor;
             Color darkColor = TileManager.Instance.stageTileData.uiDarkColor;
 
-            int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
-
-            int lastScore = SaveManager.Instance.GameData.stageDataList[index].lastScore;
-            int highScore = SaveManager.Instance.GameData.stageDataList[index].highScore;
+            var stageData = SaveManager.Instance.GameData.GetSelectStageData();
+            int lastScore = stageData.lastScore;
+            int highScore = stageData.highScore;
 
             bgmSideSelect.gameObject.SetActive(true);
             bgmSideSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], color, lastScore, highScore);
@@ -182,16 +181,15 @@ namespace Lobby
             if (isDeActivating) return;
 
             isDeActivating = true;
-            SoundManager.Instance.PlaySound("Button", ESoundType.Sfx);
             LobbyManager.Instance.uiManager.Select(LobbyType.Stage);
         }
 
-        private void LockButton()
+        private void RankingButton()
         {
-            shopButton.image.rectTransform.DOKill(true);
-            shopButton.image.rectTransform.DOShakeAnchorPos(0.3f, 20, 50);
+            //TODO PLAYGAMES
+            PlayGamesPlatform.Instance.ShowLeaderboardUI();
 
-            SoundManager.Instance.PlaySound("Error", ESoundType.Sfx, 1, 1.15f);
+            SoundManager.Instance.PlaySound("Button", ESoundType.Sfx);
         }
 
         private void StartButton()
@@ -230,10 +228,9 @@ namespace Lobby
 
             bgmSelectRight.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
 
-            int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
-
-            int lastScore = SaveManager.Instance.GameData.stageDataList[index].lastScore;
-            int highScore = SaveManager.Instance.GameData.stageDataList[index].highScore;
+            var stageData = SaveManager.Instance.GameData.GetSelectStageData();
+            int lastScore = stageData.lastScore;
+            int highScore = stageData.highScore;
 
             bgmMainSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
 
@@ -267,10 +264,9 @@ namespace Lobby
 
             bgmSelectLeft.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
 
-            int index = SaveManager.Instance.GameData.selectStageIndex * 3 + SaveManager.Instance.GameData.selectBgmIndex;
-
-            int lastScore = SaveManager.Instance.GameData.stageDataList[index].lastScore;
-            int highScore = SaveManager.Instance.GameData.stageDataList[index].highScore;
+            var stageData = SaveManager.Instance.GameData.GetSelectStageData();
+            int lastScore = stageData.lastScore;
+            int highScore = stageData.highScore;
 
             bgmMainSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], TileManager.Instance.stageTileData.uiColor, lastScore, highScore);
 
@@ -289,7 +285,7 @@ namespace Lobby
         {
             if (isDeActivating || isActivating) return;
 
-            float duration = TileManager.Instance.beatInterval / 4;
+            float duration = TileManager.Instance.BeatInterval / 4;
 
             Vector3 scale = Vector3.one * 1.05f;
 

@@ -7,7 +7,6 @@ using UnityEngine.Serialization;
 
 public class Player : Singleton<Player>
 {
-    public bool isInv;
     public int line;
 
     private Rigidbody rigid;
@@ -52,7 +51,7 @@ public class Player : Singleton<Player>
     public float BoostDuration { get; private set; }
 
     [SerializeField] private ParticleSystem magnetParticle;
-    public float MagnetDuration { get; private set; }
+    private float magnetDuration;
     private Collider[] magnetOverlapColliders;
 
     protected override void OnCreated()
@@ -97,10 +96,10 @@ public class Player : Singleton<Player>
         jumpCount = MAX_JUMP_COUNT;
         rigid.useGravity = true;
 
-        if (isInv)
-        {
-            boostBlockFallCollider.gameObject.SetActive(true);
-        }
+#if UNITY_EDITOR
+        if (!GameManager.Instance.isDebugging) return;
+        boostBlockFallCollider.gameObject.SetActive(true);
+#endif
     }
 
     private void Update()
@@ -130,7 +129,9 @@ public class Player : Singleton<Player>
 
     private void CheckInv()
     {
-        if (!isInv) return;
+#if UNITY_EDITOR
+        if (GameManager.Instance.isDebugging) return;
+#endif
 
         boostBlockFallCollider.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
@@ -142,22 +143,22 @@ public class Player : Singleton<Player>
 
     public void Magnet(float duration)
     {
-        if (MagnetDuration <= 0)
+        if (magnetDuration <= 0)
             magnetParticle.Play();
 
-        MagnetDuration = duration;
+        magnetDuration = duration;
     }
 
     private void CheckMagnet()
     {
-        if (MagnetDuration <= 0) return;
+        if (magnetDuration <= 0) return;
 
-        MagnetDuration -= Time.deltaTime;
+        magnetDuration -= Time.deltaTime;
         magnetOverlapColliders = Physics.OverlapSphere(transform.position, Item_Magnet.MAGNET_RADIUS, LayerMask.GetMask("Getable"));
         foreach (var overlapCollider in magnetOverlapColliders)
             overlapCollider.transform.position = Vector3.MoveTowards(overlapCollider.transform.position, transform.position, Item_Magnet.MAGNET_SPEED * Time.deltaTime);
 
-        if (MagnetDuration > 0) return;
+        if (magnetDuration > 0) return;
 
         magnetParticle.Stop();
     }
@@ -185,8 +186,10 @@ public class Player : Singleton<Player>
         if (BoostDuration > 0) return;
 
         boostParticle.Stop();
-        if (!isInv)
+#if UNITY_EDITOR
+        if (GameManager.Instance.isDebugging)
             boostBlockFallCollider.gameObject.SetActive(false);
+#endif
         SpeedAddValue -= Item_Boost.BOOST_SPEED_ADD_VALUE;
     }
 
@@ -199,7 +202,7 @@ public class Player : Singleton<Player>
 
     private void Move(float deltaTime)
     {
-        float moveValue = Speed * deltaTime / TileManager.Instance.beatInterval;
+        float moveValue = Speed * deltaTime / TileManager.Instance.BeatInterval;
         transform.Translate(Vector3.forward * moveValue);
     }
 
@@ -224,7 +227,9 @@ public class Player : Singleton<Player>
         if (collision.collider.CompareTag("Road"))
             jumpCount = MAX_JUMP_COUNT;
 
-        if (isInv) return;
+#if UNITY_EDITOR
+        if (GameManager.Instance.isDebugging) return;
+#endif
 
         if (collision.collider.CompareTag("Fall"))
             OnHitFallObject();

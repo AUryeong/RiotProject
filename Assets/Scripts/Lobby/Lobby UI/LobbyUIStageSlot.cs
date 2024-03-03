@@ -1,8 +1,6 @@
 ﻿using DG.Tweening;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Lobby
 {
@@ -45,7 +43,7 @@ namespace Lobby
 
         public void Bounce(int bgmSelectIndex)
         {
-            float duration = TileManager.Instance.beatInterval / 4;
+            float duration = TileManager.Instance.BeatInterval / 4;
 
             Vector3 scale = Vector3.one * 1.1f;
 

@@ -8,11 +8,12 @@ namespace InGame
     public class UIGameOverPopup : MonoBehaviour
     {
         private float toLobbyDuration = 0;
-        
+
         [SerializeField] private Image background;
         [SerializeField] private Image blackBackground;
 
         [Space(10f)]
+        [SerializeField] private Image rankBackground;
         [SerializeField] private TextMeshProUGUI rankText;
 
         [Space(10f)]
@@ -50,12 +51,14 @@ namespace InGame
 
             runeBase.localScale = Vector3.zero;
 
+            rankBackground.color = rankBackground.color.GetAlpha(0);
             rankText.color = rankText.color.GetAlpha(0);
             rankText.rectTransform.localScale = Vector3.one * 10;
             rankText.rectTransform.localRotation = Quaternion.Euler(0, 0, 0);
+            rankText.fontMaterial.SetColor("_OutlineColor", darkColor);
 
             int runeCount = InGameManager.Instance.Rune;
-            int maxRuneCount = TileManager.Instance.bgmData.DefaultBeatCount * Enemy.PERFECT_RUNE_COUNT;
+            int maxRuneCount = TileManager.Instance.bgmData.DefaultBeatCount * Item_Rune.PERFECT_RUNE_COUNT;
 
             string rank = "F";
             if (runeCount >= maxRuneCount * 6 / 6f)
@@ -84,7 +87,7 @@ namespace InGame
             blackBackground.DOFade(0.35f, UI_MOVE_DURATION);
             background.DOFade(1, UI_MOVE_DURATION).SetDelay(UI_MOVE_DURATION);
 
-            resultBase.DOAnchorPosY(-213f, UI_MOVE_DURATION).SetDelay(UI_MOVE_DURATION);
+            resultBase.DOAnchorPosY(-162.5f, UI_MOVE_DURATION).SetDelay(UI_MOVE_DURATION);
 
             if (Player.Instance.IsAlive)
             {
@@ -128,7 +131,9 @@ namespace InGame
             runeBase.DOScale(1, UI_MOVE_DURATION).SetEase(Ease.OutBack).SetDelay(UI_MOVE_DURATION * 3f);
             runeText.DOCounter(0, runeCount, UI_MOVE_DURATION * 2).SetDelay(UI_MOVE_DURATION * 3f);
 
+            rankBackground.DOFade(0.1f, UI_MOVE_DURATION / 4f).SetDelay(UI_MOVE_DURATION * 5.5f);
             rankText.rectTransform.DOScale(1, UI_MOVE_DURATION / 4).SetDelay(UI_MOVE_DURATION * 5.5f).OnStart(() => { SoundManager.Instance.PlaySound("Drum_snare", ESoundType.Sfx); });
+            rankText.rectTransform.DORotate(new Vector3(0, 0, Random.Range(-35f, 35f)), UI_MOVE_DURATION / 4).SetDelay(UI_MOVE_DURATION * 5.5f);
             rankText.DOFade(1, UI_MOVE_DURATION / 4).SetDelay(UI_MOVE_DURATION * 5.5f);
 
             toLobbyDuration = 8;
@@ -137,7 +142,7 @@ namespace InGame
         private void Update()
         {
             if (toLobbyDuration <= 0) return;
-            
+
             toLobbyDuration -= Time.deltaTime;
 
             if (toLobbyDuration >= 2f && Input.GetMouseButtonDown(0))
@@ -145,6 +150,7 @@ namespace InGame
                 toLobbyDuration = 1;
                 DOTween.CompleteAll();
             }
+
             if (toLobbyDuration > 0) return;
             GameManager.Instance.ActiveSceneLink(SceneLinkType.Lobby);
         }
