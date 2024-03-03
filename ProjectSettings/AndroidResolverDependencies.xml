@@ -1,12 +1,13 @@
 <dependencies>
   <packages>
+    <package>androidx.fragment:fragment:1.1.0</package>
     <package>com.google.android.gms:play-services-ads:22.5.0</package>
     <package>com.google.android.ump:user-messaging-platform:2.1.0</package>
   </packages>
   <files />
   <settings>
     <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />
-    <setting name="bundleId" value="com.AdverGameKorea.RatsGo" />
+    <setting name="bundleId" value="com.AUryeong.RiotProject2" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
     <setting name="gradlePropertiesTemplateEnabled" value="True" />

@@ -1,5 +1,5 @@
-﻿using DG.Tweening;
-using GooglePlayGames;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,8 +33,8 @@ namespace Lobby
         [SerializeField] private RectTransform bgmParent;
 
         [Space(10f)]
-        [SerializeField] private Image bgmSelectLeft;
-        [SerializeField] private Image bgmSelectRight;
+        [SerializeField] private Button bgmSelectLeft;
+        [SerializeField] private Button bgmSelectRight;
 
         [Space(10f)]
         [SerializeField] private LobbyUISongSelect bgmMainSelect;
@@ -67,6 +67,12 @@ namespace Lobby
 
             settingButton.onClick.RemoveAllListeners();
             settingButton.onClick.AddListener(uiSetting.Active);
+            
+            bgmSelectLeft.onClick.RemoveAllListeners();
+            bgmSelectLeft.onClick.AddListener(PrevBgm);
+            
+            bgmSelectRight.onClick.RemoveAllListeners();
+            bgmSelectRight.onClick.AddListener(NextBgm);
         }
 
         public override void Active()
@@ -182,12 +188,14 @@ namespace Lobby
 
             isDeActivating = true;
             LobbyManager.Instance.uiManager.Select(LobbyType.Stage);
+
+            SoundManager.Instance.PlaySound("Button", ESoundType.Sfx);
         }
 
         private void RankingButton()
         {
             //TODO PLAYGAMES
-            PlayGamesPlatform.Instance.ShowLeaderboardUI();
+            //PlayGamesPlatform.Instance.ShowLeaderboardUI();
 
             SoundManager.Instance.PlaySound("Button", ESoundType.Sfx);
         }
@@ -211,22 +219,29 @@ namespace Lobby
 
         private void NextBgm()
         {
+            var selectableBgmIndexList = new List<int>();
+            for (int i = 0; i < 3; i++)
+            {
+                if (SaveManager.Instance.GameData.GetStageData(SaveManager.Instance.GameData.selectStageIndex, i).isBuy)
+                    selectableBgmIndexList.Add(i);
+            }
+
+            if (selectableBgmIndexList.Count <= 1) return;
+            
             SoundManager.Instance.PlaySound("levelup_back", ESoundType.Sfx, 0.6f, 0.9f);
 
             bgmMainSelect.RectTransform.DOKill(true);
             bgmSideSelect.RectTransform.DOKill(true);
-            bgmSelectRight.rectTransform.DOKill(true);
+            bgmSelectRight.image.rectTransform.DOKill(true);
 
             int prevIndex = SaveManager.Instance.GameData.selectBgmIndex;
-            int nowIndex = prevIndex - 1 < 0 ? TileManager.Instance.stageTileData.bgmDataList.Count - 1 : prevIndex - 1;
+            int nowIndex = selectableBgmIndexList[prevIndex - 1 < 0 ? selectableBgmIndexList.Count - 1 : prevIndex - 1];
             SaveManager.Instance.GameData.selectBgmIndex = nowIndex;
-
-            if (prevIndex == nowIndex) return;
 
             bgmMainSelect.gameObject.SetActive(true);
             bgmMainSelect.RectTransform.anchoredPosition = new Vector2(-GameManager.Instance.ScreenSize.x, bgmMainSelect.RectTransform.anchoredPosition.y);
 
-            bgmSelectRight.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
+            bgmSelectRight.image.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
 
             var stageData = SaveManager.Instance.GameData.GetSelectStageData();
             int lastScore = stageData.lastScore;
@@ -247,14 +262,23 @@ namespace Lobby
 
         private void PrevBgm()
         {
+            var selectableBgmIndexList = new List<int>();
+            for (int i = 0; i < 3; i++)
+            {
+                if (SaveManager.Instance.GameData.GetStageData(SaveManager.Instance.GameData.selectStageIndex, i).isBuy)
+                    selectableBgmIndexList.Add(i);
+            }
+
+            if (selectableBgmIndexList.Count <= 1) return;
+            
             SoundManager.Instance.PlaySound("levelup_back", ESoundType.Sfx, 0.6f, 0.9f);
 
             bgmMainSelect.RectTransform.DOKill(true);
             bgmSideSelect.RectTransform.DOKill(true);
-            bgmSelectLeft.rectTransform.DOKill(true);
+            bgmSelectLeft.image.rectTransform.DOKill(true);
 
             int prevIndex = SaveManager.Instance.GameData.selectBgmIndex;
-            int nowIndex = (prevIndex + 1) % TileManager.Instance.stageTileData.bgmDataList.Count;
+            int nowIndex = selectableBgmIndexList[prevIndex - 1 < 0 ? selectableBgmIndexList.Count - 1 : prevIndex - 1];
             SaveManager.Instance.GameData.selectBgmIndex = nowIndex;
 
             if (prevIndex == nowIndex) return;
@@ -262,7 +286,7 @@ namespace Lobby
             bgmMainSelect.gameObject.SetActive(true);
             bgmMainSelect.RectTransform.anchoredPosition = new Vector2(GameManager.Instance.ScreenSize.x, bgmMainSelect.RectTransform.anchoredPosition.y);
 
-            bgmSelectLeft.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
+            bgmSelectLeft.image.rectTransform.DOPunchScale(Vector3.one * 0.6f, UI_DRAG_MOVE_DURATION);
 
             var stageData = SaveManager.Instance.GameData.GetSelectStageData();
             int lastScore = stageData.lastScore;

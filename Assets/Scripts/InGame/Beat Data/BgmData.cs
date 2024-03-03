@@ -10,10 +10,12 @@ public class BgmData
     public string bgmNickName;
     [Space(10f)] public string bgmName;
 
+    [Space(10f)] public int price;
+
     [Title("High Light Color")]
     public List<ThemeColor> highLightColors = new();
-    
-    [Title("Special Value")]
+
+    [Title("Beat Value")]
     public float bpm;
     public float bpmMultiplier = 1;
     public float speedAdder;
@@ -42,8 +44,8 @@ public class BgmData
 
     [Space(10f)] [Title("Beat Data")] [SerializeField]
     private TextAsset textAsset;
-    
-    [Space(5f)] [ShowIf("@textAsset != null")][TableList]
+
+    [Space(5f)] [ShowIf("@textAsset != null")] [TableList]
     public Queue<BeatData> beatDataList = new();
 
     [Button("Convert Csv To Beat Datas")]
@@ -53,11 +55,10 @@ public class BgmData
         beatDataList = new Queue<BeatData>();
         string[] rows = textAsset.text.Split('\n');
 
-        BeatData prevData = null;
         foreach (var row in rows)
         {
             if (string.IsNullOrWhiteSpace(row) || string.IsNullOrEmpty(row)) continue;
-            
+
             string[] columns = row.Split(",");
             float beat = float.Parse(columns[0]);
             var beatData = new BeatData
@@ -66,16 +67,12 @@ public class BgmData
                 type = columns.Length <= 1 ? BeatType.Default : Utility.GetEnum<BeatType>(columns[1]),
                 value = columns.Length <= 2 ? -1 : float.Parse(columns[2])
             };
-            if (prevData != null)
-                prevData.beatDistance = beat - prevData.beat;
-            prevData = beatData;
 
             beatDataList.Enqueue(beatData);
         }
 
         Debug.Log("Add All Beat Datas");
     }
-
 }
 
 [Serializable]
@@ -88,7 +85,6 @@ public class TileChangeData
 [Serializable]
 public class BeatData
 {
-    public float beatDistance;
     public float beat;
 
     public BeatType type = BeatType.Default;

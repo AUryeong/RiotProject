@@ -39,6 +39,9 @@ MonoBehaviour:
     - Name: bgmName
       Entry: 1
       Data: Sound3-1
+    - Name: price
+      Entry: 3
+      Data: 0
     - Name: highLightColors
       Entry: 7
       Data: 2|System.Collections.Generic.List`1[[ThemeColor, Assembly-CSharp]], mscorlib
@@ -114,9 +117,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 4|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.799999952
     - Name: beat
       Entry: 4
       Data: 1.2
@@ -132,9 +132,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 5|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 2
@@ -150,9 +147,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 6|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.4000001
     - Name: beat
       Entry: 4
       Data: 3
@@ -168,9 +162,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 7|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999952
     - Name: beat
       Entry: 4
       Data: 3.4
@@ -186,9 +177,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 8|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999952
     - Name: beat
       Entry: 4
       Data: 3.7
@@ -204,9 +192,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 9|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 4
@@ -222,9 +207,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 10|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 5
@@ -240,9 +222,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 11|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.399999619
     - Name: beat
       Entry: 4
       Data: 5.3
@@ -258,9 +237,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 12|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 5.7
@@ -276,9 +252,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 13|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 6
@@ -294,9 +267,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 14|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 7
@@ -312,9 +282,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 15|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.399999619
     - Name: beat
       Entry: 4
       Data: 7.3
@@ -330,9 +297,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 16|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 7.7
@@ -348,9 +312,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 17|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 8
@@ -366,9 +327,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 18|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.399999619
     - Name: beat
       Entry: 4
       Data: 8.3
@@ -384,9 +342,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 19|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 8.7
@@ -402,9 +357,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 20|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 9
@@ -420,9 +372,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 21|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 10
@@ -438,9 +387,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 22|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 10
@@ -456,9 +402,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 23|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 11
@@ -474,9 +417,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 24|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.399999619
     - Name: beat
       Entry: 4
       Data: 11.3
@@ -492,9 +432,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 25|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 11.7
@@ -510,9 +447,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 26|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 12
@@ -528,9 +462,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 27|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 13
@@ -546,9 +477,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 28|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.399999619
     - Name: beat
       Entry: 4
       Data: 13.3
@@ -564,9 +492,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 29|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 13.7
@@ -582,9 +507,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 30|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 14
@@ -600,9 +522,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 31|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 15
@@ -618,9 +537,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 32|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.399999619
     - Name: beat
       Entry: 4
       Data: 15.3
@@ -636,9 +552,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 33|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 15.7
@@ -654,9 +567,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 34|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 16
@@ -672,9 +582,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 35|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 16.3
@@ -690,9 +597,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 36|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 16.7
@@ -708,9 +612,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 37|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 17
@@ -726,9 +627,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 38|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 17.7
@@ -744,9 +642,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 39|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 18
@@ -762,9 +657,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 40|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 18.3
@@ -780,9 +672,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 41|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 18.7
@@ -798,9 +687,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 42|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 19
@@ -816,9 +702,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 43|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 19.7
@@ -834,9 +717,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 44|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 20
@@ -852,9 +732,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 45|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 20.3
@@ -870,9 +747,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 46|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 20.7
@@ -888,9 +762,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 47|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 21
@@ -906,9 +777,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 48|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 21.7
@@ -924,9 +792,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 49|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 22
@@ -942,9 +807,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 50|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 22.5
@@ -960,9 +822,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 51|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 23
@@ -978,9 +837,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 52|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 24
@@ -996,9 +852,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 53|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 24.3
@@ -1014,9 +867,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 54|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 24.7
@@ -1032,9 +882,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 55|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 25
@@ -1050,9 +897,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 56|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 25.7
@@ -1068,9 +912,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 57|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 26
@@ -1086,9 +927,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 58|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 27
@@ -1104,9 +942,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 59|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 27.3
@@ -1122,9 +957,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 60|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 27.7
@@ -1140,9 +972,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 61|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 28
@@ -1158,9 +987,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 62|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 29
@@ -1176,9 +1002,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 63|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 29.3
@@ -1194,9 +1017,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 64|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 29.7
@@ -1212,9 +1032,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 65|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 30
@@ -1230,9 +1047,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 66|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 31
@@ -1248,9 +1062,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 67|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 31.3
@@ -1266,9 +1077,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 68|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 31.7
@@ -1284,9 +1092,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 69|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 32
@@ -1302,9 +1107,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 70|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 32.3
@@ -1320,9 +1122,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 71|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 32.7
@@ -1338,9 +1137,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 72|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 33
@@ -1356,9 +1152,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 73|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 33.7
@@ -1374,9 +1167,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 74|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 34
@@ -1392,9 +1182,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 75|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 34.5
@@ -1410,9 +1197,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 76|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 35
@@ -1428,9 +1212,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 77|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 35.7
@@ -1446,9 +1227,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 78|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 36
@@ -1464,9 +1242,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 79|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 37
@@ -1482,9 +1257,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 80|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 37.7
@@ -1500,9 +1272,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 81|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 38
@@ -1518,9 +1287,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 82|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 38.3
@@ -1536,9 +1302,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 83|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 38.7
@@ -1554,9 +1317,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 84|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 39
@@ -1572,9 +1332,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 85|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 40
@@ -1590,9 +1347,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 86|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 40.3
@@ -1608,9 +1362,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 87|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 40.7
@@ -1626,9 +1377,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 88|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 41
@@ -1644,9 +1392,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 89|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 41.7
@@ -1662,9 +1407,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 90|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 42
@@ -1680,9 +1422,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 91|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 43
@@ -1698,9 +1437,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 92|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 43.3
@@ -1716,9 +1452,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 93|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 43.7
@@ -1734,9 +1467,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 94|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 44
@@ -1752,9 +1482,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 95|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 45
@@ -1770,9 +1497,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 96|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 45.3
@@ -1788,9 +1512,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 97|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 45.7
@@ -1806,9 +1527,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 98|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 46
@@ -1824,9 +1542,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 99|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 47
@@ -1842,9 +1557,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 100|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 47.3
@@ -1860,9 +1572,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 101|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 47.7
@@ -1878,9 +1587,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 102|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 48
@@ -1896,9 +1602,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 103|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 49
@@ -1914,9 +1617,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 104|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 49.7
@@ -1932,9 +1632,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 105|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 50
@@ -1950,9 +1647,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 106|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 51
@@ -1968,9 +1662,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 107|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 7
     - Name: beat
       Entry: 4
       Data: 51
@@ -1986,9 +1677,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 108|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 58
@@ -2019,6 +1707,9 @@ MonoBehaviour:
     - Name: bgmName
       Entry: 1
       Data: Sound3-2
+    - Name: price
+      Entry: 3
+      Data: 7000
     - Name: highLightColors
       Entry: 7
       Data: 110|System.Collections.Generic.List`1[[ThemeColor, Assembly-CSharp]],
@@ -2096,9 +1787,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 112|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3
     - Name: beat
       Entry: 4
       Data: 0.7
@@ -2114,9 +1802,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 113|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 1
@@ -2132,9 +1817,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 114|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 1.5
@@ -2150,9 +1832,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 115|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 2
@@ -2168,9 +1847,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 116|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 2.5
@@ -2186,9 +1862,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 117|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 3
@@ -2204,9 +1877,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 118|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 3.5
@@ -2222,9 +1892,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 119|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 4
@@ -2240,9 +1907,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 120|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 5
@@ -2258,9 +1922,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 121|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 5.5
@@ -2276,9 +1937,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 122|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 6
@@ -2294,9 +1952,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 123|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 6.5
@@ -2312,9 +1967,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 124|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 7
@@ -2330,9 +1982,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 125|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 7.5
@@ -2348,9 +1997,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 126|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 8
@@ -2366,9 +2012,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 127|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 9
@@ -2384,9 +2027,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 128|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 9.5
@@ -2402,9 +2042,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 129|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 10
@@ -2420,9 +2057,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 130|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 10.5
@@ -2438,9 +2072,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 131|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 11
@@ -2456,9 +2087,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 132|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 11.5
@@ -2474,9 +2102,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 133|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 12
@@ -2492,9 +2117,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 134|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 13
@@ -2510,9 +2132,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 135|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 13.5
@@ -2528,9 +2147,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 136|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 14
@@ -2546,9 +2162,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 137|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 14.5
@@ -2564,9 +2177,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 138|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 15
@@ -2582,9 +2192,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 139|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 15.5
@@ -2600,9 +2207,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 140|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 16
@@ -2618,9 +2222,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 141|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 17
@@ -2636,9 +2237,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 142|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 17
@@ -2654,9 +2252,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 143|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 18
@@ -2672,9 +2267,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 144|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 19
@@ -2690,9 +2282,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 145|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 19.5
@@ -2708,9 +2297,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 146|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 20
@@ -2726,9 +2312,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 147|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 21
@@ -2744,9 +2327,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 148|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 22
@@ -2762,9 +2342,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 149|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 23
@@ -2780,9 +2357,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 150|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 23.5
@@ -2798,9 +2372,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 151|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 24
@@ -2816,9 +2387,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 152|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 25
@@ -2834,9 +2402,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 153|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 26
@@ -2852,9 +2417,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 154|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 27
@@ -2870,9 +2432,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 155|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 27.5
@@ -2888,9 +2447,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 156|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 28
@@ -2906,9 +2462,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 157|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 28.5
@@ -2924,9 +2477,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 158|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 29
@@ -2942,9 +2492,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 159|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 30
@@ -2960,9 +2507,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 160|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 31
@@ -2978,9 +2522,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 161|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 31.5
@@ -2996,9 +2537,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 162|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 32
@@ -3014,9 +2552,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 163|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 33
@@ -3032,9 +2567,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 164|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 33
@@ -3050,9 +2582,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 165|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 34
@@ -3068,9 +2597,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 166|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 35
@@ -3086,9 +2612,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 167|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 36
@@ -3104,9 +2627,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 168|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 37
@@ -3122,9 +2642,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 169|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 2
     - Name: beat
       Entry: 4
       Data: 38
@@ -3140,9 +2657,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 170|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 40
@@ -3158,9 +2672,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 171|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 41
@@ -3176,9 +2687,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 172|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 42
@@ -3194,9 +2702,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 173|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 43
@@ -3212,9 +2717,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 174|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 44
@@ -3230,9 +2732,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 175|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 45
@@ -3248,9 +2747,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 176|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 46
@@ -3266,9 +2762,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 177|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 47
@@ -3284,9 +2777,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 178|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 48
@@ -3302,9 +2792,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 179|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 49
@@ -3320,9 +2807,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 180|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 49
@@ -3338,9 +2822,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 181|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 50
@@ -3356,9 +2837,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 182|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 50.5
@@ -3374,9 +2852,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 183|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 51
@@ -3392,9 +2867,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 184|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 52
@@ -3410,9 +2882,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 185|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 52.5
@@ -3428,9 +2897,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 186|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 53.5
@@ -3446,9 +2912,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 187|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 54
@@ -3464,9 +2927,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 188|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 54.5
@@ -3482,9 +2942,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 189|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 55
@@ -3500,9 +2957,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 190|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 56
@@ -3518,9 +2972,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 191|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 57
@@ -3536,9 +2987,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 192|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 58
@@ -3554,9 +3002,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 193|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 58.5
@@ -3572,9 +3017,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 194|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 2.20000076
     - Name: beat
       Entry: 4
       Data: 59
@@ -3590,9 +3032,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 195|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 61.2
@@ -3608,9 +3047,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 196|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 61.7
@@ -3626,9 +3062,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 197|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 62.2
@@ -3644,9 +3077,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 198|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 62.7
@@ -3662,9 +3092,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 199|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 63.2
@@ -3680,9 +3107,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 200|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.9999962
     - Name: beat
       Entry: 4
       Data: 63.7
@@ -3698,9 +3122,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 201|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 64.7
@@ -3716,9 +3137,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 202|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 65.2
@@ -3734,9 +3152,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 203|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5999985
     - Name: beat
       Entry: 4
       Data: 65.6
@@ -3752,9 +3167,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 204|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 66.2
@@ -3770,9 +3182,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 205|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 67.2
@@ -3788,9 +3197,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 206|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 67.7
@@ -3806,9 +3212,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 207|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 68.2
@@ -3824,9 +3227,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 208|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 69.2
@@ -3842,9 +3242,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 209|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 69.7
@@ -3860,9 +3257,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 210|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 70.2
@@ -3878,9 +3272,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 211|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 70.7
@@ -3896,9 +3287,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 212|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 71.2
@@ -3914,9 +3302,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 213|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 72.2
@@ -3932,9 +3317,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 214|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 72.7
@@ -3950,9 +3332,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 215|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 73.2
@@ -3968,9 +3347,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 216|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 74.2
@@ -3986,9 +3362,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 217|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 74.7
@@ -4004,9 +3377,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 218|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.800003052
     - Name: beat
       Entry: 4
       Data: 75.2
@@ -4022,9 +3392,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 219|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.699996948
     - Name: beat
       Entry: 4
       Data: 76
@@ -4040,9 +3407,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 220|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 76.7
@@ -4058,9 +3422,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 221|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 77.7
@@ -4076,9 +3437,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 222|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 78.7
@@ -4094,9 +3452,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 223|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 79.2
@@ -4112,9 +3467,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 224|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.6000061
     - Name: beat
       Entry: 4
       Data: 79.7
@@ -4130,9 +3482,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 225|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5999985
     - Name: beat
       Entry: 4
       Data: 80.3
@@ -4148,9 +3497,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 226|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 80.9
@@ -4166,9 +3512,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 227|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.199996948
     - Name: beat
       Entry: 4
       Data: 81.3
@@ -4184,9 +3527,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 228|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 81.5
@@ -4202,9 +3542,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 229|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 82
@@ -4220,9 +3557,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 230|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 82.5
@@ -4238,9 +3572,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 231|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 83
@@ -4256,9 +3587,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 232|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 83.5
@@ -4274,9 +3602,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 233|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 84
@@ -4292,9 +3617,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 234|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 85
@@ -4310,9 +3632,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 235|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 85.5
@@ -4328,9 +3647,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 236|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 86
@@ -4346,9 +3662,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 237|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 86.5
@@ -4364,9 +3677,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 238|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 87
@@ -4382,9 +3692,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 239|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 87.5
@@ -4400,9 +3707,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 240|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 88
@@ -4418,9 +3722,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 241|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 89
@@ -4436,9 +3737,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 242|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 89.5
@@ -4454,9 +3752,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 243|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 90
@@ -4472,9 +3767,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 244|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 90.5
@@ -4490,9 +3782,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 245|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 91
@@ -4508,9 +3797,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 246|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 91.5
@@ -4526,9 +3812,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 247|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 92
@@ -4544,9 +3827,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 248|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 93
@@ -4562,9 +3842,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 249|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 93.5
@@ -4580,9 +3857,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 250|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 94
@@ -4598,9 +3872,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 251|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 94.5
@@ -4616,9 +3887,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 252|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 95
@@ -4634,9 +3902,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 253|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 95.5
@@ -4652,9 +3917,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 254|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 96
@@ -4670,9 +3932,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 255|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 96
@@ -4688,9 +3947,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 256|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 97
@@ -4721,6 +3977,9 @@ MonoBehaviour:
     - Name: bgmName
       Entry: 1
       Data: Sound3-3
+    - Name: price
+      Entry: 3
+      Data: 14000
     - Name: highLightColors
       Entry: 7
       Data: 258|System.Collections.Generic.List`1[[ThemeColor, Assembly-CSharp]],
@@ -4798,9 +4057,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 260|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.199999988
     - Name: beat
       Entry: 4
       Data: 0.8
@@ -4816,9 +4072,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 261|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 1
@@ -4834,9 +4087,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 262|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.399999976
     - Name: beat
       Entry: 4
       Data: 1.5
@@ -4852,9 +4102,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 263|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.1
     - Name: beat
       Entry: 4
       Data: 1.9
@@ -4870,9 +4117,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 264|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 3
@@ -4888,9 +4132,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 265|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.4000001
     - Name: beat
       Entry: 4
       Data: 3.5
@@ -4906,9 +4147,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 266|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.0999999
     - Name: beat
       Entry: 4
       Data: 3.9
@@ -4924,9 +4162,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 267|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 5
@@ -4942,9 +4177,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 268|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 5.3
@@ -4960,9 +4192,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 269|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.199999809
     - Name: beat
       Entry: 4
       Data: 5.8
@@ -4978,9 +4207,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 270|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 6
@@ -4996,9 +4222,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 271|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 7
@@ -5014,9 +4237,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 272|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.199999809
     - Name: beat
       Entry: 4
       Data: 7.3
@@ -5032,9 +4252,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 273|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 7.5
@@ -5050,9 +4267,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 274|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.19999981
     - Name: beat
       Entry: 4
       Data: 7.8
@@ -5068,9 +4282,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 275|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 9
@@ -5086,9 +4297,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 276|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 9
@@ -5104,9 +4312,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 277|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 9.5
@@ -5122,9 +4327,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 278|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 10
@@ -5140,9 +4342,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 279|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 11
@@ -5158,9 +4357,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 280|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 11.5
@@ -5176,9 +4372,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 281|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 12
@@ -5194,9 +4387,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 282|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 13
@@ -5212,9 +4402,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 283|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 13.5
@@ -5230,9 +4417,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 284|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.30000019
     - Name: beat
       Entry: 4
       Data: 14
@@ -5248,9 +4432,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 285|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3000002
     - Name: beat
       Entry: 4
       Data: 15.3
@@ -5266,9 +4447,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 286|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.399999619
     - Name: beat
       Entry: 4
       Data: 15.6
@@ -5284,9 +4462,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 287|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 16
@@ -5302,9 +4477,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 288|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 16.3
@@ -5320,9 +4492,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 289|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 17
@@ -5338,9 +4507,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 290|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 17.5
@@ -5356,9 +4522,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 291|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 18
@@ -5374,9 +4537,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 292|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 19
@@ -5392,9 +4552,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 293|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 19.5
@@ -5410,9 +4567,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 294|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 20
@@ -5428,9 +4582,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 295|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 21
@@ -5446,9 +4597,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 296|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 21.5
@@ -5464,9 +4612,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 297|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.20000076
     - Name: beat
       Entry: 4
       Data: 22
@@ -5482,9 +4627,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 298|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 23.2
@@ -5500,9 +4642,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 299|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.5
     - Name: beat
       Entry: 4
       Data: 23.5
@@ -5518,9 +4657,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 300|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 2
     - Name: beat
       Entry: 4
       Data: 25
@@ -5536,9 +4672,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 301|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 27
@@ -5554,9 +4687,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 302|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 28
@@ -5572,9 +4702,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 303|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.200000763
     - Name: beat
       Entry: 4
       Data: 29
@@ -5590,9 +4717,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 304|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.799999237
     - Name: beat
       Entry: 4
       Data: 29.2
@@ -5608,9 +4732,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 305|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 30
@@ -5626,9 +4747,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 306|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 31
@@ -5644,9 +4762,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 307|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 31.5
@@ -5662,9 +4777,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 308|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 32
@@ -5680,9 +4792,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 309|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5999985
     - Name: beat
       Entry: 4
       Data: 32.4
@@ -5698,9 +4807,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 310|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.799999237
     - Name: beat
       Entry: 4
       Data: 33
@@ -5716,9 +4822,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 311|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.20000076
     - Name: beat
       Entry: 4
       Data: 33.8
@@ -5734,9 +4837,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 312|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5999985
     - Name: beat
       Entry: 4
       Data: 35
@@ -5752,9 +4852,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 313|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 35.6
@@ -5770,9 +4867,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 314|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 36
@@ -5788,9 +4882,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 315|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 36.7
@@ -5806,9 +4897,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 316|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 37
@@ -5824,9 +4912,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 317|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 37.3
@@ -5842,9 +4927,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 318|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 38
@@ -5860,9 +4942,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 319|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 38.5
@@ -5878,9 +4957,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 320|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.799999237
     - Name: beat
       Entry: 4
       Data: 39.2
@@ -5896,9 +4972,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 321|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 40
@@ -5914,9 +4987,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 322|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.700000763
     - Name: beat
       Entry: 4
       Data: 40.3
@@ -5932,9 +5002,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 323|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 41
@@ -5950,9 +5017,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 324|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 41.5
@@ -5968,9 +5032,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 325|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 41.8
@@ -5986,9 +5047,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 326|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 42.2
@@ -6004,9 +5062,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 327|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5999985
     - Name: beat
       Entry: 4
       Data: 42.7
@@ -6022,9 +5077,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 328|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 43.3
@@ -6040,9 +5092,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 329|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.200000763
     - Name: beat
       Entry: 4
       Data: 43.8
@@ -6058,9 +5107,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 330|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 44
@@ -6076,9 +5122,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 331|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 2
     - Name: beat
       Entry: 4
       Data: 45
@@ -6094,9 +5137,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 332|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5999985
     - Name: beat
       Entry: 4
       Data: 47
@@ -6112,9 +5152,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 333|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.40000153
     - Name: beat
       Entry: 4
       Data: 47.6
@@ -6130,9 +5167,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 334|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.200000763
     - Name: beat
       Entry: 4
       Data: 49
@@ -6148,9 +5182,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 335|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 49.2
@@ -6166,9 +5197,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 336|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 49.5
@@ -6184,9 +5212,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 337|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.20000076
     - Name: beat
       Entry: 4
       Data: 49.8
@@ -6202,9 +5227,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 338|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 51
@@ -6220,9 +5242,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 339|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 52
@@ -6238,9 +5257,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 340|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.200000763
     - Name: beat
       Entry: 4
       Data: 53
@@ -6256,9 +5272,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 341|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 53.2
@@ -6274,9 +5287,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 342|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.5
     - Name: beat
       Entry: 4
       Data: 53.5
@@ -6292,9 +5302,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 343|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 55
@@ -6310,9 +5317,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 344|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.200000763
     - Name: beat
       Entry: 4
       Data: 56
@@ -6328,9 +5332,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 345|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 56.2
@@ -6346,9 +5347,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 346|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 56.5
@@ -6364,9 +5362,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 347|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.799999237
     - Name: beat
       Entry: 4
       Data: 57
@@ -6382,9 +5377,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 348|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 57.8
@@ -6400,9 +5392,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 349|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 58.1
@@ -6418,9 +5407,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 350|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 58.5
@@ -6436,9 +5422,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 351|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 2.20000076
     - Name: beat
       Entry: 4
       Data: 58.8
@@ -6454,9 +5437,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 352|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 61
@@ -6472,9 +5452,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 353|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 61.3
@@ -6490,9 +5467,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 354|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.200000763
     - Name: beat
       Entry: 4
       Data: 61.8
@@ -6508,9 +5482,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 355|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 62
@@ -6526,9 +5497,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 356|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299999237
     - Name: beat
       Entry: 4
       Data: 62.5
@@ -6544,9 +5512,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 357|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 2.20000076
     - Name: beat
       Entry: 4
       Data: 62.8
@@ -6562,9 +5527,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 358|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.300003052
     - Name: beat
       Entry: 4
       Data: 65
@@ -6580,9 +5542,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 359|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 65.3
@@ -6598,9 +5557,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 360|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.199996948
     - Name: beat
       Entry: 4
       Data: 65.8
@@ -6616,9 +5572,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 361|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 66
@@ -6634,9 +5587,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 362|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.300003052
     - Name: beat
       Entry: 4
       Data: 66.5
@@ -6652,9 +5602,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 363|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 2.199997
     - Name: beat
       Entry: 4
       Data: 66.8
@@ -6670,9 +5617,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 364|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.300003052
     - Name: beat
       Entry: 4
       Data: 69
@@ -6688,9 +5632,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 365|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 69.3
@@ -6706,9 +5647,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 366|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.199996948
     - Name: beat
       Entry: 4
       Data: 69.8
@@ -6724,9 +5662,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 367|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.300003052
     - Name: beat
       Entry: 4
       Data: 70
@@ -6742,9 +5677,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 368|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.199996948
     - Name: beat
       Entry: 4
       Data: 70.3
@@ -6760,9 +5692,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 369|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.300003052
     - Name: beat
       Entry: 4
       Data: 70.5
@@ -6778,9 +5707,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 370|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.699996948
     - Name: beat
       Entry: 4
       Data: 70.8
@@ -6796,9 +5722,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 371|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.5
     - Name: beat
       Entry: 4
       Data: 71.5
@@ -6814,9 +5737,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 372|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.199996948
     - Name: beat
       Entry: 4
       Data: 73
@@ -6832,9 +5752,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 373|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.6000061
     - Name: beat
       Entry: 4
       Data: 73.2
@@ -6850,9 +5767,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 374|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.199996948
     - Name: beat
       Entry: 4
       Data: 73.8
@@ -6868,9 +5782,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 375|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 74
@@ -6886,9 +5797,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 376|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 75
@@ -6904,9 +5812,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 377|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.400001526
     - Name: beat
       Entry: 4
       Data: 75.4
@@ -6922,9 +5827,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 378|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.199996948
     - Name: beat
       Entry: 4
       Data: 75.8
@@ -6940,9 +5842,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 379|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 76
@@ -6958,9 +5857,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 380|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 77
@@ -6976,9 +5872,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 381|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.90000153
     - Name: beat
       Entry: 4
       Data: 77
@@ -6994,9 +5887,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 382|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299995422
     - Name: beat
       Entry: 4
       Data: 78.9
@@ -7012,9 +5902,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 383|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.6000061
     - Name: beat
       Entry: 4
       Data: 79.2
@@ -7030,9 +5917,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 384|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3999939
     - Name: beat
       Entry: 4
       Data: 79.8
@@ -7048,9 +5932,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 385|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 80.2
@@ -7066,9 +5947,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 386|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.70000458
     - Name: beat
       Entry: 4
       Data: 81.2
@@ -7084,9 +5962,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 387|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299995422
     - Name: beat
       Entry: 4
       Data: 82.9
@@ -7102,9 +5977,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 388|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.6000061
     - Name: beat
       Entry: 4
       Data: 83.2
@@ -7120,9 +5992,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 389|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3999939
     - Name: beat
       Entry: 4
       Data: 83.8
@@ -7138,9 +6007,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 390|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.800003052
     - Name: beat
       Entry: 4
       Data: 84.2
@@ -7156,9 +6022,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 391|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 2
     - Name: beat
       Entry: 4
       Data: 85
@@ -7174,9 +6037,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 392|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 2
     - Name: beat
       Entry: 4
       Data: 87
@@ -7192,9 +6052,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 393|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 4
     - Name: beat
       Entry: 4
       Data: 89
@@ -7210,9 +6067,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 394|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.90000153
     - Name: beat
       Entry: 4
       Data: 93
@@ -7228,9 +6082,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 395|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.299995422
     - Name: beat
       Entry: 4
       Data: 94.9
@@ -7246,9 +6097,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 396|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.6000061
     - Name: beat
       Entry: 4
       Data: 95.2
@@ -7264,9 +6112,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 397|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3999939
     - Name: beat
       Entry: 4
       Data: 95.8
@@ -7282,9 +6127,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 398|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 96.2
@@ -7300,9 +6142,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 399|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1.6000061
     - Name: beat
       Entry: 4
       Data: 97.2
@@ -7318,9 +6157,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 400|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.3999939
     - Name: beat
       Entry: 4
       Data: 98.8
@@ -7336,9 +6172,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 401|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 99.2
@@ -7354,9 +6187,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 402|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.5
     - Name: beat
       Entry: 4
       Data: 99.7
@@ -7372,9 +6202,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 403|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0.800003052
     - Name: beat
       Entry: 4
       Data: 100.2
@@ -7390,9 +6217,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 404|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 3
     - Name: beat
       Entry: 4
       Data: 101
@@ -7408,9 +6232,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 405|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 1
     - Name: beat
       Entry: 4
       Data: 104
@@ -7426,9 +6247,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 406|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 4.699997
     - Name: beat
       Entry: 4
       Data: 105
@@ -7444,9 +6262,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 407|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 109.7
@@ -7462,9 +6277,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 408|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 5.300003
     - Name: beat
       Entry: 4
       Data: 109.7
@@ -7480,9 +6292,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 409|BeatData, Assembly-CSharp
-    - Name: beatDistance
-      Entry: 4
-      Data: 0
     - Name: beat
       Entry: 4
       Data: 115

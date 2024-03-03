@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -14,7 +15,7 @@ public class StageData
 public class GameData
 {
     public int rune;
-    
+
     public int selectStageIndex;
     public int selectBgmIndex;
 
@@ -27,10 +28,10 @@ public class GameData
     {
         return GetStageData(selectStageIndex, selectBgmIndex);
     }
-    
-    [SerializeField] private StageData[] stageDataList = new StageData[9];
 
-    public float beatSync = 0;
+    public List<StageData> stageDataList = new(9);
+
+    public float beatSync;
     public float bgmSoundMultiplier = 1;
     public float sfxSoundMultiplier = 1;
 }
@@ -67,7 +68,24 @@ public class SaveManager : Singleton<SaveManager>
     private void LoadGameData()
     {
         var s = PlayerPrefs.GetString(SAVE_DATA_NAME, "null");
-        gameData = s.Equals("null") || string.IsNullOrEmpty(s) ? new GameData() : JsonUtility.FromJson<GameData>(s);
+        if (string.IsNullOrEmpty(s) || s.Equals("null"))
+        {
+            gameData = new GameData();
+            var stageDataList = new List<StageData>();
+            for (int i = 0; i < 9; i++)
+            {
+                var stageData = new StageData();
+                stageDataList.Add(stageData);
+                if (i % 3 == 0)
+                    stageData.isBuy = true;
+            }
+
+            gameData.stageDataList = stageDataList;
+        }
+        else
+        {
+            gameData = JsonUtility.FromJson<GameData>(s);
+        }
     }
 
 

@@ -37,6 +37,8 @@ public class InputDetail : MonoBehaviour
 
 #if UNITY_EDITOR
         CheckKeyInput();
+        if (Input.GetKeyDown(KeyCode.A))
+            SaveManager.Instance.GameData.rune += 1000;
 #endif
         CheckSwipeTouch();
     }
