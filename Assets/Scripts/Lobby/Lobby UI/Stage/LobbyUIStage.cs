@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,10 @@ namespace Lobby
 
         [Space(10f)]
         [SerializeField] private UIButtonColorChanger changeButtonChanger;
+
+        [Header("Rune")]
+        [SerializeField] private Image runeBase;
+        [SerializeField] private TextMeshProUGUI runeText;
 
         private int stageSelectIndex;
         private int bgmSelectIndex;
@@ -109,6 +114,9 @@ namespace Lobby
 
             borderBackground.color = stageTileData.uiDarkColor.GetAlpha(0.35f);
 
+            runeText.text = SaveManager.Instance.GameData.rune.ToString();
+            runeText.fontSharedMaterial.SetColor("_OutlineColor", stageTileData.uiDarkColor);
+
             activeSequence?.Complete();
             deActiveSequence?.Complete();
 
@@ -130,6 +138,7 @@ namespace Lobby
                 stageSelectLeft.color = stageSelectLeft.color.GetAlpha(1);
                 stageSelectRight.color = stageSelectRight.color.GetAlpha(1);
                 exitButton.image.rectTransform.anchoredPosition = new Vector2(-70, exitButton.image.rectTransform.anchoredPosition.y);
+                runeBase.rectTransform.anchoredPosition = new Vector2(180, runeBase.rectTransform.anchoredPosition.y);
             });
 
             activeSequence.Join(sideStageSlot.RectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
@@ -138,6 +147,7 @@ namespace Lobby
             activeSequence.Join(borderBackground.DOFade(1, UI_MOVE_DURATION));
             activeSequence.Join(stageSelectRight.DOFade(1, UI_MOVE_DURATION));
             activeSequence.Join(stageSelectLeft.DOFade(1, UI_MOVE_DURATION));
+            activeSequence.Join(runeBase.rectTransform.DOAnchorPosX(-160, UI_MOVE_DURATION));
 
             activeSequence.OnUpdate(() =>
             {
@@ -174,6 +184,7 @@ namespace Lobby
                 borderBackground.color = borderBackground.color.GetAlpha(0);
                 stageSelectLeft.color = stageSelectLeft.color.GetAlpha(0);
                 stageSelectRight.color = stageSelectRight.color.GetAlpha(0);
+                runeBase.rectTransform.anchoredPosition = new Vector2(-160, runeBase.rectTransform.anchoredPosition.y);
             });
 
             deActiveSequence.Join(sideStageSlot.RectTransform.DOScale(Vector3.zero, UI_MOVE_DURATION / 2).SetEase(Ease.InBack));
@@ -182,6 +193,7 @@ namespace Lobby
             deActiveSequence.Join(borderBackground.DOFade(1, UI_MOVE_DURATION / 2));
             deActiveSequence.Join(stageSelectLeft.DOFade(1, UI_MOVE_DURATION / 2));
             deActiveSequence.Join(stageSelectRight.DOFade(1, UI_MOVE_DURATION / 2));
+            deActiveSequence.Join(runeBase.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION / 2));
 
             deActiveSequence.OnComplete(() => gameObject.SetActive(false));
         }

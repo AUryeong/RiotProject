@@ -85,11 +85,16 @@ namespace Lobby
 
             int nowIndex = SaveManager.Instance.GameData.selectBgmIndex;
 
-
-            runeText.text = SaveManager.Instance.GameData.rune.ToString();
-
             Color color = TileManager.Instance.stageTileData.uiColor;
             Color darkColor = TileManager.Instance.stageTileData.uiDarkColor;
+
+            runeText.text = SaveManager.Instance.GameData.rune.ToString();
+            runeText.fontSharedMaterial.SetColor("_OutlineColor", darkColor);
+
+            titleButtonChanger.Apply(color, darkColor);
+            playButtonChanger.Apply(color, darkColor);
+            lockButtonChanger.Apply(color, darkColor);
+            stageButtonChanger.Apply(color, darkColor);
 
             var stageData = SaveManager.Instance.GameData.GetSelectStageData();
             int lastScore = stageData.lastScore;
@@ -97,13 +102,6 @@ namespace Lobby
 
             bgmSideSelect.gameObject.SetActive(true);
             bgmSideSelect.Show(TileManager.Instance.stageTileData.bgmDataList[nowIndex], color, lastScore, highScore);
-
-            runeText.fontSharedMaterial.SetColor("_OutlineColor", darkColor);
-
-            titleButtonChanger.Apply(color, darkColor);
-            playButtonChanger.Apply(color, darkColor);
-            lockButtonChanger.Apply(color, darkColor);
-            stageButtonChanger.Apply(color, darkColor);
 
             activeSequence?.Complete();
             deActiveSequence?.Complete();
