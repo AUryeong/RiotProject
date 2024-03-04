@@ -118,7 +118,7 @@ namespace Lobby
             activeSequence.OnStart(() =>
             {
                 settingButton.image.rectTransform.anchoredPosition = new Vector2(-70, settingButton.image.rectTransform.anchoredPosition.y);
-                runeBase.rectTransform.anchoredPosition = new Vector2(180, runeBase.rectTransform.anchoredPosition.y);
+                runeBase.rectTransform.anchoredPosition = new Vector2(340, runeBase.rectTransform.anchoredPosition.y);
                 bgmParent.anchoredPosition = new Vector2(bgmParent.anchoredPosition.x, 1000);
                 startButton.image.rectTransform.localScale = Vector3.zero;
                 shopButton.image.rectTransform.localScale = Vector3.zero;
@@ -170,7 +170,7 @@ namespace Lobby
             });
 
             deActiveSequence.Join(settingButton.image.rectTransform.DOAnchorPosX(-100, UI_MOVE_DURATION / 2));
-            deActiveSequence.Join(runeBase.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION / 2));
+            deActiveSequence.Join(runeBase.rectTransform.DOAnchorPosX(340, UI_MOVE_DURATION / 2));
             deActiveSequence.Join(bgmParent.DOAnchorPosY(1000, UI_MOVE_DURATION / 2));
 
             deActiveSequence.Join(startButton.image.rectTransform.DOScale(Vector3.zero, UI_MOVE_DURATION / 2).SetEase(Ease.InBack));

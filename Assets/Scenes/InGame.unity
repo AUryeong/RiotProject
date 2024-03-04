@@ -4362,6 +4362,8 @@ MonoBehaviour:
   stageSelectLeft: {fileID: 1620518843}
   stageSelectRight: {fileID: 169902232}
   changeButtonChanger: {fileID: 1281992333}
+  runeBase: {fileID: 39218178}
+  runeText: {fileID: 2142688944}
 --- !u!1 &657287798
 GameObject:
   m_ObjectHideFlags: 0

@@ -138,7 +138,7 @@ namespace Lobby
                 stageSelectLeft.color = stageSelectLeft.color.GetAlpha(1);
                 stageSelectRight.color = stageSelectRight.color.GetAlpha(1);
                 exitButton.image.rectTransform.anchoredPosition = new Vector2(-70, exitButton.image.rectTransform.anchoredPosition.y);
-                runeBase.rectTransform.anchoredPosition = new Vector2(180, runeBase.rectTransform.anchoredPosition.y);
+                runeBase.rectTransform.anchoredPosition = new Vector2(340, runeBase.rectTransform.anchoredPosition.y);
             });
 
             activeSequence.Join(sideStageSlot.RectTransform.DOScale(Vector3.one, UI_MOVE_DURATION).SetEase(Ease.OutBack));
@@ -193,7 +193,7 @@ namespace Lobby
             deActiveSequence.Join(borderBackground.DOFade(1, UI_MOVE_DURATION / 2));
             deActiveSequence.Join(stageSelectLeft.DOFade(1, UI_MOVE_DURATION / 2));
             deActiveSequence.Join(stageSelectRight.DOFade(1, UI_MOVE_DURATION / 2));
-            deActiveSequence.Join(runeBase.rectTransform.DOAnchorPosX(100, UI_MOVE_DURATION / 2));
+            deActiveSequence.Join(runeBase.rectTransform.DOAnchorPosX(340, UI_MOVE_DURATION / 2));
 
             deActiveSequence.OnComplete(() => gameObject.SetActive(false));
         }
